@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-06-28T23:09:00.000Z",
+  "updatedAt": "2026-06-28T23:12:41.296Z",
   "houses": {
     "35011": {
-      "title": "Top-Tier Home w/ a Responsive Host — Clean, High Quality, Safe Community",
+      "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "roomsAvailable": 4,
       "fromPrice": 169,
       "priceUnit": "week",
       "neighborhood": "McAfee",
-      "city": "Decatur, GA",
+      "city": "Atlanta, GA",
+      "image": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
       "utilitiesIncluded": true,
       "available": true,
-      "image": "",
-      "checkedAt": "2026-06-28T23:09:00.000Z",
+      "checkedAt": "2026-06-28T23:12:41.296Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
