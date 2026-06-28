@@ -1,10 +1,21 @@
 {
-  "_README": "Each house = one PadSplit listing URL the daily job visits to read room availability. Add every house here. Room-level details live in data/listings.json; this file is what the scraper crawls.",
+  "_README": "Your houses = the editable source of truth for branding + the PadSplit link the daily job crawls. Live numbers (rooms available, from-price, photo) are filled into data/availability.json automatically by the scraper. Add every house here.",
   "houses": [
     {
       "id": "35011",
-      "name": "Atlanta House #35011",
-      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/35011"
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/35011",
+      "name": "Private Rooms — Decatur (McAfee)",
+      "neighborhood": "McAfee, Decatur",
+      "city": "Atlanta",
+      "image": "/rooms/decatur.svg",
+      "blurb": "Move-in ready co-living home minutes from I-285 and Decatur. Private bedroom, shared common spaces.",
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer",
+        "Monthly cleaning",
+        "Near MARTA & I-285"
+      ]
     }
   ]
 }

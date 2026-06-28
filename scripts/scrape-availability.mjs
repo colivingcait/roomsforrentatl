@@ -1,40 +1,62 @@
 /**
- * Daily availability scraper for RoomsForRentATL.
+ * Daily availability updater for RoomsForRentATL.
  *
- * Visits each house's PadSplit page in a real (headless) browser, reads which
- * rooms are available, and writes data/availability.json. Designed to run on a
- * GitHub Actions schedule (see .github/workflows/refresh-availability.yml),
- * which then commits the result so Vercel redeploys with fresh availability.
+ * Visits each house's PadSplit page in a real (headless) Chromium, reads the
+ * house-level summary PadSplit exposes — "N rooms available", "Rooms from
+ * $X/week", the lead photo, neighborhood — and writes data/availability.json.
  *
- * PadSplit blocks plain bot requests, so we drive a real Chromium with a normal
- * user-agent/locale. This run ALSO behaves as a probe: it logs diagnostics and
- * saves the rendered HTML + a screenshot per house to ./artifacts so we can
- * confirm we got through and tune the room/availability parsing to PadSplit's
- * real markup.
+ * Runs on a GitHub Actions schedule (.github/workflows/refresh-availability.yml)
+ * which commits the result, triggering a Vercel redeploy with fresh numbers.
+ * PadSplit blocks plain bots, so we drive a real browser with a normal UA. On
+ * any failure for a house we leave its previous data untouched (never wipe the
+ * site because one scrape hiccuped). Rendered HTML + screenshots are saved to
+ * ./artifacts for debugging.
  */
 import { chromium } from "playwright";
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 
 const ART = "artifacts";
 mkdirSync(ART, { recursive: true });
 
 const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses;
 
+// Preserve last-known data so a failed scrape doesn't blank a house.
+const prev = existsSync("data/availability.json")
+  ? JSON.parse(readFileSync("data/availability.json", "utf8"))
+  : { houses: {} };
+
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required/i;
 
-const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required|enable javascript and cookies/i;
+/** Parse PadSplit's house-level availability from the rendered page text/html. */
+function parseHouse(text, html) {
+  const out = {};
 
-function summarize(text, html) {
-  const lower = text.toLowerCase();
-  return {
-    chars: text.length,
-    challenged: CHALLENGE.test(text) || CHALLENGE.test(html.slice(0, 5000)),
-    mentionsAvailable: (lower.match(/available/g) || []).length,
-    mentionsBook: (lower.match(/\bbook\b/g) || []).length,
-    mentionsRoom: (lower.match(/\broom\b/g) || []).length,
-    priceHits: Array.from(new Set((text.match(/\$\s?\d{2,4}\s*\/?\s*(?:wk|week|mo|month)?/gi) || []).slice(0, 12))),
-  };
+  // "4 rooms available" — the subject house's own count. (Nearby homes say
+  // "1 room left" instead, so this phrasing won't pick those up.)
+  const avail = text.match(/(\d+)\s+rooms?\s+available/i);
+  if (avail) out.roomsAvailable = parseInt(avail[1], 10);
+  else if (/no rooms? available|fully booked|currently unavailable/i.test(text)) out.roomsAvailable = 0;
+
+  // "Rooms from $169 /week" — the lowest available room price in the house.
+  const from = text.match(/Rooms from\s*\$\s*(\d+)\s*\/\s*(week|month|wk|mo)/i);
+  if (from) {
+    out.fromPrice = parseInt(from[1], 10);
+    out.priceUnit = /mo|month/i.test(from[2]) ? "month" : "week";
+  }
+
+  const nb = text.match(/Neighborhood:\s*([A-Za-z][A-Za-z .'-]{1,30})/);
+  if (nb) out.neighborhood = nb[1].trim();
+
+  const city = text.match(/\b([A-Z][a-zA-Z]+),\s*GA\b/);
+  if (city) out.city = `${city[1]}, GA`;
+
+  const og = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
+  if (og) out.image = og[1];
+
+  out.utilitiesIncluded = /all utilities (and fees )?included/i.test(text);
+  return out;
 }
 
 const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-blink-features=AutomationControlled"] });
@@ -45,72 +67,57 @@ const ctx = await browser.newContext({
   viewport: { width: 1280, height: 1800 },
 });
 
-const results = [];
+const result = { updatedAt: new Date().toISOString(), houses: {} };
+let okCount = 0;
+
 for (const house of houses) {
-  const tag = house.id;
-  const out = { id: house.id, url: house.padsplitUrl, ok: false };
+  const id = house.id;
   const page = await ctx.newPage();
   try {
     const resp = await page.goto(house.padsplitUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
-    out.status = resp ? resp.status() : null;
-    // Give client-side rendering a moment to populate room cards.
+    const status = resp ? resp.status() : null;
     await page.waitForLoadState("networkidle", { timeout: 30000 }).catch(() => {});
     await page.waitForTimeout(2500);
 
     const html = await page.content();
     const text = await page.evaluate(() => document.body?.innerText || "");
-    out.title = await page.title();
-    out.diag = summarize(text, html);
-    out.ok = !out.diag.challenged && (out.status ? out.status < 400 : true);
+    const title = (await page.title()).replace(/\s*\|\s*PadSplit\s*$/i, "").trim();
 
-    // Pull candidate room rows: any element whose text has a weekly/monthly
-    // price, trimmed to its nearest "card". Logged so we can lock the parser to
-    // PadSplit's real structure.
-    const rooms = await page.evaluate(() => {
-      const out = [];
-      const seen = new Set();
-      const priceRe = /\$\s?\d{2,4}\s*\/\s*(week|month|wk|mo)/i;
-      for (const el of Array.from(document.querySelectorAll("a,div,li,article,section"))) {
-        const t = (el.innerText || "").trim();
-        if (!t || t.length > 400 || !priceRe.test(t)) continue;
-        // prefer the smallest element that still contains a price
-        if (Array.from(el.querySelectorAll("*")).some((c) => priceRe.test((c.innerText || "")))) continue;
-        const key = t.replace(/\s+/g, " ");
-        if (seen.has(key)) continue;
-        seen.add(key);
-        const href = el.closest("a")?.href || el.querySelector("a")?.href || null;
-        out.push({ text: key, href });
-      }
-      return out.slice(0, 40);
-    });
-    out.rooms = rooms;
+    writeFileSync(`${ART}/house-${id}.html`, html);
+    await page.screenshot({ path: `${ART}/house-${id}.png`, fullPage: true }).catch(() => {});
 
-    writeFileSync(`${ART}/house-${tag}.html`, html);
-    writeFileSync(`${ART}/house-${tag}.txt`, text);
-    await page.screenshot({ path: `${ART}/house-${tag}.png`, fullPage: true }).catch(() => {});
+    if (CHALLENGE.test(text) || (status && status >= 400)) {
+      throw new Error(`blocked or error (status ${status})`);
+    }
 
-    console.log(`\n=== House ${tag} ===`);
-    console.log("status:", out.status, "| title:", out.title);
-    console.log("diag:", JSON.stringify(out.diag));
-    console.log(`\n--- ${rooms.length} candidate room rows ---`);
-    rooms.forEach((r, i) => console.log(`[room ${i}] ${r.text}\n        href=${r.href || "(none)"}`));
-    console.log("\n--- FULL VISIBLE TEXT START ---\n" + text.slice(0, 8000));
-    console.log("--- FULL VISIBLE TEXT END ---");
+    const parsed = parseHouse(text, html);
+    result.houses[id] = {
+      title,
+      ...parsed,
+      available: (parsed.roomsAvailable ?? 0) > 0,
+      checkedAt: result.updatedAt,
+      url: house.padsplitUrl,
+    };
+    okCount++;
+    console.log(
+      `✓ ${id}: ${parsed.roomsAvailable ?? "?"} rooms, from $${parsed.fromPrice ?? "?"}/${parsed.priceUnit ?? "wk"} — ${title}`
+    );
   } catch (err) {
-    out.error = String(err);
-    console.log(`\n=== House ${tag} FAILED ===\n`, out.error);
+    // Keep whatever we knew before; just note we couldn't refresh it.
+    const carried = prev.houses?.[id];
+    result.houses[id] = carried
+      ? { ...carried, stale: true, lastError: String(err), checkedAt: result.updatedAt }
+      : { url: house.padsplitUrl, available: false, error: String(err), checkedAt: result.updatedAt };
+    console.log(`✗ ${id}: ${err}`);
   } finally {
     await page.close();
   }
-  results.push(out);
 }
 
 await browser.close();
 
-writeFileSync(`${ART}/probe-results.json`, JSON.stringify(results, null, 2));
+// Stable, pretty output so daily diffs are readable.
+writeFileSync("data/availability.json", JSON.stringify(result, null, 2) + "\n");
+console.log(`\n==== ${okCount}/${houses.length} houses refreshed ====`);
 
-const reachable = results.filter((r) => r.ok).length;
-console.log(`\n==== SUMMARY: ${reachable}/${results.length} houses read without a challenge ====`);
-
-// Non-zero exit if every house was blocked, so the run surfaces the problem.
-if (reachable === 0) process.exit(2);
+if (okCount === 0) process.exit(2);
