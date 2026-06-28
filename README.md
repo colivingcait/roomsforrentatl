@@ -49,6 +49,24 @@ with your real rooms, edit [`data/listings.json`](data/listings.json):
 
 ---
 
+## Getting referral credit on bookings
+
+Every **Book** button deep-links to the room's PadSplit page with **your referral
+code appended**, so PadSplit attributes the booking to you. To turn it on, set
+your code once:
+
+- `NEXT_PUBLIC_PADSPLIT_REFERRAL=` — your referral code (in Vercel env vars or
+  `.env.local`).
+- It's read from your PadSplit referral link. Look at the link PadSplit gives you;
+  the code is the value after `=`. For example
+  `https://www.padsplit.com/?referral_code=ABC123` → code is `ABC123`, param is
+  `referral_code`.
+- If your link uses a different key (e.g. `?ref=ABC123`), also set
+  `NEXT_PUBLIC_PADSPLIT_REFERRAL_PARAM=ref`.
+
+The logic lives in `bookingUrl()` in [`lib/site.ts`](lib/site.ts); it won't double-
+append if a listing URL already carries a referral param.
+
 ## Deploy to Vercel (free)
 
 1. Push this repo to GitHub (already connected).
@@ -57,6 +75,8 @@ with your real rooms, edit [`data/listings.json`](data/listings.json):
 3. In **Settings → Environment Variables**, add (see [`.env.example`](.env.example)):
    - `NEXT_PUBLIC_SITE_URL=https://roomsforrentatl.com`
    - `NEXT_PUBLIC_PHONE=` your real booking number
+   - `NEXT_PUBLIC_PADSPLIT_REFERRAL=` your PadSplit referral code (so you get
+     credit on every booking — see below)
    - `CRON_SECRET=` any long random string (secures the refresh endpoint)
 4. **Settings → Domains** → add `roomsforrentatl.com` and follow the DNS steps.
 5. Done. The cron job in `vercel.json` runs automatically on Vercel.

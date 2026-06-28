@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { getListing, getAllSlugs } from "@/lib/listings";
 import { priceLabel, moveInLabel } from "@/lib/format";
-import { site } from "@/lib/site";
+import { site, bookingUrl } from "@/lib/site";
 
 export const revalidate = 900;
 
@@ -135,7 +135,7 @@ export default async function RoomPage({ params }: { params: { slug: string } })
             <div className="text-xs text-muted">{moveInLabel(listing)}</div>
           </div>
           <a
-            href={listing.padsplitUrl}
+            href={bookingUrl(listing.padsplitUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-book flex-1"
