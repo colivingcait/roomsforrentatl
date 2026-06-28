@@ -27,5 +27,8 @@ yarn-error.log*
 # vercel
 .vercel
 
+# scraper output (uploaded as CI artifacts, never committed)
+/artifacts
+
 # typescript
 *.tsbuildinfo

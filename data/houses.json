@@ -1,0 +1,10 @@
+{
+  "_README": "Each house = one PadSplit listing URL the daily job visits to read room availability. Add every house here. Room-level details live in data/listings.json; this file is what the scraper crawls.",
+  "houses": [
+    {
+      "id": "35011",
+      "name": "Atlanta House #35011",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/35011"
+    }
+  ]
+}

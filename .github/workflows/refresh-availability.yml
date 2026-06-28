@@ -1,0 +1,71 @@
+name: Refresh room availability
+
+# Runs daily to read each house's PadSplit page and update availability in the
+# site. Also runs on demand, and on changes to the scraper itself (so we can
+# probe/verify it). Commits the refreshed data back, which triggers a Vercel
+# redeploy.
+on:
+  schedule:
+    - cron: "0 11 * * *" # 11:00 UTC = ~6–7am Atlanta, before the morning movers
+  workflow_dispatch:
+  push:
+    paths:
+      - "scripts/scrape-availability.mjs"
+      - "data/houses.json"
+      - ".github/workflows/refresh-availability.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-availability
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Playwright + Chromium
+        run: |
+          npm install playwright@1.49.1 --no-save
+          npx playwright install --with-deps chromium
+
+      - name: Scrape availability from PadSplit
+        id: scrape
+        run: node scripts/scrape-availability.mjs
+        continue-on-error: true
+
+      - name: Upload rendered pages + screenshots (for verification)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: padsplit-probe
+          path: artifacts/
+          retention-days: 7
+
+      - name: Commit updated availability (if any)
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain data/availability.json 2>/dev/null)" ]; then
+            git config user.name "rfr-availability-bot"
+            git config user.email "actions@github.com"
+            git add data/availability.json
+            git commit -m "chore: refresh room availability from PadSplit [skip ci]"
+            git push
+          else
+            echo "No availability changes to commit."
+          fi
+
+      - name: Fail if every house was blocked
+        if: steps.scrape.outcome == 'failure'
+        run: |
+          echo "::error::Scraper could not read any house (blocked or errored). See the padsplit-probe artifact."
+          exit 1
