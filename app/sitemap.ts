@@ -1,15 +1,15 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
-import { getAllSlugs } from "@/lib/listings";
+import { getAllHouseIds } from "@/lib/houses";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const rooms = getAllSlugs().map((slug) => ({
-    url: `${site.url}/room/${slug}`,
+  const houses = getAllHouseIds().map((id) => ({
+    url: `${site.url}/house/${id}`,
     changeFrequency: "daily" as const,
     priority: 0.8,
   }));
   return [
-    { url: site.url, changeFrequency: "hourly", priority: 1 },
-    ...rooms,
+    { url: site.url, changeFrequency: "daily", priority: 1 },
+    ...houses,
   ];
 }

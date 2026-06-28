@@ -1,45 +1,42 @@
 export type PriceUnit = "week" | "month";
 
 /**
- * A room as authored in data/listings.json. This is the source of truth for
- * branding, copy, and the PadSplit link. Price/availability fields here act as
- * a fallback that the live scraper overrides when it can reach PadSplit.
+ * A house as you author it in data/houses.json — the editable source of truth
+ * for branding (name, blurb, amenities, photo) and the PadSplit link the daily
+ * job crawls.
  */
-export interface SeedListing {
-  /** URL-safe id used in /room/[slug] */
-  slug: string;
-  /** The room's live page on PadSplit — used for the scheduled price pull and the "Book" redirect */
+export interface SeedHouse {
+  id: string;
   padsplitUrl: string;
   name: string;
   neighborhood: string;
   city: string;
-  /** Fallback price; live scrape overrides this */
-  price: number;
-  priceUnit: PriceUnit;
-  /** Fallback availability; live scrape overrides this */
-  availableNow: boolean;
-  /** ISO date (YYYY-MM-DD) the room is available to move in */
-  moveInDate?: string;
-  bedType: string;
-  bathroom: string;
   image: string;
+  blurb?: string;
   amenities: string[];
-  highlight?: string;
 }
 
-/** Live values pulled from PadSplit by the scheduled scraper. */
-export interface LiveData {
-  price?: number;
+/** Live values written by the daily scraper into data/availability.json. */
+export interface LiveHouse {
+  title?: string;
+  roomsAvailable?: number;
+  fromPrice?: number;
   priceUnit?: PriceUnit;
-  availableNow?: boolean;
+  neighborhood?: string;
+  city?: string;
   image?: string;
-  /** ISO timestamp of when this was fetched */
-  fetchedAt?: string;
-  /** True if the live fetch succeeded; false means we're showing seed values */
-  ok: boolean;
+  utilitiesIncluded?: boolean;
+  available?: boolean;
+  checkedAt?: string;
+  stale?: boolean;
 }
 
-/** A listing as rendered on the site: seed data with any live overrides merged in. */
-export interface Listing extends SeedListing {
-  live: LiveData;
+/** A house as rendered on the site: your seed data + live availability merged. */
+export interface House extends SeedHouse {
+  roomsAvailable: number;
+  fromPrice: number | null;
+  priceUnit: PriceUnit;
+  available: boolean;
+  checkedAt: string | null;
+  stale: boolean;
 }

@@ -1,16 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { getAllSlugs } from "@/lib/listings";
+import { getAllHouseIds } from "@/lib/houses";
 
 export const dynamic = "force-dynamic";
 
 /**
- * Scheduled refresh endpoint. Vercel Cron (see vercel.json) hits this on a
- * schedule to force the homepage and every room page to re-pull live PadSplit
- * pricing/availability, so changes show up without waiting for organic traffic.
- *
- * Protected by CRON_SECRET so randoms can't trigger it. Set CRON_SECRET in your
- * Vercel project settings; Vercel Cron automatically sends it as a Bearer token.
+ * On-demand revalidation endpoint. The daily scraper commits fresh availability
+ * (which redeploys on Vercel), but this lets you force the homepage and house
+ * pages to re-render immediately. Protected by CRON_SECRET.
  */
 export async function GET(req: NextRequest) {
   const secret = process.env.CRON_SECRET;
@@ -22,13 +19,13 @@ export async function GET(req: NextRequest) {
   }
 
   revalidatePath("/");
-  for (const slug of getAllSlugs()) {
-    revalidatePath(`/room/${slug}`);
+  for (const id of getAllHouseIds()) {
+    revalidatePath(`/house/${id}`);
   }
 
   return NextResponse.json({
     ok: true,
-    revalidated: ["/", ...getAllSlugs().map((s) => `/room/${s}`)],
+    revalidated: ["/", ...getAllHouseIds().map((id) => `/house/${id}`)],
     at: new Date().toISOString(),
   });
 }
