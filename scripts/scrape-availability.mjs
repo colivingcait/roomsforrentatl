@@ -63,6 +63,28 @@ for (const house of houses) {
     out.diag = summarize(text, html);
     out.ok = !out.diag.challenged && (out.status ? out.status < 400 : true);
 
+    // Pull candidate room rows: any element whose text has a weekly/monthly
+    // price, trimmed to its nearest "card". Logged so we can lock the parser to
+    // PadSplit's real structure.
+    const rooms = await page.evaluate(() => {
+      const out = [];
+      const seen = new Set();
+      const priceRe = /\$\s?\d{2,4}\s*\/\s*(week|month|wk|mo)/i;
+      for (const el of Array.from(document.querySelectorAll("a,div,li,article,section"))) {
+        const t = (el.innerText || "").trim();
+        if (!t || t.length > 400 || !priceRe.test(t)) continue;
+        // prefer the smallest element that still contains a price
+        if (Array.from(el.querySelectorAll("*")).some((c) => priceRe.test((c.innerText || "")))) continue;
+        const key = t.replace(/\s+/g, " ");
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const href = el.closest("a")?.href || el.querySelector("a")?.href || null;
+        out.push({ text: key, href });
+      }
+      return out.slice(0, 40);
+    });
+    out.rooms = rooms;
+
     writeFileSync(`${ART}/house-${tag}.html`, html);
     writeFileSync(`${ART}/house-${tag}.txt`, text);
     await page.screenshot({ path: `${ART}/house-${tag}.png`, fullPage: true }).catch(() => {});
@@ -70,7 +92,10 @@ for (const house of houses) {
     console.log(`\n=== House ${tag} ===`);
     console.log("status:", out.status, "| title:", out.title);
     console.log("diag:", JSON.stringify(out.diag));
-    console.log("first 900 chars of visible text:\n" + text.slice(0, 900).replace(/\n{2,}/g, "\n"));
+    console.log(`\n--- ${rooms.length} candidate room rows ---`);
+    rooms.forEach((r, i) => console.log(`[room ${i}] ${r.text}\n        href=${r.href || "(none)"}`));
+    console.log("\n--- FULL VISIBLE TEXT START ---\n" + text.slice(0, 8000));
+    console.log("--- FULL VISIBLE TEXT END ---");
   } catch (err) {
     out.error = String(err);
     console.log(`\n=== House ${tag} FAILED ===\n`, out.error);
