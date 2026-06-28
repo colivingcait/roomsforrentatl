@@ -1,0 +1,69 @@
+{
+  "_README": "These are PLACEHOLDER rooms so the site renders end-to-end. Replace them with your real PadSplit listings: set `padsplitUrl` to each room's live PadSplit page and the scheduled scraper will keep `price`/`availableNow` fresh automatically. See README.md > 'Adding your real listings'.",
+  "listings": [
+    {
+      "slug": "westside-bankhead-private-room",
+      "padsplitUrl": "https://www.padsplit.com/listing/REPLACE-ME-1",
+      "name": "Private Room — Westside / Bankhead",
+      "neighborhood": "Bankhead",
+      "city": "Atlanta",
+      "price": 185,
+      "priceUnit": "week",
+      "availableNow": true,
+      "moveInDate": "2026-06-28",
+      "bedType": "Private room",
+      "bathroom": "Shared bath",
+      "image": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=70",
+      "amenities": ["Fully furnished", "All utilities included", "WiFi included", "In-unit laundry", "Free parking"],
+      "highlight": "Move in today — close to MARTA & I-20"
+    },
+    {
+      "slug": "east-point-cozy-room",
+      "padsplitUrl": "https://www.padsplit.com/listing/REPLACE-ME-2",
+      "name": "Cozy Private Room — East Point",
+      "neighborhood": "East Point",
+      "city": "Atlanta",
+      "price": 199,
+      "priceUnit": "week",
+      "availableNow": true,
+      "moveInDate": "2026-06-29",
+      "bedType": "Private room",
+      "bathroom": "Shared bath",
+      "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=70",
+      "amenities": ["Fully furnished", "All utilities included", "WiFi included", "Laundry on-site"],
+      "highlight": "Quiet street, 10 min to the airport"
+    },
+    {
+      "slug": "decatur-furnished-room",
+      "padsplitUrl": "https://www.padsplit.com/listing/REPLACE-ME-3",
+      "name": "Furnished Room — Decatur",
+      "neighborhood": "Decatur",
+      "city": "Atlanta",
+      "price": 210,
+      "priceUnit": "week",
+      "availableNow": false,
+      "moveInDate": "2026-07-05",
+      "bedType": "Private room",
+      "bathroom": "Private bath",
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=70",
+      "amenities": ["Fully furnished", "All utilities included", "WiFi included", "Private bathroom", "Free parking"],
+      "highlight": "Private bath — walk to shops & transit"
+    },
+    {
+      "slug": "college-park-room",
+      "padsplitUrl": "https://www.padsplit.com/listing/REPLACE-ME-4",
+      "name": "Private Room — College Park",
+      "neighborhood": "College Park",
+      "city": "Atlanta",
+      "price": 175,
+      "priceUnit": "week",
+      "availableNow": true,
+      "moveInDate": "2026-06-28",
+      "bedType": "Private room",
+      "bathroom": "Shared bath",
+      "image": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=70",
+      "amenities": ["Fully furnished", "All utilities included", "WiFi included", "Laundry on-site", "Near MARTA"],
+      "highlight": "Lowest price — move in today"
+    }
+  ]
+}
