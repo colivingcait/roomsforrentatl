@@ -55,7 +55,7 @@ export default async function RoomPage({ params }: { params: { slug: string } })
         >
           ←
         </Link>
-        <div className="absolute left-3 bottom-3">
+        <div className="absolute right-3 top-3">
           {listing.availableNow ? (
             <span className="rounded-full bg-brand px-3 py-1.5 text-sm font-bold text-white shadow">
               ● Available now

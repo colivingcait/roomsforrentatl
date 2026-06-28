@@ -2,14 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // PadSplit listing photos are served from a few CDNs. Allow remote images
-    // so we can show the real listing photo without re-hosting it.
-    remotePatterns: [
-      { protocol: "https", hostname: "**.padsplit.com" },
-      { protocol: "https", hostname: "**.amazonaws.com" },
-      { protocol: "https", hostname: "**.cloudfront.net" },
-      { protocol: "https", hostname: "images.padsplit.com" },
-    ],
+    // PadSplit listing photos come from CDNs we can't fully enumerate, and the
+    // seed/fallback photos are local SVGs. Serving images un-optimized lets the
+    // browser load any host (or local SVG) directly — robust and zero-config —
+    // at a small perf cost vs. Next's optimizer.
+    unoptimized: true,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 };
 
