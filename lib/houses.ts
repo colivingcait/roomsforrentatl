@@ -55,15 +55,29 @@ export function availableRooms(house: House): Room[] {
     });
 }
 
-/** Photos for the card/hero gallery: room photos first, then common areas. */
+/**
+ * Photos for the card/hero gallery: lead with a kitchen shot, then interleave
+ * room photos and the remaining common areas for variety.
+ */
 export function orderedPhotos(house: House): string[] {
   const roomPics = availableRooms(house).flatMap((r) =>
     r.photos?.length ? r.photos : r.image ? [r.image] : []
   );
-  const common = house.commonAreas.map((c) => c.url);
+  const isKitchen = (c: { description: string | null; category: string }) =>
+    /kitchen/i.test(`${c.description ?? ""} ${c.category}`);
+  const kitchen = house.commonAreas.find(isKitchen);
+  const otherCommon = house.commonAreas.filter((c) => c !== kitchen).map((c) => c.url);
+
+  // Interleave rooms and remaining common areas.
+  const mixed: string[] = [];
+  for (let i = 0; i < Math.max(roomPics.length, otherCommon.length); i++) {
+    if (i < roomPics.length) mixed.push(roomPics[i]);
+    if (i < otherCommon.length) mixed.push(otherCommon[i]);
+  }
+
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const u of [...roomPics, ...common]) {
+  for (const u of [kitchen?.url, ...mixed]) {
     if (u && !seen.has(u)) {
       seen.add(u);
       out.push(u);
