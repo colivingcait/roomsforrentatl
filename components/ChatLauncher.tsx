@@ -53,7 +53,7 @@ export default function ChatLauncher() {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-40 hidden flex-col items-end gap-2 sm:flex">
+      <div className="chat-launcher fixed right-6 z-40 hidden flex-col items-end gap-2 sm:flex">
         {nudge && (
           <div className="relative max-w-[230px] rounded-2xl rounded-br-sm bg-white px-4 py-3 text-sm font-medium text-ink shadow-card">
             <button

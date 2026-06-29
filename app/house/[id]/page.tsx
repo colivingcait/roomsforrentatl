@@ -133,7 +133,10 @@ export default function HousePage({ params }: { params: { id: string } }) {
       <TrustBand />
 
       {/* Sticky CTA */}
-      <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur">
+      <div
+        data-bottom-bar
+        className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur"
+      >
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="hidden sm:block">
             <div className="text-lg font-extrabold text-ink">{fromPriceLabel(house)}</div>
@@ -148,7 +151,8 @@ export default function HousePage({ params }: { params: { id: string } }) {
               See other available rooms →
             </Link>
           )}
-          <FaqButton className="btn-secondary px-4" label="💬" startTab="chat" />
+          {/* Mobile-only chat button (desktop uses the floating launcher). */}
+          <FaqButton className="btn-secondary px-4 sm:hidden" label="💬" startTab="chat" />
         </div>
       </div>
     </main>

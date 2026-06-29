@@ -140,7 +140,10 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
       </div>
 
       {/* Sticky booking bar */}
-      <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur">
+      <div
+        data-bottom-bar
+        className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur"
+      >
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="hidden sm:block">
             {room.weeklyRate != null && <div className="text-lg font-extrabold text-ink">{priceLabel(room.weeklyRate)}</div>}

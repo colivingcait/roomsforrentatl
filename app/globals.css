@@ -51,8 +51,30 @@ body {
 .chat-fab:hover {
   animation-play-state: paused;
 }
+
+/* Floating launcher position: clears the bottom safe area, and lifts above
+   any page that has a bottom sticky bar (house/room booking bars) so it never
+   overlaps them. */
+.chat-launcher {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom));
+}
+body:has([data-bottom-bar]) .chat-launcher {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
+
+/* Periodic attention nudge for the mobile chat bar (subtle lift + glow). */
+@keyframes chat-nudge {
+  0%, 90%, 100% { transform: translateY(0); }
+  93% { transform: translateY(-4px); }
+  96% { transform: translateY(0); }
+}
+.chat-attn {
+  animation: chat-nudge 4s ease-in-out infinite, chat-glow 2.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .chat-fab {
+  .chat-fab,
+  .chat-attn {
     animation: none;
   }
 }
