@@ -15,20 +15,117 @@ type BookHouse = {
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[] };
 
 const GREETING =
-  "Hi! 👋 I can help with rooms, pricing, move-in, and how to apply. What would you like to know?";
+  "Hi! 👋 I can help with rooms, pricing, move-in, applying, house rules, and more! What would you like to know?";
 
-const SUGGESTIONS = [
+// Shown initially and as a fallback once a topic's follow-ups run out.
+const DEFAULT_SUGGESTIONS = [
   "What's available now?",
   "How much does it cost to move in?",
   "What do I need to get approved?",
   "How fast can I move in?",
-  "What's included in the rent?",
   "Where are the homes located?",
   "Are pets allowed?",
-  "How does the process work?",
-  "Can I tour a home first?",
   "How do I book a room?",
 ];
+
+// After a question is asked, surface the natural next questions on that topic.
+const FOLLOWUPS: Record<string, string[]> = {
+  // Approval / application
+  "What do I need to get approved?": [
+    "What's the application process?",
+    "How long does approval take?",
+    "Do you check credit?",
+    "What if I'm not approved?",
+  ],
+  "What's the application process?": [
+    "How long does approval take?",
+    "What do I need to get approved?",
+    "How much does it cost to move in?",
+    "How fast can I move in?",
+  ],
+  "How long does approval take?": [
+    "What's the application process?",
+    "How fast can I move in?",
+    "What if I'm not approved?",
+  ],
+  "Do you check credit?": [
+    "What do I need to get approved?",
+    "What's the application process?",
+    "What if I'm not approved?",
+  ],
+  "What if I'm not approved?": [
+    "What do I need to get approved?",
+    "What's available now?",
+    "How much does it cost to move in?",
+  ],
+  // Cost / payment
+  "How much does it cost to move in?": [
+    "What's included in the rent?",
+    "Can I pay monthly?",
+    "Are there any other fees?",
+    "How fast can I move in?",
+  ],
+  "What's included in the rent?": [
+    "How much does it cost to move in?",
+    "Can I pay monthly?",
+    "Are there any other fees?",
+  ],
+  "Can I pay monthly?": [
+    "How much does it cost to move in?",
+    "What's included in the rent?",
+    "Are there any other fees?",
+  ],
+  "Are there any other fees?": [
+    "How much does it cost to move in?",
+    "What's included in the rent?",
+    "Can I pay monthly?",
+  ],
+  // Move-in / process
+  "How fast can I move in?": [
+    "How does the process work?",
+    "What do I need to get approved?",
+    "What's available now?",
+  ],
+  "How does the process work?": [
+    "What do I need to get approved?",
+    "How long does approval take?",
+    "How much does it cost to move in?",
+    "How do I book a room?",
+  ],
+  // Availability / homes / booking
+  "What's available now?": [
+    "Where are the homes located?",
+    "How much does it cost to move in?",
+    "How do I book a room?",
+    "Can I tour a home first?",
+  ],
+  "Where are the homes located?": [
+    "How close is public transit?",
+    "What's available now?",
+    "Can I tour a home first?",
+  ],
+  "How close is public transit?": ["Where are the homes located?", "What's available now?"],
+  "Can I tour a home first?": [
+    "What's available now?",
+    "How do I book a room?",
+    "Where are the homes located?",
+  ],
+  "How do I book a room?": [
+    "How does the process work?",
+    "What do I need to get approved?",
+    "What's available now?",
+  ],
+  // House rules / living
+  "Are pets allowed?": ["What are the house rules?", "Can I have guests?", "Can two people share a room?"],
+  "What are the house rules?": ["Are pets allowed?", "Can I have guests?", "Is smoking allowed?"],
+  "Can I have guests?": ["What are the house rules?", "Are pets allowed?", "Can two people share a room?"],
+  "Can two people share a room?": [
+    "What are the house rules?",
+    "Are pets allowed?",
+    "How much does it cost to move in?",
+  ],
+  "Is smoking allowed?": ["What are the house rules?", "Are pets allowed?", "Can I have guests?"],
+};
 
 export default function ChatPanel() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -71,9 +168,16 @@ export default function ChatPanel() {
     }
   }
 
-  // Suggested questions to keep under the latest answer — minus any already asked.
+  // Suggested questions under the latest answer: follow-ups for the last topic
+  // asked (falling back to the default set), minus anything already asked.
   const asked = new Set(messages.filter((m) => m.role === "user").map((m) => m.content));
-  const remainingSuggestions = SUGGESTIONS.filter((s) => !asked.has(s)).slice(0, 4);
+  const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content;
+  const pool = (lastUser && FOLLOWUPS[lastUser]) || DEFAULT_SUGGESTIONS;
+  let remainingSuggestions = pool.filter((s) => !asked.has(s));
+  if (remainingSuggestions.length === 0) {
+    remainingSuggestions = DEFAULT_SUGGESTIONS.filter((s) => !asked.has(s));
+  }
+  remainingSuggestions = remainingSuggestions.slice(0, 4);
   const showSuggestions = !loading && remainingSuggestions.length > 0;
 
   return (
