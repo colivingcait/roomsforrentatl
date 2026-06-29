@@ -1,12 +1,20 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt = "RoomsForRentATL — Furnished rooms for rent in Atlanta, move in today";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Branded link-preview card shown when roomsforrentatl.com is shared.
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
   const chips = ["Fully furnished", "Utilities + WiFi included", "Flexible weekly lease"];
+
+  const fontsDir = join(process.cwd(), "app", "_fonts");
+  const [interSemiBold, interExtraBold] = await Promise.all([
+    readFile(join(fontsDir, "inter-600.woff")),
+    readFile(join(fontsDir, "inter-800.woff")),
+  ]);
 
   return new ImageResponse(
     (
@@ -20,7 +28,7 @@ export default function OpengraphImage() {
           background: "linear-gradient(135deg, #0E7C66 0%, #0a5a49 100%)",
           color: "white",
           padding: "70px",
-          fontFamily: "sans-serif",
+          fontFamily: "Inter",
         }}
       >
         {/* Wordmark */}
@@ -51,7 +59,7 @@ export default function OpengraphImage() {
 
         {/* Headline */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, lineHeight: 1.05 }}>
+          <div style={{ display: "flex", fontSize: "78px", fontWeight: 600, lineHeight: 1.05 }}>
             Furnished rooms in Atlanta.
           </div>
           <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, lineHeight: 1.05, color: "#FF6B35" }}>
@@ -87,6 +95,12 @@ export default function OpengraphImage() {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        { name: "Inter", data: interSemiBold, weight: 600, style: "normal" },
+        { name: "Inter", data: interExtraBold, weight: 800, style: "normal" },
+      ],
+    }
   );
 }
