@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T02:24:09.715Z",
+  "updatedAt": "2026-06-29T02:34:48.361Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -11,6 +11,7 @@
         {
           "id": 933,
           "padIndex": 1,
+          "pagePosition": 1,
           "applyIndex": null,
           "name": "Milhoja",
           "roomNumber": 6,
@@ -220,7 +221,7 @@
       "fromPrice": 170,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T02:24:09.715Z",
+      "checkedAt": "2026-06-29T02:34:48.361Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -233,6 +234,7 @@
         {
           "id": 33219,
           "padIndex": 1,
+          "pagePosition": 1,
           "applyIndex": null,
           "name": "Florence - w/ Mini Fridge!",
           "roomNumber": 6,
@@ -263,6 +265,7 @@
         {
           "id": 33218,
           "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Edinburgh - w/ Mini Fridge!",
           "roomNumber": 5,
@@ -491,7 +494,7 @@
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T02:24:09.715Z",
+      "checkedAt": "2026-06-29T02:34:48.361Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -504,6 +507,7 @@
         {
           "id": 41255,
           "padIndex": 1,
+          "pagePosition": 1,
           "applyIndex": null,
           "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
           "roomNumber": 2,
@@ -534,6 +538,7 @@
         {
           "id": 41254,
           "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Albatross - Extra Large Room Near Front Door - Plenty of storage room!",
           "roomNumber": 1,
@@ -730,7 +735,7 @@
       "fromPrice": 177,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T02:24:09.715Z",
+      "checkedAt": "2026-06-29T02:34:48.361Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -908,7 +913,7 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T02:24:09.715Z",
+      "checkedAt": "2026-06-29T02:34:48.361Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -921,6 +926,7 @@
         {
           "id": 110832,
           "padIndex": 1,
+          "pagePosition": 1,
           "applyIndex": null,
           "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
           "roomNumber": 2,
@@ -948,6 +954,7 @@
         {
           "id": 110837,
           "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Room 7 - Galway - LARGE downstairs room close to the bathroom!",
           "roomNumber": 7,
@@ -975,6 +982,7 @@
         {
           "id": 110831,
           "padIndex": 3,
+          "pagePosition": 3,
           "applyIndex": null,
           "name": "Room 1 - Ash - HUGE room with plenty of storage space & a workstation!",
           "roomNumber": 1,
@@ -1002,6 +1010,7 @@
         {
           "id": 110834,
           "padIndex": 4,
+          "pagePosition": 4,
           "applyIndex": null,
           "name": "Room 4 - Dell - LARGE room with private bath!",
           "roomNumber": 4,
@@ -1133,7 +1142,7 @@
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T02:24:09.715Z",
+      "checkedAt": "2026-06-29T02:34:48.361Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
