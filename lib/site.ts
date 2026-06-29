@@ -53,6 +53,17 @@ export function roomBookingUrl(houseId: string, roomNumber: number | null, house
   return u.toString();
 }
 
+/**
+ * Deep link straight to a specific room on the house's PadSplit page, using the
+ * stable per-room anchor PadSplit renders (id="room-number-{roomId}"). This
+ * survives PadSplit's randomized room order. Falls back to the rooms section.
+ */
+export function roomAnchorUrl(houseUrl: string, roomId?: number | string | null): string {
+  const base = bookingUrl(houseUrl);
+  const hash = roomId != null ? `room-number-${roomId}` : "select-room-section";
+  return `${base}#${hash}`;
+}
+
 export function bookingUrl(padsplitUrl: string, roomId?: string | number): string {
   const { code, param, extra } = site.referral;
   try {
