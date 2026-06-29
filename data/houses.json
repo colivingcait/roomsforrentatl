@@ -12,6 +12,7 @@
       "lng": -84.2466,
       "badge": "New!",
       "pinned": true,
+      "transit": "About a 5–10 minute walk to the nearest bus stop.",
       "blurb": "Move-in ready co-living home minutes from I-285 and Decatur. Private bedroom, shared common spaces.",
       "amenities": [
         "Fully furnished",
@@ -32,6 +33,7 @@
       "lng": -84.3052,
       "badge": "Highly Rated!",
       "heroPhoto": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37_improved.jpg",
+      "transit": "About a 5–10 minute walk to the nearest bus stop.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -50,6 +52,7 @@
       "lat": 33.7869,
       "lng": -84.1702,
       "badge": "Highly Rated!",
+      "transit": "Not within walking distance of a bus line — best suited to residents with a car.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -65,6 +68,7 @@
       "neighborhood": "Atlanta",
       "city": "Snellville",
       "image": "/rooms/meadowchase.svg",
+      "transit": "Not within walking distance of a bus line — best suited to residents with a car.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -81,6 +85,7 @@
       "neighborhood": "Atlanta",
       "city": "Decatur",
       "image": "/rooms/chestnut-hill.svg",
+      "transit": "About a 5–10 minute walk to the nearest bus stop.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",

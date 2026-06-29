@@ -30,8 +30,9 @@ function housesSnapshot(): string {
   return houses
     .map((h) => {
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const transit = h.transit ? ` Transit: ${h.transit}` : "";
       if (!h.available) {
-        return `• ${h.name} (${loc}) — currently fully booked.`;
+        return `• ${h.name} (${loc}) — currently fully booked.${transit}`;
       }
       const rooms = availableRooms(h);
       const roomLines = rooms.length
@@ -47,7 +48,7 @@ function housesSnapshot(): string {
             .join("\n")
         : "    - rooms available; see the listing for details.";
       const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}/week` : "";
-      return `• ${h.name} (${loc}) — ${h.roomsAvailable} room(s) available${from}.\n${roomLines}`;
+      return `• ${h.name} (${loc}) — ${h.roomsAvailable} room(s) available${from}.${transit}\n${roomLines}`;
     })
     .join("\n\n");
 }

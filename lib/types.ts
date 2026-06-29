@@ -63,6 +63,8 @@ export interface SeedHouse {
   pinned?: boolean;
   /** Force a specific photo URL as the first gallery image (overrides auto-pick). */
   heroPhoto?: string;
+  /** Transit note for the chat assistant, e.g. "5–10 min walk to the bus". */
+  transit?: string;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */
