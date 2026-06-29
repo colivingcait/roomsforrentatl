@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import housesData from "@/data/houses.json";
 
 export const alt = "RoomsForRentATL — Furnished rooms for rent in Atlanta, move in today";
 export const size = { width: 1200, height: 630 };
@@ -16,82 +17,124 @@ export default async function OpengraphImage() {
     readFile(join(fontsDir, "inter-800.woff")),
   ]);
 
+  // Use a real listing photo as the background. Falls back to the brand
+  // gradient if it can't be fetched (e.g. an offline/sandboxed build).
+  let bg: string | null = null;
+  const photoUrl = (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto;
+  if (photoUrl) {
+    try {
+      const res = await fetch(photoUrl);
+      if (res.ok) {
+        bg = `data:image/jpeg;base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`;
+      }
+    } catch {
+      bg = null;
+    }
+  }
+
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: "linear-gradient(135deg, #0E7C66 0%, #0a5a49 100%)",
-          color: "white",
-          padding: "70px",
-          fontFamily: "Inter",
-        }}
-      >
-        {/* Wordmark */}
-        <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "66px",
-              height: "66px",
-              borderRadius: "16px",
-              background: "white",
-              color: "#0E7C66",
-              fontSize: "42px",
-              fontWeight: 800,
-            }}
-          >
-            R
-          </div>
-          <div style={{ display: "flex", fontSize: "36px", fontWeight: 800 }}>
-            <span>Rooms</span>
-            <span style={{ color: "#bff0e3" }}>For</span>
-            <span>Rent</span>
-            <span style={{ color: "#FF6B35" }}>ATL</span>
-          </div>
-        </div>
+      <div style={{ position: "relative", display: "flex", width: "100%", height: "100%", fontFamily: "Inter" }}>
+        {/* Background photo (if available) */}
+        {bg && (
+          <img
+            src={bg}
+            width={1200}
+            height={630}
+            style={{ position: "absolute", top: 0, left: 0, width: "1200px", height: "630px", objectFit: "cover" }}
+          />
+        )}
 
-        {/* Headline */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", fontSize: "78px", fontWeight: 600, lineHeight: 1.05 }}>
-            Furnished rooms in Atlanta.
-          </div>
-          <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, lineHeight: 1.05, color: "#FF6B35" }}>
-            Next Day Move In
-          </div>
-          <div style={{ display: "flex", fontSize: "30px", color: "rgba(255,255,255,0.85)", marginTop: "22px" }}>
-            All-in weekly pricing · utilities &amp; WiFi included
-          </div>
-        </div>
+        {/* Scrim for text legibility (or the full brand gradient as fallback) */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            display: "flex",
+            width: "1200px",
+            height: "630px",
+            background: bg
+              ? "linear-gradient(105deg, rgba(7,42,34,0.95) 0%, rgba(7,42,34,0.80) 48%, rgba(7,42,34,0.55) 100%)"
+              : "linear-gradient(135deg, #0E7C66 0%, #0a5a49 100%)",
+          }}
+        />
 
-        {/* Feature chips */}
-        <div style={{ display: "flex", gap: "16px" }}>
-          {chips.map((c) => (
+        {/* Content */}
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "100%",
+            height: "100%",
+            padding: "70px",
+            color: "white",
+          }}
+        >
+          {/* Wordmark */}
+          <div style={{ display: "flex", alignItems: "center", gap: "18px" }}>
             <div
-              key={c}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
-                flexShrink: 0,
-                background: "rgba(255,255,255,0.15)",
-                borderRadius: "12px",
-                padding: "14px 24px",
-                fontSize: "26px",
-                fontWeight: 600,
-                whiteSpace: "nowrap",
+                justifyContent: "center",
+                width: "66px",
+                height: "66px",
+                borderRadius: "16px",
+                background: "white",
+                color: "#0E7C66",
+                fontSize: "42px",
+                fontWeight: 800,
               }}
             >
-              <div style={{ display: "flex", width: "13px", height: "13px", borderRadius: "50%", background: "#FF6B35" }} />
-              {c}
+              R
             </div>
-          ))}
+            <div style={{ display: "flex", fontSize: "36px", fontWeight: 800 }}>
+              <span>Rooms</span>
+              <span style={{ color: "#bff0e3" }}>For</span>
+              <span>Rent</span>
+              <span style={{ color: "#FF6B35" }}>ATL</span>
+            </div>
+          </div>
+
+          {/* Headline */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", fontSize: "78px", fontWeight: 600, lineHeight: 1.05 }}>
+              Furnished rooms in Atlanta.
+            </div>
+            <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, lineHeight: 1.05, color: "#FF6B35" }}>
+              Next Day Move In
+            </div>
+            <div style={{ display: "flex", fontSize: "30px", color: "rgba(255,255,255,0.88)", marginTop: "22px" }}>
+              All-in weekly pricing · utilities &amp; WiFi included
+            </div>
+          </div>
+
+          {/* Feature chips */}
+          <div style={{ display: "flex", gap: "16px" }}>
+            {chips.map((c) => (
+              <div
+                key={c}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  flexShrink: 0,
+                  background: "rgba(255,255,255,0.18)",
+                  borderRadius: "12px",
+                  padding: "14px 24px",
+                  fontSize: "26px",
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <div style={{ display: "flex", width: "13px", height: "13px", borderRadius: "50%", background: "#FF6B35" }} />
+                {c}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     ),
