@@ -24,6 +24,31 @@ const POLICIES = `
 - The exact street address of a home is shared after booking, for resident privacy.
 `.trim();
 
+const HOUSE_RULES = `
+Rent payment & enforcement:
+- Rent must be paid in full by its due date. If rent goes unpaid, all access codes (front door and bedroom) automatically deactivate at 12:00 PM on the 3rd day the payment is late.
+- After codes deactivate, the resident has 24 hours to pay the full outstanding balance or vacate; access is restored if the balance is paid in full within that 24 hours.
+- If the balance isn't paid and the resident hasn't vacated within 24 hours, the host team completes a set-out of the resident's belongings to secure the property for re-occupancy.
+- If a PadSplit account is terminated for any reason, access codes deactivate and are not reinstated; this counts as an immediate move-out (same 24-hour set-out rule). Any balance owed after move-out is reported to a collections agency.
+
+Immediate grounds for suspension of access:
+- No guests in the home at any time — day or night. Every resident is vetted and background-checked for everyone's safety.
+- No smoking or vaping inside the home; smoking must be outdoors, preferably in the backyard.
+- No pets, under any circumstances.
+- Repeated complaints from housemates (cleanliness, excessive noise, or other violations) can lead to suspension or termination of membership.
+
+Conduct & community expectations:
+- Treat housemates, property, and furnishings with care and respect. Damaged or broken furniture/decor must be replaced or paid for by the responsible resident. Don't rearrange or remove furnishings or decor.
+- Keep personal and common areas clean and orderly. Wash, dry, and put away all dishes immediately — no air-drying.
+- Each resident supplies their own personal-care items (toilet paper, paper towels, soap, etc.). The group may coordinate purchases, but it's ultimately each person's responsibility.
+- Quiet hours are 10:00 PM to 8:00 AM daily: avoid loud phone calls, high-volume TV or music, laundry, or cooking large meals (quick meals and microwave use are fine).
+- Resolve interpersonal conflicts directly with housemates — hosts do not mediate disputes.
+- Report maintenance or safety issues promptly through the PadSplit ticketing system.
+- Lawful behavior only — no illegal activity, drugs, or weapons on the premises.
+- Do not tamper with security cameras, locks, WiFi equipment, or thermostats.
+- Dispose of trash and food properly to prevent pests and keep the home clean.
+`.trim();
+
 /** A compact, always-current snapshot of the homes and what's available. */
 function housesSnapshot(): string {
   const houses = getHouses();
@@ -81,6 +106,9 @@ ${housesSnapshot()}
 
 # Policies
 ${POLICIES}
+
+# House rules (apply to all homes)
+${HOUSE_RULES}
 
 # Common questions and the approved answers
 ${faqs}
