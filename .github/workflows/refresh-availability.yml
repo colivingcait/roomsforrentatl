@@ -6,7 +6,8 @@ name: Refresh room availability
 # redeploy.
 on:
   schedule:
-    - cron: "0 11 * * *" # 11:00 UTC = ~6–7am Atlanta, before the morning movers
+    - cron: "0 11 * * *" # 11:00 UTC = ~7am Atlanta — before the morning movers
+    - cron: "0 23 * * *" # 23:00 UTC = ~7pm Atlanta — fresh data for evening browsers
   workflow_dispatch:
   push:
     paths:
