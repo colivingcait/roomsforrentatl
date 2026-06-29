@@ -17,15 +17,22 @@ export default async function OpengraphImage() {
     readFile(join(fontsDir, "inter-800.woff")),
   ]);
 
-  // Use a real listing photo as the background. Falls back to the brand
-  // gradient if it can't be fetched (e.g. an offline/sandboxed build).
+  // Use a real listing photo as the background. Bounded by a timeout and a
+  // size cap, and fully guarded, so it can NEVER break the build — it simply
+  // falls back to the brand gradient if the photo can't be embedded safely.
   let bg: string | null = null;
   const photoUrl = (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto;
   if (photoUrl) {
     try {
-      const res = await fetch(photoUrl);
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
+      const res = await fetch(photoUrl, { signal: ctrl.signal });
+      clearTimeout(timer);
       if (res.ok) {
-        bg = `data:image/jpeg;base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`;
+        const buf = Buffer.from(await res.arrayBuffer());
+        if (buf.byteLength > 0 && buf.byteLength <= 3_000_000) {
+          bg = `data:image/jpeg;base64,${buf.toString("base64")}`;
+        }
       }
     } catch {
       bg = null;
