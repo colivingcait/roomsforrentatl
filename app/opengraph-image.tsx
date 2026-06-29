@@ -6,7 +6,7 @@ export const contentType = "image/png";
 
 // Branded link-preview card shown when roomsforrentatl.com is shared.
 export default function OpengraphImage() {
-  const chips = ["Fully furnished", "Utilities + WiFi included", "Next-day move-in"];
+  const chips = ["Fully furnished", "Utilities + WiFi included", "Flexible weekly lease"];
 
   return new ImageResponse(
     (
@@ -55,7 +55,7 @@ export default function OpengraphImage() {
             Furnished rooms in Atlanta.
           </div>
           <div style={{ display: "flex", fontSize: "78px", fontWeight: 800, lineHeight: 1.05, color: "#FF6B35" }}>
-            Move in today.
+            Next Day Move In
           </div>
           <div style={{ display: "flex", fontSize: "30px", color: "rgba(255,255,255,0.85)", marginTop: "22px" }}>
             All-in weekly pricing · utilities &amp; WiFi included
