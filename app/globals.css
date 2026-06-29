@@ -31,3 +31,28 @@ body {
     @apply inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700;
   }
 }
+
+/* Floating chat button: a periodic gentle "pop" to draw the eye, plus a soft
+   pulsing glow. Pauses on hover, and respects reduced-motion preferences. */
+@keyframes chat-pop {
+  0%, 88%, 100% { transform: scale(1) translateY(0); }
+  91% { transform: scale(1.06) translateY(-4px); }
+  94% { transform: scale(1) translateY(0); }
+  96% { transform: scale(1.03) translateY(-2px); }
+  98% { transform: scale(1) translateY(0); }
+}
+@keyframes chat-glow {
+  0%, 100% { box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35); }
+  50% { box-shadow: 0 8px 30px rgba(255, 107, 53, 0.65); }
+}
+.chat-fab {
+  animation: chat-pop 4.5s ease-in-out infinite, chat-glow 2.6s ease-in-out infinite;
+}
+.chat-fab:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-fab {
+    animation: none;
+  }
+}

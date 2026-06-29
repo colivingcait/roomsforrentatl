@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
+import ChatLauncher from "@/components/ChatLauncher";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { updatedLabel } from "@/lib/format";
@@ -56,6 +57,9 @@ export default function HomePage() {
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur sm:hidden">
         <FaqButton className="btn-book w-full" label="💬 Have a question? Chat with us" startTab="chat" />
       </div>
+
+      {/* Desktop floating chat button + exit-intent auto-open */}
+      <ChatLauncher />
     </main>
   );
 }
