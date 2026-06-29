@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T00:14:55.837Z",
+  "updatedAt": "2026-06-29T00:34:00.567Z",
   "houses": {
     "152": {
       "title": "PadSplit",
@@ -10,7 +10,7 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T00:14:55.837Z",
+      "checkedAt": "2026-06-29T00:34:00.567Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -79,7 +79,7 @@
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:14:55.837Z",
+      "checkedAt": "2026-06-29T00:34:00.567Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -148,19 +148,21 @@
       "fromPrice": 177,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:14:55.837Z",
+      "checkedAt": "2026-06-29T00:34:00.567Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
-      "title": "PadSplit",
-      "city": "Atlanta, GA",
+      "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
+      "neighborhood": "Lake Commons CT",
+      "city": "Snellville, GA",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_b48c8d8f-e5d8-4998-b906-326ac57e696d.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "roomsAvailable": 0,
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T00:14:55.837Z",
+      "checkedAt": "2026-06-29T00:34:00.567Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -273,7 +275,7 @@
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:14:55.837Z",
+      "checkedAt": "2026-06-29T00:34:00.567Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
