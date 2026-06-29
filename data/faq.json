@@ -1,13 +1,25 @@
 {
-  "_README": "Edit these answers anytime — they power the 'Have a question?' popup (and, later, the chat assistant's knowledge base). Keep them accurate to your policy.",
+  "_README": "Edit these answers anytime — they power the 'Have a question?' popup and the chat assistant's knowledge base. Optional 'link' field renders a clickable link under the answer. Keep everything accurate to your policy; some answers below reflect typical PadSplit norms — adjust as needed.",
   "faqs": [
     {
       "q": "How fast can I move in?",
       "a": "Most rooms are next-day move-in once you're approved, and approval is usually quick. Pick a room, apply, and you can often move in the same or next day."
     },
     {
+      "q": "Can I move in today?",
+      "a": "Often, yes! If a room is available and you're approved in time, same-day move-in is frequently possible. Apply early in the day for the best shot, and text us if you're on a tight timeline."
+    },
+    {
+      "q": "What happens after I'm approved?",
+      "a": "You pay your first week's rent to lock in the room, then get your move-in details and door code. From there you can move in right away — most homes are ready immediately."
+    },
+    {
       "q": "What does it cost to move in?",
       "a": "Just a $19 application fee to apply — and it's refunded if you're not approved. Once you're approved, your first week's rent is due to move in. There's no big security deposit."
+    },
+    {
+      "q": "Is there a security deposit?",
+      "a": "No large security deposit. To move in you just pay the $19 application fee (refunded if you're not approved) and your first week's rent once you're approved."
     },
     {
       "q": "How does payment work / when is rent due?",
@@ -18,12 +30,68 @@
       "a": "Rent is billed weekly, in advance — that's how our billing works, so there isn't a monthly option. Your first week is due when you move in, and after that you're charged automatically on the same weekday each week. If weekly doesn't fit your schedule, you can ask us about paying bi-weekly instead."
     },
     {
+      "q": "How do I pay rent?",
+      "a": "Payments are handled securely through PadSplit — you connect a bank account or card and rent is charged automatically each week, so there's nothing to remember and no cash to hand over."
+    },
+    {
+      "q": "Are there any other fees or hidden costs?",
+      "a": "No hidden costs. Your weekly rent covers the room, all utilities, and WiFi. The only upfront items are the $19 application fee and your first week's rent. (Optional extras like double occupancy cost a little more.)"
+    },
+    {
       "q": "What do I need to get approved?",
       "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening automatically during your application."
     },
     {
+      "q": "Do you check credit?",
+      "a": "There's no minimum credit score. Approval is based on a background screening and proof you earn at least 2x the rent — not a traditional credit check."
+    },
+    {
+      "q": "How do I show proof of income?",
+      "a": "During your application you can upload recent pay stubs, a bank statement, or an offer letter. We generally look for income of about 2x the rent. If your situation is a little different, text us and we'll help."
+    },
+    {
+      "q": "How long does approval take?",
+      "a": "Usually quick — often within the same day. The background screening runs automatically as part of your PadSplit application."
+    },
+    {
+      "q": "What if I'm not approved?",
+      "a": "If you're not approved, your $19 application fee is refunded. Text us and we'll let you know if another option might be a better fit."
+    },
+    {
       "q": "Can I tour a home before booking?",
       "a": "You can explore every room and common area through the photos and 3D tour on each listing. If you'd like more detail on a specific home, just text us."
+    },
+    {
+      "q": "What's included in the price?",
+      "a": "Your furnished room, all utilities, WiFi, and shared common areas — one weekly payment, no separate bills."
+    },
+    {
+      "q": "Is the room furnished? What's in it?",
+      "a": "Yes — every room comes fully furnished, typically with a bed, mattress, and storage, and the shared spaces like the kitchen and living room are furnished too. You just bring your personal belongings."
+    },
+    {
+      "q": "Is it a private room?",
+      "a": "Yes, you get your own private bedroom with its own lock. Spaces like the kitchen, living room, and most bathrooms are shared with your housemates."
+    },
+    {
+      "q": "Do rooms have private bathrooms?",
+      "a": "Some rooms have a private bathroom and others share — it's listed on each room. Private-bath rooms cost a bit more and tend to go quickly."
+    },
+    {
+      "q": "How many people live in each home?",
+      "a": "These are shared co-living homes, so you'll have a handful of housemates, each with their own private room. Text us about a specific home for the exact number."
+    },
+    {
+      "q": "Can I use the kitchen and cook?",
+      "a": "Absolutely. Every home has a shared, fully-equipped kitchen you're free to use, along with shared living spaces."
+    },
+    {
+      "q": "Is there laundry?",
+      "a": "Yes — every home has a washer and dryer on site, included at no extra cost."
+    },
+    {
+      "q": "Is there parking?",
+      "a": "Most homes have street or driveway parking. It can vary by home, so text us about a specific one if you'll be driving."
     },
     {
       "q": "Can two people share a room?",
@@ -42,16 +110,64 @@
       }
     },
     {
+      "q": "Can I have guests or overnight visitors?",
+      "a": "You're welcome to have guests visit, but the homes are for registered residents, so overnight or extended stays aren't allowed without approval. Text us if you have a specific situation."
+    },
+    {
+      "q": "Is smoking allowed?",
+      "a": "The homes are smoke-free indoors out of respect for everyone. Text us if you have a question about a specific home."
+    },
+    {
+      "q": "Are the homes men, women, or mixed?",
+      "a": "Most are mixed-gender co-living homes. If you'd prefer a particular setup, text us and we'll let you know what's available."
+    },
+    {
+      "q": "How long can I stay? Is there a minimum?",
+      "a": "You can stay as long as you like — most residents stay 6–12 months. There's no long lease; you simply pay weekly. Text us about the current minimum stay or move-out notice."
+    },
+    {
+      "q": "How do I move out?",
+      "a": "Just give notice through PadSplit when you're ready — there's no long lease tying you down. Text us and we'll walk you through the notice period."
+    },
+    {
+      "q": "Can I switch rooms or homes later?",
+      "a": "Often yes — if another room or home opens up and you're in good standing, we can usually help you move. Just text us when you're thinking about it."
+    },
+    {
       "q": "Is there a lease?",
       "a": "No long lease. You pay weekly and can stay as long as you like — most residents stay 6–12 months."
     },
     {
-      "q": "What's included in the price?",
-      "a": "Your furnished room, all utilities, WiFi, and shared common areas — one weekly payment, no separate bills."
+      "q": "Where are the homes located?",
+      "a": "We have homes across the Atlanta area — Decatur, South Atlanta, Stone Mountain, and Snellville. You can see each home's neighborhood on the map; the exact address is shared after you book."
+    },
+    {
+      "q": "How close is public transit?",
+      "a": "It depends on the home — some are a short 5–10 minute walk to the bus, while others are better for residents who drive or rideshare. Ask about a specific home and we'll tell you."
     },
     {
       "q": "Is it safe?",
       "a": "Every resident is background-checked, and each room has its own electronic door lock for privacy and security."
+    },
+    {
+      "q": "Who handles maintenance or repairs?",
+      "a": "If something needs fixing, just let us know (or submit it through PadSplit) and we'll take care of it. You're never on the hook for normal repairs."
+    },
+    {
+      "q": "Are the homes cleaned?",
+      "a": "Shared common areas are cleaned regularly, and several homes include monthly cleaning of those spaces. You keep your own room tidy."
+    },
+    {
+      "q": "Do I need renters insurance?",
+      "a": "It's not required, though you're welcome to insure your personal belongings if you'd like."
+    },
+    {
+      "q": "What is PadSplit and why do I book there?",
+      "a": "PadSplit is the trusted platform we use to handle applications, screening, and secure weekly payments. When you tap “Book this room,” it takes you there to apply and pay for that exact room."
+    },
+    {
+      "q": "How do I get the exact address?",
+      "a": "For residents' privacy, the exact street address is shared after you book. Each listing shows the neighborhood and a map area so you know where it is."
     }
   ]
 }
