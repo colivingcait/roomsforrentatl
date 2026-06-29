@@ -18,6 +18,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 
 const ART = "artifacts";
 mkdirSync(ART, { recursive: true });
+// re-run trigger: pick up newly-listed rooms (Chestnut Hill)
 
 const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses;
 const prev = existsSync("data/availability.json")
