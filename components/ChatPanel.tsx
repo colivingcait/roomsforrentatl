@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-type Message = { role: "user" | "assistant"; content: string };
+type BookHouse = {
+  id: string;
+  name: string;
+  location: string;
+  fromPrice: string | null;
+  roomsAvailable: number;
+  url: string;
+};
+type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[] };
 
 const GREETING =
   "Hi! 👋 I can help with rooms, pricing, move-in, and how to apply. What would you like to know?";
@@ -44,7 +52,7 @@ export default function ChatPanel() {
       if (!res.ok || !data.reply) {
         setError(data.error || "Sorry — something went wrong. Please try again in a moment.");
       } else {
-        setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
+        setMessages((m) => [...m, { role: "assistant", content: data.reply, houses: data.houses }]);
       }
     } catch {
       setError("Couldn't reach the assistant. Please check your connection and try again.");
@@ -78,9 +86,18 @@ export default function ChatPanel() {
         )}
 
         {messages.map((m, i) => (
-          <Bubble key={i} role={m.role}>
-            <MessageText text={m.content} isUser={m.role === "user"} />
-          </Bubble>
+          <div key={i} className="space-y-2">
+            <Bubble role={m.role}>
+              <MessageText text={m.content} isUser={m.role === "user"} />
+            </Bubble>
+            {m.houses && m.houses.length > 0 && (
+              <div className="space-y-2">
+                {m.houses.map((h) => (
+                  <BookCard key={h.id} house={h} />
+                ))}
+              </div>
+            )}
+          </div>
         ))}
 
         {loading && (
@@ -124,6 +141,23 @@ export default function ChatPanel() {
           AI assistant — answers may not be perfect.
         </p>
       </form>
+    </div>
+  );
+}
+
+function BookCard({ house }: { house: BookHouse }) {
+  const rooms = `${house.roomsAvailable} room${house.roomsAvailable === 1 ? "" : "s"} available`;
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="flex items-baseline justify-between gap-2">
+        <div className="font-extrabold text-ink">{house.name}</div>
+        {house.fromPrice && <div className="text-sm font-bold text-ink">from {house.fromPrice}</div>}
+      </div>
+      <div className="text-sm text-muted">{house.location}</div>
+      <div className="mt-0.5 text-xs font-semibold text-brand">{rooms}</div>
+      <a href={house.url} className="btn-book mt-2 block w-full py-2 text-center text-sm">
+        Book your room →
+      </a>
     </div>
   );
 }

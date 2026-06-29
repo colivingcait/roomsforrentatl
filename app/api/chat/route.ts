@@ -1,8 +1,44 @@
 import { buildSystemPrompt } from "@/lib/knowledge";
+import { getHouses } from "@/lib/houses";
+import { priceLabel } from "@/lib/format";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+export type BookCard = {
+  id: string;
+  name: string;
+  location: string;
+  fromPrice: string | null;
+  roomsAvailable: number;
+  url: string;
+};
+
+// The bot ends a booking reply with a token like `<<<BOOK: 35011, 152>>>`.
+// Pull it out, strip it from the visible text, and turn the IDs into cards
+// (only for homes that actually have rooms available right now).
+function extractBookCards(text: string): { text: string; cards: BookCard[] } {
+  const match = text.match(/<<<\s*BOOK:\s*([0-9,\s]+?)>>>/i);
+  if (!match) return { text, cards: [] };
+
+  const cleaned = text.replace(match[0], "").trim();
+  const ids = Array.from(new Set(match[1].split(",").map((s) => s.trim()).filter(Boolean)));
+  const houses = getHouses();
+  const cards: BookCard[] = ids
+    .map((id) => houses.find((h) => h.id === id))
+    .filter((h): h is NonNullable<typeof h> => !!h && h.available && h.roomsAvailable > 0)
+    .map((h) => ({
+      id: h.id,
+      name: h.name,
+      location: [h.neighborhood, h.city].filter(Boolean).join(", "),
+      fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
+      roomsAvailable: h.roomsAvailable,
+      url: `/house/${h.id}#rooms`,
+    }));
+
+  return { text: cleaned, cards };
+}
 
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TURNS = 12; // cap conversation length we forward
@@ -79,7 +115,7 @@ export async function POST(req: Request) {
       // Don't leak provider details to the client.
       console.error("Anthropic API error", res.status, await res.text().catch(() => ""));
       return Response.json(
-        { error: "Sorry — I couldn't answer just now. Please text us and we'll help right away." },
+        { error: "Sorry — I couldn't answer just now. Please try again in a moment." },
         { status: 502 }
       );
     }
@@ -95,16 +131,17 @@ export async function POST(req: Request) {
 
     if (!reply) {
       return Response.json(
-        { error: "Sorry — I didn't catch that. Could you rephrase, or text us?" },
+        { error: "Sorry — I didn't catch that. Could you rephrase?" },
         { status: 502 }
       );
     }
 
-    return Response.json({ reply });
+    const { text, cards } = extractBookCards(reply);
+    return Response.json({ reply: text, houses: cards });
   } catch (err) {
     console.error("Chat route error", err);
     return Response.json(
-      { error: "Sorry — something went wrong. Please text us and we'll help." },
+      { error: "Sorry — something went wrong. Please try again." },
       { status: 500 }
     );
   }

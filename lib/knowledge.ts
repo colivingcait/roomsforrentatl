@@ -45,7 +45,7 @@ function housesSnapshot(): string {
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
       const transit = h.transit ? ` Transit: ${h.transit}` : "";
       if (!h.available) {
-        return `• ${h.name} (${loc}) — currently fully booked.${transit}`;
+        return `• ${h.name} (${loc}) [id ${h.id}] — currently fully booked.${transit}`;
       }
       const rooms = availableRooms(h);
       const roomLines = rooms.length
@@ -61,7 +61,7 @@ function housesSnapshot(): string {
             .join("\n")
         : "    - rooms available; see the listing for details.";
       const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}/week` : "";
-      return `• ${h.name} (${loc}) — ${h.roomsAvailable} room(s) available${from}.${transit}\n${roomLines}`;
+      return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}\n${roomLines}`;
     })
     .join("\n\n");
 }
@@ -81,8 +81,10 @@ export function buildSystemPrompt(): string {
 - KEEP EVERYTHING ONLINE. This whole process — browsing, questions, applying, and booking — is meant to be done online. Do NOT routinely tell people to call or text; there is no live phone line staffed to answer. Instead, point them to the best online next step: browse the room's live listing, use a search link, or start an application (the $19 application fee is refunded if they're not approved).
 - Only as a genuine LAST RESORT, if something truly cannot be resolved online (for example a registered service animal, which must be handled individually), you may mention they can reach out by text. Do this rarely, not as a default sign-off. Never paste the phone number proactively.
 - If you don't know something, be honest that you're not sure, then guide them to the listing, a search link, or the application rather than to a phone call.
-- To book, tell them to open a room and tap "Book this room," which takes them to that home on PadSplit to apply and pay. Note that PadSplit shows the rooms in a random order, so they should pick the room by the same name shown here.
-- Prices are weekly and "all-in" (utilities + WiFi included). Availability can change quickly; if unsure, suggest they check the room's live listing.
+- BOOKING — show tappable cards, never plain instructions. Whenever you point someone toward booking (they ask how or where to book, or you're recommending specific homes), do NOT tell them to browse PadSplit or pick a room by name. Instead write a short, friendly lead-in (for example: "Here are the homes you can book in Decatur — tap one to get started:") and then, on the LAST line of your reply, output a booking token that the app turns into clickable home cards.
+- Booking token format: <<<BOOK: id, id>>> using the bracketed home IDs from the homes list — include only homes that currently have rooms available and that fit what the person asked (e.g. a specific city). Example for the two Decatur homes: <<<BOOK: 35011, 152>>>. Never mention, quote, explain, or format the token — just put it alone on the final line. Tapping a card takes the person into the booking flow on our own site (they pick a room and book there).
+- NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (pet-friendly / double-occupancy).
+- Prices are weekly and "all-in" (utilities + WiFi included). Availability can change quickly; if unsure, suggest they check using a booking card.
 
 # Privacy and safety — strict, non-negotiable rules
 - NEVER provide or guess a home's street address, unit number, building name, cross-streets, GPS coordinates, or map pin. You do not have this information. The exact address is shared by staff only AFTER a resident books. If asked where a home is, give only the neighborhood/city listed below and explain the full address comes after booking.
