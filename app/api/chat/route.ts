@@ -153,7 +153,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 400,
+        max_tokens: 600,
         system: buildSystemPrompt(track),
         messages,
       }),
