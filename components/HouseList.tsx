@@ -34,17 +34,15 @@ export default function HouseList({ houses }: { houses: House[] }) {
   return (
     <section>
       {cities.length > 1 && (
-        <div className="sticky top-[57px] z-20 -mx-4 border-b border-slate-100 bg-slate-50/95 px-4 py-3 backdrop-blur">
-          <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <FilterPill active={city === "all"} onClick={() => setCity("all")}>
-              All cities
+        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <FilterPill active={city === "all"} onClick={() => setCity("all")}>
+            All cities
+          </FilterPill>
+          {cities.map((c) => (
+            <FilterPill key={c} active={city === c} onClick={() => setCity(c)}>
+              {c}
             </FilterPill>
-            {cities.map((c) => (
-              <FilterPill key={c} active={city === c} onClick={() => setCity(c)}>
-                {c}
-              </FilterPill>
-            ))}
-          </div>
+          ))}
         </div>
       )}
 

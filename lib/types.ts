@@ -113,6 +113,7 @@ export interface Unit {
   furnishedNote?: string; // what's included vs. what the tenant brings
   features?: string[];
   applyUrl?: string | null; // TurboTenant link; absent if not ready yet
+  comingSoon?: boolean; // show a simple "Coming soon" card, pinned last
   photos?: string[];
   tourUrl?: string | null;
 }

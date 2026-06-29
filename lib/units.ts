@@ -3,9 +3,10 @@ import type { Unit } from "./types";
 
 const UNITS = (unitsData.units as Unit[]) ?? [];
 
-/** Available soonest first, then cheaper first. */
+/** Coming-soon units last; otherwise available soonest first, then cheaper. */
 export function getUnits(): Unit[] {
   return [...UNITS].sort((a, b) => {
+    if (!!a.comingSoon !== !!b.comingSoon) return a.comingSoon ? 1 : -1;
     const ad = a.availableDate ?? "9999";
     const bd = b.availableDate ?? "9999";
     if (ad !== bd) return ad < bd ? -1 : 1;

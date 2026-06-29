@@ -6,6 +6,35 @@ import { rentLabel, availDateLabel } from "@/lib/format";
 export default function UnitCard({ unit }: { unit: Unit }) {
   const photos = unit.photos ?? [];
 
+  // Coming-soon unit: a simple, non-clickable placeholder card.
+  if (unit.comingSoon) {
+    return (
+      <div className="overflow-hidden rounded-2xl bg-white shadow-card">
+        <div className="relative grid aspect-[4/3] w-full place-items-center bg-gradient-to-br from-slate-700 to-slate-900 text-center text-white">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Coming soon</div>
+            <div className="mt-1.5 text-2xl font-extrabold">{unit.type}</div>
+            <div className="mt-1 text-sm text-white/90">{availDateLabel(unit.availableDate)}</div>
+          </div>
+          <span className="absolute left-3 top-3 rounded-full bg-ink/85 px-2.5 py-1 text-xs font-bold text-white shadow">
+            Private unit · Long-term
+          </span>
+        </div>
+        <div className="flex items-center justify-between gap-3 p-4">
+          <div>
+            <h3 className="font-semibold leading-tight text-ink">{unit.title}</h3>
+            <p className="mt-0.5 text-sm text-muted">
+              {unit.type} · {unit.city}
+            </p>
+          </div>
+          <div className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-600">
+            Coming soon
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Link
       href={`/rental/${unit.id}`}

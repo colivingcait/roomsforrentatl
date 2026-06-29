@@ -48,23 +48,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Co-living rooms section header */}
-      <section className="mx-auto max-w-3xl px-4 pt-5">
-        <div className="flex items-center gap-2">
-          <span className="rounded-full bg-brand px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
-            Co-living
-          </span>
-          <h2 className="text-lg font-extrabold text-ink">Rooms for rent</h2>
-        </div>
-        <p className="mt-1.5 text-sm text-muted">
-          A private room in a fully-furnished shared home — weekly all-in pricing with utilities &amp; WiFi included,
-          and next-day move-in.
-        </p>
-      </section>
+      {/* Co-living rooms section */}
+      <section className="mx-auto max-w-3xl px-4 pt-6">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
+              Co-living
+            </span>
+            <h2 className="text-lg font-extrabold text-ink">Furnished rooms for rent</h2>
+          </div>
+          <p className="mt-1.5 text-sm text-muted">
+            A private furnished room in a move-in-ready shared home — weekly all-in pricing with utilities &amp; WiFi
+            included, and next-day move-in. Booked through PadSplit.
+          </p>
 
-      <div className="mx-auto max-w-3xl px-4 pb-2 pt-2">
-        <HouseList houses={houses} />
-      </div>
+          <div className="mt-4">
+            <HouseList houses={houses} />
+          </div>
+        </div>
+      </section>
 
       <UnitsSection units={units} />
 
