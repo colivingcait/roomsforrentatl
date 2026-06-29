@@ -1,4 +1,30 @@
-import type { House, Room, PriceUnit, BathroomType } from "./types";
+import type { House, Room, Photo, PriceUnit, BathroomType } from "./types";
+
+/** A clean space label (Kitchen, Bathroom, Living room…) from PadSplit's photo data. */
+export function photoLabel(p: Pick<Photo, "description" | "category">): string {
+  const desc = (p.description || "").trim();
+  const text = `${desc} ${p.category}`.toLowerCase();
+  const map: [RegExp, string][] = [
+    [/kitchen/, "Kitchen"],
+    [/bath|shower|restroom/, "Bathroom"],
+    [/dining/, "Dining room"],
+    [/living|family\s*room/, "Living room"],
+    [/\bden\b/, "Den"],
+    [/laundry|washer|dryer/, "Laundry"],
+    [/patio|deck/, "Patio"],
+    [/backyard|\byard\b|garden/, "Backyard"],
+    [/storage|closet|pantry/, "Storage"],
+    [/garage/, "Garage"],
+    [/bed\s*room/, "Bedroom"],
+    [/exterior|front|street|outside|neighborhood/, "Exterior"],
+  ];
+  for (const [re, label] of map) if (re.test(text)) return label;
+  // A short, clean PadSplit description (no "detected:" noise) — use it as-is.
+  if (desc && !/detected:/i.test(desc) && desc.length <= 28) {
+    return desc.charAt(0).toUpperCase() + desc.slice(1);
+  }
+  return "Common area";
+}
 import { availableRooms } from "./houses";
 
 export function priceLabel(price: number, unit: PriceUnit = "week"): string {

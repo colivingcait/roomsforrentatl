@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Photo } from "@/lib/types";
+import { photoLabel } from "@/lib/format";
 
 /** Horizontal, swipeable gallery of the house's shared spaces. */
 export default function CommonAreas({ photos }: { photos: Photo[] }) {
@@ -12,18 +13,12 @@ export default function CommonAreas({ photos }: { photos: Photo[] }) {
         {photos.map((p, i) => (
           <figure key={i} className="w-64 shrink-0">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-100">
-              <Image src={p.url} alt={p.description || prettyCategory(p.category)} fill sizes="256px" className="object-cover" />
+              <Image src={p.url} alt={photoLabel(p)} fill sizes="256px" className="object-cover" />
             </div>
-            <figcaption className="mt-1.5 text-sm font-medium text-ink">{prettyCategory(p.category)}</figcaption>
+            <figcaption className="mt-1.5 text-sm font-medium text-ink">{photoLabel(p)}</figcaption>
           </figure>
         ))}
       </div>
     </section>
   );
-}
-
-function prettyCategory(c: string): string {
-  return (c || "Common area")
-    .replace(/[-_]/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
 }
