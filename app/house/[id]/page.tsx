@@ -81,7 +81,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
             <span className="text-sm text-muted">
               {house.reviewCount
                 ? `· ${house.reviewCount} resident review${house.reviewCount === 1 ? "" : "s"}`
-                : "· Highly rated by residents"}
+                : "· Resident rating"}
             </span>
           </div>
         )}

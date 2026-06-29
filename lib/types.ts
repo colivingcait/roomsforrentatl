@@ -65,8 +65,10 @@ export interface SeedHouse {
   heroPhoto?: string;
   /** Transit note for the chat assistant, e.g. "5–10 min walk to the bus". */
   transit?: string;
-  /** Average resident review score (out of 5), if highly rated. Drives the reviews highlight. */
+  /** Curated resident review score (out of 5), e.g. 4.7. Shown on the property page. */
   rating?: number;
+  /** Optional number of reviews to show next to the rating, e.g. 32. */
+  reviewCount?: number;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */
@@ -84,7 +86,6 @@ export interface LiveHouse {
   utilitiesIncluded?: boolean;
   available?: boolean;
   rating?: number | null;
-  reviewCount?: number | null;
   checkedAt?: string;
   stale?: boolean;
 }
@@ -98,7 +99,6 @@ export interface House extends SeedHouse {
   fromPrice: number | null;
   priceUnit: PriceUnit;
   available: boolean;
-  reviewCount?: number | null;
   checkedAt: string | null;
   stale: boolean;
 }

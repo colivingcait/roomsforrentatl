@@ -167,12 +167,11 @@ async function extractPhotos(page) {
 }
 
 /**
- * Pull the listing's star rating + review count out of __NEXT_DATA__ (with a
- * visible-text fallback like "4.7 (32 reviews)"). Returns the best guess plus
- * the raw rating/review-keyed candidates we found, so the Action log can
- * confirm which fields PadSplit actually uses.
+ * Pull the listing's star rating out of __NEXT_DATA__ — the average resident
+ * review score (0–5). PadSplit's per-photo `aiRating` (0–100) is ignored by the
+ * 0–5 filter. Review COUNTS aren't reliably in this payload, so we skip them.
  */
-async function extractListingMeta(page) {
+async function extractRating(page) {
   return page.evaluate(() => {
     let data;
     try { data = window.__NEXT_DATA__; } catch {}
@@ -180,52 +179,25 @@ async function extractListingMeta(page) {
       const el = document.getElementById("__NEXT_DATA__");
       if (el) try { data = JSON.parse(el.textContent || "{}"); } catch {}
     }
-
-    const candidates = {};
-    if (data) {
-      const visit = (node, depth, path) => {
-        if (!node || typeof node !== "object" || depth > 18) return;
-        for (const k of Object.keys(node)) {
-          const v = node[k];
-          const key = path ? `${path}.${k}` : k;
-          if ((typeof v === "number" || typeof v === "string") && /rating|review|stars|score/i.test(k)) {
-            if (!(key in candidates)) candidates[key] = v;
-          } else if (v && typeof v === "object") {
-            visit(v, depth + 1, key);
-          }
-        }
-      };
-      visit(data, 0, "");
-    }
+    if (!data) return null;
 
     let rating = null;
-    let reviewCount = null;
-    for (const [key, val] of Object.entries(candidates)) {
-      const num = typeof val === "string" ? parseFloat(val) : val;
-      if (!Number.isFinite(num)) continue;
-      if (rating == null && /rating|stars|score/i.test(key) && num > 0 && num <= 5) rating = num;
-      if (
-        reviewCount == null &&
-        /review/i.test(key) &&
-        /count|total|number|num|reviews$/i.test(key) &&
-        Number.isInteger(num) &&
-        num >= 0
-      ) {
-        reviewCount = num;
+    const visit = (node, depth) => {
+      if (rating != null || !node || typeof node !== "object" || depth > 18) return;
+      for (const k of Object.keys(node)) {
+        const v = node[k];
+        if (/rating/i.test(k) && !/ai/i.test(k)) {
+          const num = typeof v === "string" ? parseFloat(v) : v;
+          if (Number.isFinite(num) && num > 0 && num <= 5) {
+            rating = Math.round(num * 10) / 10;
+            return;
+          }
+        }
+        if (v && typeof v === "object") visit(v, depth + 1);
       }
-    }
-
-    // Visible-text fallback: e.g. "4.7 ★ (32 reviews)" / "4.7 · 32 reviews".
-    if (rating == null || reviewCount == null) {
-      const body = document.body?.innerText || "";
-      const m = body.match(/\b([0-5](?:\.\d)?)\b[^0-9]{0,12}?(\d{1,4})\s+reviews?/i);
-      if (m) {
-        if (rating == null) rating = parseFloat(m[1]);
-        if (reviewCount == null) reviewCount = parseInt(m[2], 10);
-      }
-    }
-
-    return { rating, reviewCount, candidates };
+    };
+    visit(data, 0);
+    return rating;
   });
 }
 
@@ -286,7 +258,7 @@ for (const house of houses) {
     const meta = parseHouseMeta(text, html);
     const rooms = await extractRooms(page);
     const { commonAreas, carousel } = await extractPhotos(page);
-    const listingMeta = await extractListingMeta(page);
+    const rating = await extractRating(page);
 
     // PadSplit's /room-details/{house}/{N} uses N = the room's position in the
     // order rooms appear ON THE PAGE. Derive that from where each room's name
@@ -328,18 +300,11 @@ for (const house of houses) {
       fromPrice: Number.isFinite(fromPrice) ? fromPrice : null,
       priceUnit: "week",
       available: available.length > 0,
-      rating: listingMeta.rating,
-      reviewCount: listingMeta.reviewCount,
+      rating,
       checkedAt: result.updatedAt,
       url: house.padsplitUrl,
     };
     okCount++;
-
-    console.log(
-      `  [${id}] rating: ${listingMeta.rating ?? "?"} (${listingMeta.reviewCount ?? "?"} reviews) — candidates: ${JSON.stringify(
-        listingMeta.candidates
-      ).slice(0, 300)}`
-    );
 
     const byBath = available.reduce((m, r) => ((m[r.bathroomType || "?"] = (m[r.bathroomType || "?"] || 0) + 1), m), {});
     console.log(

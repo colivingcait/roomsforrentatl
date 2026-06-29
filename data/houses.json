@@ -1,5 +1,5 @@
 {
-  "_README": "Your houses = the editable source of truth for branding + the PadSplit link the daily job crawls. Live numbers (rooms available, from-price, photo, neighborhood) are filled into data/availability.json automatically by the scraper. lat/lng are approximate NEIGHBORHOOD centers for the map (not addresses) \u2014 added once the scraper reveals each house's neighborhood.",
+  "_README": "Your houses = the editable source of truth for branding + the PadSplit link the daily job crawls. Live numbers (rooms available, from-price, photo, neighborhood) are filled into data/availability.json automatically by the scraper. lat/lng are approximate NEIGHBORHOOD centers for the map (not addresses) — added once the scraper reveals each house's neighborhood.",
   "houses": [
     {
       "id": "35011",
@@ -34,7 +34,7 @@
       "badge": "Highly Rated!",
       "heroPhoto": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37_improved.jpg",
       "transit": "About a 5–10 minute walk to the nearest bus stop.",
-      "rating": 4.5,
+      "rating": 4.8,
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -54,7 +54,7 @@
       "lng": -84.1702,
       "badge": "Highly Rated!",
       "transit": "Not within walking distance of a bus line — best suited to residents who drive or rideshare.",
-      "rating": 4.5,
+      "rating": 4.3,
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -78,7 +78,8 @@
         "Monthly cleaning"
       ],
       "lat": 33.8573,
-      "lng": -84.0007
+      "lng": -84.0007,
+      "rating": 5.0
     },
     {
       "id": "152",
