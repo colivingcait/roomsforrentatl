@@ -13,11 +13,19 @@ type BookHouse = {
   url: string;
 };
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[] };
+type Track = "room" | "unit" | "both";
 
 const GREETING =
-  "Hi! 👋 I can help with rooms, pricing, move-in, applying, house rules, and more! What would you like to know?";
+  "Hi! 👋 First, what are you looking for? We have rooms for rent (from $165/week) and entire units for rent (from $1,500/month). Which are you interested in?";
 
-// Shown initially and as a fallback once a topic's follow-ups run out.
+// The first thing a visitor picks — it tailors every answer that follows.
+const TRACK_OPTIONS: { label: string; track: Track; text: string }[] = [
+  { label: "🛏️ A room for rent — $165+/week", track: "room", text: "I'm looking for a room for rent (weekly)." },
+  { label: "🏠 An entire unit — $1,500+/month", track: "unit", text: "I'm looking for an entire unit to rent (monthly)." },
+  { label: "Show me both", track: "both", text: "Show me both options." },
+];
+
+// Default question chips for someone renting a weekly co-living ROOM.
 const DEFAULT_SUGGESTIONS = [
   "What's available now?",
   "How much does it cost to move in?",
@@ -26,6 +34,25 @@ const DEFAULT_SUGGESTIONS = [
   "Where are the homes located?",
   "Are pets allowed?",
   "How do I book a room?",
+];
+
+// Default question chips for someone renting a whole long-term UNIT.
+const UNIT_SUGGESTIONS = [
+  "What units are available?",
+  "How much is the rent?",
+  "How do I apply?",
+  "Are they furnished?",
+  "Where are they located?",
+  "When can I move in?",
+  "What's the lease length?",
+];
+
+// Default question chips when they want to see both products.
+const BOTH_SUGGESTIONS = [
+  "What's available now?",
+  "How does the pricing compare?",
+  "Where are they located?",
+  "How do I apply?",
 ];
 
 // After a question is asked, surface the natural next questions on that topic.
@@ -132,6 +159,8 @@ export default function ChatPanel() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Which kind of housing they're after — set when they pick an option up front.
+  const [track, setTrack] = useState<Track | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -140,7 +169,7 @@ export default function ChatPanel() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
-  async function send(text: string, source: "typed" | "suggested" = "typed") {
+  async function send(text: string, source: "typed" | "suggested" = "typed", trackOverride?: Track) {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
     setError(null);
@@ -152,7 +181,7 @@ export default function ChatPanel() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next, source }),
+        body: JSON.stringify({ messages: next, source, track: trackOverride ?? track }),
       });
       const data = await res.json();
       if (!res.ok || !data.reply) {
@@ -168,17 +197,24 @@ export default function ChatPanel() {
     }
   }
 
+  // Until they've told us which kind of housing they want, the only chips we
+  // show are the three options up top — everything after is tailored to that.
+  const showTrackOptions = !loading && !track;
+
   // Suggested questions under the latest answer: follow-ups for the last topic
-  // asked (falling back to the default set), minus anything already asked.
+  // asked (falling back to the track's default set), minus anything already asked.
   const asked = new Set(messages.filter((m) => m.role === "user").map((m) => m.content));
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content;
-  const pool = (lastUser && FOLLOWUPS[lastUser]) || DEFAULT_SUGGESTIONS;
+  const trackDefaults =
+    track === "unit" ? UNIT_SUGGESTIONS : track === "both" ? BOTH_SUGGESTIONS : DEFAULT_SUGGESTIONS;
+  // Topic follow-ups are room-specific; only use them on the room track.
+  const pool = (track === "room" && lastUser && FOLLOWUPS[lastUser]) || trackDefaults;
   let remainingSuggestions = pool.filter((s) => !asked.has(s));
   if (remainingSuggestions.length === 0) {
-    remainingSuggestions = DEFAULT_SUGGESTIONS.filter((s) => !asked.has(s));
+    remainingSuggestions = trackDefaults.filter((s) => !asked.has(s));
   }
   remainingSuggestions = remainingSuggestions.slice(0, 4);
-  const showSuggestions = !loading && remainingSuggestions.length > 0;
+  const showSuggestions = !loading && !!track && remainingSuggestions.length > 0;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -212,6 +248,25 @@ export default function ChatPanel() {
         )}
 
         {error && <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+
+        {/* Up-front choice: which kind of housing are they after? */}
+        {showTrackOptions && (
+          <div className="flex flex-col gap-2 pt-1">
+            {TRACK_OPTIONS.map((o) => (
+              <button
+                key={o.track}
+                type="button"
+                onClick={() => {
+                  setTrack(o.track);
+                  send(o.text, "suggested", o.track);
+                }}
+                className="rounded-2xl border border-brand/30 bg-brand/5 px-4 py-3 text-left text-base font-semibold text-brand active:scale-[0.98]"
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Suggested questions — stay under the latest answer so you can keep tapping. */}
         {showSuggestions && (

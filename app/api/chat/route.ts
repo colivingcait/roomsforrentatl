@@ -120,6 +120,9 @@ export async function POST(req: Request) {
   const latest = messages[messages.length - 1];
   const question = latest?.role === "user" ? latest.content : "";
   const source = (payload as { source?: unknown }).source === "suggested" ? "suggested" : "typed";
+  const rawTrack = (payload as { track?: unknown }).track;
+  const track =
+    rawTrack === "room" || rawTrack === "unit" || rawTrack === "both" ? rawTrack : null;
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -132,7 +135,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 400,
-        system: buildSystemPrompt(),
+        system: buildSystemPrompt(track),
         messages,
       }),
     });
