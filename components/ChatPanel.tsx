@@ -21,6 +21,13 @@ const SUGGESTIONS = [
   "What's available now?",
   "How much does it cost to move in?",
   "What do I need to get approved?",
+  "How fast can I move in?",
+  "What's included in the rent?",
+  "Where are the homes located?",
+  "Are pets allowed?",
+  "How does the process work?",
+  "Can I tour a home first?",
+  "How do I book a room?",
 ];
 
 export default function ChatPanel() {
@@ -64,6 +71,11 @@ export default function ChatPanel() {
     }
   }
 
+  // Suggested questions to keep under the latest answer — minus any already asked.
+  const asked = new Set(messages.filter((m) => m.role === "user").map((m) => m.content));
+  const remainingSuggestions = SUGGESTIONS.filter((s) => !asked.has(s)).slice(0, 4);
+  const showSuggestions = !loading && remainingSuggestions.length > 0;
+
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       {/* Conversation */}
@@ -71,21 +83,6 @@ export default function ChatPanel() {
         <Bubble role="assistant">
           <MessageText text={GREETING} />
         </Bubble>
-
-        {messages.length === 0 && (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {SUGGESTIONS.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => send(s)}
-                className="rounded-full border border-brand/30 bg-brand/5 px-3 py-1.5 text-sm font-semibold text-brand active:scale-95"
-              >
-                {s}
-              </button>
-            ))}
-          </div>
-        )}
 
         {messages.map((m, i) => (
           <div key={i} className="space-y-2">
@@ -111,6 +108,25 @@ export default function ChatPanel() {
         )}
 
         {error && <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+
+        {/* Suggested questions — stay under the latest answer so you can keep tapping. */}
+        {showSuggestions && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {messages.length > 0 && (
+              <p className="w-full text-xs font-semibold uppercase tracking-wide text-muted">Popular questions</p>
+            )}
+            {remainingSuggestions.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => send(s)}
+                className="rounded-full border border-brand/30 bg-brand/5 px-3 py-1.5 text-sm font-semibold text-brand active:scale-95"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Composer */}
