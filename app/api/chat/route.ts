@@ -78,17 +78,20 @@ function stripMarkdown(text: string): string {
     .replace(/^\s*[-*]\s+/gm, "- "); // normalize bullets to "- "
 }
 
-// Record each visitor question so you can see what people ask. Always logs to
-// Vercel's function logs; if CHAT_LOG_WEBHOOK is set (e.g. a Google Sheet Apps
-// Script URL), it also appends there. Fire-and-forget — never blocks the chat.
-function logQuestion(question: string) {
-  console.log(`[chat] Q: ${question.replace(/\s+/g, " ").slice(0, 500)}`);
+// Record each visitor question AND the assistant's answer so you can see what
+// people ask and how the bot replied. Always logs to Vercel's function logs;
+// if CHAT_LOG_WEBHOOK is set (e.g. a Google Sheet Apps Script URL), it also
+// appends there. Fire-and-forget — never blocks the chat.
+function logChat(question: string, answer: string) {
+  const q = question.replace(/\s+/g, " ").slice(0, 500);
+  const a = answer.replace(/\s+/g, " ").slice(0, 1500);
+  console.log(`[chat] Q: ${q} | A: ${a}`);
   const webhook = process.env.CHAT_LOG_WEBHOOK;
   if (!webhook) return;
   void fetch(webhook, {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ question, at: new Date().toISOString() }),
+    body: JSON.stringify({ question, answer, at: new Date().toISOString() }),
   }).catch(() => {});
 }
 
@@ -115,7 +118,7 @@ export async function POST(req: Request) {
 
   // The newest user message is the question being asked this turn.
   const latest = messages[messages.length - 1];
-  if (latest?.role === "user") logQuestion(latest.content);
+  const question = latest?.role === "user" ? latest.content : "";
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -136,6 +139,7 @@ export async function POST(req: Request) {
     if (!res.ok) {
       // Don't leak provider details to the client.
       console.error("Anthropic API error", res.status, await res.text().catch(() => ""));
+      logChat(question, "(assistant unavailable)");
       return Response.json(
         { error: "Sorry — I couldn't answer just now. Please try again in a moment." },
         { status: 502 }
@@ -152,6 +156,7 @@ export async function POST(req: Request) {
     );
 
     if (!reply) {
+      logChat(question, "(no answer)");
       return Response.json(
         { error: "Sorry — I didn't catch that. Could you rephrase?" },
         { status: 502 }
@@ -159,9 +164,11 @@ export async function POST(req: Request) {
     }
 
     const { text, cards } = extractBookCards(reply);
+    logChat(question, text);
     return Response.json({ reply: text, houses: cards });
   } catch (err) {
     console.error("Chat route error", err);
+    logChat(question, "(error)");
     return Response.json(
       { error: "Sorry — something went wrong. Please try again." },
       { status: 500 }
