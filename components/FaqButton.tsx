@@ -6,7 +6,8 @@ import faqData from "@/data/faq.json";
 import { site } from "@/lib/site";
 import ChatPanel from "./ChatPanel";
 
-const FAQS = faqData.faqs as { q: string; a: string }[];
+type Faq = { q: string; a: string; link?: { label: string; url: string } };
+const FAQS = faqData.faqs as Faq[];
 
 export default function FaqButton({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
@@ -82,7 +83,7 @@ export default function FaqButton({ className }: { className?: string }) {
                   <div className="flex-1 overflow-y-auto px-5 [scrollbar-width:thin]">
                     <div className="divide-y divide-slate-100">
                       {FAQS.map((f, i) => (
-                        <FaqItem key={i} q={f.q} a={f.a} />
+                        <FaqItem key={i} faq={f} />
                       ))}
                     </div>
                   </div>
@@ -134,7 +135,7 @@ function TabButton({
   );
 }
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ faq }: { faq: Faq }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="py-1">
@@ -144,10 +145,24 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         className="flex w-full items-center justify-between gap-3 py-3 text-left"
         aria-expanded={open}
       >
-        <span className="font-semibold text-ink">{q}</span>
+        <span className="font-semibold text-ink">{faq.q}</span>
         <span className="shrink-0 text-xl leading-none text-brand">{open ? "–" : "+"}</span>
       </button>
-      {open && <p className="pb-3 text-sm leading-relaxed text-muted">{a}</p>}
+      {open && (
+        <div className="pb-3">
+          <p className="text-sm leading-relaxed text-muted">{faq.a}</p>
+          {faq.link && (
+            <a
+              href={faq.link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand underline"
+            >
+              {faq.link.label} →
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }

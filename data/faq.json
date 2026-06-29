@@ -22,8 +22,12 @@
       "a": "You can explore every room and common area through the photos and 3D tour on each listing. If you'd like more detail on a specific home, just text us."
     },
     {
-      "q": "Can two people share a room, or can I bring a child?",
-      "a": "Most rooms are single-occupancy. Some homes allow double occupancy or children for an added fee — text us about a specific home and we'll confirm."
+      "q": "Can two people share a room?",
+      "a": "Most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — you can search for rooms that allow double occupancy here. (Bringing a child? Text us about a specific home and we'll confirm.)",
+      "link": {
+        "label": "Search double-occupancy rooms",
+        "url": "https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link"
+      }
     },
     {
       "q": "Are pets allowed?",

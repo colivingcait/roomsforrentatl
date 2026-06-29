@@ -52,7 +52,7 @@
       "lat": 33.7869,
       "lng": -84.1702,
       "badge": "Highly Rated!",
-      "transit": "Not within walking distance of a bus line — best suited to residents with a car.",
+      "transit": "Not within walking distance of a bus line — best suited to residents who drive or rideshare.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",
@@ -68,7 +68,7 @@
       "neighborhood": "Atlanta",
       "city": "Snellville",
       "image": "/rooms/meadowchase.svg",
-      "transit": "Not within walking distance of a bus line — best suited to residents with a car.",
+      "transit": "Not within walking distance of a bus line — best suited to residents who drive or rideshare.",
       "amenities": [
         "Fully furnished",
         "All utilities + WiFi included",

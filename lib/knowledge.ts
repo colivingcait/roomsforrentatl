@@ -10,7 +10,7 @@ import { roomTitle, priceLabel, prettyBath, moveInLabel } from "./format";
 import faqData from "@/data/faq.json";
 import { site } from "./site";
 
-const FAQS = faqData.faqs as { q: string; a: string }[];
+const FAQS = faqData.faqs as { q: string; a: string; link?: { label: string; url: string } }[];
 
 const POLICIES = `
 - Move-in cost: a $19 application fee to apply (refunded if you're not approved). Once approved, the first week's rent is due to move in. No large security deposit.
@@ -18,7 +18,7 @@ const POLICIES = `
 - Approval requirements: income of at least 2x the rent; no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening during the application.
 - Lease: no long lease — weekly payments, stay as long as you like (most residents stay 6–12 months).
 - Pets: the homes are pet-free. Registered service animals are handled case by case (have them text us).
-- Occupancy: most rooms are single-occupancy. Some homes allow double occupancy or children for an added fee — confirm per-home by texting us.
+- Occupancy: most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — people can search double-occupancy rooms here: https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link . For bringing a child, confirm per-home by texting us.
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
 - The exact street address of a home is shared after booking, for resident privacy.
@@ -55,7 +55,9 @@ function housesSnapshot(): string {
 
 export function buildSystemPrompt(): string {
   const updated = lastUpdated();
-  const faqs = FAQS.map((f) => `Q: ${f.q}\nA: ${f.a}`).join("\n\n");
+  const faqs = FAQS.map(
+    (f) => `Q: ${f.q}\nA: ${f.a}${f.link ? `\n   (${f.link.label}: ${f.link.url})` : ""}`
+  ).join("\n\n");
 
   return `You are the friendly virtual assistant for ${site.name} (${site.domain}), which lists furnished, move-in-ready private rooms for rent in the Atlanta area. You help people find a room, understand pricing and move-in, and decide to book.
 
