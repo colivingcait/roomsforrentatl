@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T00:41:24.714Z",
+  "updatedAt": "2026-06-29T00:48:51.598Z",
   "houses": {
     "152": {
       "title": "PadSplit",
@@ -12,7 +12,7 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T00:41:24.714Z",
+      "checkedAt": "2026-06-29T00:48:51.598Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -35,6 +35,7 @@
           "roomSize": "large",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 1,
           "status": 1,
@@ -63,6 +64,7 @@
           "roomSize": "standard",
           "workspace": true,
           "miniFridge": true,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 1,
           "status": 1,
@@ -207,7 +209,7 @@
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:41:24.714Z",
+      "checkedAt": "2026-06-29T00:48:51.598Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -230,6 +232,7 @@
           "roomSize": "large",
           "workspace": true,
           "miniFridge": true,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 1,
           "status": 1,
@@ -258,6 +261,7 @@
           "roomSize": "large",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 1,
           "status": 1,
@@ -402,145 +406,21 @@
       "fromPrice": 177,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:41:24.714Z",
+      "checkedAt": "2026-06-29T00:48:51.598Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
-      "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
-      "neighborhood": "Lake Commons CT",
-      "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_b48c8d8f-e5d8-4998-b906-326ac57e696d.jpg",
+      "title": "PadSplit",
+      "city": "Atlanta, GA",
       "utilitiesIncluded": false,
       "rooms": [],
-      "commonAreas": [
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/a40e7b68-ce81-40f9-a716-a6d6752edfca.jpg",
-          "category": "other",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/9e426a21-1eb0-4180-a2e8-2b1c5ba0395e.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/4f3422bb-7c3f-4d50-b92c-827beb3a6ba6.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/de9f951e-f58e-4263-a233-84f92c27853e.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        }
-      ],
-      "carousel": [
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
-          "category": "common_space",
-          "description": null,
-          "primary": false
-        }
-      ],
+      "commonAreas": [],
+      "carousel": [],
       "roomsAvailable": 0,
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T00:41:24.714Z",
+      "checkedAt": "2026-06-29T00:48:51.598Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -563,6 +443,7 @@
           "roomSize": "standard",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 1,
           "status": 1,
@@ -588,6 +469,7 @@
           "roomSize": "standard",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 2,
           "status": 1,
@@ -613,6 +495,7 @@
           "roomSize": "large",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 2,
           "status": 1,
@@ -638,6 +521,7 @@
           "roomSize": "standard",
           "workspace": true,
           "miniFridge": false,
+          "privateAccess": false,
           "climateControl": "central-ac",
           "windows": 2,
           "status": 1,
@@ -733,7 +617,7 @@
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T00:41:24.714Z",
+      "checkedAt": "2026-06-29T00:48:51.598Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
