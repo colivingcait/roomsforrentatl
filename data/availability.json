@@ -1,18 +1,170 @@
 {
-  "updatedAt": "2026-06-29T01:37:54.231Z",
+  "updatedAt": "2026-06-29T01:43:09.970Z",
   "houses": {
     "152": {
-      "title": "PadSplit",
+      "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
+      "neighborhood": "McAfee",
       "city": "Atlanta, GA",
-      "utilitiesIncluded": false,
-      "rooms": [],
-      "commonAreas": [],
-      "carousel": [],
-      "roomsAvailable": 0,
-      "fromPrice": null,
+      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+      "utilitiesIncluded": true,
+      "rooms": [
+        {
+          "id": 933,
+          "padIndex": 1,
+          "applyIndex": null,
+          "name": "Milhoja",
+          "roomNumber": 6,
+          "description": "",
+          "weeklyRate": 170,
+          "recommendedPrice": 177,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": false,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-06-30",
+          "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+            "https://www.padsplit.com/img/psproperty/152/img_d168cc65-d787-44ea-af93-72813f09d22b.jpg",
+            "https://www.padsplit.com/img/psproperty/152/img_498ac228-bcb3-4d3b-8519-c30192447d03.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:shower",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Lower level den",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074_improved.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Dining room",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb_improved.jpg",
+          "category": "common_space",
+          "description": "other, detected:",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Lower level den",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Dining room",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb.jpg",
+          "category": "common_space",
+          "description": "full size washer dryer",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false
+        }
+      ],
+      "carousel": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:shower",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Lower level den",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074_improved.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066_improved.jpg",
+          "category": "common_space",
+          "description": "Dining room",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb_improved.jpg",
+          "category": "common_space",
+          "description": "other, detected:",
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "primary": false
+        }
+      ],
+      "roomsAvailable": 1,
+      "fromPrice": 170,
       "priceUnit": "week",
-      "available": false,
-      "checkedAt": "2026-06-29T01:37:54.231Z",
+      "available": true,
+      "checkedAt": "2026-06-29T01:43:09.970Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -211,7 +363,7 @@
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:37:54.231Z",
+      "checkedAt": "2026-06-29T01:43:09.970Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -410,21 +562,145 @@
       "fromPrice": 177,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:37:54.231Z",
+      "checkedAt": "2026-06-29T01:43:09.970Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
-      "title": "PadSplit",
-      "city": "Atlanta, GA",
+      "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
+      "neighborhood": "Lake Commons CT",
+      "city": "Snellville, GA",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
-      "commonAreas": [],
-      "carousel": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/a40e7b68-ce81-40f9-a716-a6d6752edfca.jpg",
+          "category": "other",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/9e426a21-1eb0-4180-a2e8-2b1c5ba0395e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/4f3422bb-7c3f-4d50-b92c-827beb3a6ba6.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/de9f951e-f58e-4263-a233-84f92c27853e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        }
+      ],
+      "carousel": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false
+        }
+      ],
       "roomsAvailable": 0,
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T01:37:54.231Z",
+      "checkedAt": "2026-06-29T01:43:09.970Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -625,7 +901,7 @@
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:37:54.231Z",
+      "checkedAt": "2026-06-29T01:43:09.970Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
