@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-06-29T01:43:09.970Z",
+  "updatedAt": "2026-06-29T01:59:51.383Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+      "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": true,
       "rooms": [
         {
@@ -41,73 +41,113 @@
           "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Kitchen with new smooth top range and 2 refrigerators",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:shower",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Lower level den",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074_improved.jpg",
           "category": "common_space",
           "description": "Nice backyard patio with table and lights",
-          "primary": false
+          "primary": false,
+          "width": 3468,
+          "height": 4624
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Dining room",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb_improved.jpg",
           "category": "common_space",
           "description": "other, detected:",
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
-          "category": "common_space",
-          "description": "Kitchen with new smooth top range and 2 refrigerators",
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066.jpg",
-          "category": "common_space",
-          "description": "Lower level den",
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066.jpg",
-          "category": "common_space",
-          "description": "Dining room",
-          "primary": false
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb.jpg",
-          "category": "common_space",
-          "description": "full size washer dryer",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
           "category": "common_space",
           "description": "Nice backyard patio with table and lights",
-          "primary": false
+          "primary": false,
+          "width": 3468,
+          "height": 4624
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "primary": false,
+          "width": 899,
+          "height": 600
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Lower level den",
+          "primary": false,
+          "width": 899,
+          "height": 600
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066.jpg",
+          "category": "common_space",
+          "description": "Dining room",
+          "primary": false,
+          "width": 899,
+          "height": 600
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb.jpg",
+          "category": "common_space",
+          "description": "full size washer dryer",
+          "primary": false,
+          "width": 3000,
+          "height": 4000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac.jpg",
+          "category": "common_space",
+          "description": "Lovely new tile shower downstairs",
+          "primary": false,
+          "width": 3000,
+          "height": 4000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4.jpg",
+          "category": "common_space",
+          "description": "New shared bath upstairs.",
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         }
       ],
       "carousel": [
@@ -115,63 +155,79 @@
           "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Kitchen with new smooth top range and 2 refrigerators",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:shower",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Lower level den",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074_improved.jpg",
           "category": "common_space",
           "description": "Nice backyard patio with table and lights",
-          "primary": false
+          "primary": false,
+          "width": 3468,
+          "height": 4624
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_2_1581956605.1992066_improved.jpg",
           "category": "common_space",
           "description": "Dining room",
-          "primary": false
+          "primary": false,
+          "width": 899,
+          "height": 600
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/e3717da7-99d1-4045-9541-b8551f4dbafb_improved.jpg",
           "category": "common_space",
           "description": "other, detected:",
-          "primary": false
+          "primary": false,
+          "width": 3000,
+          "height": 4000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
           "category": "common_space",
-          "description": "Kitchen with new smooth top range and 2 refrigerators",
-          "primary": false
+          "description": "Nice backyard patio with table and lights",
+          "primary": false,
+          "width": 3468,
+          "height": 4624
         }
       ],
       "roomsAvailable": 1,
       "fromPrice": 170,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:43:09.970Z",
+      "checkedAt": "2026-06-29T01:59:51.383Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
       "rooms": [
         {
@@ -240,73 +296,129 @@
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
           "category": "common_space",
           "description": "dining_room, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/3b49a894-ec69-4f3f-ab7a-fa8abf68ee32_improved.jpg",
           "category": "common_space",
           "description": "living_room, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/5c9ee0ac-d5eb-437c-8660-7e2942530e11_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, gas stove",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/90af8b52-99ff-43b9-9fc8-7f31f1728a4b_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, gas stove, microwave oven, refrigerator",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, refrigerator, gas stove, microwave oven",
-          "primary": true
+          "primary": true,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/4572796d-504b-4a3d-adf3-591f56744b0a_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:window blind",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f864ce9c-87d9-42b0-afd8-0cc33ce759d7_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, gas stove, stove",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/40b566ab-821b-4174-bb4d-6cda9ff47dad.jpg",
           "category": "common_space",
           "description": "Storage closet w/ step stool and cleaning supplies",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/640ccfd4-6135-4baf-8dfe-df8b6241d652_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:shower",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/643dea21-8b86-4d2a-a528-ee3ee5e2ef08_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/bf5f5cfc-5d8f-4a81-b2f0-ca327f5b6e1c_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/11640e12-335b-4153-8dab-18543f304048_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:shower",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/8299/f8b1b050-b652-46e2-93de-7bec316cffc3_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:shower",
+          "primary": false,
+          "width": 3024,
+          "height": 4032
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/8299/d111ca6f-38af-431d-b063-c0e18a137589_improved.jpg",
+          "category": "common_space",
+          "description": "kitchen, detected:refrigerator, kitchen stove, washing machine",
+          "primary": false,
+          "width": 4032,
+          "height": 3024
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/8299/7e61740d-4985-4543-b05c-98eefc2caead_improved.jpg",
+          "category": "common_space",
+          "description": "living_room, detected:",
+          "primary": false,
+          "width": 4032,
+          "height": 3024
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/8299/017b3a12-52bf-4713-919d-53cdda745515_improved.jpg",
+          "category": "common_space",
+          "description": "bathroom, detected:window blind, bathtub, shower",
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         }
       ],
       "carousel": [
@@ -314,56 +426,72 @@
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
           "category": "common_space",
           "description": "dining_room, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/3b49a894-ec69-4f3f-ab7a-fa8abf68ee32_improved.jpg",
           "category": "common_space",
           "description": "living_room, detected:",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/5c9ee0ac-d5eb-437c-8660-7e2942530e11_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, gas stove",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/90af8b52-99ff-43b9-9fc8-7f31f1728a4b_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, gas stove, microwave oven, refrigerator",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, stove, refrigerator, gas stove, microwave oven",
-          "primary": true
+          "primary": true,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/4572796d-504b-4a3d-adf3-591f56744b0a_improved.jpg",
           "category": "common_space",
           "description": "bathroom, detected:window blind",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f864ce9c-87d9-42b0-afd8-0cc33ce759d7_improved.jpg",
           "category": "common_space",
           "description": "kitchen, detected:kitchen stove, gas stove, stove",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/40b566ab-821b-4174-bb4d-6cda9ff47dad.jpg",
           "category": "common_space",
           "description": "Storage closet w/ step stool and cleaning supplies",
-          "primary": false
+          "primary": false,
+          "width": 4032,
+          "height": 3024
         }
       ],
       "roomsAvailable": 2,
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:43:09.970Z",
+      "checkedAt": "2026-06-29T01:59:51.383Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -439,73 +567,97 @@
           "url": "https://www.padsplit.com/img/psproperty/11889/31721219-2ea3-4377-867b-ab03a0250691.jpg",
           "category": "other",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/f566e043-db88-4832-9f52-de9f6da5dd0d.png",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/e8b5ad5e-88a6-4abf-ac83-a9a504599955.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/aaf9d405-2f70-4912-91ea-1069c912040e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/1e1cc647-1ba0-4885-8e9f-2487d79d911f.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/c41896b5-87ef-4638-9a86-567fe233315e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/d83bc5c8-004e-4be5-a0a2-dcbfe343712d.jpg",
           "category": "common_space",
           "description": "Living Room",
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/8056af91-de58-4e5d-97d2-e95227f5612a.jpg",
           "category": "common_space",
           "description": "Downstairs Bathroom",
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1067
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/7972baf1-99d2-4441-bdd8-665b89169aa8.jpg",
           "category": "common_space",
           "description": "upstairs bathroom",
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/d932489c-6d93-4b13-84a8-090961b13eb4.jpg",
           "category": "common_space",
           "description": "upstairs bathroom",
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/9bd6e165-3964-4651-85e6-0c5b3e06b632.jpg",
           "category": "common_space",
           "description": "upstairs bathroom",
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         }
       ],
       "carousel": [
@@ -513,63 +665,79 @@
           "url": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/f566e043-db88-4832-9f52-de9f6da5dd0d.png",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/e8b5ad5e-88a6-4abf-ac83-a9a504599955.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/aaf9d405-2f70-4912-91ea-1069c912040e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/1e1cc647-1ba0-4885-8e9f-2487d79d911f.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1066
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/c41896b5-87ef-4638-9a86-567fe233315e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/d83bc5c8-004e-4be5-a0a2-dcbfe343712d.jpg",
           "category": "common_space",
           "description": "Living Room",
-          "primary": false
+          "primary": false,
+          "width": 1920,
+          "height": 1080
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/8056af91-de58-4e5d-97d2-e95227f5612a.jpg",
           "category": "common_space",
           "description": "Downstairs Bathroom",
-          "primary": false
+          "primary": false,
+          "width": 1600,
+          "height": 1067
         }
       ],
       "roomsAvailable": 2,
       "fromPrice": 177,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:43:09.970Z",
+      "checkedAt": "2026-06-29T01:59:51.383Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Lake Commons CT",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_b48c8d8f-e5d8-4998-b906-326ac57e696d.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -577,73 +745,97 @@
           "url": "https://www.padsplit.com/img/psproperty/30251/a40e7b68-ce81-40f9-a716-a6d6752edfca.jpg",
           "category": "other",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/9e426a21-1eb0-4180-a2e8-2b1c5ba0395e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/4f3422bb-7c3f-4d50-b92c-827beb3a6ba6.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/de9f951e-f58e-4263-a233-84f92c27853e.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         }
       ],
       "carousel": [
@@ -651,62 +843,78 @@
           "url": "https://www.padsplit.com/img/psproperty/30251/a2e34899-e3f7-423b-b022-e2a08686a871.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/03a99239-6a86-4e52-8a7f-e37c81728fd1.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/91ad4f64-43f4-4146-89d2-20c228dd3cea.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/6acee56f-e050-4c2e-8a80-a525c274b63a.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/ec0cde77-2fad-4c15-b0ee-2a70f6e12ca5.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/5abdd96a-85bc-406c-9cec-9ac39cd420e4.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/aabcc469-7548-4551-95bb-03510e75e918.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/30251/c56bd3b7-21fd-4bf4-b8bb-8e0326cbb835.jpg",
           "category": "common_space",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         }
       ],
       "roomsAvailable": 0,
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "checkedAt": "2026-06-29T01:43:09.970Z",
+      "checkedAt": "2026-06-29T01:59:51.383Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
-      "city": "Atlanta, GA",
+      "city": "Decatur, GA",
       "image": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
       "utilitiesIncluded": true,
       "rooms": [
@@ -826,25 +1034,33 @@
           "url": "https://www.padsplit.com/img/psproperty/35011/ee4433f3-bbab-43f9-aafa-4bf456cbee0e.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinetry, stainless steel appliances, and generous counter space for everyday cooking.",
-          "primary": true
+          "primary": true,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinet storage, subway-tile backsplash, stainless range, and a sink set by the window.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/a6a9f37b-0a25-4985-ad51-a81cd563b027.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinetry, solid-surface counters, and a double sink with window view for easy meal prep.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/806afd0d-fdec-4081-b7e8-70634a864e49.jpg",
           "category": "common_space",
           "description": "Dedicated laundry/utility room with washer and dryer, durable tile flooring, and an exterior door for easy access.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         }
       ],
       "carousel": [
@@ -852,56 +1068,72 @@
           "url": "https://www.padsplit.com/img/psproperty/35011/ee4433f3-bbab-43f9-aafa-4bf456cbee0e.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinetry, stainless steel appliances, and generous counter space for everyday cooking.",
-          "primary": true
+          "primary": true,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinet storage, subway-tile backsplash, stainless range, and a sink set by the window.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/a6a9f37b-0a25-4985-ad51-a81cd563b027.jpg",
           "category": "common_space",
           "description": "Updated kitchen with ample cabinetry, solid-surface counters, and a double sink with window view for easy meal prep.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/806afd0d-fdec-4081-b7e8-70634a864e49.jpg",
           "category": "common_space",
           "description": "Dedicated laundry/utility room with washer and dryer, durable tile flooring, and an exterior door for easy access.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "category": "bedroom",
           "description": "Furnished bedroom with a full bed, bedside table, and dedicated desk space, plus a ceiling fan and hardwood floors.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
           "category": "bedroom",
           "description": null,
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png",
           "category": "bedroom",
           "description": "Furnished bedroom with a work desk, open garment rack, and shelving, plus a large window and hardwood floors.",
-          "primary": false
+          "primary": false,
+          "width": 1388,
+          "height": 1044
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
           "category": "bedroom",
           "description": "Spacious bedroom with wood-look flooring, ceiling fan, dual windows with blinds, and a dedicated desk workspace.",
-          "primary": false
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         }
       ],
       "roomsAvailable": 4,
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
-      "checkedAt": "2026-06-29T01:43:09.970Z",
+      "checkedAt": "2026-06-29T01:59:51.383Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
