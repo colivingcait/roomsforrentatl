@@ -98,6 +98,8 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           </a>
         )}
 
+        {unit.description && <p className="mt-4 text-slate-600">{unit.description}</p>}
+
         <h2 className="mt-7 text-lg font-bold text-ink">Details</h2>
         <dl className="mt-3 grid grid-cols-2 gap-3">
           {facts.map((f) => (

@@ -109,6 +109,7 @@ export interface Unit {
   leaseLength?: string | null;
   pets?: string | null;
   sqft?: number | null;
+  description?: string; // longer write-up shown on the unit page
   features?: string[];
   applyUrl?: string | null; // TurboTenant link; absent if not ready yet
   photos?: string[];
