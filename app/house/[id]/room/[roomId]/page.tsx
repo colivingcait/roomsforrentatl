@@ -139,7 +139,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             <div className="text-xs text-muted">{moveInLabel(room.moveInDate)}</div>
           </div>
           <a
-            href={roomBookingUrl(house.id, room.pagePosition ?? room.roomNumber, house.padsplitUrl)}
+            href={roomBookingUrl(house.id, room.pagePosition ?? room.padIndex, house.padsplitUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-book flex-1"

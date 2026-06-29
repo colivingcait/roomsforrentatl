@@ -59,7 +59,13 @@ jobs:
             git config user.email "actions@github.com"
             git add data/availability.json
             git commit -m "chore: refresh room availability from PadSplit [skip ci]"
-            git push
+            # Rebase + retry so a concurrent push to the branch doesn't drop the update.
+            for i in 1 2 3 4 5; do
+              git push origin "HEAD:${{ github.ref_name }}" && break
+              echo "push rejected; rebasing and retrying ($i)…"
+              git pull --rebase --autostash origin "${{ github.ref_name }}" || true
+              sleep 3
+            done
           else
             echo "No availability changes to commit."
           fi
