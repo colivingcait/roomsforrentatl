@@ -126,8 +126,17 @@ function privateBathSnapshot(): string {
 function unitsSnapshot(): string {
   const units = getUnits();
   if (!units.length) return "(none currently listed)";
-  return units
+  const ready = units.filter((u) => !u.comingSoon);
+  const soon = units.filter((u) => u.comingSoon);
+  const header =
+    `EXACT count — ${ready.length} unit${ready.length === 1 ? "" : "s"} available to apply for now` +
+    (soon.length
+      ? `, plus ${soon.length} COMING SOON (not yet available, no applications — only mention if relevant).`
+      : ".") +
+    " Do not call a coming-soon unit 'available'.";
+  const lines = units
     .map((u) => {
+      const status = u.comingSoon ? "[COMING SOON — not yet available] " : "";
       const bits = [
         rentLabel(u.rent),
         u.furnished ? "furnished" : u.furnished === false ? "unfurnished" : null,
@@ -147,9 +156,10 @@ function unitsSnapshot(): string {
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
       const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
       const desc = u.description ? ` Details: ${u.description.replace(/\s+/g, " ")}` : "";
-      return `• ${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
+      return `• ${status}${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
     })
     .join("\n");
+  return `${header}\n${lines}`;
 }
 
 type Track = "room" | "unit" | "both";
@@ -164,6 +174,7 @@ function trackDirective(track?: Track | null): string {
   if (track === "unit") {
     return `# What this visitor wants: a LONG-TERM PRIVATE UNIT (they already told you)
 - They picked "an entire unit" up front, so DON'T ask again. Tailor every answer to the whole long-term apartments (monthly rent from ~$1,500, ~12-month lease, furnished, utilities included, apply via that unit's TurboTenant link).
+- DON'T DUMP THE LIST. When they first ask, give a ONE-LINE overview (how many are available now + the price range) and then ask ONE quick narrowing question with chips — e.g. budget, or studio vs. larger. Show ONE unit's full details (features, description) only after they pick it. Keep the opening to ~3 short lines max, not a feature-by-feature wall of text.
 - CRITICAL: do NOT mention PadSplit, weekly pricing, the $19 application fee, the co-living house rules, next-day move-in, or the BOOK card — NONE of that applies to these units. Those are a completely separate product. If (and only if) they later ask about a cheaper or weekly option, you may then mention the co-living rooms.`;
   }
   if (track === "both") {
