@@ -8,6 +8,8 @@ type BookHouse = {
   location: string;
   fromPrice: string | null;
   roomsAvailable: number;
+  rating?: number | null;
+  reviewCount?: number | null;
   url: string;
 };
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[] };
@@ -150,7 +152,15 @@ function BookCard({ house }: { house: BookHouse }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
       <div className="flex items-baseline justify-between gap-2">
-        <div className="font-extrabold text-ink">{house.name}</div>
+        <div className="flex items-baseline gap-2">
+          <div className="font-extrabold text-ink">{house.name}</div>
+          {house.rating != null && (
+            <span className="text-xs font-bold text-amber-500">
+              ★ {house.rating.toFixed(1)}
+              {house.reviewCount ? <span className="font-normal text-muted"> ({house.reviewCount})</span> : null}
+            </span>
+          )}
+        </div>
         {house.fromPrice && <div className="text-sm font-bold text-ink">from {house.fromPrice}</div>}
       </div>
       <div className="text-sm text-muted">{house.location}</div>

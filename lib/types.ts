@@ -83,6 +83,8 @@ export interface LiveHouse {
   image?: string;
   utilitiesIncluded?: boolean;
   available?: boolean;
+  rating?: number | null;
+  reviewCount?: number | null;
   checkedAt?: string;
   stale?: boolean;
 }
@@ -96,6 +98,7 @@ export interface House extends SeedHouse {
   fromPrice: number | null;
   priceUnit: PriceUnit;
   available: boolean;
+  reviewCount?: number | null;
   checkedAt: string | null;
   stale: boolean;
 }

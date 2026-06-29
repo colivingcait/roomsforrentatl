@@ -166,6 +166,69 @@ async function extractPhotos(page) {
   });
 }
 
+/**
+ * Pull the listing's star rating + review count out of __NEXT_DATA__ (with a
+ * visible-text fallback like "4.7 (32 reviews)"). Returns the best guess plus
+ * the raw rating/review-keyed candidates we found, so the Action log can
+ * confirm which fields PadSplit actually uses.
+ */
+async function extractListingMeta(page) {
+  return page.evaluate(() => {
+    let data;
+    try { data = window.__NEXT_DATA__; } catch {}
+    if (!data) {
+      const el = document.getElementById("__NEXT_DATA__");
+      if (el) try { data = JSON.parse(el.textContent || "{}"); } catch {}
+    }
+
+    const candidates = {};
+    if (data) {
+      const visit = (node, depth, path) => {
+        if (!node || typeof node !== "object" || depth > 18) return;
+        for (const k of Object.keys(node)) {
+          const v = node[k];
+          const key = path ? `${path}.${k}` : k;
+          if ((typeof v === "number" || typeof v === "string") && /rating|review|stars|score/i.test(k)) {
+            if (!(key in candidates)) candidates[key] = v;
+          } else if (v && typeof v === "object") {
+            visit(v, depth + 1, key);
+          }
+        }
+      };
+      visit(data, 0, "");
+    }
+
+    let rating = null;
+    let reviewCount = null;
+    for (const [key, val] of Object.entries(candidates)) {
+      const num = typeof val === "string" ? parseFloat(val) : val;
+      if (!Number.isFinite(num)) continue;
+      if (rating == null && /rating|stars|score/i.test(key) && num > 0 && num <= 5) rating = num;
+      if (
+        reviewCount == null &&
+        /review/i.test(key) &&
+        /count|total|number|num|reviews$/i.test(key) &&
+        Number.isInteger(num) &&
+        num >= 0
+      ) {
+        reviewCount = num;
+      }
+    }
+
+    // Visible-text fallback: e.g. "4.7 ★ (32 reviews)" / "4.7 · 32 reviews".
+    if (rating == null || reviewCount == null) {
+      const body = document.body?.innerText || "";
+      const m = body.match(/\b([0-5](?:\.\d)?)\b[^0-9]{0,12}?(\d{1,4})\s+reviews?/i);
+      if (m) {
+        if (rating == null) rating = parseFloat(m[1]);
+        if (reviewCount == null) reviewCount = parseInt(m[2], 10);
+      }
+    }
+
+    return { rating, reviewCount, candidates };
+  });
+}
+
 const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-blink-features=AutomationControlled"] });
 const ctx = await browser.newContext({
   userAgent: UA,
@@ -223,6 +286,7 @@ for (const house of houses) {
     const meta = parseHouseMeta(text, html);
     const rooms = await extractRooms(page);
     const { commonAreas, carousel } = await extractPhotos(page);
+    const listingMeta = await extractListingMeta(page);
 
     // PadSplit's /room-details/{house}/{N} uses N = the room's position in the
     // order rooms appear ON THE PAGE. Derive that from where each room's name
@@ -247,31 +311,6 @@ for (const house of houses) {
       r.pagePosition = located ? i + 1 : r.padIndex;
     });
 
-    // TEMP probe: find a #anchor that lands on the rooms section, plus what the
-    // "See rooms" button targets, so we can deep-link straight to the rooms.
-    if (id === "8299") {
-      const anchor = await page.evaluate(() => {
-        const out = { idsWithRoom: [], seeRooms: null, hashLinks: [] };
-        document.querySelectorAll("[id]").forEach((el) => {
-          if (/room|avail|listing|book/i.test(el.id)) out.idsWithRoom.push(el.id);
-        });
-        const btn = Array.from(document.querySelectorAll("a,button,div,span")).find((e) =>
-          /^\s*see rooms\s*$/i.test(e.textContent || "")
-        );
-        if (btn) {
-          out.seeRooms = {
-            tag: btn.tagName,
-            href: btn.getAttribute("href"),
-            dataset: JSON.stringify(btn.dataset || {}),
-            outer: (btn.outerHTML || "").slice(0, 160),
-          };
-        }
-        document.querySelectorAll('a[href^="#"]').forEach((a) => out.hashLinks.push(a.getAttribute("href")));
-        return out;
-      });
-      console.log(`  [8299] ANCHOR PROBE: ${JSON.stringify(anchor)}`);
-    }
-
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(
@@ -289,21 +328,24 @@ for (const house of houses) {
       fromPrice: Number.isFinite(fromPrice) ? fromPrice : null,
       priceUnit: "week",
       available: available.length > 0,
+      rating: listingMeta.rating,
+      reviewCount: listingMeta.reviewCount,
       checkedAt: result.updatedAt,
       url: house.padsplitUrl,
     };
     okCount++;
+
+    console.log(
+      `  [${id}] rating: ${listingMeta.rating ?? "?"} (${listingMeta.reviewCount ?? "?"} reviews) — candidates: ${JSON.stringify(
+        listingMeta.candidates
+      ).slice(0, 300)}`
+    );
 
     const byBath = available.reduce((m, r) => ((m[r.bathroomType || "?"] = (m[r.bathroomType || "?"] || 0) + 1), m), {});
     console.log(
       `✓ ${id}: ${rooms.length} rooms (${available.length} available ${JSON.stringify(byBath)}), from $${
         Number.isFinite(fromPrice) ? fromPrice : "?"
       }/wk — ${title}`
-    );
-
-    console.log(
-      `  [${id}] page order:`,
-      JSON.stringify(available.map((r) => ({ pos: r.pagePosition, num: r.roomNumber, name: (r.name || "").slice(0, 16) })))
     );
   } catch (err) {
     const carried = prev.houses?.[id];

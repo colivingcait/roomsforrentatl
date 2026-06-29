@@ -74,6 +74,18 @@ export default function HousePage({ params }: { params: { id: string } }) {
           </div>
         </div>
 
+        {house.rating != null && (
+          <div className="mt-4 flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3">
+            <span className="text-lg leading-none text-amber-500" aria-hidden>★</span>
+            <span className="text-lg font-extrabold text-ink">{house.rating.toFixed(1)}</span>
+            <span className="text-sm text-muted">
+              {house.reviewCount
+                ? `· ${house.reviewCount} resident review${house.reviewCount === 1 ? "" : "s"}`
+                : "· Highly rated by residents"}
+            </span>
+          </div>
+        )}
+
         {house.blurb && <p className="mt-4 text-slate-600">{house.blurb}</p>}
 
         {/* Rooms */}

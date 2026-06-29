@@ -12,6 +12,8 @@ export type BookCard = {
   location: string;
   fromPrice: string | null;
   roomsAvailable: number;
+  rating: number | null;
+  reviewCount: number | null;
   url: string;
 };
 
@@ -34,6 +36,8 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
       location: [h.neighborhood, h.city].filter(Boolean).join(", "),
       fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
       roomsAvailable: h.roomsAvailable,
+      rating: h.rating ?? null,
+      reviewCount: h.reviewCount ?? null,
       url: `/house/${h.id}#rooms`,
     }));
 

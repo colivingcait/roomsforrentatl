@@ -133,6 +133,9 @@ function merge(seed: SeedHouse): House {
     fromPrice: Number.isFinite(fromPrice as number) ? (fromPrice as number) : null,
     priceUnit: (live.priceUnit as PriceUnit) ?? "week",
     available: (avail.length || live.roomsAvailable || 0) > 0,
+    // Live rating from PadSplit wins; fall back to the seed value if present.
+    rating: live.rating ?? seed.rating,
+    reviewCount: live.reviewCount ?? null,
     checkedAt: live.checkedAt ?? null,
     stale: live.stale ?? false,
   };

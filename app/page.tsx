@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
-import ReviewsHighlight from "@/components/ReviewsHighlight";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { updatedLabel } from "@/lib/format";
@@ -43,8 +42,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <ReviewsHighlight />
 
       <div className="mx-auto max-w-3xl px-4 pb-2 pt-2">
         <HouseList houses={houses} />
