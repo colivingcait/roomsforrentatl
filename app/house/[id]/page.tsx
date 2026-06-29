@@ -99,7 +99,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
         ) : (
           <p className="mt-2 text-muted">
             This home is fully booked at the moment. Check back soon or{" "}
-            <a href={site.phoneHref} className="font-semibold text-brand">
+            <a href={site.smsHref} className="font-semibold text-brand">
               text us
             </a>{" "}
             and we’ll find you a room.
@@ -121,8 +121,12 @@ export default function HousePage({ params }: { params: { id: string } }) {
         <p className="mt-6 text-xs text-slate-400">
           Rooms &amp; pricing sync from PadSplit{updated ? ` (${updated.toLowerCase()})` : ""} and may change. Exact
           address is shared after booking. Questions?{" "}
+          <a href={site.smsHref} className="font-semibold text-brand">
+            Text us
+          </a>{" "}
+          or{" "}
           <a href={site.phoneHref} className="font-semibold text-brand">
-            Call or text us
+            call
           </a>
           .
         </p>
@@ -149,8 +153,8 @@ export default function HousePage({ params }: { params: { id: string } }) {
               View on PadSplit →
             </a>
           )}
-          <a href={site.phoneHref} className="btn-secondary px-4" aria-label="Call or text us">
-            📞
+          <a href={site.smsHref} className="btn-secondary px-4" aria-label="Text us">
+            💬
           </a>
         </div>
       </div>

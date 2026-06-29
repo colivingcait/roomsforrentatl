@@ -9,8 +9,10 @@ export const site = {
   tagline: "Furnished rooms for rent in Atlanta — move in today.",
   description:
     "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, quick move-in. Book your room today.",
-  // Used for the "Call / Text" buttons. Update to your real booking line.
+  // The Call/Text line — routes to your assistant. Set NEXT_PUBLIC_PHONE in Vercel.
   phone: process.env.NEXT_PUBLIC_PHONE ?? "+1 (404) 555-0100",
+  // Pre-filled text shown when someone taps "Text us".
+  smsBody: "Hi! I'm interested in a room with RoomsForRentATL — can you help?",
   // Your PadSplit referral. The code is appended to every "Book" link so you get
   // referral credit. PadSplit reads it from the `referralCode` query param (seen
   // on real PadSplit share links), alongside ref_source/ref_role attribution.
@@ -24,7 +26,8 @@ export const site = {
     return "tel:" + this.phone.replace(/[^0-9+]/g, "");
   },
   get smsHref() {
-    return "sms:" + this.phone.replace(/[^0-9+]/g, "");
+    // `?&body=` is the form that prefills on both iOS and Android.
+    return `sms:${this.phone.replace(/[^0-9+]/g, "")}?&body=${encodeURIComponent(this.smsBody)}`;
   },
 };
 

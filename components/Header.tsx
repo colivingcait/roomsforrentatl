@@ -13,8 +13,8 @@ export default function Header() {
             Rooms<span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
           </span>
         </Link>
-        <a href={site.phoneHref} className="text-sm font-semibold text-brand">
-          Call / Text
+        <a href={site.smsHref} className="text-sm font-semibold text-brand">
+          💬 Text us
         </a>
       </div>
     </header>

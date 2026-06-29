@@ -1,9 +1,9 @@
 import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
+import ContactButtons from "@/components/ContactButtons";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { updatedLabel } from "@/lib/format";
-import { site } from "@/lib/site";
 
 // The data file is refreshed daily by the scraper (committed → redeploy). We
 // also revalidate hourly as a backstop.
@@ -49,9 +49,7 @@ export default function HomePage() {
       <Footer />
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur sm:hidden">
-        <a href={site.phoneHref} className="btn-book w-full">
-          Need help today? Call / Text us
-        </a>
+        <ContactButtons />
       </div>
     </main>
   );

@@ -9,9 +9,13 @@ export default function Footer() {
         </div>
         <p className="mt-1 max-w-md">{site.tagline}</p>
         <p className="mt-3">
-          Questions or want a tour today?{" "}
+          Questions or want a room today?{" "}
+          <a href={site.smsHref} className="font-semibold text-brand">
+            Text us
+          </a>{" "}
+          or{" "}
           <a href={site.phoneHref} className="font-semibold text-brand">
-            {site.phone}
+            call {site.phone}
           </a>
         </p>
         <p className="mt-4 text-xs text-slate-400">
