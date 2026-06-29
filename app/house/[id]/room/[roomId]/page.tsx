@@ -53,7 +53,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
       <Header />
 
       {/* Photo gallery */}
-      <div className="relative aspect-[4/3] w-full bg-slate-100 sm:aspect-[16/9]">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
         <Image src={photos[0]} alt={roomTitle(room)} fill priority sizes="100vw" className="object-cover" />
         <Link
           href={`/house/${house.id}`}
