@@ -10,6 +10,8 @@
       "image": "/rooms/glen-mora.svg",
       "lat": 33.7396,
       "lng": -84.2466,
+      "badge": "New!",
+      "pinned": true,
       "blurb": "Move-in ready co-living home minutes from I-285 and Decatur. Private bedroom, shared common spaces.",
       "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning", "Near MARTA & I-285"]
     },
@@ -22,6 +24,7 @@
       "image": "/rooms/candace.svg",
       "lat": 33.6905,
       "lng": -84.3052,
+      "badge": "Highly Rated!",
       "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
     },
     {
@@ -33,6 +36,7 @@
       "image": "/rooms/raven.svg",
       "lat": 33.7869,
       "lng": -84.1702,
+      "badge": "Highly Rated!",
       "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
     },
     {

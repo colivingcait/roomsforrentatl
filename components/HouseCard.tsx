@@ -13,17 +13,33 @@ export default function HouseCard({ house }: { house: House }) {
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
         <Image src={house.image} alt={house.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
-        <div className="absolute left-3 top-3">
-          {house.available ? (
-            <span className="rounded-full bg-brand px-2.5 py-1 text-xs font-bold text-white shadow">
-              ● {availabilityLabel(house)}
-            </span>
-          ) : (
-            <span className="rounded-full bg-slate-900/80 px-2.5 py-1 text-xs font-bold text-white shadow">
-              Fully booked
-            </span>
-          )}
-        </div>
+
+        {/* Fully-booked marker spans the top of the card */}
+        {!house.available && (
+          <div className="absolute inset-x-0 top-0 bg-slate-900/85 py-1.5 text-center text-xs font-bold uppercase tracking-wide text-white">
+            Fully booked!
+          </div>
+        )}
+
+        {/* Availability badge (only when bookable) */}
+        {house.available && (
+          <span className="absolute left-3 top-3 rounded-full bg-brand px-2.5 py-1 text-xs font-bold text-white shadow">
+            ● {availabilityLabel(house)}
+          </span>
+        )}
+
+        {/* Merchandising badge */}
+        {house.badge && (
+          <span
+            className={
+              "absolute right-3 top-3 rounded-full px-2.5 py-1 text-xs font-extrabold text-white shadow " +
+              (/new/i.test(house.badge) ? "bg-accent" : "bg-amber-500")
+            }
+          >
+            {/highly|rated/i.test(house.badge) ? "★ " : ""}
+            {house.badge}
+          </span>
+        )}
       </div>
 
       <div className="p-4">

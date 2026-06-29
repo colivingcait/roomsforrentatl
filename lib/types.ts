@@ -41,6 +41,10 @@ export interface SeedHouse {
   /** Approximate neighborhood center (NOT the street address) for the map. */
   lat?: number;
   lng?: number;
+  /** Optional merchandising tag shown on the card, e.g. "New!" or "Highly Rated!". */
+  badge?: string;
+  /** Pin this house to the top of the list regardless of price. */
+  pinned?: boolean;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */

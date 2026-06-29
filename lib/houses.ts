@@ -7,6 +7,7 @@ const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {}
 
 export function getHouses(): House[] {
   return SEED.map(merge).sort((a, b) => {
+    if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1; // pinned first
     if (a.available !== b.available) return a.available ? -1 : 1;
     return (a.fromPrice ?? 1e9) - (b.fromPrice ?? 1e9);
   });
