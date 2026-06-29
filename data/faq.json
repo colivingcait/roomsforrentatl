@@ -1,13 +1,21 @@
 {
-  "_README": "Edit these answers anytime — they power the 'Have a question?' popup. Review the payment, occupancy, and approval answers to match your exact policy.",
+  "_README": "Edit these answers anytime — they power the 'Have a question?' popup (and, later, the chat assistant's knowledge base). Keep them accurate to your policy.",
   "faqs": [
     {
       "q": "How fast can I move in?",
-      "a": "Most rooms are next-day move-in once you're approved. Approval is usually quick."
+      "a": "Most rooms are next-day move-in once you're approved, and approval is usually quick. Pick a room, apply, and you can often move in the same or next day."
+    },
+    {
+      "q": "What does it cost to move in?",
+      "a": "Just a $19 application fee to apply — and it's refunded if you're not approved. Once you're approved, your first week's rent is due to move in. There's no big security deposit."
     },
     {
       "q": "How does payment work / when is rent due?",
-      "a": "Rent is paid weekly, in advance. Your first payment is due when you book, and after that you're billed automatically on the same weekday each week."
+      "a": "Rent is paid weekly, in advance. Your first week is due when you move in, and after that you're billed automatically on the same weekday each week — utilities and WiFi are already included, so there are no separate bills."
+    },
+    {
+      "q": "What do I need to get approved?",
+      "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening automatically during your application."
     },
     {
       "q": "Can I tour a home before booking?",
@@ -18,8 +26,8 @@
       "a": "Most rooms are single-occupancy. Some homes allow double occupancy or children for an added fee — text us about a specific home and we'll confirm."
     },
     {
-      "q": "What do I need to get approved?",
-      "a": "A quick background screening and proof you can cover rent (generally income around 3x the rent), with no recent evictions. PadSplit runs the screening during your application."
+      "q": "Are pets allowed?",
+      "a": "No, the homes are pet-free. (Registered service animals are handled separately — text us if that applies to you.)"
     },
     {
       "q": "Is there a lease?",
