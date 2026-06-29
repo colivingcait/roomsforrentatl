@@ -30,8 +30,12 @@
       }
     },
     {
-      "q": "Are pets allowed?",
-      "a": "No, the homes are pet-free. (Registered service animals are handled separately — text us if that applies to you.)"
+      "q": "Are animals allowed?",
+      "a": "No, our homes are pet-free. To find a home for you and your furry friend, search here. (Registered service animals are handled separately — text us if that applies to you.)",
+      "link": {
+        "label": "Search pet-friendly homes",
+        "url": "https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link"
+      }
     },
     {
       "q": "Is there a lease?",

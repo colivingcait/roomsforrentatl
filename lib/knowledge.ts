@@ -17,7 +17,7 @@ const POLICIES = `
 - Rent: paid weekly, in advance, billed automatically on the same weekday each week. Utilities and WiFi are included.
 - Approval requirements: income of at least 2x the rent; no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening during the application.
 - Lease: no long lease — weekly payments, stay as long as you like (most residents stay 6–12 months).
-- Pets: the homes are pet-free. Registered service animals are handled case by case (have them text us).
+- Pets: our homes are pet-free. If someone needs a pet-friendly home, they can search here: https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link . Registered service animals are handled case by case (have them text us).
 - Occupancy: most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — people can search double-occupancy rooms here: https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link . For bringing a child, confirm per-home by texting us.
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
