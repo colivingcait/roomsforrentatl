@@ -92,6 +92,29 @@ export interface LiveHouse {
   stale?: boolean;
 }
 
+/** A long-term (monthly) private rental unit — managed manually, not PadSplit. */
+export interface Unit {
+  id: string;
+  title: string;
+  type: string; // e.g. "Studio" or "2 Bed · 1 Bath"
+  beds: number;
+  baths: number;
+  city: string;
+  neighborhood?: string;
+  rent: number; // monthly
+  deposit?: number | null;
+  furnished?: boolean | null;
+  utilitiesIncluded?: boolean | null;
+  availableDate?: string | null; // ISO date
+  leaseLength?: string | null;
+  pets?: string | null;
+  sqft?: number | null;
+  features?: string[];
+  applyUrl?: string | null; // TurboTenant link; absent if not ready yet
+  photos?: string[];
+  tourUrl?: string | null;
+}
+
 /** A house as rendered on the site: your seed data + live availability merged. */
 export interface House extends SeedHouse {
   rooms: Room[];

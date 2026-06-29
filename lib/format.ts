@@ -89,6 +89,20 @@ export function roomTagline(room: Room): string | null {
   return room.description && room.description.trim() ? room.description.trim() : null;
 }
 
+/** Monthly rent for long-term units, e.g. "$1,500/mo". */
+export function rentLabel(rent: number): string {
+  return `$${rent.toLocaleString()}/mo`;
+}
+
+/** Availability label for a long-term unit (by month/day, or "Available now"). */
+export function availDateLabel(iso?: string | null): string {
+  if (!iso) return "Available now";
+  const d = new Date(iso + (iso.length === 10 ? "T00:00:00" : ""));
+  if (isNaN(d.getTime())) return "Available now";
+  if (startOfDay(d) <= startOfDay(new Date())) return "Available now";
+  return `Available ${d.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
+}
+
 export function moveInLabel(iso: string | null): string {
   // PadSplit rooms here are next-day move-in, so surface everything as
   // "Available now" unless a room is genuinely weeks out.

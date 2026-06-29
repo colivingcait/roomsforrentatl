@@ -2,8 +2,10 @@ import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
+import UnitsSection from "@/components/UnitsSection";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
+import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 
 // The data file is refreshed daily by the scraper (committed → redeploy). We
@@ -12,6 +14,7 @@ export const revalidate = 3600;
 
 export default function HomePage() {
   const houses = getHouses();
+  const units = getUnits();
   const updated = updatedLabel(lastUpdated());
   const openCount = houses.filter((h) => h.available).length;
   const totalRooms = houses.reduce((n, h) => n + (h.available ? h.roomsAvailable : 0), 0);
@@ -46,6 +49,8 @@ export default function HomePage() {
       <div className="mx-auto max-w-3xl px-4 pb-2 pt-2">
         <HouseList houses={houses} />
       </div>
+
+      <UnitsSection units={units} />
 
       <TrustBand />
 
