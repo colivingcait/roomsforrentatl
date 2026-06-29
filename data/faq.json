@@ -94,7 +94,12 @@
     {
       "category": "The home & your room",
       "q": "Is there parking?",
-      "a": "Most homes have street or driveway parking. It can vary by home, so check the specific listing if you'll be driving."
+      "a": "Yes — every home has driveway and street parking, about 4–5 spots per house. It's first come, first served, with one car per resident."
+    },
+    {
+      "category": "The home & your room",
+      "q": "How many people share a bathroom?",
+      "a": "Usually about 1 bathroom for every 3 rooms. It can be a bit more or less, depending on the home's layout and who's living there now."
     },
     {
       "category": "The home & your room",
