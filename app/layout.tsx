@@ -24,6 +24,11 @@ export const metadata: Metadata = {
     siteName: site.name,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Rooms for Rent in Atlanta`,
+    description: site.description,
+  },
   robots: { index: true, follow: true },
 };
 
