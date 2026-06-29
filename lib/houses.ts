@@ -64,6 +64,8 @@ function merge(seed: SeedHouse): House {
     neighborhood: live.neighborhood || seed.neighborhood,
     image: live.image || seed.image,
     rooms,
+    commonAreas: live.commonAreas ?? [],
+    carousel: live.carousel ?? [],
     roomsAvailable: avail.length || live.roomsAvailable || 0,
     fromPrice: Number.isFinite(fromPrice as number) ? (fromPrice as number) : null,
     priceUnit: (live.priceUnit as PriceUnit) ?? "week",

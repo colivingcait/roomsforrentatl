@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
 import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel } from "@/lib/format";
-import { site, bookingUrl } from "@/lib/site";
+import { site, roomBookingUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -129,7 +129,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             <div className="text-xs text-muted">{moveInLabel(room.moveInDate)}</div>
           </div>
           <a
-            href={bookingUrl(house.padsplitUrl, room.id)}
+            href={roomBookingUrl(house.id, room.padIndex, house.padsplitUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-book flex-1"

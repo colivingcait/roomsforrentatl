@@ -1,9 +1,18 @@
 export type PriceUnit = "week" | "month";
 export type BathroomType = "private" | "shared";
 
+export interface Photo {
+  url: string;
+  category: string;
+  description: string | null;
+  primary?: boolean;
+}
+
 /** A single room within a house, scraped from PadSplit's per-room data. */
 export interface Room {
   id: number;
+  /** 1-based position in PadSplit's room order — used in the apply deep-link. */
+  padIndex: number | null;
   name: string | null;
   roomNumber: number | null;
   description: string | null;
@@ -51,6 +60,8 @@ export interface SeedHouse {
 export interface LiveHouse {
   title?: string;
   rooms?: Room[];
+  commonAreas?: Photo[];
+  carousel?: Photo[];
   roomsAvailable?: number;
   fromPrice?: number;
   priceUnit?: PriceUnit;
@@ -66,6 +77,8 @@ export interface LiveHouse {
 /** A house as rendered on the site: your seed data + live availability merged. */
 export interface House extends SeedHouse {
   rooms: Room[];
+  commonAreas: Photo[];
+  carousel: Photo[];
   roomsAvailable: number;
   fromPrice: number | null;
   priceUnit: PriceUnit;

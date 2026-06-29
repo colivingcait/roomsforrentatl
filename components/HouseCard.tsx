@@ -1,10 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { House } from "@/lib/types";
+import PhotoStrip from "./PhotoStrip";
 import { fromPriceLabel, availabilityLabel, bathroomBreakdown, prettyBath, priceLabel } from "@/lib/format";
 
 export default function HouseCard({ house }: { house: House }) {
   const breakdown = bathroomBreakdown(house);
+  const photos = house.carousel.length ? house.carousel.map((p) => p.url) : [house.image];
 
   return (
     <Link
@@ -12,7 +13,7 @@ export default function HouseCard({ house }: { house: House }) {
       className="group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]"
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
-        <Image src={house.image} alt={house.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+        <PhotoStrip images={photos} alt={house.name} />
 
         {/* Fully-booked marker spans the top of the card */}
         {!house.available && (

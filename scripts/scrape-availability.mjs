@@ -75,11 +75,14 @@ async function extractRooms(page) {
     visit(data, 0);
     if (!found) return [];
 
-    return found.map((r) => {
+    return found.map((r, i) => {
       const a = r.amenities || {};
       const pic = (r.pictures || []).find((p) => p.primary) || (r.pictures || [])[0];
       return {
         id: r.id,
+        // 1-based position in PadSplit's room order — this is what the
+        // /room-details/{houseId}/{padIndex} apply URL uses.
+        padIndex: i + 1,
         name: typeof r.name === "string" ? r.name : null,
         roomNumber: r.roomNumber ?? null,
         description: r.description ?? null,
@@ -100,6 +103,61 @@ async function extractRooms(page) {
         photos: (r.pictures || []).map((p) => p.location).filter(Boolean).slice(0, 6),
       };
     });
+  });
+}
+
+/**
+ * Collect every categorized photo in __NEXT_DATA__ and split into common-area
+ * photos (kitchen/living/exterior/etc.) and a curated carousel order. PadSplit
+ * hosts these on its CDN, so we just keep the URLs — nothing is re-hosted.
+ */
+async function extractPhotos(page) {
+  return page.evaluate(() => {
+    let data;
+    try {
+      data = window.__NEXT_DATA__;
+    } catch {}
+    if (!data) {
+      const el = document.getElementById("__NEXT_DATA__");
+      if (el) try { data = JSON.parse(el.textContent || "{}"); } catch {}
+    }
+    if (!data) return { commonAreas: [], carousel: [] };
+
+    const pics = [];
+    const seen = new Set();
+    const visit = (node, depth) => {
+      if (!node || typeof node !== "object" || depth > 18) return;
+      if (Array.isArray(node)) {
+        for (const x of node) visit(x, depth + 1);
+        return;
+      }
+      if (typeof node.location === "string" && /^https?:\/\//.test(node.location) && "category" in node) {
+        if (!seen.has(node.location)) {
+          seen.add(node.location);
+          pics.push({
+            url: node.location,
+            category: (node.category || "other").toString(),
+            description: node.description || null,
+            primary: !!node.primary,
+          });
+        }
+      }
+      for (const k of Object.keys(node)) visit(node[k], depth + 1);
+    };
+    visit(data, 0);
+
+    const isBedroom = (c) => /bed\s*room|bedroom/i.test(c);
+    const commonAreas = pics.filter((p) => !isBedroom(p.category)).slice(0, 12);
+
+    // Carousel: lead with exterior/common areas, then a couple bedrooms.
+    const prio = ["exterior", "frontage", "front", "living", "common", "kitchen", "dining", "bathroom"];
+    const rank = (c) => {
+      const i = prio.findIndex((p) => c.toLowerCase().includes(p));
+      return i === -1 ? prio.length + (isBedroom(c) ? 1 : 0) : i;
+    };
+    const carousel = [...pics].sort((a, b) => rank(a.category) - rank(b.category)).slice(0, 8);
+
+    return { commonAreas, carousel };
   });
 }
 
@@ -137,6 +195,7 @@ for (const house of houses) {
 
     const meta = parseHouseMeta(text, html);
     const rooms = await extractRooms(page);
+    const { commonAreas, carousel } = await extractPhotos(page);
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(
@@ -148,6 +207,8 @@ for (const house of houses) {
       title,
       ...meta,
       rooms,
+      commonAreas,
+      carousel,
       roomsAvailable: available.length,
       fromPrice: Number.isFinite(fromPrice) ? fromPrice : null,
       priceUnit: "week",
