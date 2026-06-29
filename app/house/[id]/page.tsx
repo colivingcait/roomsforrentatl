@@ -77,7 +77,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
         {house.blurb && <p className="mt-4 text-slate-600">{house.blurb}</p>}
 
         {/* Rooms */}
-        <div className="mt-6 flex items-center justify-between">
+        <div id="rooms" className="mt-6 flex scroll-mt-20 items-center justify-between">
           <h2 className="text-lg font-bold text-ink">
             {rooms.length > 0 ? `${availabilityLabel(house)}` : "No rooms available right now"}
           </h2>
@@ -128,8 +128,8 @@ export default function HousePage({ params }: { params: { id: string } }) {
             <div className="text-xs text-muted">{availabilityLabel(house)}</div>
           </div>
           {rooms.length > 0 ? (
-            <a href={`#`} className="btn-book pointer-events-none flex-1 opacity-90">
-              Pick a room above to book →
+            <a href="#rooms" className="btn-book flex-1">
+              Pick a room to book →
             </a>
           ) : (
             <Link href="/" className="btn-book flex-1">
