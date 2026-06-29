@@ -7,9 +7,9 @@ import RoomCard from "@/components/RoomCard";
 import PhotoStrip from "@/components/PhotoStrip";
 import TrustBand from "@/components/TrustBand";
 import CommonAreas from "@/components/CommonAreas";
+import FaqButton from "@/components/FaqButton";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
-import { site } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -93,10 +93,10 @@ export default function HousePage({ params }: { params: { id: string } }) {
         ) : (
           <p className="mt-2 text-muted">
             This home is fully booked at the moment. Check back soon or{" "}
-            <a href={site.smsHref} className="font-semibold text-brand">
-              text us
-            </a>{" "}
-            and we’ll find you a room.
+            <Link href="/" className="font-semibold text-brand">
+              browse our other available rooms
+            </Link>
+            .
           </p>
         )}
 
@@ -114,15 +114,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
 
         <p className="mt-6 text-xs text-slate-400">
           Rooms &amp; pricing sync from PadSplit{updated ? ` (${updated.toLowerCase()})` : ""} and may change. Exact
-          address is shared after booking. Questions?{" "}
-          <a href={site.smsHref} className="font-semibold text-brand">
-            Text us
-          </a>{" "}
-          or{" "}
-          <a href={site.phoneHref} className="font-semibold text-brand">
-            call
-          </a>
-          .
+          address is shared after booking.
         </p>
       </div>
 
@@ -144,9 +136,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
               See other available rooms →
             </Link>
           )}
-          <a href={site.smsHref} className="btn-secondary px-4" aria-label="Text us">
-            💬
-          </a>
+          <FaqButton className="btn-secondary px-4" label="💬" startTab="chat" />
         </div>
       </div>
     </main>

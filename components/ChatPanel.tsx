@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { site } from "@/lib/site";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -43,12 +42,12 @@ export default function ChatPanel() {
       });
       const data = await res.json();
       if (!res.ok || !data.reply) {
-        setError(data.error || "Something went wrong. Please text us.");
+        setError(data.error || "Sorry — something went wrong. Please try again in a moment.");
       } else {
         setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
       }
     } catch {
-      setError("Couldn't reach the assistant. Please check your connection or text us.");
+      setError("Couldn't reach the assistant. Please check your connection and try again.");
     } finally {
       setLoading(false);
       inputRef.current?.focus();
@@ -92,15 +91,7 @@ export default function ChatPanel() {
           </Bubble>
         )}
 
-        {error && (
-          <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">
-            {error}{" "}
-            <a href={site.smsHref} className="font-semibold underline">
-              Text us
-            </a>
-            .
-          </div>
-        )}
+        {error && <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
       </div>
 
       {/* Composer */}
@@ -130,10 +121,7 @@ export default function ChatPanel() {
           </button>
         </div>
         <p className="mt-2 text-center text-[11px] text-slate-400">
-          AI assistant — answers may not be perfect.{" "}
-          <a href={site.smsHref} className="underline">
-            Text a human
-          </a>
+          AI assistant — answers may not be perfect.
         </p>
       </form>
     </div>

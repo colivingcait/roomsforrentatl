@@ -7,7 +7,7 @@
     },
     {
       "q": "Can I move in today?",
-      "a": "Often, yes! If a room is available and you're approved in time, same-day move-in is frequently possible. Apply early in the day for the best shot, and text us if you're on a tight timeline."
+      "a": "Often, yes! If a room is available and you're approved in time, same-day move-in is frequently possible. Apply early in the day for the best shot if you're on a tight timeline."
     },
     {
       "q": "What happens after I'm approved?",
@@ -47,7 +47,7 @@
     },
     {
       "q": "How do I show proof of income?",
-      "a": "During your application you can upload recent pay stubs, a bank statement, or an offer letter. We generally look for income of about 2x the rent. If your situation is a little different, text us and we'll help."
+      "a": "During your application you can upload recent pay stubs, a bank statement, or an offer letter. We generally look for income of about 2x the rent, and the application walks you through exactly what to provide."
     },
     {
       "q": "How long does approval take?",
@@ -55,11 +55,11 @@
     },
     {
       "q": "What if I'm not approved?",
-      "a": "If you're not approved, your $19 application fee is refunded. Text us and we'll let you know if another option might be a better fit."
+      "a": "If you're not approved, your $19 application fee is refunded. You're welcome to apply to another home that might be a better fit."
     },
     {
       "q": "Can I tour a home before booking?",
-      "a": "You can explore every room and common area through the photos and 3D tour on each listing. If you'd like more detail on a specific home, just text us."
+      "a": "You can explore every room and common area through the photos and 3D tour on each listing — it's a full walkthrough of the home before you ever book."
     },
     {
       "q": "What's included in the price?",
@@ -79,7 +79,7 @@
     },
     {
       "q": "How many people live in each home?",
-      "a": "These are shared co-living homes, so you'll have a handful of housemates, each with their own private room. Text us about a specific home for the exact number."
+      "a": "These are shared co-living homes, so you'll have a handful of housemates, each with their own private room. The exact number varies by home and you can see the layout on each listing."
     },
     {
       "q": "Can I use the kitchen and cook?",
@@ -91,11 +91,11 @@
     },
     {
       "q": "Is there parking?",
-      "a": "Most homes have street or driveway parking. It can vary by home, so text us about a specific one if you'll be driving."
+      "a": "Most homes have street or driveway parking. It can vary by home, so check the specific listing if you'll be driving."
     },
     {
       "q": "Can two people share a room?",
-      "a": "Most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — you can search for rooms that allow double occupancy here. (Bringing a child? Text us about a specific home and we'll confirm.)",
+      "a": "Most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — you can search for rooms that allow double occupancy here. (Bringing a child? Some homes allow it for a fee — use the same search to find family-friendly homes.)",
       "link": {
         "label": "Search double-occupancy rooms",
         "url": "https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link"
@@ -103,7 +103,7 @@
     },
     {
       "q": "Are animals allowed?",
-      "a": "No, our homes are pet-free. To find a home for you and your furry friend, search here. (Registered service animals are handled separately — text us if that applies to you.)",
+      "a": "No, our homes are pet-free. To find a home for you and your furry friend, search here. (Registered service animals are considered separately, case by case.)",
       "link": {
         "label": "Search pet-friendly homes",
         "url": "https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link"
@@ -119,23 +119,23 @@
     },
     {
       "q": "What are the house rules?",
-      "a": "Our homes run on a simple philosophy: be here and be happy. A few shared agreements keep everyone comfortable — it's residents only (no guests), smoke-free indoors (step outside to smoke or vape), and pet-free. Quiet hours are 9 PM–9 AM. Keep shared spaces tidy and wash your dishes right after using them, bring your own basics like toilet paper and soap, treat the home and furnishings with care, and be a good neighbor — resolve things kindly and report anything that needs fixing through PadSplit. Text us if you'd like more detail."
+      "a": "Our homes run on a simple philosophy: be here and be happy. A few shared agreements keep everyone comfortable — it's residents only (no guests), smoke-free indoors (step outside to smoke or vape), and pet-free. Quiet hours are 9 PM–9 AM. Keep shared spaces tidy and wash your dishes right after using them, bring your own basics like toilet paper and soap, treat the home and furnishings with care, and be a good neighbor — resolve things kindly and report anything that needs fixing through PadSplit. Ask our assistant if you'd like more detail on anything."
     },
     {
       "q": "Are the homes men, women, or mixed?",
-      "a": "Most are mixed-gender co-living homes. If you'd prefer a particular setup, text us and we'll let you know what's available."
+      "a": "Most are mixed-gender co-living homes. You can browse what's available across our homes right on the site."
     },
     {
       "q": "How long can I stay? Is there a minimum?",
-      "a": "You can stay as long as you like — most residents stay 6–12 months. There's no long lease; you simply pay weekly. Text us about the current minimum stay or move-out notice."
+      "a": "You can stay as long as you like — most residents stay 6–12 months. There's no long lease; you simply pay weekly. The details on minimum stay and move-out notice are in your PadSplit agreement."
     },
     {
       "q": "How do I move out?",
-      "a": "Just give notice through PadSplit when you're ready — there's no long lease tying you down. Text us and we'll walk you through the notice period."
+      "a": "Just give notice through PadSplit when you're ready — there's no long lease tying you down, and your agreement explains the notice period."
     },
     {
       "q": "Can I switch rooms or homes later?",
-      "a": "Often yes — if another room or home opens up and you're in good standing, we can usually help you move. Just text us when you're thinking about it."
+      "a": "Often yes — if another room or home opens up and you're in good standing, you can usually move. Just apply to the new room on PadSplit when one becomes available."
     },
     {
       "q": "Is there a lease?",
@@ -155,7 +155,7 @@
     },
     {
       "q": "Who handles maintenance or repairs?",
-      "a": "If something needs fixing, just let us know (or submit it through PadSplit) and we'll take care of it. You're never on the hook for normal repairs."
+      "a": "If something needs fixing, submit a request through PadSplit and we'll take care of it. You're never on the hook for normal repairs."
     },
     {
       "q": "Are the homes cleaned?",

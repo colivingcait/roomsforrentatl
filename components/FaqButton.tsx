@@ -1,18 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import faqData from "@/data/faq.json";
-import { site } from "@/lib/site";
 import ChatPanel from "./ChatPanel";
 
 type Faq = { q: string; a: string; link?: { label: string; url: string } };
 const FAQS = faqData.faqs as Faq[];
 
-export default function FaqButton({ className }: { className?: string }) {
+export default function FaqButton({
+  className,
+  label = "Have a question?",
+  startTab = "faq",
+}: {
+  className?: string;
+  label?: ReactNode;
+  startTab?: "faq" | "chat";
+}) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [tab, setTab] = useState<"faq" | "chat">("faq");
+  const [tab, setTab] = useState<"faq" | "chat">(startTab);
 
   // Portals need the DOM — only render after mount (avoids SSR mismatch).
   useEffect(() => setMounted(true), []);
@@ -35,7 +43,7 @@ export default function FaqButton({ className }: { className?: string }) {
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} className={className}>
-        Have a question?
+        {label}
       </button>
 
       {/* Rendered through a portal to <body> so the fixed overlay escapes the
@@ -44,7 +52,7 @@ export default function FaqButton({ className }: { className?: string }) {
         mounted &&
         createPortal(
           <div
-            className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4"
+            className="fixed inset-0 z-[9999] flex items-end justify-center sm:items-center sm:p-4"
             role="dialog"
             aria-modal="true"
             aria-label="Frequently asked questions"
@@ -90,15 +98,14 @@ export default function FaqButton({ className }: { className?: string }) {
 
                   {/* Footer */}
                   <div className="safe-bottom border-t border-slate-100 bg-slate-50 px-5 py-4">
-                    <p className="text-sm font-semibold text-ink">Still have a question?</p>
-                    <div className="mt-2 flex gap-2">
-                      <a href={site.smsHref} className="btn-book flex-1 py-2.5">
-                        💬 Text us
-                      </a>
-                      <a href={site.phoneHref} className="btn-secondary px-4 py-2.5">
-                        Call
-                      </a>
-                    </div>
+                    <p className="text-sm font-semibold text-ink">Didn’t find your answer?</p>
+                    <button
+                      type="button"
+                      onClick={() => setTab("chat")}
+                      className="btn-book mt-2 w-full py-2.5"
+                    >
+                      💬 Ask our assistant
+                    </button>
                   </div>
                 </>
               ) : (

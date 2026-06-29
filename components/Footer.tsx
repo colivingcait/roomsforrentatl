@@ -9,14 +9,9 @@ export default function Footer() {
         </div>
         <p className="mt-1 max-w-md">{site.tagline}</p>
         <p className="mt-3">
-          Questions or want a room today?{" "}
-          <a href={site.smsHref} className="font-semibold text-brand">
-            Text us
-          </a>{" "}
-          or{" "}
-          <a href={site.phoneHref} className="font-semibold text-brand">
-            call {site.phone}
-          </a>
+          Have a question? Tap{" "}
+          <span className="font-semibold text-brand">“Have a question?”</span> at the top to chat with
+          our assistant anytime.
         </p>
         <p className="mt-4 text-xs text-slate-400">
           © {site.domain}. Rooms are listed and booked through PadSplit. Pricing and availability
