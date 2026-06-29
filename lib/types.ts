@@ -1,9 +1,33 @@
 export type PriceUnit = "week" | "month";
+export type BathroomType = "private" | "shared";
+
+/** A single room within a house, scraped from PadSplit's per-room data. */
+export interface Room {
+  id: number;
+  name: string | null;
+  roomNumber: number | null;
+  description: string | null;
+  weeklyRate: number | null;
+  recommendedPrice: number | null;
+  bathroomType: BathroomType | null;
+  bedSize: string | null;
+  roomSize: string | null;
+  workspace: boolean;
+  miniFridge: boolean;
+  climateControl: string | null;
+  windows: number | null;
+  status: number | null;
+  detailedStatus: string | null;
+  moveInDate: string | null;
+  image: string | null;
+  photos: string[];
+  /** Derived: PadSplit status === 1 means vacant/listed. */
+  available: boolean;
+}
 
 /**
- * A house as you author it in data/houses.json — the editable source of truth
- * for branding (name, blurb, amenities, photo) and the PadSplit link the daily
- * job crawls.
+ * A house as authored in data/houses.json — editable branding + the PadSplit
+ * link the daily job crawls.
  */
 export interface SeedHouse {
   id: string;
@@ -22,6 +46,7 @@ export interface SeedHouse {
 /** Live values written by the daily scraper into data/availability.json. */
 export interface LiveHouse {
   title?: string;
+  rooms?: Room[];
   roomsAvailable?: number;
   fromPrice?: number;
   priceUnit?: PriceUnit;
@@ -36,6 +61,7 @@ export interface LiveHouse {
 
 /** A house as rendered on the site: your seed data + live availability merged. */
 export interface House extends SeedHouse {
+  rooms: Room[];
   roomsAvailable: number;
   fromPrice: number | null;
   priceUnit: PriceUnit;

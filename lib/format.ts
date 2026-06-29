@@ -1,29 +1,81 @@
-import type { House, PriceUnit } from "./types";
+import type { House, Room, PriceUnit, BathroomType } from "./types";
+import { availableRooms } from "./houses";
 
-export function priceLabel(price: number, unit: PriceUnit): string {
+export function priceLabel(price: number, unit: PriceUnit = "week"): string {
   return `$${price.toLocaleString()}/${unit === "week" ? "wk" : "mo"}`;
 }
 
-/** "from $169/wk" — the house's lowest available room price. */
 export function fromPriceLabel(house: House): string {
   if (house.fromPrice == null) return "See pricing";
   return `from ${priceLabel(house.fromPrice, house.priceUnit)}`;
 }
 
-/** "4 rooms available" / "1 room available" / "Fully booked". */
 export function availabilityLabel(house: House): string {
   if (!house.available || house.roomsAvailable <= 0) return "Fully booked";
   const n = house.roomsAvailable;
   return `${n} room${n === 1 ? "" : "s"} available`;
 }
 
-/** Friendly "Updated today / yesterday / on Jun 26" from an ISO timestamp. */
+/** Group available rooms by bathroom type with the cheapest price in each. */
+export function bathroomBreakdown(house: House): { type: BathroomType; count: number; from: number | null }[] {
+  const groups: Record<string, { count: number; from: number }> = {};
+  for (const r of availableRooms(house)) {
+    const key = r.bathroomType ?? "shared";
+    const g = (groups[key] ??= { count: 0, from: Infinity });
+    g.count++;
+    if (r.weeklyRate != null && r.weeklyRate < g.from) g.from = r.weeklyRate;
+  }
+  const order: BathroomType[] = ["private", "shared"];
+  return order
+    .filter((t) => groups[t])
+    .map((t) => ({ type: t, count: groups[t].count, from: Number.isFinite(groups[t].from) ? groups[t].from : null }));
+}
+
+export function prettyBath(type: BathroomType | null): string {
+  if (type === "private") return "Private bath";
+  if (type === "shared") return "Shared bath";
+  return "Bath";
+}
+
+export function prettyBed(size: string | null): string | null {
+  if (!size) return null;
+  return `${size.charAt(0).toUpperCase()}${size.slice(1)} bed`;
+}
+
+/** PadSplit room names look like "Room 2 - Brook - Affordable room…". Keep it short. */
+export function roomTitle(room: Room): string {
+  if (room.roomNumber != null) return `Room ${room.roomNumber}`;
+  if (room.name) return room.name.split(" - ").slice(0, 2).join(" · ");
+  return "Room";
+}
+
+/** The descriptive tail of the PadSplit room name, if any. */
+export function roomTagline(room: Room): string | null {
+  if (room.description) return room.description;
+  if (room.name) {
+    const parts = room.name.split(" - ");
+    if (parts.length > 2) return parts.slice(2).join(" - ");
+  }
+  return null;
+}
+
+export function moveInLabel(iso: string | null): string {
+  if (!iso) return "Available now";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "Available now";
+  const today = startOfDay(new Date());
+  const days = Math.round((startOfDay(d) - today) / 86_400_000);
+  if (days <= 0) return "Move in today";
+  if (days === 1) return "Move in tomorrow";
+  if (days < 14) return `Available in ${days} days`;
+  return `Available ${d.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
+}
+
 export function updatedLabel(iso: string | null): string | null {
   if (!iso) return null;
   const d = new Date(iso);
   if (isNaN(d.getTime())) return null;
-  const today = new Date();
-  const days = Math.floor((startOfDay(today) - startOfDay(d)) / 86_400_000);
+  const days = Math.floor((startOfDay(new Date()) - startOfDay(d)) / 86_400_000);
   if (days <= 0) return "Updated today";
   if (days === 1) return "Updated yesterday";
   if (days < 7) return `Updated ${days} days ago`;

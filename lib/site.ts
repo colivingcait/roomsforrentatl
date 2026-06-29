@@ -34,14 +34,14 @@ export const site = {
  * code is configured, it returns the plain PadSplit URL unchanged. Won't
  * overwrite a referral param that's already on the URL.
  */
-export function bookingUrl(padsplitUrl: string): string {
+export function bookingUrl(padsplitUrl: string, roomId?: string | number): string {
   const { code, param, extra } = site.referral;
-  if (!code) return padsplitUrl;
   try {
     const u = new URL(padsplitUrl);
-    if (!u.searchParams.has(param)) u.searchParams.set(param, code);
+    if (roomId != null) u.searchParams.set("roomId", String(roomId));
+    if (code && !u.searchParams.has(param)) u.searchParams.set(param, code);
     for (const [k, v] of Object.entries(extra)) {
-      if (!u.searchParams.has(k)) u.searchParams.set(k, v);
+      if (code && !u.searchParams.has(k)) u.searchParams.set(k, v);
     }
     return u.toString();
   } catch {

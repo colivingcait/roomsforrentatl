@@ -1,22 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { House } from "@/lib/types";
-import { fromPriceLabel, availabilityLabel } from "@/lib/format";
+import { fromPriceLabel, availabilityLabel, bathroomBreakdown, prettyBath, priceLabel } from "@/lib/format";
 
 export default function HouseCard({ house }: { house: House }) {
+  const breakdown = bathroomBreakdown(house);
+
   return (
     <Link
       href={`/house/${house.id}`}
       className="group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]"
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
-        <Image
-          src={house.image}
-          alt={house.name}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover"
-        />
+        <Image src={house.image} alt={house.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
         <div className="absolute left-3 top-3">
           {house.available ? (
             <span className="rounded-full bg-brand px-2.5 py-1 text-xs font-bold text-white shadow">
@@ -44,13 +40,21 @@ export default function HouseCard({ house }: { house: House }) {
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-2">
-          {house.amenities.slice(0, 2).map((a) => (
-            <span key={a} className="chip">
-              {a}
-            </span>
-          ))}
-        </div>
+        {breakdown.length > 0 && (
+          <div className="mt-3 border-t border-slate-100 pt-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Availability</p>
+            <ul className="mt-1.5 space-y-1">
+              {breakdown.map((b) => (
+                <li key={b.type} className="flex items-center justify-between text-sm">
+                  <span className="text-ink">
+                    <span className="font-semibold">{b.count}</span> {prettyBath(b.type).toLowerCase()}
+                  </span>
+                  {b.from != null && <span className="font-semibold text-brand">from {priceLabel(b.from)}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </Link>
   );
