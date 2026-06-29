@@ -250,6 +250,27 @@ for (const house of houses) {
         Number.isFinite(fromPrice) ? fromPrice : "?"
       }/wk — ${title}`
     );
+
+    // TEMP diagnostic: click each room on the listing and record the real
+    // /room-details URL PadSplit navigates to, so we can map room → URL exactly.
+    if (id === "35011") {
+      for (const r of available) {
+        const nick = (r.name || "").split(" - ")[1] || r.name || `Room ${r.roomNumber}`;
+        try {
+          await page.goto(house.padsplitUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
+          await page
+            .waitForFunction(() => JSON.stringify(window.__NEXT_DATA__ || {}).includes("roomNumber"), { timeout: 15000 })
+            .catch(() => {});
+          await page.waitForTimeout(1200);
+          const loc = page.getByText(nick, { exact: false }).first();
+          await loc.click({ timeout: 6000 });
+          await page.waitForURL(/room-details/i, { timeout: 8000 }).catch(() => {});
+          console.log(`  PROBE roomNumber=${r.roomNumber} pad=${r.padIndex} nick=${nick} -> ${page.url()}`);
+        } catch (e) {
+          console.log(`  PROBE roomNumber=${r.roomNumber} nick=${nick} FAILED ${e}`);
+        }
+      }
+    }
   } catch (err) {
     const carried = prev.houses?.[id];
     result.houses[id] = carried
