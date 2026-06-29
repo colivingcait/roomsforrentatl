@@ -18,24 +18,32 @@
       "sqft": 1000,
       "description": "Bright, spacious 2 bed / 1 bath upstairs unit in a duplex-style house — furnished, freshly updated, and full of natural light! Open-concept living with hardwood floors and a full kitchen with newer stainless steel appliances. The master bedroom is huge with a walk-in closet, and the second bedroom has a closet too. The best part might be the big, brand-new deck right off the living room — lake and nature views, plus a large backyard to enjoy!\n\nAll utilities are included (electric, water, internet, and more). It comes furnished too — couch, dining table, both bed sets, and basic kitchen items to get you cooking — so just bring your clothes, bed linens, towels, and personal belongings and you're all set! Laundry is shared with the downstairs unit and is located in the garage, and your designated parking is in the driveway.\n\nSince it's in the Norris Lake community, a 12+ month lease gets you access to the lake, pool, beach, tennis courts, and parks! Priority is given to long-term leases (12+ months). First month and security deposit, plus a background and credit check, are required to move in.",
       "furnishedNote": "Furnished with the couch, dining table, both bed sets, and basic kitchen items — just bring your clothes, bed linens, towels, and personal belongings.",
-      "features": ["Open-concept living with hardwood floors", "Full kitchen with newer stainless appliances", "Huge master bedroom with walk-in closet", "Big brand-new deck — lake & nature views", "Large backyard", "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"],
+      "features": [
+        "Open-concept living with hardwood floors",
+        "Full kitchen with newer stainless appliances",
+        "Huge master bedroom with walk-in closet",
+        "Big brand-new deck — lake & nature views",
+        "Large backyard",
+        "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"
+      ],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=e2085ef6-1230-4f26-9c63-1df569145778",
       "photos": [
         "/units/lake-house-2br/3325BB4E-5482-4492-8911-EAF7DBA2FF1D_1_105_c.jpeg",
-        "/units/lake-house-2br/3C96CCA1-F0E3-4E85-935E-631D3D4887E5_1_105_c.jpeg",
-        "/units/lake-house-2br/A09126B0-88E1-4886-A9FE-B68374FA5CC5_1_105_c.jpeg",
-        "/units/lake-house-2br/338CFA50-E78E-4487-9FFA-2DDFCC7DCDB6_1_105_c.jpeg",
-        "/units/lake-house-2br/CE4A2BFB-F4C5-4F82-B617-A004BCD11173_4_5005_c.jpeg",
         "/units/lake-house-2br/E69E408D-07A7-4118-A60B-42FA793715FF_1_105_c.jpeg",
+        "/units/lake-house-2br/A09126B0-88E1-4886-A9FE-B68374FA5CC5_1_105_c.jpeg",
         "/units/lake-house-2br/588CF48B-ABFE-4116-8C1A-6B2FA3551F33_1_105_c.jpeg",
-        "/units/lake-house-2br/76AFEA3E-58F1-44EF-903A-BF296A4FA1AA_1_105_c.jpeg",
+        "/units/lake-house-2br/F84B668E-5030-4603-9EC4-F9E1112B6438_1_105_c.jpeg",
+        "/units/lake-house-2br/B960567B-F5D4-462F-9C39-BBF5E7976011_4_5005_c.jpeg",
+        "/units/lake-house-2br/3C96CCA1-F0E3-4E85-935E-631D3D4887E5_1_105_c.jpeg",
+        "/units/lake-house-2br/338CFA50-E78E-4487-9FFA-2DDFCC7DCDB6_1_105_c.jpeg",
+        "/units/lake-house-2br/E7822DEF-9500-4246-A520-134173EFD1B7_1_105_c.jpeg",
         "/units/lake-house-2br/45DA305A-5C6F-4BBD-A839-31B3A7AF367E_1_102_o.jpeg",
-        "/units/lake-house-2br/37EAD4F2-65CC-4D79-AC1F-B62396E25714_1_102_o.jpeg",
-        "/units/lake-house-2br/CD70743A-68FF-4340-B874-10B1ACBB9EEE_4_5005_c.jpeg",
-        "/units/lake-house-2br/BEF3A706-C8AA-426B-A263-5BDB496B00D4_4_5005_c.jpeg",
+        "/units/lake-house-2br/1448F41B-B714-4CDD-A396-FF648653EE65_1_102_a.jpeg",
+        "/units/lake-house-2br/DC7BF700-D6E6-48A7-9A3B-E3CC491CFD2E_1_105_c.jpeg",
+        "/units/lake-house-2br/C620B612-CB01-4018-9B55-1484B49D44F7_1_102_a.jpeg",
         "/units/lake-house-2br/35C4B91C-CE51-4772-A344-F1003F097B24_1_105_c.jpeg",
         "/units/lake-house-2br/67B4AE40-1A91-4891-8B82-42639B22302D_4_5005_c.jpeg",
-        "/units/lake-house-2br/B960567B-F5D4-462F-9C39-BBF5E7976011_4_5005_c.jpeg"
+        "/units/lake-house-2br/CD70743A-68FF-4340-B874-10B1ACBB9EEE_4_5005_c.jpeg"
       ],
       "tourUrl": null
     },
@@ -56,7 +64,13 @@
       "sqft": 500,
       "description": "Newly renovated studio in a duplex-style house — comfy, furnished, private and clean! All utilities are included (electric, water, internet). Easy to move in — just bring your clothes, bed linens, towels, and personal belongings! Laundry is shared with the upstairs unit and is located in the garage (connected to the studio). The entire downstairs is yours: private entrance, private patio, and more. Your designated parking space is in the parking pad on the right side of the driveway.\n\nPriority is given to long-term leases (12+ months). First month and security deposit, plus a background and credit check, are required to move in. And since it's in the Norris Lake community, a 12+ month lease gets you access to the lake, pool, beach, tennis courts, and nearby parks — all within the neighborhood!",
       "furnishedNote": "Fully furnished, including kitchen items — just bring your clothes, bed linens, towels, and personal belongings.",
-      "features": ["Private entrance & private patio", "The entire downstairs is yours", "Designated parking space", "Laundry in the connected garage", "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"],
+      "features": [
+        "Private entrance & private patio",
+        "The entire downstairs is yours",
+        "Designated parking space",
+        "Laundry in the connected garage",
+        "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"
+      ],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=b8cb0774-46e7-44fa-8065-fe71845200b1",
       "photos": [
         "/units/lake-house-studio/D9A3BA47-89CB-4142-B9D6-4E1BC1DA184B_1_105_c.jpeg",
@@ -88,7 +102,11 @@
       "leaseLength": "12 months preferred",
       "pets": "No pets",
       "sqft": 500,
-      "features": ["Brand-new renovation", "Fully private — kitchen, bathroom & entry", "Private patio"],
+      "features": [
+        "Brand-new renovation",
+        "Fully private — kitchen, bathroom & entry",
+        "Private patio"
+      ],
       "applyUrl": null,
       "photos": [],
       "tourUrl": null
