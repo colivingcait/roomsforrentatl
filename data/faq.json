@@ -14,6 +14,10 @@
       "a": "Rent is paid weekly, in advance. Your first week is due when you move in, and after that you're billed automatically on the same weekday each week — utilities and WiFi are already included, so there are no separate bills."
     },
     {
+      "q": "Can I pay monthly?",
+      "a": "Rent is billed weekly, in advance — that's how our billing works, so there isn't a monthly option. Your first week is due when you move in, and after that you're charged automatically on the same weekday each week. If weekly doesn't fit your schedule, you can ask us about paying bi-weekly instead."
+    },
+    {
       "q": "What do I need to get approved?",
       "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening automatically during your application."
     },
