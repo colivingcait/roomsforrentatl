@@ -6,8 +6,20 @@ import { createPortal } from "react-dom";
 import faqData from "@/data/faq.json";
 import ChatPanel from "./ChatPanel";
 
-type Faq = { q: string; a: string; link?: { label: string; url: string } };
+type Faq = { q: string; a: string; category?: string; link?: { label: string; url: string } };
 const FAQS = faqData.faqs as Faq[];
+
+// Group FAQs by category, preserving the order they first appear.
+const FAQ_GROUPS: { category: string; items: Faq[] }[] = [];
+for (const f of FAQS) {
+  const category = f.category ?? "More";
+  let group = FAQ_GROUPS.find((g) => g.category === category);
+  if (!group) {
+    group = { category, items: [] };
+    FAQ_GROUPS.push(group);
+  }
+  group.items.push(f);
+}
 
 export default function FaqButton({
   className,
@@ -87,13 +99,20 @@ export default function FaqButton({
 
               {tab === "faq" ? (
                 <>
-                  {/* Scrollable Q&A */}
+                  {/* Scrollable Q&A, grouped by category */}
                   <div className="flex-1 overflow-y-auto px-5 [scrollbar-width:thin]">
-                    <div className="divide-y divide-slate-100">
-                      {FAQS.map((f, i) => (
-                        <FaqItem key={i} faq={f} />
-                      ))}
-                    </div>
+                    {FAQ_GROUPS.map((group) => (
+                      <div key={group.category} className="pt-3">
+                        <h3 className="px-1 pb-1 text-xs font-bold uppercase tracking-wide text-muted">
+                          {group.category}
+                        </h3>
+                        <div className="divide-y divide-slate-100">
+                          {group.items.map((f, i) => (
+                            <FaqItem key={i} faq={f} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Footer */}

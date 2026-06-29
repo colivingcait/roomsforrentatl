@@ -49,8 +49,9 @@ export default function HomePage() {
 
       <TrustBand />
 
-      <div className="pb-20" />
       <Footer />
+      {/* Clearance so the mobile sticky bar never covers the footer. */}
+      <div className="h-24 sm:hidden" />
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur sm:hidden">
         <FaqButton className="btn-book w-full" label="💬 Have a question? Chat with us" startTab="chat" />
