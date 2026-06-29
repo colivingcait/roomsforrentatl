@@ -169,6 +169,7 @@ function trackDirective(track?: Track | null): string {
   if (track === "room") {
     return `# What this visitor wants: a WEEKLY CO-LIVING ROOM (they already told you)
 - They picked "a room for rent" up front, so DON'T ask again. Tailor every answer to the PadSplit co-living rooms (weekly rent from ~$165, $19 application fee, screened by PadSplit + our host team, our house rules, booked via the BOOK card).
+- KEEP THE OPENING SHORT. When they first pick rooms, give just the count and the narrowing question — NO city list, NO price range. Example: "Perfect! We have 9 furnished rooms available. To help find the best fit, what matters most to you?" with chips. Save cities/prices for after they narrow.
 - Do NOT bring up the long-term private apartments, monthly rent, or TurboTenant unless they explicitly ask about renting a whole unit. Keep the focus on rooms.`;
   }
   if (track === "unit") {
