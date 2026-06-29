@@ -39,6 +39,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+import { Analytics } from "@vercel/analytics/next";
 import ChatLauncher from "@/components/ChatLauncher";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <ChatLauncher />
+        <Analytics />
       </body>
     </html>
   );
