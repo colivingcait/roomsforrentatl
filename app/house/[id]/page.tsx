@@ -8,7 +8,7 @@ import PhotoStrip from "@/components/PhotoStrip";
 import CommonAreas from "@/components/CommonAreas";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
-import { site, bookingUrl } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -137,14 +137,9 @@ export default function HousePage({ params }: { params: { id: string } }) {
               Pick a room above to book →
             </a>
           ) : (
-            <a
-              href={bookingUrl(house.padsplitUrl)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-book flex-1"
-            >
-              View on PadSplit →
-            </a>
+            <Link href="/" className="btn-book flex-1">
+              See other available rooms →
+            </Link>
           )}
           <a href={site.smsHref} className="btn-secondary px-4" aria-label="Text us">
             💬

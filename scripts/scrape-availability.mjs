@@ -178,21 +178,43 @@ for (const house of houses) {
   const id = house.id;
   const page = await ctx.newPage();
   try {
-    const resp = await page.goto(house.padsplitUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
-    const status = resp ? resp.status() : null;
-    // PadSplit pages keep connections open; don't wait forever for networkidle.
-    await page.waitForLoadState("networkidle", { timeout: 12000 }).catch(() => {});
-    await page.waitForTimeout(1500);
+    // Some listings intermittently serve a generic shell with no listing data.
+    // Retry until PadSplit's app actually hydrates __NEXT_DATA__ (or give up and
+    // carry forward last-known data rather than wiping it with an empty render).
+    let status = null;
+    let title = "";
+    let text = "";
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      const resp = await page.goto(house.padsplitUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
+      status = resp ? resp.status() : null;
+      await page
+        .waitForFunction(
+          () => {
+            const d = window.__NEXT_DATA__;
+            if (!d) return false;
+            const s = JSON.stringify(d);
+            return s.includes("roomNumber") || s.includes("pspropertyId");
+          },
+          { timeout: 15000 }
+        )
+        .catch(() => {});
+      await page.waitForTimeout(1200);
+      text = await page.evaluate(() => document.body?.innerText || "");
+      title = (await page.title()).replace(/\s*\|\s*PadSplit\s*$/i, "").trim();
+      const rendered = title && title.toLowerCase() !== "padsplit";
+      if (rendered || CHALLENGE.test(text) || (status && status >= 400)) break;
+      if (attempt < 3) await page.waitForTimeout(1500);
+    }
 
     const html = await page.content();
-    const text = await page.evaluate(() => document.body?.innerText || "");
-    const title = (await page.title()).replace(/\s*\|\s*PadSplit\s*$/i, "").trim();
-
     writeFileSync(`${ART}/house-${id}.html`, html);
     await page.screenshot({ path: `${ART}/house-${id}.png`, fullPage: true }).catch(() => {});
 
     if (CHALLENGE.test(text) || (status && status >= 400)) {
       throw new Error(`blocked or error (status ${status})`);
+    }
+    if (!title || title.toLowerCase() === "padsplit") {
+      throw new Error("listing did not render (generic shell)");
     }
 
     const meta = parseHouseMeta(text, html);
