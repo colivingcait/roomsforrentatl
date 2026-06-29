@@ -1,0 +1,37 @@
+{
+  "_README": "Edit these answers anytime — they power the 'Have a question?' popup. Review the payment, occupancy, and approval answers to match your exact policy.",
+  "faqs": [
+    {
+      "q": "How fast can I move in?",
+      "a": "Most rooms are next-day move-in once you're approved. Approval is usually quick."
+    },
+    {
+      "q": "How does payment work / when is rent due?",
+      "a": "Rent is paid weekly, in advance. Your first payment is due when you book, and after that you're billed automatically on the same weekday each week."
+    },
+    {
+      "q": "Can I tour a home before booking?",
+      "a": "You can explore every room and common area through the photos and 3D tour on each listing. If you'd like more detail on a specific home, just text us."
+    },
+    {
+      "q": "Can two people share a room, or can I bring a child?",
+      "a": "Most rooms are single-occupancy. Some homes allow double occupancy or children for an added fee — text us about a specific home and we'll confirm."
+    },
+    {
+      "q": "What do I need to get approved?",
+      "a": "A quick background screening and proof you can cover rent (generally income around 3x the rent), with no recent evictions. PadSplit runs the screening during your application."
+    },
+    {
+      "q": "Is there a lease?",
+      "a": "No long lease. You pay weekly and can stay as long as you like — most residents stay 6–12 months."
+    },
+    {
+      "q": "What's included in the price?",
+      "a": "Your furnished room, all utilities, WiFi, and shared common areas — one weekly payment, no separate bills."
+    },
+    {
+      "q": "Is it safe?",
+      "a": "Every resident is background-checked, and each room has its own electronic door lock for privacy and security."
+    }
+  ]
+}

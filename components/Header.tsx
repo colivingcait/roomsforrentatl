@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import FaqButton from "./FaqButton";
 
 export default function Header() {
   return (
@@ -13,9 +13,7 @@ export default function Header() {
             Rooms<span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
           </span>
         </Link>
-        <a href={site.smsHref} className="text-sm font-semibold text-brand">
-          💬 Text us
-        </a>
+        <FaqButton className="text-sm font-semibold text-brand" />
       </div>
     </header>
   );

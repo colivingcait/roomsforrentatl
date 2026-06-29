@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
 import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
-import { site, roomBookingUrl } from "@/lib/site";
+import { site, bookingUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -125,9 +125,17 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
           ))}
         </ul>
 
-        <p className="mt-6 text-xs text-slate-400">
-          Tap “Book this room” to apply &amp; pay on PadSplit’s secure page. Pricing/availability sync from PadSplit and
-          may change. Exact address is shared after booking.
+        <div className="mt-6 rounded-xl bg-brand/5 p-3 text-sm text-slate-600">
+          <p className="font-semibold text-ink">Booking this room</p>
+          <p className="mt-1">
+            Tap <span className="font-semibold">“Book this room”</span> to open this home on PadSplit, then choose{" "}
+            <span className="font-semibold text-ink">“{roomTitle(room)}”</span> to apply &amp; pay. (PadSplit shows the
+            rooms in a random order, so pick it by name.)
+          </p>
+        </div>
+
+        <p className="mt-3 text-xs text-slate-400">
+          Pricing &amp; availability sync from PadSplit and may change. Exact address is shared after booking.
         </p>
       </div>
 
@@ -139,7 +147,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             <div className="text-xs text-muted">{moveInLabel(room.moveInDate)}</div>
           </div>
           <a
-            href={roomBookingUrl(house.id, room.pagePosition ?? room.padIndex, house.padsplitUrl)}
+            href={bookingUrl(house.padsplitUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-book flex-1"
