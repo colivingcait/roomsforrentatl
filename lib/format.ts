@@ -77,21 +77,16 @@ export function prettyBed(size: string | null): string | null {
   return `${size.charAt(0).toUpperCase()}${size.slice(1)} bed`;
 }
 
-/** PadSplit room names look like "Room 2 - Brook - Affordable room…". Keep it short. */
+/** Use PadSplit's exact room name so listings match across both sites. */
 export function roomTitle(room: Room): string {
+  if (room.name && room.name.trim()) return room.name.trim();
   if (room.roomNumber != null) return `Room ${room.roomNumber}`;
-  if (room.name) return room.name.split(" - ").slice(0, 2).join(" · ");
   return "Room";
 }
 
-/** The descriptive tail of the PadSplit room name, if any. */
+/** Optional extra description (kept separate from the name to avoid repetition). */
 export function roomTagline(room: Room): string | null {
-  if (room.description) return room.description;
-  if (room.name) {
-    const parts = room.name.split(" - ");
-    if (parts.length > 2) return parts.slice(2).join(" - ");
-  }
-  return null;
+  return room.description && room.description.trim() ? room.description.trim() : null;
 }
 
 export function moveInLabel(iso: string | null): string {

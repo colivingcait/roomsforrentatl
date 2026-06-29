@@ -19,7 +19,7 @@ export default function RoomCard({ house, room }: { house: House; room: Room }) 
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold leading-tight text-ink">{roomTitle(room)}</h3>
+          <h3 className="line-clamp-2 font-semibold leading-tight text-ink">{roomTitle(room)}</h3>
           {room.weeklyRate != null && (
             <span className="shrink-0 font-extrabold text-ink">{priceLabel(room.weeklyRate)}</span>
           )}
