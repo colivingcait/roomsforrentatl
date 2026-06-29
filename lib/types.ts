@@ -15,6 +15,8 @@ export interface Room {
   id: number;
   /** 1-based position in PadSplit's room order — used in the apply deep-link. */
   padIndex: number | null;
+  /** The room's position on the PadSplit page — the N in /room-details/{house}/{N}. */
+  pagePosition?: number | null;
   /** PadSplit's own /room-details index for this room (matched from the page). */
   applyIndex?: number | null;
   name: string | null;

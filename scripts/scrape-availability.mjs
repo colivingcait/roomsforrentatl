@@ -81,8 +81,9 @@ async function extractRooms(page) {
       const pic = (r.pictures || []).find((p) => p.primary) || (r.pictures || [])[0];
       return {
         id: r.id,
-        // Raw array order; the real apply index is matched from the DOM below.
+        // Raw array order; pagePosition (the real apply index) is computed below.
         padIndex: i + 1,
+        pagePosition: i + 1,
         applyIndex: null,
         name: typeof r.name === "string" ? r.name : null,
         roomNumber: r.roomNumber ?? null,
@@ -222,6 +223,30 @@ for (const house of houses) {
     const meta = parseHouseMeta(text, html);
     const rooms = await extractRooms(page);
     const { commonAreas, carousel } = await extractPhotos(page);
+
+    // PadSplit's /room-details/{house}/{N} uses N = the room's position in the
+    // order rooms appear ON THE PAGE. Derive that from where each room's name
+    // first shows up in the visible text, then number them 1..N in that order.
+    const posOf = (r) => {
+      const tokens = [
+        r.name,
+        (r.name || "").split(" - ").slice(0, 2).join(" - "),
+        (r.name || "").split(" - ")[1],
+        (r.name || "").split(" - ")[0],
+      ].filter(Boolean);
+      for (const t of tokens) {
+        const i = text.indexOf(t);
+        if (i >= 0) return i;
+      }
+      return Number.MAX_SAFE_INTEGER;
+    };
+    const ordered = [...rooms].sort((a, b) => posOf(a) - posOf(b));
+    // If we couldn't locate any room name in the text, fall back to array order.
+    const located = ordered.some((r) => posOf(r) !== Number.MAX_SAFE_INTEGER);
+    ordered.forEach((r, i) => {
+      r.pagePosition = located ? i + 1 : r.padIndex;
+    });
+
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(
@@ -251,26 +276,10 @@ for (const house of houses) {
       }/wk — ${title}`
     );
 
-    // TEMP diagnostic: click each room on the listing and record the real
-    // /room-details URL PadSplit navigates to, so we can map room → URL exactly.
-    if (id === "35011") {
-      for (const r of available) {
-        const nick = (r.name || "").split(" - ")[1] || r.name || `Room ${r.roomNumber}`;
-        try {
-          await page.goto(house.padsplitUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
-          await page
-            .waitForFunction(() => JSON.stringify(window.__NEXT_DATA__ || {}).includes("roomNumber"), { timeout: 15000 })
-            .catch(() => {});
-          await page.waitForTimeout(1200);
-          const loc = page.getByText(nick, { exact: false }).first();
-          await loc.click({ timeout: 6000 });
-          await page.waitForURL(/room-details/i, { timeout: 8000 }).catch(() => {});
-          console.log(`  PROBE roomNumber=${r.roomNumber} pad=${r.padIndex} nick=${nick} -> ${page.url()}`);
-        } catch (e) {
-          console.log(`  PROBE roomNumber=${r.roomNumber} nick=${nick} FAILED ${e}`);
-        }
-      }
-    }
+    console.log(
+      `  [${id}] page order:`,
+      JSON.stringify(available.map((r) => ({ pos: r.pagePosition, num: r.roomNumber, name: (r.name || "").slice(0, 16) })))
+    );
   } catch (err) {
     const carried = prev.houses?.[id];
     result.houses[id] = carried
