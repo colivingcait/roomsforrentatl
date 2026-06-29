@@ -42,10 +42,10 @@ export const site = {
  * https://www.padsplit.com/room-details/35011/1?referralCode=...
  * Falls back to the house listing URL if we don't have a room number.
  */
-export function roomBookingUrl(houseId: string, padIndex: number | null, houseUrl: string): string {
-  if (padIndex == null) return bookingUrl(houseUrl);
+export function roomBookingUrl(houseId: string, roomNumber: number | null, houseUrl: string): string {
+  if (roomNumber == null) return bookingUrl(houseUrl);
   const { code, param, extra } = site.referral;
-  const u = new URL(`https://www.padsplit.com/room-details/${houseId}/${padIndex}`);
+  const u = new URL(`https://www.padsplit.com/room-details/${houseId}/${roomNumber}`);
   if (code) {
     u.searchParams.set(param, code);
     for (const [k, v] of Object.entries(extra)) u.searchParams.set(k, v);
