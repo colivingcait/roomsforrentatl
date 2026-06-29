@@ -65,6 +65,8 @@ export interface SeedHouse {
   heroPhoto?: string;
   /** Transit note for the chat assistant, e.g. "5–10 min walk to the bus". */
   transit?: string;
+  /** Average resident review score (out of 5), if highly rated. Drives the reviews highlight. */
+  rating?: number;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */
