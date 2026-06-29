@@ -8,6 +8,11 @@
     },
     {
       "category": "Moving in",
+      "q": "How does the process work?",
+      "a": "It's simple: apply, get approved by both PadSplit and our host team (usually the same day), pay your first week's rent, get your door code, and move in!"
+    },
+    {
+      "category": "Moving in",
       "q": "What happens after I'm approved?",
       "a": "You pay your first week's rent to lock in the room, then get your move-in details and door code. From there you can move in right away — most homes are ready immediately."
     },
@@ -34,7 +39,7 @@
     {
       "category": "Getting approved",
       "q": "What do I need to get approved?",
-      "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening automatically during your application."
+      "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. You're approved by both PadSplit's background screening and our host team — usually the same day."
     },
     {
       "category": "Getting approved",
@@ -49,7 +54,7 @@
     {
       "category": "Getting approved",
       "q": "How long does approval take?",
-      "a": "Usually quick — often within the same day. The background screening runs automatically as part of your PadSplit application."
+      "a": "Usually quick — often the same day. You're approved by both PadSplit's background screening (which runs automatically with your application) and our host team."
     },
     {
       "category": "Getting approved",

@@ -15,7 +15,8 @@ const FAQS = faqData.faqs as { q: string; a: string; link?: { label: string; url
 const POLICIES = `
 - Move-in cost: a $19 application fee to apply (refunded if you're not approved). Once approved, the first week's rent is due to move in. No large security deposit.
 - Rent: paid weekly, in advance, billed automatically on the same weekday each week. Utilities and WiFi are included. There is no monthly payment option, but residents can ask about paying bi-weekly if that fits their schedule better.
-- Approval requirements: income of at least 2x the rent; no felonies, violent misdemeanors, or evictions in the past 7 years. PadSplit runs the background screening during the application.
+- Approval: every applicant is approved by BOTH PadSplit's background screening AND our host team — usually the same day. Requirements: income of at least 2x the rent; no felonies, violent misdemeanors, or evictions in the past 7 years.
+- The move-in process, start to finish: apply → get approved by both PadSplit and our host team (usually the same day) → pay your first week's rent → get your door code → move in. Always describe it this way.
 - Lease: no long lease — weekly payments, stay as long as you like (most residents stay 6–12 months).
 - Pets: our homes are pet-free. If someone needs a pet-friendly home, they can search here: https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link . Registered service animals are considered separately, case by case (this is one of the rare situations where it's fine to invite them to reach out directly).
 - Occupancy: most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — people can search double-occupancy rooms here: https://www.padsplit.com/?sign-up=&referralCode=B2C2060F&ref_device=desktop&ref_role=host&ref_source=link . Bringing a child varies by home; point them to the search or the home's listing.
