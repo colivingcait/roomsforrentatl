@@ -23,6 +23,8 @@ const POLICIES = `
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
 - The exact street address of a home is shared after booking, for resident privacy.
+- Tours: most homes can be toured virtually — photos plus a 3D walkthrough on each listing. In-person visits are NOT available until after booking, since the exact address is private until then. Do not offer or imply an in-person showing beforehand.
+- Transfers: if a resident isn't happy with their home at move-in, or simply wants a change later, transferring to another available room or home is simple and FREE.
 `.trim();
 
 const HOUSE_RULES = `
