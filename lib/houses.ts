@@ -65,8 +65,11 @@ export function orderedPhotos(house: House): string[] {
   );
   const isKitchen = (c: { description: string | null; category: string }) =>
     /kitchen/i.test(`${c.description ?? ""} ${c.category}`);
-  const kitchen = house.commonAreas.find(isKitchen);
-  const otherCommon = house.commonAreas.filter((c) => c !== kitchen).map((c) => c.url);
+  // Lead with the kitchen; if none is tagged, use PadSplit's own primary photo.
+  const lead =
+    house.commonAreas.find(isKitchen) ?? house.commonAreas.find((c) => c.primary) ?? house.commonAreas[0];
+  const otherCommon = house.commonAreas.filter((c) => c !== lead).map((c) => c.url);
+  const kitchen = lead;
 
   // Interleave rooms and remaining common areas.
   const mixed: string[] = [];
