@@ -86,6 +86,21 @@ export default function HousePage({ params }: { params: { id: string } }) {
           </div>
         )}
 
+        {house.tourUrl && (
+          <a
+            href={house.tourUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 font-semibold text-brand active:scale-[0.99]"
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-lg leading-none">🎦</span>
+              Take the 3D virtual tour
+            </span>
+            <span aria-hidden>→</span>
+          </a>
+        )}
+
         {house.blurb && <p className="mt-4 text-slate-600">{house.blurb}</p>}
 
         {/* Rooms */}

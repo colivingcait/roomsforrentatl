@@ -23,7 +23,7 @@ const POLICIES = `
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
 - The exact street address of a home is shared after booking, for resident privacy.
-- Tours: most homes can be toured virtually — photos plus a 3D walkthrough on each listing. In-person visits are NOT available until after booking, since the exact address is private until then. Do not offer or imply an in-person showing beforehand.
+- Tours: most homes can be toured virtually — photos plus a 3D walkthrough on each listing. A few homes also have a full Matterport 3D tour; if a home in the list shows a "3D virtual tour" link, share that link when someone wants to tour it. In-person visits are NOT available until after booking, since the exact address is private until then. Do not offer or imply an in-person showing beforehand.
 - Transfers: if a resident isn't happy with their home at move-in, or simply wants a change later, transferring to another available room or home is simple and FREE.
 `.trim();
 
@@ -47,8 +47,9 @@ function housesSnapshot(): string {
     .map((h) => {
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
       const transit = h.transit ? ` Transit: ${h.transit}` : "";
+      const tour = h.tourUrl ? ` 3D virtual tour: ${h.tourUrl}` : "";
       if (!h.available) {
-        return `• ${h.name} (${loc}) [id ${h.id}] — currently fully booked.${transit}`;
+        return `• ${h.name} (${loc}) [id ${h.id}] — currently fully booked.${transit}${tour}`;
       }
       const rooms = availableRooms(h);
       const roomLines = rooms.length
@@ -64,7 +65,7 @@ function housesSnapshot(): string {
             .join("\n")
         : "    - rooms available; see the listing for details.";
       const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}/week` : "";
-      return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}\n${roomLines}`;
+      return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}${tour}\n${roomLines}`;
     })
     .join("\n\n");
 }

@@ -69,6 +69,8 @@ export interface SeedHouse {
   rating?: number;
   /** Optional number of reviews to show next to the rating, e.g. 32. */
   reviewCount?: number;
+  /** Matterport / 3D virtual tour URL, if the home has one. */
+  tourUrl?: string;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */

@@ -42,6 +42,13 @@ export default function HouseCard({ house }: { house: House }) {
             {house.badge}
           </span>
         )}
+
+        {/* 3D tour badge (pointer-events-none so it doesn't block swiping) */}
+        {house.tourUrl && (
+          <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/65 px-2.5 py-1 text-xs font-bold text-white shadow">
+            🎦 3D Tour
+          </span>
+        )}
       </div>
 
       <div className="p-4">
