@@ -13,6 +13,8 @@ export interface Room {
   id: number;
   /** 1-based position in PadSplit's room order — used in the apply deep-link. */
   padIndex: number | null;
+  /** PadSplit's own /room-details index for this room (matched from the page). */
+  applyIndex?: number | null;
   name: string | null;
   roomNumber: number | null;
   description: string | null;

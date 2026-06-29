@@ -80,9 +80,9 @@ async function extractRooms(page) {
       const pic = (r.pictures || []).find((p) => p.primary) || (r.pictures || [])[0];
       return {
         id: r.id,
-        // 1-based position in PadSplit's room order — this is what the
-        // /room-details/{houseId}/{padIndex} apply URL uses.
+        // Raw array order; the real apply index is matched from the DOM below.
         padIndex: i + 1,
+        applyIndex: null,
         name: typeof r.name === "string" ? r.name : null,
         roomNumber: r.roomNumber ?? null,
         description: r.description ?? null,
@@ -197,6 +197,36 @@ for (const house of houses) {
     const meta = parseHouseMeta(text, html);
     const rooms = await extractRooms(page);
     const { commonAreas, carousel } = await extractPhotos(page);
+
+    // Capture PadSplit's OWN apply links (/room-details/{house}/{N}) so we send
+    // people to the exact room they tapped — the URL number isn't our array
+    // order. Match each link to a room by the room name shown on its card.
+    const applyLinks = await page.evaluate((houseId) => {
+      const links = [];
+      const seen = new Set();
+      for (const a of Array.from(document.querySelectorAll('a[href*="/room-details/"]'))) {
+        const href = a.getAttribute("href") || "";
+        const m = href.match(new RegExp("/room-details/" + houseId + "/(\\d+)"));
+        if (!m) continue;
+        const idx = parseInt(m[1], 10);
+        if (seen.has(idx)) continue;
+        seen.add(idx);
+        let el = a;
+        for (let k = 0; k < 4 && el.parentElement; k++) el = el.parentElement;
+        links.push({ idx, text: (el.innerText || "").replace(/\s+/g, " ").trim().slice(0, 140) });
+      }
+      return links;
+    }, id);
+
+    for (const room of rooms) {
+      const nameKey = (room.name || "").split(" - ")[0].trim().toLowerCase();
+      let link =
+        (nameKey && applyLinks.find((l) => l.text.toLowerCase().includes(nameKey))) ||
+        (room.weeklyRate != null && applyLinks.find((l) => l.text.includes("$" + room.weeklyRate)));
+      if (link) room.applyIndex = link.idx;
+    }
+    console.log(`  [${id}] applyLinks:`, JSON.stringify(applyLinks));
+    console.log(`  [${id}] room→apply:`, JSON.stringify(rooms.map((r) => ({ n: r.name?.slice(0, 18), num: r.roomNumber, pad: r.padIndex, apply: r.applyIndex }))));
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(

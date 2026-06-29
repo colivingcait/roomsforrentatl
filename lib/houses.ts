@@ -55,6 +55,23 @@ export function availableRooms(house: House): Room[] {
     });
 }
 
+/** Photos for the card/hero gallery: room photos first, then common areas. */
+export function orderedPhotos(house: House): string[] {
+  const roomPics = availableRooms(house).flatMap((r) =>
+    r.photos?.length ? r.photos : r.image ? [r.image] : []
+  );
+  const common = house.commonAreas.map((c) => c.url);
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const u of [...roomPics, ...common]) {
+    if (u && !seen.has(u)) {
+      seen.add(u);
+      out.push(u);
+    }
+  }
+  return out.length ? out.slice(0, 16) : [house.image];
+}
+
 function merge(seed: SeedHouse): House {
   const live = LIVE[seed.id] ?? {};
   const rooms: Room[] = (live.rooms ?? []).map((r) => ({ ...r, available: r.status === 1 }));

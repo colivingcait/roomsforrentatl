@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { House } from "@/lib/types";
 import PhotoStrip from "./PhotoStrip";
+import { orderedPhotos } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, bathroomBreakdown, prettyBath, priceLabel } from "@/lib/format";
 
 export default function HouseCard({ house }: { house: House }) {
   const breakdown = bathroomBreakdown(house);
-  const photos = house.carousel.length ? house.carousel.map((p) => p.url) : [house.image];
+  const photos = orderedPhotos(house);
 
   return (
     <Link
@@ -33,8 +34,8 @@ export default function HouseCard({ house }: { house: House }) {
         {house.badge && (
           <span
             className={
-              "absolute right-3 top-3 rounded-full px-2.5 py-1 text-xs font-extrabold text-white shadow " +
-              (/new/i.test(house.badge) ? "bg-accent" : "bg-amber-500")
+              "absolute right-3 top-3 rounded-full px-2.5 py-1 text-xs font-extrabold shadow " +
+              (/new/i.test(house.badge) ? "bg-accent text-white" : "bg-gold text-ink")
             }
           >
             {/highly|rated/i.test(house.badge) ? "★ " : ""}
@@ -47,9 +48,7 @@ export default function HouseCard({ house }: { house: House }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="font-semibold leading-tight text-ink">{house.name}</h3>
-            <p className="mt-0.5 text-sm text-muted">
-              {house.neighborhood} · {house.city}
-            </p>
+            <p className="mt-0.5 text-sm text-muted">{house.city}</p>
           </div>
           <div className="shrink-0 text-right">
             <div className="text-lg font-extrabold text-ink">{fromPriceLabel(house)}</div>

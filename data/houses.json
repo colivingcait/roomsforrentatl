@@ -1,61 +1,93 @@
 {
-  "_README": "Your houses = the editable source of truth for branding + the PadSplit link the daily job crawls. Live numbers (rooms available, from-price, photo, neighborhood) are filled into data/availability.json automatically by the scraper. lat/lng are approximate NEIGHBORHOOD centers for the map (not addresses) — added once the scraper reveals each house's neighborhood.",
+  "_README": "Your houses = the editable source of truth for branding + the PadSplit link the daily job crawls. Live numbers (rooms available, from-price, photo, neighborhood) are filled into data/availability.json automatically by the scraper. lat/lng are approximate NEIGHBORHOOD centers for the map (not addresses) \u2014 added once the scraper reveals each house's neighborhood.",
   "houses": [
     {
       "id": "35011",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/35011",
-      "name": "Glen Mora",
+      "name": "Mora",
       "neighborhood": "McAfee, Decatur",
-      "city": "Atlanta",
+      "city": "Decatur",
       "image": "/rooms/glen-mora.svg",
       "lat": 33.7396,
       "lng": -84.2466,
       "badge": "New!",
       "pinned": true,
       "blurb": "Move-in ready co-living home minutes from I-285 and Decatur. Private bedroom, shared common spaces.",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning", "Near MARTA & I-285"]
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer",
+        "Monthly cleaning",
+        "Near MARTA & I-285"
+      ]
     },
     {
       "id": "8299",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/8299",
       "name": "Candace",
       "neighborhood": "South Gresham",
-      "city": "Atlanta",
+      "city": "South Atlanta",
       "image": "/rooms/candace.svg",
       "lat": 33.6905,
       "lng": -84.3052,
       "badge": "Highly Rated!",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Smart TV in every room",
+        "Private workspace",
+        "Washer & dryer"
+      ]
     },
     {
       "id": "11889",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11889",
       "name": "Raven",
       "neighborhood": "Off Stephenson",
-      "city": "Atlanta",
+      "city": "Stone Mountain",
       "image": "/rooms/raven.svg",
       "lat": 33.7869,
       "lng": -84.1702,
       "badge": "Highly Rated!",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Smart TV in every room",
+        "Private workspace",
+        "Washer & dryer"
+      ]
     },
     {
       "id": "30251",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/30251",
-      "name": "Meadowchase",
+      "name": "Meadow",
       "neighborhood": "Atlanta",
-      "city": "Atlanta",
+      "city": "Snellville",
       "image": "/rooms/meadowchase.svg",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning"]
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer",
+        "Monthly cleaning"
+      ],
+      "lat": 33.8573,
+      "lng": -84.0007
     },
     {
       "id": "152",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/152",
-      "name": "Chestnut Hill",
+      "name": "Chestnut",
       "neighborhood": "Atlanta",
-      "city": "Atlanta",
+      "city": "Decatur",
       "image": "/rooms/chestnut-hill.svg",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning"]
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer",
+        "Monthly cleaning"
+      ],
+      "lat": 33.746,
+      "lng": -84.252
     }
   ]
 }

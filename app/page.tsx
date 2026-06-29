@@ -26,7 +26,7 @@ export default function HomePage() {
           </span>
           <h1 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
             Furnished rooms for rent. <br className="hidden sm:block" />
-            Move in <span className="text-accent">today.</span>
+            <span className="text-gold">Next-day move-in.</span>
           </h1>
           <p className="mt-2 max-w-md text-white/80">
             {totalRooms > 0

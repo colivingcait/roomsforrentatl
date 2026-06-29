@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import RoomCard from "@/components/RoomCard";
 import PhotoStrip from "@/components/PhotoStrip";
 import CommonAreas from "@/components/CommonAreas";
-import { getHouse, getAllHouseIds, availableRooms, lastUpdated } from "@/lib/houses";
+import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
 
@@ -40,12 +40,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
       <Header />
 
       <div className="relative aspect-[4/3] w-full bg-slate-100 sm:aspect-[16/9]">
-        <PhotoStrip
-          images={house.carousel.length ? house.carousel.map((p) => p.url) : [house.image]}
-          alt={house.name}
-          sizes="100vw"
-          priority
-        />
+        <PhotoStrip images={orderedPhotos(house)} alt={house.name} sizes="100vw" priority />
         <Link
           href="/"
           className="absolute left-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-lg font-bold text-ink shadow active:scale-95"
@@ -70,9 +65,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
         <div className="mt-5 flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-extrabold leading-tight text-ink">{house.name}</h1>
-            <p className="mt-1 text-muted">
-              {house.neighborhood} · {house.city}
-            </p>
+            <p className="mt-1 text-muted">{house.city}</p>
           </div>
           <div className="shrink-0 text-right">
             <div className="text-2xl font-extrabold text-ink">{fromPriceLabel(house)}</div>

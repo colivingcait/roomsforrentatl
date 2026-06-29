@@ -19,22 +19,22 @@ type Filter = "all" | "available";
 type View = "list" | "map";
 
 export default function HouseList({ houses }: { houses: House[] }) {
-  const [filter, setFilter] = useState<Filter>("available");
-  const [hood, setHood] = useState<string>("all");
+  const [filter, setFilter] = useState<Filter>("all");
+  const [city, setCity] = useState<string>("all");
   const [view, setView] = useState<View>("list");
 
-  const neighborhoods = useMemo(
-    () => Array.from(new Set(houses.map((h) => h.neighborhood))).sort(),
+  const cities = useMemo(
+    () => Array.from(new Set(houses.map((h) => h.city))).sort(),
     [houses]
   );
 
   const shown = useMemo(() => {
     return houses.filter((h) => {
       if (filter === "available" && !h.available) return false;
-      if (hood !== "all" && h.neighborhood !== hood) return false;
+      if (city !== "all" && h.city !== city) return false;
       return true;
     });
-  }, [houses, filter, hood]);
+  }, [houses, filter, city]);
 
   const availableCount = houses.filter((h) => h.available).length;
 
@@ -48,16 +48,16 @@ export default function HouseList({ houses }: { houses: House[] }) {
           <FilterPill active={filter === "all"} onClick={() => setFilter("all")}>
             All homes ({houses.length})
           </FilterPill>
-          {neighborhoods.length > 1 && <div className="mx-1 w-px shrink-0 bg-slate-200" />}
-          {neighborhoods.length > 1 && (
-            <FilterPill active={hood === "all"} onClick={() => setHood("all")}>
-              All areas
+          {cities.length > 1 && <div className="mx-1 w-px shrink-0 bg-slate-200" />}
+          {cities.length > 1 && (
+            <FilterPill active={city === "all"} onClick={() => setCity("all")}>
+              All cities
             </FilterPill>
           )}
-          {neighborhoods.length > 1 &&
-            neighborhoods.map((n) => (
-              <FilterPill key={n} active={hood === n} onClick={() => setHood(n)}>
-                {n}
+          {cities.length > 1 &&
+            cities.map((c) => (
+              <FilterPill key={c} active={city === c} onClick={() => setCity(c)}>
+                {c}
               </FilterPill>
             ))}
         </div>

@@ -69,14 +69,13 @@ export function roomTagline(room: Room): string | null {
 }
 
 export function moveInLabel(iso: string | null): string {
+  // PadSplit rooms here are next-day move-in, so surface everything as
+  // "Available now" unless a room is genuinely weeks out.
   if (!iso) return "Available now";
   const d = new Date(iso);
   if (isNaN(d.getTime())) return "Available now";
-  const today = startOfDay(new Date());
-  const days = Math.round((startOfDay(d) - today) / 86_400_000);
-  if (days <= 0) return "Move in today";
-  if (days === 1) return "Move in tomorrow";
-  if (days < 14) return `Available in ${days} days`;
+  const days = Math.round((startOfDay(d) - startOfDay(new Date())) / 86_400_000);
+  if (days <= 7) return "Available now";
   return `Available ${d.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
 }
 

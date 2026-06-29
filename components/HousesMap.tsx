@@ -49,7 +49,7 @@ export default function HousesMap({ houses }: { houses: House[] }) {
           .bindPopup(
             `<div style="min-width:160px">
                <strong>${escapeHtml(h.name)}</strong><br/>
-               <span style="color:#64748B">${escapeHtml(h.neighborhood)}</span><br/>
+               <span style="color:#64748B">${escapeHtml(h.city)}</span><br/>
                ${h.available ? availabilityLabel(h) : "Fully booked"} · ${fromPriceLabel(h)}<br/>
                <a href="/house/${h.id}" style="color:#0E7C66;font-weight:600">View home →</a>
              </div>`
