@@ -44,6 +44,25 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
   return { text: cleaned, cards };
 }
 
+// The bot ends a reply with `<<<CHIPS: Option one | Option two>>>` — short,
+// tappable quick replies so the visitor rarely has to type. Pull them out and
+// strip the token from the visible text.
+function extractChips(text: string): { text: string; chips: string[] } {
+  const match = text.match(/<<<\s*CHIPS:\s*([\s\S]+?)>>>/i);
+  if (!match) return { text, chips: [] };
+  const cleaned = text.replace(match[0], "").trim();
+  const chips = Array.from(
+    new Set(
+      match[1]
+        .split("|")
+        .map((s) => s.trim().replace(/^[-•*]\s*/, ""))
+        .filter(Boolean)
+        .map((s) => s.slice(0, 48))
+    )
+  ).slice(0, 4);
+  return { text: cleaned, chips };
+}
+
 const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TURNS = 12; // cap conversation length we forward
 const MAX_CHARS = 1500; // cap per-message length
@@ -167,9 +186,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const { text, cards } = extractBookCards(reply);
+    const booked = extractBookCards(reply);
+    const { text, chips } = extractChips(booked.text);
     logChat(question, text, source);
-    return Response.json({ reply: text, houses: cards });
+    return Response.json({ reply: text, houses: booked.cards, chips });
   } catch (err) {
     console.error("Chat route error", err);
     logChat(question, "(error)", source);

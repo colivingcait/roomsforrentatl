@@ -12,7 +12,7 @@ type BookHouse = {
   reviewCount?: number | null;
   url: string;
 };
-type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[] };
+type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[]; chips?: string[] };
 type Track = "room" | "unit" | "both";
 
 const GREETING =
@@ -187,7 +187,10 @@ export default function ChatPanel() {
       if (!res.ok || !data.reply) {
         setError(data.error || "Sorry — something went wrong. Please try again in a moment.");
       } else {
-        setMessages((m) => [...m, { role: "assistant", content: data.reply, houses: data.houses }]);
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: data.reply, houses: data.houses, chips: data.chips },
+        ]);
       }
     } catch {
       setError("Couldn't reach the assistant. Please check your connection and try again.");
@@ -201,9 +204,19 @@ export default function ChatPanel() {
   // show are the three options up top — everything after is tailored to that.
   const showTrackOptions = !loading && !track;
 
-  // Suggested questions under the latest answer: follow-ups for the last topic
-  // asked (falling back to the track's default set), minus anything already asked.
   const asked = new Set(messages.filter((m) => m.role === "user").map((m) => m.content));
+
+  // The bot drives its own quick-reply buttons: whenever its latest answer ends
+  // with chips (the answers to a question it just asked, or the next best tap),
+  // show those. They're always more relevant than a static topic list.
+  const lastMsg = messages[messages.length - 1];
+  const botChips = (lastMsg?.role === "assistant" ? lastMsg.chips ?? [] : []).filter(
+    (c) => !asked.has(c)
+  );
+  const showBotChips = !loading && !!track && botChips.length > 0;
+
+  // Fallback when the bot didn't supply chips: a static set of popular questions,
+  // tailored to the chosen track, minus anything already asked.
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content;
   const trackDefaults =
     track === "unit" ? UNIT_SUGGESTIONS : track === "both" ? BOTH_SUGGESTIONS : DEFAULT_SUGGESTIONS;
@@ -214,7 +227,7 @@ export default function ChatPanel() {
     remainingSuggestions = trackDefaults.filter((s) => !asked.has(s));
   }
   remainingSuggestions = remainingSuggestions.slice(0, 4);
-  const showSuggestions = !loading && !!track && remainingSuggestions.length > 0;
+  const showSuggestions = !loading && !!track && !showBotChips && remainingSuggestions.length > 0;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -263,6 +276,22 @@ export default function ChatPanel() {
                 className="rounded-2xl border border-brand/30 bg-brand/5 px-4 py-3 text-left text-base font-semibold text-brand active:scale-[0.98]"
               >
                 {o.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Bot-driven quick replies — the answers to whatever it just asked. */}
+        {showBotChips && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {botChips.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => send(c, "suggested")}
+                className="rounded-full bg-brand px-3.5 py-2 text-sm font-semibold text-white shadow-sm active:scale-95"
+              >
+                {c}
               </button>
             ))}
           </div>
