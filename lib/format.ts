@@ -31,6 +31,15 @@ export function bathroomBreakdown(house: House): { type: BathroomType; count: nu
     .map((t) => ({ type: t, count: groups[t].count, from: Number.isFinite(groups[t].from) ? groups[t].from : null }));
 }
 
+/** Standout selling-point tags for a room (private bath/entrance, mini fridge). */
+export function roomHighlights(room: Room): string[] {
+  const tags: string[] = [];
+  if (room.bathroomType === "private") tags.push("Private bathroom");
+  if (room.privateAccess) tags.push("Private entrance");
+  if (room.miniFridge) tags.push("Mini fridge");
+  return tags;
+}
+
 export function prettyBath(type: BathroomType | null): string {
   if (type === "private") return "Private bath";
   if (type === "shared") return "Shared bath";

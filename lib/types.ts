@@ -23,6 +23,7 @@ export interface Room {
   roomSize: string | null;
   workspace: boolean;
   miniFridge: boolean;
+  privateAccess: boolean;
   climateControl: string | null;
   windows: number | null;
   status: number | null;

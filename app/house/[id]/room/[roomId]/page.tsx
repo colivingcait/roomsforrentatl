@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
-import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel } from "@/lib/format";
+import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
 import { site, roomBookingUrl } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -42,6 +42,8 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
   features.push({ label: "Bathroom", value: prettyBath(room.bathroomType) });
   if (prettyBed(room.bedSize)) features.push({ label: "Bed", value: prettyBed(room.bedSize)! });
   if (room.roomSize) features.push({ label: "Room size", value: cap(room.roomSize) });
+  if (room.privateAccess) features.push({ label: "Entrance", value: "Private entrance" });
+  if (room.miniFridge) features.push({ label: "Mini fridge", value: "Included" });
   if (room.workspace) features.push({ label: "Workspace", value: "Desk included" });
   if (room.climateControl) features.push({ label: "Climate", value: prettyClimate(room.climateControl) });
   if (room.windows) features.push({ label: "Windows", value: String(room.windows) });
@@ -88,7 +90,15 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="chip">{prettyBath(room.bathroomType)}</span>
+          {roomHighlights(room).map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-3 py-1 text-sm font-bold text-accent-dark"
+            >
+              ★ {tag}
+            </span>
+          ))}
+          {room.bathroomType === "shared" && <span className="chip">{prettyBath(room.bathroomType)}</span>}
           {prettyBed(room.bedSize) && <span className="chip">{prettyBed(room.bedSize)}</span>}
           <span className="chip text-brand">{moveInLabel(room.moveInDate)}</span>
         </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { House, Room } from "@/lib/types";
-import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel } from "@/lib/format";
+import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
 
 export default function RoomCard({ house, room }: { house: House; room: Room }) {
   const tagline = roomTagline(room);
@@ -26,7 +26,15 @@ export default function RoomCard({ house, room }: { house: House; room: Room }) 
         </div>
         {tagline && <p className="mt-0.5 line-clamp-2 text-sm text-muted">{tagline}</p>}
         <div className="mt-2 flex flex-wrap gap-1.5">
-          <span className="chip">{prettyBath(room.bathroomType)}</span>
+          {roomHighlights(room).map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-1 text-xs font-bold text-accent-dark"
+            >
+              ★ {tag}
+            </span>
+          ))}
+          {room.bathroomType === "shared" && <span className="chip">{prettyBath(room.bathroomType)}</span>}
           {prettyBed(room.bedSize) && <span className="chip">{prettyBed(room.bedSize)}</span>}
           <span className="chip text-brand">{moveInLabel(room.moveInDate)}</span>
         </div>

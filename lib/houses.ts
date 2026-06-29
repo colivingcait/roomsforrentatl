@@ -43,11 +43,16 @@ export function lastUpdated(): string | null {
   return (availability as { updatedAt?: string }).updatedAt ?? null;
 }
 
-/** Available rooms only, cheapest first. */
+/** Available rooms only: private-bath rooms surfaced first, then cheapest first. */
 export function availableRooms(house: House): Room[] {
   return house.rooms
     .filter((r) => r.available)
-    .sort((a, b) => (a.weeklyRate ?? 1e9) - (b.weeklyRate ?? 1e9));
+    .sort((a, b) => {
+      const ap = a.bathroomType === "private" ? 0 : 1;
+      const bp = b.bathroomType === "private" ? 0 : 1;
+      if (ap !== bp) return ap - bp; // private bath first
+      return (a.weeklyRate ?? 1e9) - (b.weeklyRate ?? 1e9);
+    });
 }
 
 function merge(seed: SeedHouse): House {

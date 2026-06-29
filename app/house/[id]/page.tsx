@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import RoomCard from "@/components/RoomCard";
+import PhotoStrip from "@/components/PhotoStrip";
+import CommonAreas from "@/components/CommonAreas";
 import { getHouse, getAllHouseIds, availableRooms, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
@@ -38,10 +40,15 @@ export default function HousePage({ params }: { params: { id: string } }) {
       <Header />
 
       <div className="relative aspect-[4/3] w-full bg-slate-100 sm:aspect-[16/9]">
-        <Image src={house.image} alt={house.name} fill priority sizes="100vw" className="object-cover" />
+        <PhotoStrip
+          images={house.carousel.length ? house.carousel.map((p) => p.url) : [house.image]}
+          alt={house.name}
+          sizes="100vw"
+          priority
+        />
         <Link
           href="/"
-          className="absolute left-3 top-3 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-lg font-bold text-ink shadow active:scale-95"
+          className="absolute left-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-lg font-bold text-ink shadow active:scale-95"
           aria-label="Back to all homes"
         >
           ←
@@ -108,6 +115,8 @@ export default function HousePage({ params }: { params: { id: string } }) {
             </li>
           ))}
         </ul>
+
+        <CommonAreas photos={house.commonAreas} />
 
         <p className="mt-6 text-xs text-slate-400">
           Rooms &amp; pricing sync from PadSplit{updated ? ` (${updated.toLowerCase()})` : ""} and may change. Exact

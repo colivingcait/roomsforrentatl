@@ -93,6 +93,7 @@ async function extractRooms(page) {
         roomSize: a.roomSize ?? null,
         workspace: !!a.workspace,
         miniFridge: !!a.miniFridge,
+        privateAccess: !!a.privateAccess, // private entrance
         climateControl: a.climateControl ?? null,
         windows: a.windows ?? null,
         status: r.status ?? null,
