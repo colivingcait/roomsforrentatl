@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Unit } from "@/lib/types";
+import PhotoStrip from "./PhotoStrip";
 import { rentLabel, availDateLabel } from "@/lib/format";
 
 export default function UnitCard({ unit }: { unit: Unit }) {
@@ -42,7 +42,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
         {photos.length > 0 ? (
-          <Image src={photos[0]} alt={unit.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          <PhotoStrip images={photos} alt={unit.title} sizes="(max-width: 768px) 100vw, 50vw" />
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
             <div>
