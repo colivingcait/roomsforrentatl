@@ -58,8 +58,8 @@ export default function HomePage() {
             <h2 className="text-lg font-extrabold text-ink">Furnished rooms for rent</h2>
           </div>
           <p className="mt-1.5 text-sm text-muted">
-            A private furnished room in a move-in-ready shared home — weekly all-in pricing with utilities &amp; WiFi
-            included, and next-day move-in. Booked through PadSplit.
+            A private furnished room in a shared home — weekly all-in pricing with utilities &amp; WiFi included. Ready
+            for next-day move-in!
           </p>
 
           <div className="mt-4">
