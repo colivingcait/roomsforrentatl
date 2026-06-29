@@ -124,7 +124,14 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           </>
         )}
 
-        <div className="mt-6 rounded-xl bg-slate-50 p-3 text-sm text-slate-600">
+        {unit.furnishedNote && (
+          <div className="mt-6 rounded-xl border border-brand/20 bg-brand/5 p-3 text-sm text-slate-600">
+            <p className="font-semibold text-ink">What&rsquo;s furnished</p>
+            <p className="mt-1">{unit.furnishedNote}</p>
+          </div>
+        )}
+
+        <div className="mt-4 rounded-xl bg-slate-50 p-3 text-sm text-slate-600">
           <p className="font-semibold text-ink">How to apply</p>
           <p className="mt-1">
             {unit.applyUrl
@@ -134,8 +141,9 @@ export default function RentalPage({ params }: { params: { id: string } }) {
         </div>
 
         <p className="mt-3 text-xs text-slate-400">
-          This is a private long-term rental (monthly lease), separate from our weekly co-living rooms. Exact address is
-          shared during the application.
+          This is a private long-term rental (monthly lease), separate from our weekly co-living rooms. Photos show the
+          unit furnished; some décor and personal items belong to the current resident. Exact address is shared during
+          the application.
         </p>
       </div>
 

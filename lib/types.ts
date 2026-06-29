@@ -110,6 +110,7 @@ export interface Unit {
   pets?: string | null;
   sqft?: number | null;
   description?: string; // longer write-up shown on the unit page
+  furnishedNote?: string; // what's included vs. what the tenant brings
   features?: string[];
   applyUrl?: string | null; // TurboTenant link; absent if not ready yet
   photos?: string[];

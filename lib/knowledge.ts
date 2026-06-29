@@ -94,7 +94,8 @@ function unitsSnapshot(): string {
         : " (no application link yet — tell them applications are opening soon and to ask us to get on the list)";
       const tour = u.tourUrl ? ` 3D tour: ${u.tourUrl}` : "";
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
-      return `• ${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${apply}${tour}`;
+      const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
+      return `• ${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${apply}${tour}`;
     })
     .join("\n");
 }
