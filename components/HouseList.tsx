@@ -15,11 +15,9 @@ const HousesMap = dynamic(() => import("./HousesMap"), {
   ),
 });
 
-type Filter = "all" | "available";
 type View = "list" | "map";
 
 export default function HouseList({ houses }: { houses: House[] }) {
-  const [filter, setFilter] = useState<Filter>("all");
   const [city, setCity] = useState<string>("all");
   const [view, setView] = useState<View>("list");
 
@@ -28,40 +26,27 @@ export default function HouseList({ houses }: { houses: House[] }) {
     [houses]
   );
 
-  const shown = useMemo(() => {
-    return houses.filter((h) => {
-      if (filter === "available" && !h.available) return false;
-      if (city !== "all" && h.city !== city) return false;
-      return true;
-    });
-  }, [houses, filter, city]);
-
-  const availableCount = houses.filter((h) => h.available).length;
+  const shown = useMemo(
+    () => houses.filter((h) => city === "all" || h.city === city),
+    [houses, city]
+  );
 
   return (
     <section>
-      <div className="sticky top-[57px] z-20 -mx-4 border-b border-slate-100 bg-slate-50/95 px-4 py-3 backdrop-blur">
-        <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <FilterPill active={filter === "available"} onClick={() => setFilter("available")}>
-            Available now ({availableCount})
-          </FilterPill>
-          <FilterPill active={filter === "all"} onClick={() => setFilter("all")}>
-            All homes ({houses.length})
-          </FilterPill>
-          {cities.length > 1 && <div className="mx-1 w-px shrink-0 bg-slate-200" />}
-          {cities.length > 1 && (
+      {cities.length > 1 && (
+        <div className="sticky top-[57px] z-20 -mx-4 border-b border-slate-100 bg-slate-50/95 px-4 py-3 backdrop-blur">
+          <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <FilterPill active={city === "all"} onClick={() => setCity("all")}>
               All cities
             </FilterPill>
-          )}
-          {cities.length > 1 &&
-            cities.map((c) => (
+            {cities.map((c) => (
               <FilterPill key={c} active={city === c} onClick={() => setCity(c)}>
                 {c}
               </FilterPill>
             ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* List / Map toggle */}
       <div className="mt-4 flex items-center justify-between">

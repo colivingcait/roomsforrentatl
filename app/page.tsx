@@ -13,11 +13,13 @@ import { updatedLabel } from "@/lib/format";
 export const revalidate = 3600;
 
 export default function HomePage() {
-  const houses = getHouses();
+  // Only show co-living homes that have rooms available — fully-booked homes
+  // drop off the homepage entirely.
+  const houses = getHouses().filter((h) => h.available);
   const units = getUnits();
   const updated = updatedLabel(lastUpdated());
-  const openCount = houses.filter((h) => h.available).length;
-  const totalRooms = houses.reduce((n, h) => n + (h.available ? h.roomsAvailable : 0), 0);
+  const openCount = houses.length;
+  const totalRooms = houses.reduce((n, h) => n + h.roomsAvailable, 0);
 
   return (
     <main className="min-h-screen">
@@ -44,6 +46,20 @@ export default function HomePage() {
             <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Utilities included</span>
           </div>
         </div>
+      </section>
+
+      {/* Co-living rooms section header */}
+      <section className="mx-auto max-w-3xl px-4 pt-5">
+        <div className="flex items-center gap-2">
+          <span className="rounded-full bg-brand px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
+            Co-living
+          </span>
+          <h2 className="text-lg font-extrabold text-ink">Rooms for rent</h2>
+        </div>
+        <p className="mt-1.5 text-sm text-muted">
+          A private room in a fully-furnished shared home — weekly all-in pricing with utilities &amp; WiFi included,
+          and next-day move-in.
+        </p>
       </section>
 
       <div className="mx-auto max-w-3xl px-4 pb-2 pt-2">
