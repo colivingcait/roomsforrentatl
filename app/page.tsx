@@ -36,9 +36,9 @@ export default function HomePage() {
             All-in weekly pricing — utilities &amp; WiFi included.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-sm font-medium text-white/90">
-            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ No long lease</span>
+            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Flexible lease</span>
             <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Fully furnished</span>
-            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Bills included</span>
+            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Utilities included</span>
           </div>
         </div>
       </section>
