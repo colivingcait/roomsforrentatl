@@ -7,7 +7,7 @@ const POINTS = [
   {
     icon: "✅",
     title: "Background-checked residents",
-    body: "Every PadSplit member is background-screened, so you know who you’re living with.",
+    body: "Every resident is background-screened, so you know who you’re living with.",
   },
   {
     icon: "🔐",
