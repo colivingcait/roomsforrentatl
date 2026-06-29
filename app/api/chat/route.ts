@@ -28,6 +28,16 @@ function sanitize(input: unknown): ChatMessage[] {
   return trimmed;
 }
 
+// The chat bubble shows plain text, so strip Markdown the model may emit.
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1") // **bold**
+    .replace(/__(.+?)__/g, "$1") // __bold__
+    .replace(/(^|\s)\*(\S.*?\S|\S)\*(?=\s|$)/g, "$1$2") // *italics*
+    .replace(/^#{1,6}\s+/gm, "") // # headings
+    .replace(/^\s*[-*]\s+/gm, "- "); // normalize bullets to "- "
+}
+
 export async function POST(req: Request) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
@@ -75,11 +85,13 @@ export async function POST(req: Request) {
     }
 
     const data = (await res.json()) as { content?: { type: string; text?: string }[] };
-    const reply = (data.content ?? [])
-      .filter((b) => b.type === "text" && typeof b.text === "string")
-      .map((b) => b.text)
-      .join("")
-      .trim();
+    const reply = stripMarkdown(
+      (data.content ?? [])
+        .filter((b) => b.type === "text" && typeof b.text === "string")
+        .map((b) => b.text)
+        .join("")
+        .trim()
+    );
 
     if (!reply) {
       return Response.json(
