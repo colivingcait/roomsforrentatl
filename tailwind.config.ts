@@ -8,19 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // PadSplit-style palette for a consistent hand-off to their apply flow.
         brand: {
-          DEFAULT: "#2563EB", // primary blue
-          dark: "#1D4ED8",
-          light: "#3B82F6",
-        },
-        gold: {
-          DEFAULT: "#F5B301", // secondary yellow
-          dark: "#B8860B",
+          DEFAULT: "#0E7C66", // Atlanta teal-green — fresh, trustworthy
+          dark: "#0A5C4C",
+          light: "#13A083",
         },
         accent: {
-          DEFAULT: "#E23744", // tertiary red — urgency / "New!"
-          dark: "#C81E2C",
+          DEFAULT: "#FF6B35", // warm orange — "book now" urgency
+          dark: "#E2551F",
         },
         ink: "#0F172A",
         muted: "#64748B",

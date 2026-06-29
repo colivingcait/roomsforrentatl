@@ -35,7 +35,7 @@ export default function HouseCard({ house }: { house: House }) {
           <span
             className={
               "absolute right-3 top-3 rounded-full px-2.5 py-1 text-xs font-extrabold shadow " +
-              (/new/i.test(house.badge) ? "bg-accent text-white" : "bg-gold text-ink")
+              (/new/i.test(house.badge) ? "bg-accent text-white" : "bg-amber-500 text-white")
             }
           >
             {/highly|rated/i.test(house.badge) ? "★ " : ""}
