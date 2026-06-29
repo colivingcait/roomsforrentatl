@@ -140,7 +140,7 @@ export default function ChatPanel() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
-  async function send(text: string) {
+  async function send(text: string, source: "typed" | "suggested" = "typed") {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
     setError(null);
@@ -152,7 +152,7 @@ export default function ChatPanel() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next }),
+        body: JSON.stringify({ messages: next, source }),
       });
       const data = await res.json();
       if (!res.ok || !data.reply) {
@@ -223,7 +223,7 @@ export default function ChatPanel() {
               <button
                 key={s}
                 type="button"
-                onClick={() => send(s)}
+                onClick={() => send(s, "suggested")}
                 className="rounded-full border border-brand/30 bg-brand/5 px-3 py-1.5 text-sm font-semibold text-brand active:scale-95"
               >
                 {s}
