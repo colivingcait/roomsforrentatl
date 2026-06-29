@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T00:05:36.697Z",
+  "updatedAt": "2026-06-29T00:10:51.653Z",
   "houses": {
     "152": {
       "title": "PadSplit",
@@ -7,7 +7,7 @@
       "city": "Atlanta, GA",
       "utilitiesIncluded": false,
       "available": false,
-      "checkedAt": "2026-06-29T00:05:36.697Z",
+      "checkedAt": "2026-06-29T00:10:51.653Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -20,7 +20,7 @@
       "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
       "available": true,
-      "checkedAt": "2026-06-29T00:05:36.697Z",
+      "checkedAt": "2026-06-29T00:10:51.653Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -33,7 +33,7 @@
       "image": "https://www.padsplit.com/img/psproperty/11889/img_2c79d9b7-84c4-4ecb-a0a4-960edc1c65cd.png",
       "utilitiesIncluded": true,
       "available": true,
-      "checkedAt": "2026-06-29T00:05:36.697Z",
+      "checkedAt": "2026-06-29T00:10:51.653Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -42,7 +42,7 @@
       "city": "Atlanta, GA",
       "utilitiesIncluded": false,
       "available": false,
-      "checkedAt": "2026-06-29T00:05:36.697Z",
+      "checkedAt": "2026-06-29T00:10:51.653Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -55,7 +55,7 @@
       "image": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
       "utilitiesIncluded": true,
       "available": true,
-      "checkedAt": "2026-06-29T00:05:36.697Z",
+      "checkedAt": "2026-06-29T00:10:51.653Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
