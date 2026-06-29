@@ -70,20 +70,32 @@ export function orderedPhotos(house: House): string[] {
 
   const matches = (c: Photo, re: RegExp) => re.test(`${c.description ?? ""} ${c.category}`);
   const area = (c: Photo) => (c.width ?? 0) * (c.height ?? 0);
+  // Street/exterior/outdoor shots should never be the lead photo.
+  const isExterior = (c: Photo) =>
+    c.category === "other" || matches(c, /exterior|street|front\b|neighborhood|outside|patio|backyard|\byard\b/i);
 
-  // Lead with the largest kitchen shot; fall back to PadSplit's primary photo.
+  // Lead photo: a manual override wins; otherwise biggest kitchen, then a living
+  // area, then PadSplit's primary, then a room photo — never a street shot.
   const kitchens = house.commonAreas.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
-  const lead = kitchens[0] ?? house.commonAreas.find((c) => c.primary) ?? house.commonAreas[0];
+  const leadUrl =
+    house.heroPhoto ||
+    kitchens[0]?.url ||
+    house.commonAreas.find((c) => matches(c, /living|den|family/i))?.url ||
+    house.commonAreas.find((c) => matches(c, /dining/i))?.url ||
+    house.commonAreas.find((c) => c.primary && !isExterior(c))?.url ||
+    roomPics[0] ||
+    house.commonAreas.find((c) => !isExterior(c) && !matches(c, /bath|shower|restroom/i))?.url ||
+    house.commonAreas[0]?.url;
 
   const baths = house.commonAreas
-    .filter((c) => c !== lead && matches(c, /bath|shower|restroom/i))
+    .filter((c) => c.url !== leadUrl && matches(c, /bath|shower|restroom/i))
     .map((c) => c.url);
   const others = house.commonAreas
-    .filter((c) => c !== lead && !matches(c, /bath|shower|restroom|kitchen/i))
+    .filter((c) => c.url !== leadUrl && !matches(c, /bath|shower|restroom|kitchen/i))
     .map((c) => c.url);
 
   const sequence = [
-    lead?.url,
+    leadUrl,
     ...roomPics.slice(0, 6),
     ...baths,
     ...others,
