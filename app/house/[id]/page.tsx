@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import RoomCard from "@/components/RoomCard";
 import PhotoStrip from "@/components/PhotoStrip";
+import TrustBand from "@/components/TrustBand";
 import CommonAreas from "@/components/CommonAreas";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
@@ -124,6 +125,8 @@ export default function HousePage({ params }: { params: { id: string } }) {
           .
         </p>
       </div>
+
+      <TrustBand />
 
       {/* Sticky CTA */}
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur">

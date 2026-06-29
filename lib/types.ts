@@ -6,6 +6,8 @@ export interface Photo {
   category: string;
   description: string | null;
   primary?: boolean;
+  width?: number | null;
+  height?: number | null;
 }
 
 /** A single room within a house, scraped from PadSplit's per-room data. */

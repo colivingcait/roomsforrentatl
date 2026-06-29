@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import ContactButtons from "@/components/ContactButtons";
+import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { updatedLabel } from "@/lib/format";
 
@@ -42,10 +43,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-3xl px-4 pb-24 pt-2">
+      <div className="mx-auto max-w-3xl px-4 pb-2 pt-2">
         <HouseList houses={houses} />
       </div>
 
+      <TrustBand />
+
+      <div className="pb-20" />
       <Footer />
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur sm:hidden">

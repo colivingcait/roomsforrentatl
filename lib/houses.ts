@@ -1,6 +1,6 @@
 import housesData from "@/data/houses.json";
 import availability from "@/data/availability.json";
-import type { House, SeedHouse, LiveHouse, Room, PriceUnit } from "./types";
+import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./types";
 
 const SEED = (housesData.houses as SeedHouse[]) ?? [];
 const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {};
@@ -56,37 +56,49 @@ export function availableRooms(house: House): Room[] {
 }
 
 /**
- * Photos for the card/hero gallery: lead with a kitchen shot, then interleave
- * room photos and the remaining common areas for variety.
+ * Photos for the card/hero gallery, in this order:
+ *   1. the biggest kitchen photo
+ *   2. the first 6 room photos
+ *   3. bathrooms
+ *   4. other common areas (dining, living, patio, laundry, …)
+ *   5. any remaining room photos
  */
 export function orderedPhotos(house: House): string[] {
   const roomPics = availableRooms(house).flatMap((r) =>
     r.photos?.length ? r.photos : r.image ? [r.image] : []
   );
-  const isKitchen = (c: { description: string | null; category: string }) =>
-    /kitchen/i.test(`${c.description ?? ""} ${c.category}`);
-  // Lead with the kitchen; if none is tagged, use PadSplit's own primary photo.
-  const lead =
-    house.commonAreas.find(isKitchen) ?? house.commonAreas.find((c) => c.primary) ?? house.commonAreas[0];
-  const otherCommon = house.commonAreas.filter((c) => c !== lead).map((c) => c.url);
-  const kitchen = lead;
 
-  // Interleave rooms and remaining common areas.
-  const mixed: string[] = [];
-  for (let i = 0; i < Math.max(roomPics.length, otherCommon.length); i++) {
-    if (i < roomPics.length) mixed.push(roomPics[i]);
-    if (i < otherCommon.length) mixed.push(otherCommon[i]);
-  }
+  const matches = (c: Photo, re: RegExp) => re.test(`${c.description ?? ""} ${c.category}`);
+  const area = (c: Photo) => (c.width ?? 0) * (c.height ?? 0);
+
+  // Lead with the largest kitchen shot; fall back to PadSplit's primary photo.
+  const kitchens = house.commonAreas.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
+  const lead = kitchens[0] ?? house.commonAreas.find((c) => c.primary) ?? house.commonAreas[0];
+
+  const baths = house.commonAreas
+    .filter((c) => c !== lead && matches(c, /bath|shower|restroom/i))
+    .map((c) => c.url);
+  const others = house.commonAreas
+    .filter((c) => c !== lead && !matches(c, /bath|shower|restroom|kitchen/i))
+    .map((c) => c.url);
+
+  const sequence = [
+    lead?.url,
+    ...roomPics.slice(0, 6),
+    ...baths,
+    ...others,
+    ...roomPics.slice(6),
+  ];
 
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const u of [kitchen?.url, ...mixed]) {
+  for (const u of sequence) {
     if (u && !seen.has(u)) {
       seen.add(u);
       out.push(u);
     }
   }
-  return out.length ? out.slice(0, 16) : [house.image];
+  return out.length ? out.slice(0, 20) : [house.image];
 }
 
 function merge(seed: SeedHouse): House {

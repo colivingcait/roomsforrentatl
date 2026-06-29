@@ -141,6 +141,8 @@ async function extractPhotos(page) {
             category: (node.category || "other").toString(),
             description: node.description || null,
             primary: !!node.primary,
+            width: node.imageWidth ?? null,
+            height: node.imageHeight ?? null,
           });
         }
       }
@@ -149,7 +151,7 @@ async function extractPhotos(page) {
     visit(data, 0);
 
     const isBedroom = (c) => /bed\s*room|bedroom/i.test(c);
-    const commonAreas = pics.filter((p) => !isBedroom(p.category)).slice(0, 12);
+    const commonAreas = pics.filter((p) => !isBedroom(p.category)).slice(0, 16);
 
     // Carousel: lead with exterior/common areas, then a couple bedrooms.
     const prio = ["exterior", "frontage", "front", "living", "common", "kitchen", "dining", "bathroom"];
