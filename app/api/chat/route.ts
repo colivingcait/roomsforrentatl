@@ -78,6 +78,20 @@ function stripMarkdown(text: string): string {
     .replace(/^\s*[-*]\s+/gm, "- "); // normalize bullets to "- "
 }
 
+// Record each visitor question so you can see what people ask. Always logs to
+// Vercel's function logs; if CHAT_LOG_WEBHOOK is set (e.g. a Google Sheet Apps
+// Script URL), it also appends there. Fire-and-forget — never blocks the chat.
+function logQuestion(question: string) {
+  console.log(`[chat] Q: ${question.replace(/\s+/g, " ").slice(0, 500)}`);
+  const webhook = process.env.CHAT_LOG_WEBHOOK;
+  if (!webhook) return;
+  void fetch(webhook, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ question, at: new Date().toISOString() }),
+  }).catch(() => {});
+}
+
 export async function POST(req: Request) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
@@ -98,6 +112,10 @@ export async function POST(req: Request) {
   if (!messages.length) {
     return Response.json({ error: "Please type a question." }, { status: 400 });
   }
+
+  // The newest user message is the question being asked this turn.
+  const latest = messages[messages.length - 1];
+  if (latest?.role === "user") logQuestion(latest.content);
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
