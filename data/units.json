@@ -16,8 +16,9 @@
       "leaseLength": "12 months preferred",
       "pets": "Considered case by case",
       "sqft": 1000,
-      "furnishedNote": "Comes furnished with the couch, rugs, TV, kitchen table, beds, and minimal kitchen supplies. Tenants bring their own linens, kitchenware, and personal items.",
-      "features": ["Brand-new stairs & deck", "Huge primary bedroom"],
+      "description": "Bright, spacious 2 bed / 1 bath upstairs unit in a duplex-style house — furnished, freshly updated, and full of natural light! Open-concept living with hardwood floors and a full kitchen with newer stainless steel appliances. The master bedroom is huge with a walk-in closet, and the second bedroom has a closet too. The best part might be the big, brand-new deck right off the living room — lake and nature views, plus a large backyard to enjoy!\n\nAll utilities are included (electric, water, internet, and more). It comes furnished too — couch, dining table, both bed sets, and basic kitchen items to get you cooking — so just bring your clothes, bed linens, towels, and personal belongings and you're all set! Laundry is shared with the downstairs unit and is located in the garage, and your designated parking is in the driveway.\n\nSince it's in the Norris Lake community, a 12+ month lease gets you access to the lake, pool, beach, tennis courts, and parks! Priority is given to long-term leases (12+ months). First month and security deposit, plus a background and credit check, are required to move in.",
+      "furnishedNote": "Furnished with the couch, dining table, both bed sets, and basic kitchen items — just bring your clothes, bed linens, towels, and personal belongings.",
+      "features": ["Open-concept living with hardwood floors", "Full kitchen with newer stainless appliances", "Huge master bedroom with walk-in closet", "Big brand-new deck — lake & nature views", "Large backyard", "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=e2085ef6-1230-4f26-9c63-1df569145778",
       "photos": [
         "/units/lake-house-2br/3325BB4E-5482-4492-8911-EAF7DBA2FF1D_1_105_c.jpeg",
@@ -53,8 +54,9 @@
       "leaseLength": "12 months preferred",
       "pets": "Considered case by case",
       "sqft": 500,
-      "furnishedNote": "Fully furnished, including kitchen items — tenants just bring their own linens, towels, and personal items.",
-      "features": ["Quiet & peaceful", "Private patio", "Designated parking", "Shared laundry in garage"],
+      "description": "Newly renovated studio in a duplex-style house — comfy, furnished, private and clean! All utilities are included (electric, water, internet). Easy to move in — just bring your clothes, bed linens, towels, and personal belongings! Laundry is shared with the upstairs unit and is located in the garage (connected to the studio). The entire downstairs is yours: private entrance, private patio, and more. Your designated parking space is in the parking pad on the right side of the driveway.\n\nPriority is given to long-term leases (12+ months). First month and security deposit, plus a background and credit check, are required to move in. And since it's in the Norris Lake community, a 12+ month lease gets you access to the lake, pool, beach, tennis courts, and nearby parks — all within the neighborhood!",
+      "furnishedNote": "Fully furnished, including kitchen items — just bring your clothes, bed linens, towels, and personal belongings.",
+      "features": ["Private entrance & private patio", "The entire downstairs is yours", "Designated parking space", "Laundry in the connected garage", "Norris Lake community: lake, pool, beach, tennis & parks (12+ month lease)"],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=b8cb0774-46e7-44fa-8065-fe71845200b1",
       "photos": [],
       "tourUrl": null

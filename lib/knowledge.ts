@@ -95,7 +95,8 @@ function unitsSnapshot(): string {
       const tour = u.tourUrl ? ` 3D tour: ${u.tourUrl}` : "";
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
       const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
-      return `• ${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${apply}${tour}`;
+      const desc = u.description ? ` Details: ${u.description.replace(/\s+/g, " ")}` : "";
+      return `• ${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
     })
     .join("\n");
 }
