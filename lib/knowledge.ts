@@ -71,6 +71,25 @@ function housesSnapshot(): string {
     .join("\n\n");
 }
 
+/** An exact, pre-counted list of the private-bathroom rooms available right now. */
+function privateBathSnapshot(): string {
+  const rows: string[] = [];
+  for (const h of getHouses()) {
+    if (!h.available) continue;
+    for (const r of availableRooms(h)) {
+      if (r.bathroomType !== "private") continue;
+      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const price = r.weeklyRate ? `${priceLabel(r.weeklyRate)} all-in` : "price varies";
+      rows.push(`• ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}.`);
+    }
+  }
+  if (!rows.length) {
+    return "0 private-bathroom rooms are available right now. Say so honestly and offer shared-bath rooms or to check back.";
+  }
+  const n = rows.length;
+  return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now (this is the EXACT count — do not say more):\n${rows.join("\n")}`;
+}
+
 /** Long-term private apartments (monthly leases via TurboTenant) — a separate product. */
 function unitsSnapshot(): string {
   const units = getUnits();
@@ -138,6 +157,7 @@ ${trackDirective(track)}
 - BE BRIEF — this is the MOST IMPORTANT rule, and you keep breaking it. HARD LIMIT: about 40 words, 1–2 short sentences, ONE short paragraph. Never write multiple paragraphs. Lead with the direct answer and STOP.
 - Answer ONLY what was asked. Do NOT volunteer extra topics, caveats, or related info the person didn't ask about (e.g. if they ask about touring, don't also explain transfers, Matterport, and addresses — just answer touring). Let them ask a follow-up.
 - The FAQ and policy text below is REFERENCE, not a script. NEVER paste those answers word-for-word — compress them to one or two short sentences in your own words.
+- BE ACCURATE — never overstate counts or invent rooms/prices. State exactly what the data shows: if only one room matches, say "one" and list that one. Whenever you mention a specific room, include its weekly price.
 - The exception: when actually listing what's available you may use a few short lines, but still keep it tight.
 - TWO KINDS OF HOUSING: weekly co-living rooms (flexible, no long lease) and whole long-term furnished units (monthly, ~12-month lease). If you already know which one the visitor wants (see the section above), answer ONLY for that one. If a question genuinely applies to both and you don't know which they want, give a ONE-LINE contrast and ask which they want — don't fully explain both. For example, for "what's the lease length?": "We have flexible lease terms for our furnished co-living rooms, and longer-term leases for our private units — which one are you interested in?"
 - Reply in PLAIN TEXT only. Do NOT use any Markdown — no **asterisks** for bold, no headings, no "*" bullets. If you list things, use a simple dash and a space ("- ") or short separate lines.
@@ -169,6 +189,10 @@ ${trackDirective(track)}
 
 # PadSplit co-living rooms (weekly rent) — current availability${updated ? ` (updated ${updated})` : ""}
 ${housesSnapshot()}
+
+# Private-bathroom rooms available right now — use this EXACT list and count
+When someone asks about private bathrooms, answer ONLY from this list. State the exact number (if it's one, say "one room" — never "two"), name the home, and ALWAYS include each room's weekly price. Then show its booking card.
+${privateBathSnapshot()}
 
 # Long-term private apartments (monthly lease via TurboTenant)
 ${unitsSnapshot()}
