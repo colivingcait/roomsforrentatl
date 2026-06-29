@@ -14,6 +14,9 @@ export interface SeedHouse {
   image: string;
   blurb?: string;
   amenities: string[];
+  /** Approximate neighborhood center (NOT the street address) for the map. */
+  lat?: number;
+  lng?: number;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */

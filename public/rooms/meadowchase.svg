@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22C55E"/><stop offset="1" stop-color="#15803D"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#g)"/><rect width="1200" height="900" fill="#000" opacity="0.06"/>
+  
+  <g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.92">
+    <path d="M150 600 H1050" opacity="0.5"/>
+    <rect x="200" y="250" width="230" height="180" rx="10"/>
+    <path d="M315 250 V430 M200 340 H430"/>
+    <path d="M520 600 V470 a20 20 0 0 1 20-20 H900 a20 20 0 0 1 20 20 V600"/>
+    <path d="M520 535 H920"/>
+    <rect x="560" y="480" width="120" height="55" rx="12"/>
+    <path d="M965 600 V440 M925 440 H1005 L985 380 H945 Z"/>
+  </g>
+  <text x="600" y="760" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="58" font-weight="800" fill="#fff">Meadowchase</text>
+  <text x="600" y="815" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif" font-size="30" font-weight="600" fill="#fff" opacity="0.85">Furnished rooms · Atlanta</text>
+</svg>
