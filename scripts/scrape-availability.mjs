@@ -247,6 +247,31 @@ for (const house of houses) {
       r.pagePosition = located ? i + 1 : r.padIndex;
     });
 
+    // TEMP probe: find a #anchor that lands on the rooms section, plus what the
+    // "See rooms" button targets, so we can deep-link straight to the rooms.
+    if (id === "8299") {
+      const anchor = await page.evaluate(() => {
+        const out = { idsWithRoom: [], seeRooms: null, hashLinks: [] };
+        document.querySelectorAll("[id]").forEach((el) => {
+          if (/room|avail|listing|book/i.test(el.id)) out.idsWithRoom.push(el.id);
+        });
+        const btn = Array.from(document.querySelectorAll("a,button,div,span")).find((e) =>
+          /^\s*see rooms\s*$/i.test(e.textContent || "")
+        );
+        if (btn) {
+          out.seeRooms = {
+            tag: btn.tagName,
+            href: btn.getAttribute("href"),
+            dataset: JSON.stringify(btn.dataset || {}),
+            outer: (btn.outerHTML || "").slice(0, 160),
+          };
+        }
+        document.querySelectorAll('a[href^="#"]').forEach((a) => out.hashLinks.push(a.getAttribute("href")));
+        return out;
+      });
+      console.log(`  [8299] ANCHOR PROBE: ${JSON.stringify(anchor)}`);
+    }
+
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(
