@@ -35,7 +35,9 @@ function merge(seed: SeedHouse): House {
   const live = LIVE[seed.id] ?? {};
   return {
     ...seed,
-    // Prefer the scraped photo (the real listing) but keep the local fallback.
+    // Prefer the scraped neighborhood/photo (the real listing) but keep the
+    // authored values as fallback.
+    neighborhood: live.neighborhood || seed.neighborhood,
     image: live.image || seed.image,
     roomsAvailable: live.roomsAvailable ?? 0,
     fromPrice: live.fromPrice ?? null,

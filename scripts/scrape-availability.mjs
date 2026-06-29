@@ -90,6 +90,46 @@ for (const house of houses) {
       throw new Error(`blocked or error (status ${status})`);
     }
 
+    // TEMP investigation: discover PadSplit's per-room data shape so we can build
+    // the bathroom-type/price breakdown. Logs candidate room arrays for one house.
+    if (id === "35011") {
+      const probe = await page.evaluate(() => {
+        const result = { hasNextData: false, candidates: [] };
+        let data;
+        try {
+          data = window.__NEXT_DATA__;
+        } catch {}
+        if (!data) {
+          const el = document.getElementById("__NEXT_DATA__");
+          if (el) try { data = JSON.parse(el.textContent || "{}"); } catch {}
+        }
+        result.hasNextData = !!data;
+        const seen = [];
+        const visit = (node, depth) => {
+          if (!node || typeof node !== "object" || depth > 14 || seen.length > 6) return;
+          if (Array.isArray(node)) {
+            if (node.length >= 1 && node.length <= 40 && node.every((x) => x && typeof x === "object")) {
+              const keys = Object.keys(node[0]);
+              const looksRoom =
+                keys.some((k) => /bath/i.test(k)) ||
+                (keys.some((k) => /price|rent|rate|cost/i.test(k)) &&
+                  keys.some((k) => /status|avail|room|move/i.test(k)));
+              if (looksRoom) seen.push({ size: node.length, keys, sample: node.slice(0, 2) });
+            }
+            for (const x of node) visit(x, depth + 1);
+          } else {
+            for (const k of Object.keys(node)) visit(node[k], depth + 1);
+          }
+        };
+        if (data) visit(data, 0);
+        result.candidates = seen;
+        return result;
+      });
+      console.log(`\n[PROBE 35011] hasNextData=${probe.hasNextData} candidates=${probe.candidates.length}`);
+      console.log(JSON.stringify(probe.candidates, null, 1).slice(0, 5000));
+      console.log("[PROBE 35011 END]\n");
+    }
+
     const parsed = parseHouse(text, html);
     result.houses[id] = {
       title,

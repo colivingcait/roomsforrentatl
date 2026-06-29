@@ -17,19 +17,23 @@
       "id": "8299",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/8299",
       "name": "Candace",
-      "neighborhood": "Atlanta",
+      "neighborhood": "South Gresham",
       "city": "Atlanta",
       "image": "/rooms/candace.svg",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning"]
+      "lat": 33.6905,
+      "lng": -84.3052,
+      "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
     },
     {
       "id": "11889",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11889",
       "name": "Raven",
-      "neighborhood": "Atlanta",
+      "neighborhood": "Off Stephenson",
       "city": "Atlanta",
       "image": "/rooms/raven.svg",
-      "amenities": ["Fully furnished", "All utilities + WiFi included", "Washer & dryer", "Monthly cleaning"]
+      "lat": 33.7869,
+      "lng": -84.1702,
+      "amenities": ["Fully furnished", "All utilities + WiFi included", "Smart TV in every room", "Private workspace", "Washer & dryer"]
     },
     {
       "id": "30251",
