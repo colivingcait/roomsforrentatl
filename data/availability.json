@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T00:01:51.117Z",
+  "updatedAt": "2026-06-30T13:11:30.438Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -222,7 +222,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-06-30T00:01:51.117Z",
+      "checkedAt": "2026-06-30T13:11:30.438Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -261,37 +261,6 @@
             "https://www.padsplit.com/img/psproperty/8299/img_2303e433-5f8f-41af-9863-1da7895eba21.png",
             "https://www.padsplit.com/img/psproperty/8299/img_b439e0fc-c1f1-4041-9f6f-9b9a8c2e9dd8.png",
             "https://www.padsplit.com/img/psproperty/8299/img_0432efc9-662b-4cec-af88-7183abd2d2b4.png"
-          ]
-        },
-        {
-          "id": 33218,
-          "padIndex": 2,
-          "pagePosition": 2,
-          "applyIndex": null,
-          "name": "Edinburgh - w/ Mini Fridge!",
-          "roomNumber": 5,
-          "description": "",
-          "weeklyRate": 183,
-          "recommendedPrice": 190,
-          "bathroomType": "shared",
-          "bedSize": "full",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": true,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-07-01",
-          "image": "https://www.padsplit.com/img/psproperty/8299/img_610b0801-924a-4aec-ab95-a0d09c1081c9.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/8299/img_610b0801-924a-4aec-ab95-a0d09c1081c9.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_16159733-d9ac-46d9-860d-4be53748cc88_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_bd6cbddf-09f7-4262-b006-150a56da8b8d.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_2da1246c-d6fd-40c8-824b-f3601efb9dd9.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_11783891-bfb7-41da-8022-853af4e1dfe0.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_34a2cce2-8cb7-43ff-a51c-3c354222dc95.png"
           ]
         }
       ],
@@ -491,18 +460,18 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 2,
+      "roomsAvailable": 1,
       "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-06-30T00:01:51.117Z",
+      "checkedAt": "2026-06-30T13:11:30.438Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "Off Stephenson",
-      "city": "Atlanta, GA",
+      "city": "Mountain, GA",
       "image": "https://www.padsplit.com/img/psproperty/11889/img_2c79d9b7-84c4-4ecb-a0a4-960edc1c65cd.png",
       "utilitiesIncluded": true,
       "rooms": [
@@ -738,7 +707,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-06-30T00:01:51.117Z",
+      "checkedAt": "2026-06-30T13:11:30.438Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -917,7 +886,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-06-30T00:01:51.117Z",
+      "checkedAt": "2026-06-30T13:11:30.438Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -947,7 +916,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-06-30",
+          "moveInDate": "2026-07-01",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -975,7 +944,7 @@
           "windows": 2,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-06-30",
+          "moveInDate": "2026-07-01",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
@@ -1003,7 +972,7 @@
           "windows": 2,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-06-30",
+          "moveInDate": "2026-07-01",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_d0c0d720-c8a8-4ae9-b27f-6219c0518444.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_d0c0d720-c8a8-4ae9-b27f-6219c0518444.jpg",
@@ -1012,33 +981,31 @@
           ]
         },
         {
-          "id": 110834,
+          "id": 110835,
           "padIndex": 4,
           "pagePosition": 4,
           "applyIndex": null,
-          "name": "Room 4 - Dell - LARGE room with private bath!",
-          "roomNumber": 4,
-          "description": "Private bathroom!",
-          "weeklyRate": 235,
-          "recommendedPrice": 250,
-          "bathroomType": "private",
+          "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
+          "roomNumber": 5,
+          "description": "",
+          "weeklyRate": 173,
+          "recommendedPrice": 185,
+          "bathroomType": "shared",
           "bedSize": "full",
           "roomSize": "standard",
           "workspace": true,
           "miniFridge": false,
           "privateAccess": false,
           "climateControl": "central-ac",
-          "windows": 2,
+          "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-06-30",
-          "image": "https://www.padsplit.com/img/psproperty/35011/img_6ac3f2b9-6201-4ea0-a21a-15e3a36bebf3.jpg",
+          "moveInDate": "2026-07-01",
+          "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "photos": [
-            "https://www.padsplit.com/img/psproperty/35011/img_6ac3f2b9-6201-4ea0-a21a-15e3a36bebf3.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_912f3eac-0c33-405b-9b81-4055401be1e5.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_c3fff410-3542-4724-b552-18a3b1161d49.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_75e2ceea-0604-49c9-9b8d-e156d43e7c08.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_ef5ec58b-9588-4774-8ad2-26e0bf02dc87.jpg"
+            "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_8d140d71-6d2c-4610-bd15-fc4004f78c56.jpg"
           ]
         }
       ],
@@ -1147,10 +1114,8 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-06-30T00:01:51.117Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/35011",
-      "stale": true,
-      "lastError": "Error: blocked or error (status 502)"
+      "checkedAt": "2026-06-30T13:11:30.438Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
 }
