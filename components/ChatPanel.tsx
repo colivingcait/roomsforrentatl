@@ -154,6 +154,16 @@ const FOLLOWUPS: Record<string, string[]> = {
   "Is smoking allowed?": ["What are the house rules?", "Are pets allowed?", "Can I have guests?"],
 };
 
+// Infer which housing track a message points to, so tailoring kicks in even
+// when someone types their preference or taps a bot chip instead of the picker.
+function inferTrack(text: string): Track | null {
+  const t = text.toLowerCase();
+  if (/\bboth\b/.test(t)) return "both";
+  if (/(entire|whole|private)\s+(unit|apartment|apt)|monthly|long[- ]?term/.test(t)) return "unit";
+  if (/room for rent|\ba room\b|weekly|co-?living/.test(t)) return "room";
+  return null;
+}
+
 export default function ChatPanel() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -173,6 +183,10 @@ export default function ChatPanel() {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
     setError(null);
+    // Lock in the housing track once it's clear — from the picker, or inferred
+    // from what they tapped/typed — so answers stay tailored to room vs. unit.
+    const effectiveTrack = trackOverride ?? track ?? inferTrack(trimmed) ?? undefined;
+    if (effectiveTrack && effectiveTrack !== track) setTrack(effectiveTrack);
     const next = [...messages, { role: "user" as const, content: trimmed }];
     setMessages(next);
     setInput("");
@@ -181,7 +195,7 @@ export default function ChatPanel() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next, source, track: trackOverride ?? track }),
+        body: JSON.stringify({ messages: next, source, track: effectiveTrack }),
       });
       const data = await res.json();
       if (!res.ok || !data.reply) {
@@ -200,11 +214,11 @@ export default function ChatPanel() {
     }
   }
 
-  // Until they've told us which kind of housing they want, the only chips we
-  // show are the three options up top — everything after is tailored to that.
-  const showTrackOptions = !loading && !track;
-
   const asked = new Set(messages.filter((m) => m.role === "user").map((m) => m.content));
+
+  // The room/unit/both picker is only the OPENING choice — show it before the
+  // conversation starts. Once anyone has said anything, the bot drives the chips.
+  const showTrackOptions = !loading && !track && messages.length === 0;
 
   // The bot drives its own quick-reply buttons: whenever its latest answer ends
   // with chips (the answers to a question it just asked, or the next best tap),
@@ -213,10 +227,10 @@ export default function ChatPanel() {
   const botChips = (lastMsg?.role === "assistant" ? lastMsg.chips ?? [] : []).filter(
     (c) => !asked.has(c)
   );
-  const showBotChips = !loading && !!track && botChips.length > 0;
+  const showBotChips = !loading && botChips.length > 0;
 
   // Fallback when the bot didn't supply chips: a static set of popular questions,
-  // tailored to the chosen track, minus anything already asked.
+  // tailored to the chosen track (or the general set if none picked yet).
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content;
   const trackDefaults =
     track === "unit" ? UNIT_SUGGESTIONS : track === "both" ? BOTH_SUGGESTIONS : DEFAULT_SUGGESTIONS;
@@ -227,7 +241,8 @@ export default function ChatPanel() {
     remainingSuggestions = trackDefaults.filter((s) => !asked.has(s));
   }
   remainingSuggestions = remainingSuggestions.slice(0, 4);
-  const showSuggestions = !loading && !!track && !showBotChips && remainingSuggestions.length > 0;
+  const showSuggestions =
+    !loading && !showTrackOptions && !showBotChips && messages.length > 0 && remainingSuggestions.length > 0;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
