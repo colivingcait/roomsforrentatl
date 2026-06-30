@@ -3,6 +3,7 @@ import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
 import UnitsSection from "@/components/UnitsSection";
+import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { getUnits } from "@/lib/units";
@@ -47,6 +48,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <NearestHomeFinder />
 
       {/* Co-living rooms section */}
       <section className="mx-auto max-w-3xl px-4 pt-6">
