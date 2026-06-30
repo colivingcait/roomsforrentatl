@@ -94,17 +94,20 @@
     {
       "category": "The home & your room",
       "q": "Is there parking?",
-      "a": "Yes — every home has driveway and street parking, about 4–5 spots per house. It's first come, first served, with one car per resident."
+      "variants": ["Where do I park?", "Do you have parking?", "What's the parking situation?"],
+      "a": "Yes — there's a carport and street parking right in front of the house, so you'll always have a spot."
     },
     {
       "category": "The home & your room",
       "q": "How many people share a bathroom?",
-      "a": "Usually about 1 bathroom for every 3 rooms. It can be a bit more or less, depending on the home's layout and who's living there now."
+      "variants": ["How many people am I sharing the bathroom with?", "What's the bathroom situation?", "How many share a bath?"],
+      "a": "You're typically sharing with 2 to 4 people. Everyone's on different schedules and cleans up after themselves, so we really don't get complaints about the shared bathrooms."
     },
     {
       "category": "The home & your room",
       "q": "How many people live in each home?",
-      "a": "These are shared co-living homes, so you'll have a handful of housemates, each with their own private room. The exact number varies by home and you can see the layout on each listing."
+      "variants": ["How many bedrooms?", "How many roommates?", "How many people does the house fit?", "How big is the house?"],
+      "a": "Our homes are over 2,500 sq ft across multiple floors, with standard-size bedrooms (10x12 and larger). They comfortably fit up to 8 residents, each in their own private room."
     },
     {
       "category": "The home & your room",
@@ -151,13 +154,15 @@
     },
     {
       "category": "Your stay",
-      "q": "How long can I stay? Is there a minimum?",
-      "a": "You can stay as long as you like — most residents stay 6–12 months. There's no long lease; you simply pay weekly. The details on minimum stay and move-out notice are in your PadSplit agreement."
+      "q": "Is there a minimum stay or long-term commitment?",
+      "variants": ["Do I have to commit to 3 months?", "What's the minimum stay?", "Is this month-to-month?", "Is there a lease?"],
+      "a": "We look for people who want to stick around long-term, but there's no lock-in — if something changes, you're free to transfer or move out whenever you need to."
     },
     {
       "category": "Your stay",
-      "q": "How do I move out?",
-      "a": "Just give notice through PadSplit when you're ready — there's no long lease tying you down, and your agreement explains the notice period."
+      "q": "What if I don't like it?",
+      "variants": ["What if it's not a good fit?", "Can I leave if I want to?", "What if I want to move out?", "How do I move out?"],
+      "a": "We want you somewhere you actually like living. If it's not working out, you can easily book a move-out — no hard feelings."
     },
     {
       "category": "Your stay",
@@ -173,6 +178,12 @@
       "category": "Location",
       "q": "How close is public transit?",
       "a": "It depends on the home — some are a short 5–10 minute walk to the bus, while others are better for residents who drive or rideshare. Ask our assistant about a specific home and we'll tell you."
+    },
+    {
+      "category": "Good to know",
+      "q": "Can I get mail and packages delivered?",
+      "variants": ["Can I use it as my mailing address?", "Do you accept packages?", "Can I get mail there?"],
+      "a": "Absolutely — it's your home. Use the address for mail, packages, whatever you need."
     },
     {
       "category": "Good to know",
