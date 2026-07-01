@@ -77,13 +77,20 @@ function housesSnapshot(): string {
     .join("\n\n");
 }
 
-/** Exact, pre-computed totals so the bot never has to count or guess. */
+/** Exact, pre-computed totals so the bot never has to count or guess. Covers
+ *  BOTH PadSplit rooms and Willow (non-PadSplit) rooms, so "by city"/"which
+ *  area" answers are never missing a real area or including an empty one. */
 function quickFacts(): string {
   const houses = getHouses().filter((h) => h.available);
   const all = houses.flatMap((h) => availableRooms(h).map((r) => ({ r, h })));
   const priced = all.filter(({ r }) => typeof r.weeklyRate === "number" && (r.weeklyRate as number) > 0);
+  const colivingHouses = getColivingHouses();
+  const colivingAll = colivingHouses.flatMap((h) => availableColivingRooms(h).map((r) => ({ r, h })));
+
   const lines: string[] = [];
-  lines.push(`Total: ${all.length} room(s) available across ${houses.length} home(s).`);
+  lines.push(
+    `Total: ${all.length + colivingAll.length} room(s) available across ${houses.length + colivingHouses.length} home(s).`
+  );
 
   if (priced.length) {
     const cheapest = priced.reduce((a, b) => ((b.r.weeklyRate as number) < (a.r.weeklyRate as number) ? b : a));
@@ -94,17 +101,38 @@ function quickFacts(): string {
     );
   }
 
-  const byCity = new Map<string, { count: number; min: number }>();
-  for (const { r, h } of all) {
-    const cur = byCity.get(h.city) ?? { count: 0, min: Infinity };
-    cur.count += 1;
-    if (typeof r.weeklyRate === "number") cur.min = Math.min(cur.min, r.weeklyRate);
-    byCity.set(h.city, cur);
-  }
+  type CityStat = { count: number; min: number; unit: "week" | "month" };
+  const byCity = new Map<string, CityStat[]>();
+  const addCity = (city: string, price: number | null | undefined, unit: "week" | "month") => {
+    const arr = byCity.get(city) ?? [];
+    let entry = arr.find((e) => e.unit === unit);
+    if (!entry) {
+      entry = { count: 0, min: Infinity, unit };
+      arr.push(entry);
+    }
+    entry.count += 1;
+    if (typeof price === "number") entry.min = Math.min(entry.min, price);
+    byCity.set(city, arr);
+  };
+  for (const { r, h } of all) addCity(h.city, r.weeklyRate, "week");
+  for (const { r, h } of colivingAll) addCity(h.city, r.price, h.rentUnit);
+
   const cityLines = Array.from(byCity.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([city, v]) => `- ${city}: ${v.count} room(s)${isFinite(v.min) ? `, from ${priceLabel(v.min)}/wk` : ""}`);
-  if (cityLines.length) lines.push(`By city:\n${cityLines.join("\n")}`);
+    .map(([city, stats]) => {
+      const parts = stats.map(
+        (s) => `${s.count} room(s)${isFinite(s.min) ? `, from ${priceLabel(s.min, s.unit)}` : ""}`
+      );
+      return `- ${city}: ${parts.join(" + ")}`;
+    });
+  if (cityLines.length) {
+    lines.push(
+      `By city — this is the COMPLETE and EXACT list of areas with rooms available right now (includes Willow):\n${cityLines.join("\n")}`
+    );
+    lines.push(
+      "For a \"which area?\" question, the chips MUST be exactly these cities — no more, no fewer. Never include a city with 0 rooms; never omit one listed above."
+    );
+  }
 
   return lines.join("\n");
 }
