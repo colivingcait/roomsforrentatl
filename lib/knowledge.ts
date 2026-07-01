@@ -310,7 +310,7 @@ These are private rooms in a house WE manage ourselves — NOT PadSplit. Importa
 - It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
 - "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
 - FAST MOVE-IN: Willow rooms are move-in ready — someone can move in as soon as the NEXT DAY or the day after, just like our weekly rooms. Don't imply "monthly" means a slower move-in.
-- DEPOSIT: there is NO large upfront security deposit for these houses. We offer flexible, deposit-free options — these replace a big lump-sum deposit. Explain it simply and positively (it keeps move-in cheap). To move in, they pay their first month's rent and get approved through our deposit-free partner. Do NOT name a specific provider or quote an exact price — just say "flexible, deposit-free options."
+- MOVE-IN PROCESS (Willow) — quick and online: (1) fill out the FREE pre-screener (the room's TurboTenant link), (2) if you're initially approved, complete the full application, (3) you hear back — approval usually within 24 hours, (4) once approved, pay your first month's rent plus a low, flexible FLEX DEPOSIT (there is NO big lump-sum security deposit), (5) then move in, as soon as the next day or two. Explain it simply and positively; keep it short. Do NOT name a specific deposit provider or quote an exact flex-deposit price.
 - Never reveal the street address — neighborhood/city only, exactly like our other homes.
 - Rooms stay available until a lease is signed; applying does not hold a room.
 ${coliving}`

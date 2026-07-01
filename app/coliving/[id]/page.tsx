@@ -60,7 +60,9 @@ export default function ColivingHousePage({ params }: { params: { id: string } }
           <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <div className="text-sm font-bold text-ink">Move-in</div>
             <p className="mt-1 text-sm text-muted">
-              {depositLine(house)} To move in, you pay your first month&apos;s rent and get approved through our deposit-free partner.
+              {depositLine(house)} The process is quick and online: fill out the free pre-screener, get approved
+              (usually within 24 hours), then pay your first month&apos;s rent plus the flex deposit to move in — as
+              soon as the next day or two.
             </p>
           </div>
         )}
