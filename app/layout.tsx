@@ -1,36 +1,31 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { site } from "@/lib/site";
+import { getBrand } from "@/lib/brand";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} — Rooms for Rent in Atlanta, Move In Today`,
-    template: `%s · ${site.name}`,
-  },
-  description: site.description,
-  keywords: [
-    "rooms for rent Atlanta",
-    "furnished rooms Atlanta",
-    "move in today Atlanta",
-    "weekly rooms Atlanta",
-    "PadSplit Atlanta",
-    "cheap rooms Atlanta",
-  ],
-  openGraph: {
-    title: `${site.name} — Rooms for Rent in Atlanta`,
-    description: site.description,
-    url: site.url,
-    siteName: site.name,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} — Rooms for Rent in Atlanta`,
-    description: site.description,
-  },
-  robots: { index: true, follow: true },
-};
+export function generateMetadata(): Metadata {
+  const brand = getBrand();
+  const isHomes = brand.key === "homes";
+  const headline = isHomes
+    ? `${brand.name} — Apartments for Rent in Atlanta`
+    : `${brand.name} — Rooms for Rent in Atlanta, Move In Today`;
+  return {
+    metadataBase: new URL(brand.url),
+    title: { default: headline, template: `%s · ${brand.name}` },
+    description: brand.description,
+    keywords: isHomes
+      ? ["apartments for rent Atlanta", "furnished apartments Atlanta", "homes for rent Atlanta", "monthly rentals Atlanta"]
+      : ["rooms for rent Atlanta", "furnished rooms Atlanta", "move in today Atlanta", "weekly rooms Atlanta", "PadSplit Atlanta"],
+    openGraph: {
+      title: headline,
+      description: brand.description,
+      url: brand.url,
+      siteName: brand.name,
+      type: "website",
+    },
+    twitter: { card: "summary_large_image", title: headline, description: brand.description },
+    robots: { index: true, follow: true },
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#0E7C66",

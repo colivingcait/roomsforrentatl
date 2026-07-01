@@ -1,6 +1,7 @@
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
 import { priceLabel } from "@/lib/format";
+import { brandFromHost, BRANDS } from "@/lib/brand";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
@@ -142,6 +143,7 @@ export async function POST(req: Request) {
   const rawTrack = (payload as { track?: unknown }).track;
   const track =
     rawTrack === "room" || rawTrack === "unit" || rawTrack === "both" ? rawTrack : null;
+  const brand = BRANDS[brandFromHost(req.headers.get("host"))];
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -154,7 +156,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 600,
-        system: buildSystemPrompt(track),
+        system: buildSystemPrompt(track, { name: brand.name, domain: brand.domain }),
         messages,
       }),
     });

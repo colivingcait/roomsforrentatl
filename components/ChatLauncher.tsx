@@ -40,9 +40,15 @@ export default function ChatLauncher() {
   const [nudge, setNudge] = useState(false);
   const interacted = useRef(false);
   const pathname = usePathname();
-  // Don't proactively pop the (room-oriented) assistant at long-term leads —
-  // the FAB stays, but no nudge/auto-open on the whole-apartment pages.
-  const suppressProactive = !!pathname && pathname.startsWith("/rental");
+  // The homes brand (homesforrentatl.com) is all whole apartments — default the
+  // chat to "unit" mode there. On the rooms brand, only the /rental* pages do.
+  const isHomesBrand =
+    typeof window !== "undefined" && window.location.hostname.toLowerCase().includes("homesforrent");
+  const onRentalPage = !!pathname && pathname.startsWith("/rental");
+  // Don't proactively pop the room-oriented assistant at long-term leads on the
+  // rooms brand's rental pages (the FAB stays). The homes brand can still greet.
+  const suppressProactive = onRentalPage && !isHomesBrand;
+  const chatTrack: "unit" | null = isHomesBrand || onRentalPage ? "unit" : null;
 
   const openChat = () => {
     interacted.current = true;
@@ -129,7 +135,7 @@ export default function ChatLauncher() {
         open={open}
         onClose={() => setOpen(false)}
         startTab="chat"
-        initialTrack={suppressProactive ? "unit" : null}
+        initialTrack={chatTrack}
       />
     </>
   );
