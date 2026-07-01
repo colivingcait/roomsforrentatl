@@ -16,7 +16,7 @@ export default function ColivingSection({ houses }: { houses: ColivingHouse[] })
   );
 }
 
-function ColivingHouseCard({ house }: { house: ColivingHouse }) {
+export function ColivingHouseCard({ house }: { house: ColivingHouse }) {
   const rooms = availableColivingRooms(house);
   const from = colivingFromPrice(house);
   const hero = rooms.find((r) => r.photos && r.photos.length > 0)?.photos?.[0];

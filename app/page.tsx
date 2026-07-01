@@ -3,7 +3,6 @@ import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
 import UnitsSection from "@/components/UnitsSection";
-import ColivingSection from "@/components/ColivingSection";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
@@ -69,12 +68,10 @@ export default function HomePage() {
           </p>
 
           <div className="mt-4">
-            <HouseList houses={houses} />
+            <HouseList houses={houses} colivingHouses={colivingHouses} />
           </div>
         </div>
       </section>
-
-      <ColivingSection houses={colivingHouses} />
 
       <UnitsSection units={units} />
 

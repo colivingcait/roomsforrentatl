@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import type { House } from "@/lib/types";
+import type { House, ColivingHouse } from "@/lib/types";
 import HouseCard from "./HouseCard";
+import { ColivingHouseCard } from "./ColivingSection";
 
 // Leaflet touches `window`, so load the map client-side only.
 const HousesMap = dynamic(() => import("./HousesMap"), {
@@ -17,19 +18,35 @@ const HousesMap = dynamic(() => import("./HousesMap"), {
 
 type View = "list" | "map";
 
-export default function HouseList({ houses }: { houses: House[] }) {
+export default function HouseList({
+  houses,
+  colivingHouses = [],
+}: {
+  houses: House[];
+  colivingHouses?: ColivingHouse[];
+}) {
   const [city, setCity] = useState<string>("all");
   const [view, setView] = useState<View>("list");
 
   const cities = useMemo(
-    () => Array.from(new Set(houses.map((h) => h.city))).sort(),
-    [houses]
+    () =>
+      Array.from(
+        new Set([...houses.map((h) => h.city), ...colivingHouses.map((h) => h.city)])
+      ).sort(),
+    [houses, colivingHouses]
   );
 
   const shown = useMemo(
     () => houses.filter((h) => city === "all" || h.city === city),
     [houses, city]
   );
+
+  const shownColiving = useMemo(
+    () => colivingHouses.filter((h) => city === "all" || h.city === city),
+    [colivingHouses, city]
+  );
+
+  const totalShown = shown.length + shownColiving.length;
 
   return (
     <section>
@@ -49,7 +66,7 @@ export default function HouseList({ houses }: { houses: House[] }) {
       {/* List / Map toggle */}
       <div className="mt-4 flex items-center justify-between">
         <p className="text-sm font-medium text-muted">
-          {shown.length} {shown.length === 1 ? "home" : "homes"}
+          {totalShown} {totalShown === 1 ? "home" : "homes"}
         </p>
         <div className="inline-flex rounded-xl border border-slate-200 bg-white p-1">
           <ViewTab active={view === "list"} onClick={() => setView("list")}>
@@ -61,7 +78,7 @@ export default function HouseList({ houses }: { houses: House[] }) {
         </div>
       </div>
 
-      {shown.length === 0 ? (
+      {totalShown === 0 ? (
         <div className="py-16 text-center">
           <p className="text-lg font-semibold text-ink">No homes match that filter</p>
           <p className="mt-1 text-muted">Try “All homes” or a different area.</p>
@@ -72,7 +89,14 @@ export default function HouseList({ houses }: { houses: House[] }) {
         </div>
       ) : (
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {shown.map((h) => (
+          {/* Pinned home first (Mora), then Willow & other co-living houses, then the rest. */}
+          {shown.slice(0, 1).map((h) => (
+            <HouseCard key={h.id} house={h} />
+          ))}
+          {shownColiving.map((h) => (
+            <ColivingHouseCard key={`cl-${h.id}`} house={h} />
+          ))}
+          {shown.slice(1).map((h) => (
             <HouseCard key={h.id} house={h} />
           ))}
         </div>
