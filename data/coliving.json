@@ -8,6 +8,7 @@
       "city": "West Atlanta",
       "lat": null,
       "lng": null,
+      "heroPhoto": "/willow/kitchen.jpg",
       "rentUnit": "month",
       "utilitiesIncluded": true,
       "wifi": true,
