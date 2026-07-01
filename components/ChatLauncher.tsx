@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import ChatDialog from "./ChatDialog";
 
 // --- Tweak these to taste -------------------------------------------------
@@ -38,6 +39,10 @@ export default function ChatLauncher() {
   const [open, setOpen] = useState(false);
   const [nudge, setNudge] = useState(false);
   const interacted = useRef(false);
+  const pathname = usePathname();
+  // Don't proactively pop the (room-oriented) assistant at long-term leads —
+  // the FAB stays, but no nudge/auto-open on the whole-apartment pages.
+  const suppressProactive = !!pathname && pathname.startsWith("/rental");
 
   const openChat = () => {
     interacted.current = true;
@@ -47,7 +52,7 @@ export default function ChatLauncher() {
 
   // One-time greeting nudge + optional one-time desktop auto-open on entry.
   useEffect(() => {
-    if (!isDesktop()) return;
+    if (!isDesktop() || suppressProactive) return;
     const timers: ReturnType<typeof setTimeout>[] = [];
 
     if (!seen(NUDGE_KEY)) {
@@ -79,7 +84,7 @@ export default function ChatLauncher() {
   // Desktop exit-intent: cursor leaving the top → open once per session
   // (shares the auto-open flag so we never auto-open more than once).
   useEffect(() => {
-    if (!isDesktop()) return;
+    if (!isDesktop() || suppressProactive) return;
     if (seen(AUTO_OPEN_KEY)) return;
     const onLeave = (e: MouseEvent) => {
       if (interacted.current || open) return;
