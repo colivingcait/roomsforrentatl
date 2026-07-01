@@ -60,7 +60,7 @@ function extractChips(text: string): { text: string; chips: string[] } {
         .filter(Boolean)
         .map((s) => s.slice(0, 48))
     )
-  ).slice(0, 3);
+  ).slice(0, 5); // usually ≤3; the prompt allows more only for pick-your-area lists
   return { text: cleaned, chips };
 }
 

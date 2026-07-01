@@ -238,9 +238,10 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   // with chips (the answers to a question it just asked, or the next best tap),
   // show those. They're always more relevant than a static topic list.
   const lastMsg = messages[messages.length - 1];
+  // Usually ≤3, but allow up to 5 so a pick-your-area/city list can show them all.
   const botChips = (lastMsg?.role === "assistant" ? lastMsg.chips ?? [] : [])
     .filter((c) => !asked.has(c))
-    .slice(0, 3);
+    .slice(0, 5);
   const showBotChips = !loading && botChips.length > 0;
 
   // Fallback when the bot didn't supply chips: at the very start, kick off the
