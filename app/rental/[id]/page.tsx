@@ -59,7 +59,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           </div>
         )}
         <Link
-          href="/"
+          href="/rentals"
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-2 text-sm font-bold text-ink shadow active:scale-95"
         >
           ← All rentals
