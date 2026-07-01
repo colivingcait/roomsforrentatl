@@ -16,6 +16,7 @@ type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse
 type Track = "room" | "unit" | "both";
 
 const GREETING = "Hi! 👋 Let's find your spot. What are you looking for?";
+const UNIT_GREETING = "Hi! 👋 Happy to help with our apartments. What would you like to know?";
 
 // The first thing a visitor picks — it tailors every answer that follows.
 const TRACK_OPTIONS: { label: string; track: Track; text: string }[] = [
@@ -164,13 +165,14 @@ function inferTrack(text: string): Track | null {
   return null;
 }
 
-export default function ChatPanel() {
+export default function ChatPanel({ initialTrack = null }: { initialTrack?: Track | null }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // Which kind of housing they're after — set when they pick an option up front.
-  const [track, setTrack] = useState<Track | null>(null);
+  // Which kind of housing they're after — set when they pick an option up front,
+  // or pre-set by context (e.g. the chat opens in "unit" mode on rental pages).
+  const [track, setTrack] = useState<Track | null>(initialTrack);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -242,14 +244,14 @@ export default function ChatPanel() {
   }
   remainingSuggestions = remainingSuggestions.slice(0, 4);
   const showSuggestions =
-    !loading && !showTrackOptions && !showBotChips && messages.length > 0 && remainingSuggestions.length > 0;
+    !loading && !showTrackOptions && !showBotChips && remainingSuggestions.length > 0;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       {/* Conversation */}
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto px-5 py-4">
         <Bubble role="assistant">
-          <MessageText text={GREETING} />
+          <MessageText text={initialTrack === "unit" ? UNIT_GREETING : GREETING} />
         </Bubble>
 
         {messages.map((m, i) => (

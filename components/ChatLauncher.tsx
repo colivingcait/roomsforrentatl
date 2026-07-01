@@ -125,7 +125,12 @@ export default function ChatLauncher() {
         </button>
       </div>
 
-      <ChatDialog open={open} onClose={() => setOpen(false)} startTab="chat" />
+      <ChatDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        startTab="chat"
+        initialTrack={suppressProactive ? "unit" : null}
+      />
     </>
   );
 }

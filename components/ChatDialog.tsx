@@ -25,10 +25,12 @@ export default function ChatDialog({
   open,
   onClose,
   startTab = "faq",
+  initialTrack = null,
 }: {
   open: boolean;
   onClose: () => void;
   startTab?: "faq" | "chat";
+  initialTrack?: "room" | "unit" | "both" | null;
 }) {
   const [mounted, setMounted] = useState(false);
   const [tab, setTab] = useState<"faq" | "chat">(startTab);
@@ -122,7 +124,7 @@ export default function ChatDialog({
             </div>
           </>
         ) : (
-          <ChatPanel />
+          <ChatPanel initialTrack={initialTrack} />
         )}
       </div>
     </div>,
