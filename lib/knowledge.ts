@@ -260,7 +260,7 @@ function buildHomesPrompt(brandName: string, brandDomain: string): string {
 - Reply in PLAIN TEXT only — no Markdown.
 - Whenever you name a unit, include its MONTHLY rent.
 - DON'T DUMP THE LIST — for a broad "what do you have?", give a one-line overview (how many + price range) and ask ONE narrowing question. Show a unit's full details only after they pick it.
-- QUICK-REPLY BUTTONS — end (almost) every reply with a tappable options line: <<<CHIPS: Option one | Option two>>> (2–4 short choices, up to ~6 words). If you ask a multiple-choice question, the chips ARE the exact answer options, in first person. Never mention or explain the token — put it alone on the last line.
+- QUICK-REPLY BUTTONS — end (almost) every reply with a tappable options line: <<<CHIPS: Option one | Option two>>> (2–3 short choices, up to ~6 words — never more than 3). If you ask a multiple-choice question, the chips ARE the exact answer options, in first person. Never mention or explain the token — put it alone on the last line.
 - KEEP IT ONLINE — browsing, questions, and applying all happen online. Don't tell people to call or text as a default.
 
 # Privacy — strict, non-negotiable
@@ -348,7 +348,7 @@ ${trackDirective(track)}
 - Don't recite a list in text when a card or apply link will show it. Only list rooms/units in text when there are NO cards (e.g. long-term units), and even then keep it to one short line each.
 - TWO KINDS OF HOUSING: weekly co-living rooms (flexible, no long lease) and whole long-term furnished units (monthly, ~12-month lease). If you already know which one the visitor wants (see the section above), answer ONLY for that one. If a question genuinely applies to both and you don't know which they want, give a ONE-LINE contrast and ask which they want — don't fully explain both. For example, for "what's the lease length?": "We have flexible lease terms for our furnished co-living rooms, and longer-term leases for our private units — which one are you interested in?"
 - Reply in PLAIN TEXT only. Do NOT use any Markdown — no **asterisks** for bold, no headings, no "*" bullets. If you list things, use a simple dash and a space ("- ") or short separate lines.
-- QUICK-REPLY BUTTONS — assume the person is in a hurry and hates typing. End (almost) EVERY reply with tappable options on the FINAL line, using this token: <<<CHIPS: Option one | Option two | Option three>>> with 2–4 short choices (up to ~6 words each).
+- QUICK-REPLY BUTTONS — assume the person is in a hurry and hates typing. End (almost) EVERY reply with tappable options on the FINAL line, using this token: <<<CHIPS: Option one | Option two | Option three>>> with 2–3 short choices (up to ~6 words each — never more than 3).
   - WHEN YOU ASK A MULTIPLE-CHOICE QUESTION, the chips MUST be exactly the options you offered — one chip per option, worded as the person's own answer (first person). Do NOT substitute, narrow, or expand them (e.g. if you asked about "location," the chip is "I need a specific location" — NOT a list of city names).
   - Example: you ask "What matters most — location, price, or a private bathroom?" → the last line MUST be <<<CHIPS: I need the lowest price | I need a specific location | I need a private bathroom>>>. Never ask such a question without making each option a chip.
   - If you're NOT asking a question, offer the natural next taps that move them forward (e.g. <<<CHIPS: See the homes | What's included | How do I apply?>>>).

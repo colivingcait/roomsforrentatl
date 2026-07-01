@@ -19,7 +19,7 @@ const ROOM_GREETING = "Hi! 👋 Let's find your room. When are you hoping to mov
 const UNIT_GREETING = "Hi! 👋 Let's find your place. When are you hoping to move in?";
 
 // The opener kicks off the concierge flow: first question is move-in timing.
-const OPENER_CHIPS = ["Tomorrow / ASAP", "This week", "Next month", "Just exploring"];
+const OPENER_CHIPS = ["Tomorrow / ASAP", "Next month", "Just exploring"];
 
 // Rooms site → room mode; homes site (homesforrentatl.com) → unit mode.
 function brandDefaultTrack(): Track {
@@ -238,9 +238,9 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   // with chips (the answers to a question it just asked, or the next best tap),
   // show those. They're always more relevant than a static topic list.
   const lastMsg = messages[messages.length - 1];
-  const botChips = (lastMsg?.role === "assistant" ? lastMsg.chips ?? [] : []).filter(
-    (c) => !asked.has(c)
-  );
+  const botChips = (lastMsg?.role === "assistant" ? lastMsg.chips ?? [] : [])
+    .filter((c) => !asked.has(c))
+    .slice(0, 3);
   const showBotChips = !loading && botChips.length > 0;
 
   // Fallback when the bot didn't supply chips: at the very start, kick off the
@@ -256,7 +256,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   if (remainingSuggestions.length === 0) {
     remainingSuggestions = trackDefaults.filter((s) => !asked.has(s));
   }
-  remainingSuggestions = remainingSuggestions.slice(0, 4);
+  remainingSuggestions = remainingSuggestions.slice(0, 3);
   const showSuggestions =
     !loading && !showTrackOptions && !showBotChips && remainingSuggestions.length > 0;
 
