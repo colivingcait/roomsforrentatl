@@ -19,17 +19,28 @@ export default function ColivingSection({ houses }: { houses: ColivingHouse[] })
 export function ColivingHouseCard({ house }: { house: ColivingHouse }) {
   const rooms = availableColivingRooms(house);
   const from = colivingFromPrice(house);
-  const hero = rooms.find((r) => r.photos && r.photos.length > 0)?.photos?.[0];
+  const hero = house.heroPhoto || rooms.find((r) => r.photos && r.photos.length > 0)?.photos?.[0];
   const loc = [house.neighborhood, house.city].filter(Boolean).join(", ");
+
+  // Availability breakdown by bath type, mirroring the PadSplit cards.
+  const byBath = (bath: "private" | "semi-private") => {
+    const rs = rooms.filter((r) => r.bath === bath);
+    const prices = rs.map((r) => r.price).filter((p): p is number => typeof p === "number");
+    return { count: rs.length, from: prices.length ? Math.min(...prices) : null };
+  };
+  const breakdown = [
+    { label: "private bath", ...byBath("private") },
+    { label: "semi-private bath", ...byBath("semi-private") },
+  ].filter((b) => b.count > 0);
 
   return (
     <Link
       href={`/coliving/${house.id}`}
       className="group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]"
     >
-      <div className="relative aspect-[16/9] w-full bg-slate-100">
+      <div className="relative aspect-[4/3] w-full bg-slate-100">
         {hero ? (
-          <Image src={hero} alt={house.name} fill sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
+          <Image src={hero} alt={house.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
             <div>
@@ -38,11 +49,11 @@ export function ColivingHouseCard({ house }: { house: ColivingHouse }) {
             </div>
           </div>
         )}
-        <span className="absolute left-3 top-3 rounded-full bg-ink/85 px-2.5 py-1 text-xs font-bold text-white shadow">
-          Co-living
+        <span className="absolute left-3 top-3 rounded-full bg-brand px-2.5 py-1 text-xs font-bold text-white shadow">
+          ● {rooms.length} room{rooms.length === 1 ? "" : "s"} available
         </span>
         {house.notOnPadsplit && (
-          <span className="absolute right-3 top-3 rounded-full bg-amber-500 px-2.5 py-1 text-xs font-bold text-white shadow">
+          <span className="absolute right-3 top-3 rounded-full bg-amber-500 px-2.5 py-1 text-xs font-extrabold text-white shadow">
             Not on PadSplit
           </span>
         )}
@@ -58,19 +69,27 @@ export function ColivingHouseCard({ house }: { house: ColivingHouse }) {
             <div className="text-lg font-extrabold text-ink">
               {from != null ? `from ${priceLabel(from, house.rentUnit)}` : "See pricing"}
             </div>
-            <div className="text-xs text-muted">
-              {rooms.length} room{rooms.length === 1 ? "" : "s"} available
-            </div>
+            <div className="text-xs text-muted">all-in</div>
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {house.furnished && <span className="chip">Furnished</span>}
-          {house.utilitiesIncluded && <span className="chip">Utilities included</span>}
-          {house.wifi && <span className="chip">WiFi included</span>}
-          {house.depositAlternative && <span className="chip">Deposit-free options</span>}
-          <span className="chip text-brand">Apply online</span>
-        </div>
+        {breakdown.length > 0 && (
+          <div className="mt-3 border-t border-slate-100 pt-3">
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted">Availability</p>
+            <ul className="mt-1.5 space-y-1">
+              {breakdown.map((b) => (
+                <li key={b.label} className="flex items-center justify-between text-sm">
+                  <span className="text-ink">
+                    <span className="font-semibold">{b.count}</span> {b.label}
+                  </span>
+                  {b.from != null && (
+                    <span className="font-semibold text-brand">from {priceLabel(b.from, house.rentUnit)}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </Link>
   );

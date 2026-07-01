@@ -144,6 +144,7 @@ export interface ColivingHouse {
   city: string;
   lat?: number | null;
   lng?: number | null;
+  heroPhoto?: string; // main card/hero image (falls back to the first room photo)
   rentUnit: PriceUnit; // "week" or "month"
   utilitiesIncluded?: boolean;
   wifi?: boolean;
