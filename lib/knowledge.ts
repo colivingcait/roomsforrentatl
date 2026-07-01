@@ -239,9 +239,11 @@ function colivingSnapshot(): string {
         .filter(Boolean)
         .join(", ");
       const deposit = depositLine(h);
+      const transit = h.transit ? ` Transit: ${h.transit}` : "";
+      const parking = h.parking ? ` Parking: ${h.parking}` : "";
       return `• ${h.name} (${loc}) — ${rooms.length} room(s) available${
         from != null ? ` from ${priceLabel(from, h.rentUnit)}` : ""
-      }. ${incl}.${deposit ? ` ${deposit}` : ""}${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
+      }. ${incl}.${deposit ? ` ${deposit}` : ""}${transit}${parking}${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
     })
     .join("\n\n");
 }

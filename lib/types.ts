@@ -145,6 +145,8 @@ export interface ColivingHouse {
   lat?: number | null;
   lng?: number | null;
   heroPhoto?: string; // main card/hero image (falls back to the first room photo)
+  transit?: string; // e.g. "About a 10 minute walk to the bus stop."
+  parking?: string; // e.g. "Driveway and street parking available."
   rentUnit: PriceUnit; // "week" or "month"
   utilitiesIncluded?: boolean;
   wifi?: boolean;

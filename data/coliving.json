@@ -9,6 +9,8 @@
       "lat": null,
       "lng": null,
       "heroPhoto": "/willow/kitchen.jpg",
+      "transit": "About a 10 minute walk to the bus stop.",
+      "parking": "Driveway and street parking available.",
       "rentUnit": "month",
       "utilitiesIncluded": true,
       "wifi": true,
