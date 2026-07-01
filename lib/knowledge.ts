@@ -212,7 +212,8 @@ function trackDirective(track?: Track | null): string {
     return `# What this visitor wants: a WEEKLY CO-LIVING ROOM (they already told you)
 - They picked "a room for rent" up front, so DON'T ask again. Tailor every answer to the PadSplit co-living rooms (weekly rent from ~$165, $19 application fee, screened by PadSplit + our host team, our house rules, booked via the BOOK card).
 - KEEP THE OPENING SHORT. When they first pick rooms, give just the count and the narrowing question — NO city list, NO price range. Example: "Perfect! We have 9 furnished rooms available. To help find the best fit, what matters most to you?" with chips. Save cities/prices for after they narrow.
-- Do NOT bring up the long-term private apartments, monthly rent, or TurboTenant unless they explicitly ask about renting a whole unit. Keep the focus on rooms.`;
+- Do NOT bring up the long-term whole apartments (the monthly private units) unless they explicitly ask about renting a whole unit. Keep the focus on rooms.
+- NOTE: "rooms" includes BOTH our PadSplit co-living rooms AND the rooms in our Willow house (which is NOT on PadSplit and applies via a TurboTenant pre-screener — see that section below). Include Willow rooms when relevant, and for Willow always use its pre-screener link, never a PadSplit BOOK card.`;
   }
   if (track === "unit") {
     return `# What this visitor wants: a LONG-TERM PRIVATE UNIT (they already told you)
@@ -247,7 +248,7 @@ These are private rooms in a house WE manage ourselves — NOT PadSplit. Importa
 - To apply, share that ROOM's TurboTenant pre-screener link (listed below). Do NOT use the BOOK card (that's PadSplit only), and do NOT say "PadSplit" for this house.
 - It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
 - "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
-- DEPOSIT: there is NO traditional security deposit for these houses. Instead we use Rhino, a low-cost deposit alternative — the resident pays a small monthly fee (often just a few dollars) that replaces a big lump-sum deposit and protects the home. Explain it simply and positively (it keeps move-in cheap). To move in, they pay their first month's rent. Do NOT quote an exact Rhino price — it varies by person; just say "a small monthly fee."
+- DEPOSIT: there is NO large upfront security deposit for these houses. We offer flexible, deposit-free options — these replace a big lump-sum deposit. Explain it simply and positively (it keeps move-in cheap). To move in, they pay their first month's rent. Do NOT name a specific provider or quote an exact price — just say "flexible, deposit-free options."
 - Never reveal the street address — neighborhood/city only, exactly like our other homes.
 - Rooms stay available until a lease is signed; applying does not hold a room.
 ${coliving}`

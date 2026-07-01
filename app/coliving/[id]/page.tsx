@@ -53,7 +53,7 @@ export default function ColivingHousePage({ params }: { params: { id: string } }
           {house.furnished && <span className="chip">Furnished</span>}
           {house.utilitiesIncluded && <span className="chip">Utilities included</span>}
           {house.wifi && <span className="chip">WiFi included</span>}
-          {house.depositAlternative === "rhino" && <span className="chip text-brand">No deposit</span>}
+          {house.depositAlternative && <span className="chip text-brand">Deposit-free options</span>}
         </div>
 
         {depositLine(house) && (

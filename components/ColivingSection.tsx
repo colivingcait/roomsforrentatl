@@ -68,7 +68,7 @@ function ColivingHouseCard({ house }: { house: ColivingHouse }) {
           {house.furnished && <span className="chip">Furnished</span>}
           {house.utilitiesIncluded && <span className="chip">Utilities included</span>}
           {house.wifi && <span className="chip">WiFi included</span>}
-          {house.depositAlternative === "rhino" && <span className="chip">No deposit</span>}
+          {house.depositAlternative && <span className="chip">Deposit-free options</span>}
           <span className="chip text-brand">Apply online</span>
         </div>
       </div>

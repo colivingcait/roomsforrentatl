@@ -36,8 +36,8 @@ export function colivingFromPrice(h: ColivingHouse): number | null {
 
 /** A friendly one-liner describing the deposit situation, or null if unset. */
 export function depositLine(h: ColivingHouse): string | null {
-  if (h.depositAlternative === "rhino") {
-    return "No security deposit — we use Rhino, a low-cost deposit alternative (a small monthly fee instead of a big lump sum).";
+  if (h.depositAlternative) {
+    return "No large security deposit — we offer flexible, deposit-free options instead of a big lump sum.";
   }
   if (typeof h.deposit === "number" && h.deposit > 0) {
     return `Security deposit: $${h.deposit.toLocaleString()}.`;
