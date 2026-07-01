@@ -109,23 +109,37 @@ function quickFacts(): string {
   return lines.join("\n");
 }
 
-/** An exact, pre-counted list of the private-bathroom rooms available right now. */
+/** An exact, pre-counted list of ALL private-bathroom rooms available right now (PadSplit + Willow). */
 function privateBathSnapshot(): string {
-  const rows: string[] = [];
+  const padRows: string[] = [];
   for (const h of getHouses()) {
     if (!h.available) continue;
     for (const r of availableRooms(h)) {
       if (r.bathroomType !== "private") continue;
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
       const price = r.weeklyRate ? `${priceLabel(r.weeklyRate)} all-in` : "price varies";
-      rows.push(`• ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}.`);
+      padRows.push(`• PadSplit: ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}. Book via the BOOK card.`);
     }
   }
+  const willowRows: string[] = [];
+  for (const h of getColivingHouses()) {
+    for (const r of availableColivingRooms(h)) {
+      if (r.bath !== "private") continue;
+      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const price = typeof r.price === "number" ? priceLabel(r.price, h.rentUnit) : "price TBD";
+      const apply = r.applyUrl ? ` Apply: ${r.applyUrl}` : "";
+      willowRows.push(`• ${h.name}: ${r.label} (${loc}) — ${price}, private bath, quick move-in (next day or two).${apply}`);
+    }
+  }
+  const rows = [...padRows, ...willowRows];
   if (!rows.length) {
     return "0 private-bathroom rooms are available right now. Say so honestly and offer shared-bath rooms or to check back.";
   }
   const n = rows.length;
-  return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now (this is the EXACT count — do not say more):\n${rows.join("\n")}`;
+  const willowNote = willowRows.length
+    ? `\n(${willowRows.length} of these are Willow rooms — all $900/mo with a private bath; you don't need to list each one, just say we have private-bath rooms at Willow from $900/mo and share the apply link.)`
+    : "";
+  return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now across all our homes:\n${rows.join("\n")}${willowNote}`;
 }
 
 /** Long-term private rentals (monthly leases via TurboTenant) — a separate product. */
@@ -389,8 +403,8 @@ ${quickFacts()}
 # PadSplit co-living rooms (weekly rent) — current availability${updated ? ` (updated ${updated})` : ""}
 ${housesSnapshot()}
 
-# Private-bathroom rooms available right now — use this EXACT list and count
-When someone asks about private bathrooms, answer ONLY from this list. State the exact number (if it's one, say "one room" — never "two"), name the home, and ALWAYS include each room's weekly price. Then show its booking card.
+# Private-bathroom rooms available right now — use this EXACT list
+When someone wants a private bathroom, LEAD WITH THE GOOD NEWS: if ANY private-bath room is available (below), start with "Yes! We have private-bath rooms available" and go straight to them. Do NOT open with what we DON'T have (e.g. "PadSplit has none") — only mention a category has none if they specifically ask about that category. Name the home and its price, then give the action: a BOOK card for PadSplit rooms, or the apply link for Willow rooms. Keep it short — for Willow, say "private-bath rooms at Willow from $900/mo" and share the apply link rather than listing all five.
 ${privateBathSnapshot()}
 
 # Long-term private rentals (monthly lease via TurboTenant)
