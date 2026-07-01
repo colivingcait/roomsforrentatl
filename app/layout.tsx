@@ -6,14 +6,14 @@ export function generateMetadata(): Metadata {
   const brand = getBrand();
   const isHomes = brand.key === "homes";
   const headline = isHomes
-    ? `${brand.name} — Apartments for Rent in Atlanta`
+    ? `${brand.name} — Private Rentals in Atlanta`
     : `${brand.name} — Rooms for Rent in Atlanta, Move In Today`;
   return {
     metadataBase: new URL(brand.url),
     title: { default: headline, template: `%s · ${brand.name}` },
     description: brand.description,
     keywords: isHomes
-      ? ["apartments for rent Atlanta", "furnished apartments Atlanta", "homes for rent Atlanta", "monthly rentals Atlanta"]
+      ? ["private rentals Atlanta", "furnished rentals Atlanta", "homes for rent Atlanta", "monthly rentals Atlanta"]
       : ["rooms for rent Atlanta", "furnished rooms Atlanta", "move in today Atlanta", "weekly rooms Atlanta", "PadSplit Atlanta"],
     openGraph: {
       title: headline,

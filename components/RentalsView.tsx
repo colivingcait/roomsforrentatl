@@ -20,12 +20,10 @@ export default function RentalsView() {
             ● Atlanta · Long-term rentals
           </span>
           <h1 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-            Whole apartments for rent. <br className="hidden sm:block" />
-            <span className="text-accent">Your own private space.</span>
+            Furnished rentals <span className="text-accent">in Atlanta.</span>
           </h1>
           <p className="mt-2 max-w-md text-white/80">
-            Furnished private units on a monthly lease — your own kitchen, bath, and entrance. Utilities included, and
-            you apply online in minutes.
+            Your own private space — a full unit that&apos;s all yours. Monthly lease, utilities included.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-sm font-medium text-white/90">
             <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Fully furnished</span>

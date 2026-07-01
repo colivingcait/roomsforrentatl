@@ -5,7 +5,7 @@ export default function Footer() {
   const sister =
     brand.key === "homes"
       ? { label: "Looking for a single room?", name: "RoomsForRentATL.com", url: "https://roomsforrentatl.com" }
-      : { label: "Need a whole apartment?", name: "HomesForRentATL.com", url: "https://homesforrentatl.com" };
+      : { label: "Need your own private rental?", name: "HomesForRentATL.com", url: "https://homesforrentatl.com" };
   return (
     <footer className="mt-8 border-t border-slate-100 bg-white px-4 py-8 text-sm text-muted">
       <div className="mx-auto max-w-3xl">

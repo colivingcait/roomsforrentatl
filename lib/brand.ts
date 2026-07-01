@@ -36,9 +36,9 @@ export const BRANDS: Record<BrandKey, Brand> = {
     name: "HomesForRentATL",
     domain: "HomesForRentATL.com",
     url: "https://homesforrentatl.com",
-    tagline: "Furnished homes & apartments for rent in Atlanta.",
+    tagline: "Furnished private rentals in Atlanta.",
     description:
-      "Browse whole furnished apartments for rent across Atlanta — monthly lease, utilities included, apply online.",
+      "Browse furnished private rentals across Atlanta — a full unit that's all yours, monthly lease, utilities included, apply online.",
   },
 };
 

@@ -3,9 +3,9 @@ import RentalsView from "@/components/RentalsView";
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Private Apartments for Rent in Atlanta",
+  title: "Private Rentals in Atlanta",
   description:
-    "Whole furnished apartments for rent in the Atlanta area — monthly lease, utilities included, private kitchen & bath. Apply online through TurboTenant.",
+    "Furnished private rentals in the Atlanta area — a full unit that's all yours. Monthly lease, utilities included, apply online through TurboTenant.",
 };
 
 // A units-only page (also the homepage on the homes brand).

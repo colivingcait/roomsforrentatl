@@ -12,7 +12,7 @@ export default function UnitsSection({ units }: { units: Unit[] }) {
           <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
             Long-term
           </span>
-          <h2 className="text-lg font-extrabold text-ink">Private apartments for rent</h2>
+          <h2 className="text-lg font-extrabold text-ink">Private rentals</h2>
         </div>
         <p className="mt-1.5 text-sm text-muted">
           Whole private units on a monthly lease — your own kitchen, bath, and entrance. Furnished, utilities included,

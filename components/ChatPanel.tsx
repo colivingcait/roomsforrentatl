@@ -16,7 +16,7 @@ type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse
 type Track = "room" | "unit" | "both";
 
 const ROOM_GREETING = "Hi! 👋 Let's find your room. Ask me anything, or tap a question to start:";
-const UNIT_GREETING = "Hi! 👋 Happy to help with our apartments. What would you like to know?";
+const UNIT_GREETING = "Hi! 👋 Happy to help with our private rentals. What would you like to know?";
 
 // Rooms site → room mode; homes site (homesforrentatl.com) → unit mode.
 function brandDefaultTrack(): Track {
