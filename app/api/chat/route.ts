@@ -1,5 +1,6 @@
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
+import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 import { priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
 
@@ -41,6 +42,43 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
       reviewCount: h.reviewCount ?? null,
       url: `/house/${h.id}#rooms`,
     }));
+
+  return { text: cleaned, cards };
+}
+
+export type WillowCard = {
+  id: string;
+  name: string;
+  location: string;
+  fromPrice: string | null;
+  roomsAvailable: number;
+  url: string;
+};
+
+// The bot ends a Willow reply with `<<<WILLOW: willow>>>`. Turn the house id(s)
+// into cards linking to that house's rooms + apply page.
+function extractWillowCards(text: string): { text: string; cards: WillowCard[] } {
+  const match = text.match(/<<<\s*WILLOW:\s*([a-z0-9,\-\s]+?)>>>/i);
+  if (!match) return { text, cards: [] };
+
+  const cleaned = text.replace(match[0], "").trim();
+  const ids = Array.from(new Set(match[1].split(",").map((s) => s.trim().toLowerCase()).filter(Boolean)));
+  const houses = getColivingHouses();
+  const cards: WillowCard[] = ids
+    .map((id) => houses.find((h) => h.id === id))
+    .filter((h): h is NonNullable<typeof h> => !!h)
+    .map((h) => {
+      const rooms = availableColivingRooms(h);
+      const from = colivingFromPrice(h);
+      return {
+        id: h.id,
+        name: h.name,
+        location: [h.neighborhood, h.city].filter(Boolean).join(", "),
+        fromPrice: from != null ? priceLabel(from, h.rentUnit) : null,
+        roomsAvailable: rooms.length,
+        url: `/coliving/${h.id}`,
+      };
+    });
 
   return { text: cleaned, cards };
 }
@@ -189,9 +227,10 @@ export async function POST(req: Request) {
     }
 
     const booked = extractBookCards(reply);
-    const { text, chips } = extractChips(booked.text);
+    const willowed = extractWillowCards(booked.text);
+    const { text, chips } = extractChips(willowed.text);
     logChat(question, text, source);
-    return Response.json({ reply: text, houses: booked.cards, chips });
+    return Response.json({ reply: text, houses: booked.cards, willow: willowed.cards, chips });
   } catch (err) {
     console.error("Chat route error", err);
     logChat(question, "(error)", source);

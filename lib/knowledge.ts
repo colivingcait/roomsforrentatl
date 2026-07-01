@@ -137,7 +137,7 @@ function privateBathSnapshot(): string {
   }
   const n = rows.length;
   const willowNote = willowRows.length
-    ? `\n(${willowRows.length} of these are Willow rooms — all $900/mo with a private bath; you don't need to list each one, just say we have private-bath rooms at Willow from $900/mo and share the apply link.)`
+    ? `\n(${willowRows.length} of these are Willow rooms — all $900/mo with a private bath; you don't need to list each one, just say we have private-bath rooms at Willow from $900/mo and show the Willow card <<<WILLOW: willow>>>.)`
     : "";
   return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now across all our homes:\n${rows.join("\n")}${willowNote}`;
 }
@@ -320,7 +320,7 @@ export function buildSystemPrompt(
 
 # Co-living rooms NOT on PadSplit — apply via TurboTenant (a third kind of listing)
 These are private rooms in a house WE manage ourselves — NOT PadSplit. Important rules:
-- To apply, share that ROOM's TurboTenant pre-screener link (listed below). Do NOT use the BOOK card (that's PadSplit only), and do NOT say "PadSplit" for this house.
+- SHOW A WILLOW CARD — when you recommend or mention Willow, output a Willow card token on its OWN line: <<<WILLOW: willow>>>. The app turns it into a tappable card that opens Willow's rooms + apply page. Prefer this card over pasting a raw apply link. Do NOT use the PadSplit BOOK card for Willow, and do NOT say "PadSplit" for this house. (If they want to apply to a SPECIFIC room, you can still share that room's TurboTenant pre-screener link from the list below.)
 - It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
 - "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
 - FAST MOVE-IN: Willow rooms are move-in ready — someone can move in as soon as the NEXT DAY or the day after, just like our weekly rooms. Don't imply "monthly" means a slower move-in.
@@ -368,7 +368,7 @@ ${trackDirective(track)}
   - Example: your text is just "What matters most to you?" and the last line is <<<CHIPS: I need the lowest price | A private bathroom | A certain area>>>. Do NOT write "What matters most — price, a bathroom, or an area?" — that just repeats the chips.
   - If you're NOT asking a question, offer the natural next taps that move them forward (e.g. <<<CHIPS: See the homes | What's included | How do I apply?>>>).
   - Keep chips relevant to what they're renting (rooms vs. units) and to the conversation so far. Prefer actions that need no typing — picking an option, seeing homes, getting an apply/search link.
-  - Never mention, quote, or explain the token — just put it alone on the very last line. If you also show booking cards, put the BOOK line first, then the CHIPS line last.
+  - Never mention, quote, or explain any token — just put it alone on its own line. When you show cards, order the final lines as: BOOK line, then WILLOW line, then the CHIPS line last.
 - Only answer using the information below. Do NOT invent homes, rooms, prices, availability, or policies.
 - KEEP EVERYTHING ONLINE. This whole process — browsing, questions, applying, and booking — is meant to be done online. Do NOT routinely tell people to call or text; there is no live phone line staffed to answer. Instead, point them to the best online next step: browse the room's live listing, use a search link, or start an application (the $19 application fee is refunded if they're not approved).
 - Only as a genuine LAST RESORT, if something truly cannot be resolved online (for example a registered service animal, which must be handled individually), you may mention they can reach out by text. Do this rarely, not as a default sign-off. Never paste the phone number proactively.
@@ -404,7 +404,7 @@ ${quickFacts()}
 ${housesSnapshot()}
 
 # Private-bathroom rooms available right now — use this EXACT list
-When someone wants a private bathroom, LEAD WITH THE GOOD NEWS: if ANY private-bath room is available (below), start with "Yes! We have private-bath rooms available" and go straight to them. Do NOT open with what we DON'T have (e.g. "PadSplit has none") — only mention a category has none if they specifically ask about that category. Name the home and its price, then give the action: a BOOK card for PadSplit rooms, or the apply link for Willow rooms. Keep it short — for Willow, say "private-bath rooms at Willow from $900/mo" and share the apply link rather than listing all five.
+When someone wants a private bathroom, LEAD WITH THE GOOD NEWS: if ANY private-bath room is available (below), start with "Yes! We have private-bath rooms available" and go straight to them. Do NOT open with what we DON'T have (e.g. "PadSplit has none") — only mention a category has none if they specifically ask about that category. Name the home and its price, then give the action: a BOOK card for PadSplit rooms, or a WILLOW card (<<<WILLOW: willow>>>) for Willow rooms. Keep it short — for Willow, say "private-bath rooms at Willow from $900/mo" and show the Willow card rather than listing all five.
 ${privateBathSnapshot()}
 
 # Long-term private rentals (monthly lease via TurboTenant)
