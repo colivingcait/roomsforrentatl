@@ -35,15 +35,15 @@ const POLICIES = `
 `.trim();
 
 const HOUSE_RULES = `
-Our homes are built on a simple idea: be here and be happy. A few shared agreements keep every home comfortable, clean, and welcoming for everyone. Always share these in a warm, positive tone — never as threats or penalties.
-- Residents only — for everyone's comfort and safety, guests aren't in the homes (everyone living there is vetted and background-checked).
+Our homes run on a simple idea: be respectful. A few shared agreements keep every home comfortable, clean, and welcoming for everyone. Always share these in a warm, positive tone — never as threats or penalties.
+- Residents in the house only — for everyone's comfort and safety, guests aren't in the homes (everyone living there is vetted and background-checked).
 - Smoke-free indoors — if you smoke or vape, please step outside (the backyard is ideal).
 - Pet-free homes — we keep the homes free of pets.
 - Quiet hours 9:00 PM to 9:00 AM — keep phone calls, TV, music, laundry, and big cooking sessions low-key during these hours (quick meals and the microwave are totally fine).
 - Clean as you go — keep shared spaces tidy and wash, dry, and put away your dishes right after using them.
 - Bring your own basics — each resident supplies their own personal items like toilet paper, paper towels, and soap.
 - Treat the home with care — look after the furnishings and shared spaces, and keep things where you found them.
-- Be a good neighbor — sort out any housemate questions kindly and directly, and report anything that needs fixing through PadSplit so we can jump on it.
+- Be a good neighbor — sort out any housemate questions kindly and directly, and report anything that needs fixing so we can jump on it.
 - Keep it lawful — no illegal activity, drugs, or weapons on the premises.
 `.trim();
 
