@@ -3,12 +3,36 @@
 import { useEffect, useRef, useState } from "react";
 import ChatDialog from "./ChatDialog";
 
-const SESSION_KEY = "rfr_chat_autoopened";
+// --- Tweak these to taste -------------------------------------------------
+const NUDGE_DELAY = 4500; // ms before the greeting bubble appears
+const AUTO_OPEN_DELAY = 9000; // ms before the one-time desktop auto-open
+const AUTO_OPEN_ON_ENTRY = true; // set false to only nudge, never auto-open
+const NUDGE_TEXT = "👋 Looking for a place? I'll help you find your best fit in about 30 seconds.";
+// -------------------------------------------------------------------------
+
+const AUTO_OPEN_KEY = "rfr_chat_autoopened";
+const NUDGE_KEY = "rfr_chat_nudged";
+
+const isDesktop = () =>
+  typeof window !== "undefined" && !window.matchMedia("(max-width: 639px)").matches;
+const seen = (k: string) => {
+  try {
+    return !!sessionStorage.getItem(k);
+  } catch {
+    return false;
+  }
+};
+const mark = (k: string) => {
+  try {
+    sessionStorage.setItem(k, "1");
+  } catch {}
+};
 
 /**
  * Desktop floating chat button (mobile already has a bottom "Chat with us"
- * bar). Gently pops to draw the eye, shows a one-time nudge bubble, and
- * auto-opens once per session on exit intent (cursor leaving the top).
+ * bar). On entry it shows a one-time greeting nudge and — once per session —
+ * gently auto-opens to act as a leasing guide. Also opens on exit intent.
+ * Never auto-opens on mobile (full-screen takeover hurts more than it helps).
  */
 export default function ChatLauncher() {
   const [open, setOpen] = useState(false);
@@ -21,28 +45,46 @@ export default function ChatLauncher() {
     setOpen(true);
   };
 
-  // Gentle nudge bubble after a short delay (only if they haven't engaged yet).
+  // One-time greeting nudge + optional one-time desktop auto-open on entry.
   useEffect(() => {
-    const t = setTimeout(() => {
-      if (!interacted.current) setNudge(true);
-    }, 7000);
-    return () => clearTimeout(t);
+    if (!isDesktop()) return;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    if (!seen(NUDGE_KEY)) {
+      timers.push(
+        setTimeout(() => {
+          if (!interacted.current && !open) {
+            setNudge(true);
+            mark(NUDGE_KEY);
+          }
+        }, NUDGE_DELAY)
+      );
+    }
+
+    if (AUTO_OPEN_ON_ENTRY && !seen(AUTO_OPEN_KEY)) {
+      timers.push(
+        setTimeout(() => {
+          if (!interacted.current && !open) {
+            mark(AUTO_OPEN_KEY);
+            openChat();
+          }
+        }, AUTO_OPEN_DELAY)
+      );
+    }
+
+    return () => timers.forEach(clearTimeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Desktop exit-intent: when the cursor leaves the top of the window, pop the
-  // chat — once per session, so it doesn't nag.
+  // Desktop exit-intent: cursor leaving the top → open once per session
+  // (shares the auto-open flag so we never auto-open more than once).
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(max-width: 639px)").matches) return; // desktop only
-    try {
-      if (sessionStorage.getItem(SESSION_KEY)) return;
-    } catch {}
+    if (!isDesktop()) return;
+    if (seen(AUTO_OPEN_KEY)) return;
     const onLeave = (e: MouseEvent) => {
       if (interacted.current || open) return;
       if (e.clientY <= 0) {
-        try {
-          sessionStorage.setItem(SESSION_KEY, "1");
-        } catch {}
+        mark(AUTO_OPEN_KEY);
         document.removeEventListener("mouseout", onLeave);
         openChat();
       }
@@ -55,7 +97,7 @@ export default function ChatLauncher() {
     <>
       <div className="chat-launcher fixed right-6 z-40 hidden flex-col items-end gap-2 sm:flex">
         {nudge && (
-          <div className="relative max-w-[230px] rounded-2xl rounded-br-sm bg-white px-4 py-3 text-sm font-medium text-ink shadow-card">
+          <div className="relative max-w-[250px] rounded-2xl rounded-br-sm bg-white px-4 py-3 text-sm font-medium text-ink shadow-card">
             <button
               type="button"
               aria-label="Dismiss"
@@ -64,7 +106,7 @@ export default function ChatLauncher() {
             >
               ×
             </button>
-            👋 Have a question? I can answer it right now.
+            {NUDGE_TEXT}
           </div>
         )}
         <button
