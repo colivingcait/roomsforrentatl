@@ -15,8 +15,7 @@ type BookHouse = {
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[]; chips?: string[] };
 type Track = "room" | "unit" | "both";
 
-const GREETING =
-  "Hi! 👋 Let's find your spot. First — are you looking for a private room in a shared home, or a whole place to yourself?";
+const GREETING = "Hi! 👋 Let's find your spot. What are you looking for?";
 
 // The first thing a visitor picks — it tailors every answer that follows.
 const TRACK_OPTIONS: { label: string; track: Track; text: string }[] = [
