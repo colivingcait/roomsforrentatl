@@ -16,12 +16,12 @@ type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse
 type Track = "room" | "unit" | "both";
 
 const GREETING =
-  "Hi! 👋 First, what are you looking for? We have rooms for rent (from $165/week) and entire units for rent (from $1,500/month). Which are you interested in?";
+  "Hi! 👋 Let's find your spot. First — are you looking for a private room in a shared home, or a whole place to yourself?";
 
 // The first thing a visitor picks — it tailors every answer that follows.
 const TRACK_OPTIONS: { label: string; track: Track; text: string }[] = [
-  { label: "🛏️ A room for rent — $165+/week", track: "room", text: "I'm looking for a room for rent (weekly)." },
-  { label: "🏠 An entire unit — $1,500+/month", track: "unit", text: "I'm looking for an entire unit to rent (monthly)." },
+  { label: "🛏️ A private room", track: "room", text: "I'm looking for a private room." },
+  { label: "🏠 A whole place to myself", track: "unit", text: "I'm looking for a whole place to myself." },
   { label: "Show me both", track: "both", text: "Show me both options." },
 ];
 
@@ -159,8 +159,9 @@ const FOLLOWUPS: Record<string, string[]> = {
 function inferTrack(text: string): Track | null {
   const t = text.toLowerCase();
   if (/\bboth\b/.test(t)) return "both";
-  if (/(entire|whole|private)\s+(unit|apartment|apt)|monthly|long[- ]?term/.test(t)) return "unit";
-  if (/room for rent|\ba room\b|weekly|co-?living/.test(t)) return "room";
+  if (/\broom\b|co-?living|weekly|willow/.test(t)) return "room";
+  if (/whole (place|apartment|unit|home)|entire (unit|place|apartment)|my own place|studio|\bunit\b/.test(t))
+    return "unit";
   return null;
 }
 
