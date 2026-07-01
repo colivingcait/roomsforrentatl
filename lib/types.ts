@@ -118,6 +118,42 @@ export interface Unit {
   tourUrl?: string | null;
 }
 
+/** A single room in a manually-managed (non-PadSplit) co-living house. */
+export interface ColivingRoom {
+  id: string; // e.g. "2"
+  label: string; // e.g. "Room 2"
+  bath: "private" | "semi-private"; // semi-private = shared with one other room only
+  shareWith?: string | null; // for semi-private, the room it shares a bath with
+  price?: number | null;
+  availableDate?: string | null;
+  applyUrl?: string | null; // that room's TurboTenant pre-screener link
+  photos?: string[];
+  leased?: boolean; // once a lease is signed, flip to hide/mark taken
+  active?: boolean; // false = never show (e.g. rooms 1 & 11)
+}
+
+/**
+ * A co-living house we manage ourselves — NOT on PadSplit. Rooms apply through
+ * each room's TurboTenant pre-screener. No street address is ever stored here;
+ * only the public neighborhood/city.
+ */
+export interface ColivingHouse {
+  id: string;
+  name: string;
+  neighborhood: string;
+  city: string;
+  lat?: number | null;
+  lng?: number | null;
+  rentUnit: PriceUnit; // "week" or "month"
+  utilitiesIncluded?: boolean;
+  wifi?: boolean;
+  furnished?: boolean;
+  description?: string;
+  notOnPadsplit?: boolean; // shows a "Not on PadSplit" tag on the card
+  published?: boolean; // false = fully hidden from the site AND the chatbot
+  rooms: ColivingRoom[];
+}
+
 /** A house as rendered on the site: your seed data + live availability merged. */
 export interface House extends SeedHouse {
   rooms: Room[];

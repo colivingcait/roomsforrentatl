@@ -3,9 +3,11 @@ import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
 import UnitsSection from "@/components/UnitsSection";
+import ColivingSection from "@/components/ColivingSection";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
+import { getColivingHouses } from "@/lib/coliving";
 import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 
@@ -17,6 +19,7 @@ export default function HomePage() {
   // Only show co-living homes that have rooms available — fully-booked homes
   // drop off the homepage entirely.
   const houses = getHouses().filter((h) => h.available);
+  const colivingHouses = getColivingHouses();
   const units = getUnits();
   const updated = updatedLabel(lastUpdated());
   const openCount = houses.length;
@@ -70,6 +73,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <ColivingSection houses={colivingHouses} />
 
       <UnitsSection units={units} />
 

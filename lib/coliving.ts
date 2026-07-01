@@ -1,0 +1,35 @@
+import data from "@/data/coliving.json";
+import type { ColivingHouse, ColivingRoom } from "./types";
+
+const HOUSES = (data.houses as ColivingHouse[]) ?? [];
+
+/** Only published houses, with inactive rooms (e.g. 1 & 11) filtered out. */
+export function getColivingHouses(): ColivingHouse[] {
+  return HOUSES.filter((h) => h.published).map((h) => ({
+    ...h,
+    rooms: h.rooms.filter((r) => r.active !== false),
+  }));
+}
+
+export function getColivingHouse(id: string): ColivingHouse | null {
+  const h = HOUSES.find((x) => x.id === id && x.published);
+  if (!h) return null;
+  return { ...h, rooms: h.rooms.filter((r) => r.active !== false) };
+}
+
+export function getAllColivingHouseIds(): string[] {
+  return HOUSES.filter((h) => h.published).map((h) => h.id);
+}
+
+/** Rooms that are shown as available (active and not yet leased). */
+export function availableColivingRooms(h: ColivingHouse): ColivingRoom[] {
+  return h.rooms.filter((r) => r.active !== false && !r.leased);
+}
+
+/** The lowest listed price among available rooms, or null if none priced yet. */
+export function colivingFromPrice(h: ColivingHouse): number | null {
+  const prices = availableColivingRooms(h)
+    .map((r) => r.price)
+    .filter((p): p is number => typeof p === "number");
+  return prices.length ? Math.min(...prices) : null;
+}

@@ -7,6 +7,7 @@
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
+import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "./coliving";
 import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
 import faqData from "@/data/faq.json";
 import { site } from "./site";
@@ -167,6 +168,41 @@ function unitsSnapshot(): string {
   return `${header}\n${lines}`;
 }
 
+/** Manually-managed co-living rooms NOT on PadSplit (apply via TurboTenant). */
+function colivingSnapshot(): string {
+  const houses = getColivingHouses();
+  if (!houses.length) return "";
+  return houses
+    .map((h) => {
+      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const rooms = availableColivingRooms(h);
+      const roomLines = rooms
+        .map((r) => {
+          const bath =
+            r.bath === "private"
+              ? "private bath"
+              : `semi-private bath (shared with only ${r.shareWith ?? "one other room"})`;
+          const price = typeof r.price === "number" ? priceLabel(r.price, h.rentUnit) : "price TBD";
+          const avail = r.availableDate ? `, ${availDateLabel(r.availableDate).toLowerCase()}` : "";
+          const apply = r.applyUrl ? ` To apply, share this TurboTenant pre-screener link: ${r.applyUrl}` : "";
+          return `    - ${r.label}: ${price}, ${bath}${avail}.${apply}`;
+        })
+        .join("\n");
+      const from = colivingFromPrice(h);
+      const incl = [
+        h.furnished ? "furnished" : null,
+        h.utilitiesIncluded ? "utilities included" : null,
+        h.wifi ? "WiFi included" : null,
+      ]
+        .filter(Boolean)
+        .join(", ");
+      return `• ${h.name} (${loc}) — ${rooms.length} room(s) available${
+        from != null ? ` from ${priceLabel(from, h.rentUnit)}` : ""
+      }. ${incl}.${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
+    })
+    .join("\n\n");
+}
+
 type Track = "room" | "unit" | "both";
 
 /** A directive that tailors the whole conversation to what the visitor picked up front. */
@@ -200,6 +236,20 @@ export function buildSystemPrompt(track?: Track | null): string {
         f.link ? `\n   (${f.link.label}: ${f.link.url})` : ""
       }`
   ).join("\n\n");
+
+  const coliving = colivingSnapshot();
+  const colivingBlock = coliving
+    ? `
+
+# Co-living rooms NOT on PadSplit — apply via TurboTenant (a third kind of listing)
+These are private rooms in a house WE manage ourselves — NOT PadSplit. Important rules:
+- To apply, share that ROOM's TurboTenant pre-screener link (listed below). Do NOT use the BOOK card (that's PadSplit only), and do NOT say "PadSplit" for this house.
+- It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
+- "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
+- Never reveal the street address — neighborhood/city only, exactly like our other homes.
+- Rooms stay available until a lease is signed; applying does not hold a room.
+${coliving}`
+    : "";
 
   return `You are the friendly virtual assistant for ${site.name} (${site.domain}), which lists furnished, move-in-ready private rooms AND whole long-term units for rent in the Atlanta area. You help people find the right place, understand pricing and move-in, and decide to apply.
 
@@ -270,6 +320,7 @@ ${privateBathSnapshot()}
 
 # Long-term private apartments (monthly lease via TurboTenant)
 ${unitsSnapshot()}
+${colivingBlock}
 
 # Policies (these apply to the PadSplit co-living ROOMS, not the long-term apartments)
 ${POLICIES}
