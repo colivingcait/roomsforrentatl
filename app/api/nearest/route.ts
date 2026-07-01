@@ -138,6 +138,21 @@ export async function POST(req: Request) {
     })
     .sort((a, b) => a.miles - b.miles);
 
+  // Georgia is a big state — a same-named street can match a town far outside
+  // metro Atlanta (e.g. "Alma, GA" instead of the Atlanta one), producing a
+  // nonsense multi-hour "nearest home." If even the closest home is
+  // implausibly far, treat it as not found rather than showing junk.
+  const METRO_MAX_MILES = 60;
+  if (!ranked.length || ranked[0].miles > METRO_MAX_MILES) {
+    return Response.json(
+      {
+        error:
+          "That address doesn't look like it's in the Atlanta area. Try adding the neighborhood or city (e.g. \"…, Decatur, GA\").",
+      },
+      { status: 422 }
+    );
+  }
+
   const nearest = ranked.slice(0, 2).map(({ h, miles, mins }) => {
     const low = round5(mins);
     return {

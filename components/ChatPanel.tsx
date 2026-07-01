@@ -201,10 +201,33 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   const [track, setTrack] = useState<Track | null>(startTrack);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  // One ref per message, so a long answer scrolls to its OWN top instead of
+  // jumping to the bottom of the conversation (which buries the start of it).
+  const messageRefs = useRef<Map<number, HTMLDivElement | null>>(new Map());
 
-  // Keep the latest message in view.
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    const container = scrollRef.current;
+    if (!container) return;
+    const lastIndex = messages.length - 1;
+    const lastIsAssistant = lastIndex >= 0 && messages[lastIndex].role === "assistant";
+
+    // While waiting on a reply (or the last turn was the user's own message),
+    // stay pinned to the bottom so the sent bubble / typing dots stay visible.
+    if (loading || !lastIsAssistant) {
+      container.scrollTo({ top: container.scrollHeight, behavior: "smooth" });
+      return;
+    }
+
+    // A new assistant answer just landed — scroll so its TOP is in view
+    // instead of its bottom, so the reader starts at the beginning. Measured
+    // via getBoundingClientRect so it's correct regardless of the offsetParent
+    // chain (more reliable than offsetTop here).
+    const el = messageRefs.current.get(lastIndex);
+    if (el) {
+      const delta = el.getBoundingClientRect().top - container.getBoundingClientRect().top;
+      const offset = container.scrollTop + delta - 8;
+      container.scrollTo({ top: Math.max(0, offset), behavior: "smooth" });
+    }
   }, [messages, loading]);
 
   async function send(text: string, source: "typed" | "suggested" = "typed", trackOverride?: Track) {
@@ -290,7 +313,13 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
         </Bubble>
 
         {messages.map((m, i) => (
-          <div key={i} className="space-y-2">
+          <div
+            key={i}
+            ref={(el) => {
+              messageRefs.current.set(i, el);
+            }}
+            className="space-y-2"
+          >
             <Bubble role={m.role}>
               <MessageText text={m.content} isUser={m.role === "user"} />
             </Bubble>

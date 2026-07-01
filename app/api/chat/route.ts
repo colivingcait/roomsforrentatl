@@ -228,7 +228,10 @@ export async function POST(req: Request) {
 
     const booked = extractBookCards(reply);
     const willowed = extractWillowCards(booked.text);
-    const { text, chips } = extractChips(willowed.text);
+    const { text: parsed, chips } = extractChips(willowed.text);
+    // Safety net: never let a raw <<<...>>> token reach the visible chat, even
+    // if it's malformed or a future token type the extractors above don't know.
+    const text = parsed.replace(/<<<[\s\S]*?>>>/g, "").replace(/\n{3,}/g, "\n\n").trim();
     logChat(question, text, source);
     return Response.json({ reply: text, houses: booked.cards, willow: willowed.cards, chips });
   } catch (err) {
