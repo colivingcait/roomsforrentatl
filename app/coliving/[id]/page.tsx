@@ -3,7 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getColivingHouse, getAllColivingHouseIds, availableColivingRooms } from "@/lib/coliving";
+import { getColivingHouse, getAllColivingHouseIds, availableColivingRooms, depositLine } from "@/lib/coliving";
 import type { ColivingRoom } from "@/lib/types";
 import { priceLabel, availDateLabel } from "@/lib/format";
 
@@ -53,7 +53,17 @@ export default function ColivingHousePage({ params }: { params: { id: string } }
           {house.furnished && <span className="chip">Furnished</span>}
           {house.utilitiesIncluded && <span className="chip">Utilities included</span>}
           {house.wifi && <span className="chip">WiFi included</span>}
+          {house.depositAlternative === "rhino" && <span className="chip text-brand">No deposit</span>}
         </div>
+
+        {depositLine(house) && (
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="text-sm font-bold text-ink">Move-in</div>
+            <p className="mt-1 text-sm text-muted">
+              {depositLine(house)} To move in, you pay your first month&apos;s rent.
+            </p>
+          </div>
+        )}
 
         <h2 className="mt-6 text-lg font-extrabold text-ink">
           {rooms.length} room{rooms.length === 1 ? "" : "s"} available

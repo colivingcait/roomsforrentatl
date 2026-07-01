@@ -33,3 +33,17 @@ export function colivingFromPrice(h: ColivingHouse): number | null {
     .filter((p): p is number => typeof p === "number");
   return prices.length ? Math.min(...prices) : null;
 }
+
+/** A friendly one-liner describing the deposit situation, or null if unset. */
+export function depositLine(h: ColivingHouse): string | null {
+  if (h.depositAlternative === "rhino") {
+    return "No security deposit — we use Rhino, a low-cost deposit alternative (a small monthly fee instead of a big lump sum).";
+  }
+  if (typeof h.deposit === "number" && h.deposit > 0) {
+    return `Security deposit: $${h.deposit.toLocaleString()}.`;
+  }
+  if (h.deposit === 0 || h.deposit === null) {
+    return "No security deposit required.";
+  }
+  return null;
+}

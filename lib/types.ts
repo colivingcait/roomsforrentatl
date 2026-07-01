@@ -150,6 +150,9 @@ export interface ColivingHouse {
   furnished?: boolean;
   description?: string;
   notOnPadsplit?: boolean; // shows a "Not on PadSplit" tag on the card
+  deposit?: number | null; // 0/null = no traditional cash deposit
+  depositAlternative?: "rhino" | string | null; // e.g. "rhino" → shown as a deposit-free perk
+  applicationFee?: number | null; // optional TT application fee
   published?: boolean; // false = fully hidden from the site AND the chatbot
   rooms: ColivingRoom[];
 }

@@ -13,6 +13,9 @@
       "wifi": true,
       "furnished": true,
       "notOnPadsplit": true,
+      "deposit": 0,
+      "depositAlternative": "rhino",
+      "applicationFee": null,
       "published": false,
       "description": "Move-in-ready private rooms in a spacious, fully furnished home in Adamsville, on Atlanta's west side. Every room comes furnished with all utilities and WiFi included — just bring your things. Pick a room with its own private bath, or a semi-private bath you share with only one other room. Applying is quick and online: start with the free pre-screener, and if it's a good fit, we'll send over the application to get you moved in.",
       "rooms": [

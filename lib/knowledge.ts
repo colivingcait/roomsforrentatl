@@ -7,7 +7,7 @@
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
-import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "./coliving";
+import { getColivingHouses, availableColivingRooms, colivingFromPrice, depositLine } from "./coliving";
 import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
 import faqData from "@/data/faq.json";
 import { site } from "./site";
@@ -196,9 +196,10 @@ function colivingSnapshot(): string {
       ]
         .filter(Boolean)
         .join(", ");
+      const deposit = depositLine(h);
       return `• ${h.name} (${loc}) — ${rooms.length} room(s) available${
         from != null ? ` from ${priceLabel(from, h.rentUnit)}` : ""
-      }. ${incl}.${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
+      }. ${incl}.${deposit ? ` ${deposit}` : ""}${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
     })
     .join("\n\n");
 }
@@ -246,6 +247,7 @@ These are private rooms in a house WE manage ourselves — NOT PadSplit. Importa
 - To apply, share that ROOM's TurboTenant pre-screener link (listed below). Do NOT use the BOOK card (that's PadSplit only), and do NOT say "PadSplit" for this house.
 - It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
 - "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
+- DEPOSIT: there is NO traditional security deposit for these houses. Instead we use Rhino, a low-cost deposit alternative — the resident pays a small monthly fee (often just a few dollars) that replaces a big lump-sum deposit and protects the home. Explain it simply and positively (it keeps move-in cheap). To move in, they pay their first month's rent. Do NOT quote an exact Rhino price — it varies by person; just say "a small monthly fee."
 - Never reveal the street address — neighborhood/city only, exactly like our other homes.
 - Rooms stay available until a lease is signed; applying does not hold a room.
 ${coliving}`
