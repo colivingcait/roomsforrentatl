@@ -85,7 +85,7 @@ export default function HouseList({
         </div>
       ) : view === "map" ? (
         <div className="mt-3">
-          <HousesMap houses={shown} />
+          <HousesMap houses={shown} colivingHouses={shownColiving} />
         </div>
       ) : (
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -1,5 +1,61 @@
 import { getHouses } from "@/lib/houses";
+import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 import { priceLabel } from "@/lib/format";
+
+type NearHome = {
+  id: string;
+  name: string;
+  neighborhood: string;
+  city: string;
+  lat: number;
+  lng: number;
+  fromPrice: string | null;
+  roomsAvailable: number;
+  rating: number | null;
+  reviewCount: number | null;
+  url: string;
+};
+
+/** PadSplit homes + Willow, normalized to one shape for distance ranking. */
+function allNearHomes(): NearHome[] {
+  const padsplit: NearHome[] = getHouses()
+    .filter((h) => h.available && typeof h.lat === "number" && typeof h.lng === "number")
+    .map((h) => ({
+      id: h.id,
+      name: h.name,
+      neighborhood: h.neighborhood,
+      city: h.city,
+      lat: h.lat as number,
+      lng: h.lng as number,
+      fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
+      roomsAvailable: h.roomsAvailable,
+      rating: h.rating ?? null,
+      reviewCount: h.reviewCount ?? null,
+      url: `/house/${h.id}#rooms`,
+    }));
+
+  const coliving: NearHome[] = getColivingHouses()
+    .filter((h) => typeof h.lat === "number" && typeof h.lng === "number")
+    .map((h) => {
+      const rooms = availableColivingRooms(h);
+      const from = colivingFromPrice(h);
+      return {
+        id: h.id,
+        name: h.name,
+        neighborhood: h.neighborhood,
+        city: h.city,
+        lat: h.lat as number,
+        lng: h.lng as number,
+        fromPrice: from != null ? priceLabel(from, h.rentUnit) : null,
+        roomsAvailable: rooms.length,
+        rating: null,
+        reviewCount: null,
+        url: `/coliving/${h.id}`,
+      };
+    });
+
+  return [...padsplit, ...coliving];
+}
 
 // Geocoding + distance run server-side. We only ever return a home's public
 // neighborhood and an APPROXIMATE distance/drive time — never the exact address.
@@ -123,16 +179,14 @@ export async function POST(req: Request) {
   }
   const { lat, lng, label } = geo;
 
-  const homes = getHouses().filter(
-    (h) => h.available && typeof h.lat === "number" && typeof h.lng === "number"
-  );
+  const homes = allNearHomes();
   if (!homes.length) {
     return Response.json({ error: "No homes are open right now." }, { status: 404 });
   }
 
   const ranked = homes
     .map((h) => {
-      const miles = haversineMiles(lat as number, lng as number, h.lat as number, h.lng as number);
+      const miles = haversineMiles(lat as number, lng as number, h.lat, h.lng);
       const mins = (miles * 1.35) / 28 * 60; // rough road miles ÷ ~28mph city speed
       return { h, miles, mins };
     })
@@ -163,11 +217,11 @@ export async function POST(req: Request) {
       miles: Math.max(1, Math.round(miles)),
       carLow: low,
       carHigh: low + 5,
-      fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
+      fromPrice: h.fromPrice,
       roomsAvailable: h.roomsAvailable,
-      rating: h.rating ?? null,
-      reviewCount: h.reviewCount ?? null,
-      url: `/house/${h.id}#rooms`,
+      rating: h.rating,
+      reviewCount: h.reviewCount,
+      url: h.url,
     };
   });
 
