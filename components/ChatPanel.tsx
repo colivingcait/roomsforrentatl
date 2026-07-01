@@ -15,8 +15,11 @@ type BookHouse = {
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[]; chips?: string[] };
 type Track = "room" | "unit" | "both";
 
-const ROOM_GREETING = "Hi! 👋 Let's find your room. Ask me anything, or tap a question to start:";
-const UNIT_GREETING = "Hi! 👋 Happy to help with our private rentals. What would you like to know?";
+const ROOM_GREETING = "Hi! 👋 Let's find your room. When are you hoping to move in?";
+const UNIT_GREETING = "Hi! 👋 Let's find your place. When are you hoping to move in?";
+
+// The opener kicks off the concierge flow: first question is move-in timing.
+const OPENER_CHIPS = ["Tomorrow / ASAP", "This week", "Next month", "Just exploring"];
 
 // Rooms site → room mode; homes site (homesforrentatl.com) → unit mode.
 function brandDefaultTrack(): Track {
@@ -240,14 +243,16 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   );
   const showBotChips = !loading && botChips.length > 0;
 
-  // Fallback when the bot didn't supply chips: a static set of popular questions,
-  // tailored to the chosen track (or the general set if none picked yet).
+  // Fallback when the bot didn't supply chips: at the very start, kick off the
+  // concierge flow with the move-in-timing chips; after that, a static set of
+  // popular questions tailored to the track.
   const lastUser = [...messages].reverse().find((m) => m.role === "user")?.content;
   const trackDefaults =
     track === "unit" ? UNIT_SUGGESTIONS : track === "both" ? BOTH_SUGGESTIONS : DEFAULT_SUGGESTIONS;
   // Topic follow-ups are room-specific; only use them on the room track.
   const pool = (track === "room" && lastUser && FOLLOWUPS[lastUser]) || trackDefaults;
-  let remainingSuggestions = pool.filter((s) => !asked.has(s));
+  let remainingSuggestions =
+    messages.length === 0 ? [...OPENER_CHIPS] : pool.filter((s) => !asked.has(s));
   if (remainingSuggestions.length === 0) {
     remainingSuggestions = trackDefaults.filter((s) => !asked.has(s));
   }
