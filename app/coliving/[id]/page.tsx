@@ -60,7 +60,7 @@ export default function ColivingHousePage({ params }: { params: { id: string } }
           <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <div className="text-sm font-bold text-ink">Move-in</div>
             <p className="mt-1 text-sm text-muted">
-              {depositLine(house)} To move in, you pay your first month&apos;s rent.
+              {depositLine(house)} To move in, you pay your first month&apos;s rent and get approved through our deposit-free partner.
             </p>
           </div>
         )}
