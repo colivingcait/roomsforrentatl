@@ -17,7 +17,16 @@ export const revalidate = 3600;
 export default function HomePage() {
   // Only show co-living homes that have rooms available — fully-booked homes
   // drop off the homepage entirely.
-  const houses = getHouses().filter((h) => h.available);
+  // Explicit homepage order for the co-living cards (Willow is inserted right
+  // after the first card by HouseList). Any home not listed falls to the end.
+  const ORDER = ["mora", "candace", "raven", "chestnut", "meadow"];
+  const rank = (name: string) => {
+    const i = ORDER.findIndex((n) => name.toLowerCase().includes(n));
+    return i === -1 ? ORDER.length : i;
+  };
+  const houses = getHouses()
+    .filter((h) => h.available)
+    .sort((a, b) => rank(a.name) - rank(b.name));
   const colivingHouses = getColivingHouses();
   const units = getUnits();
   const updated = updatedLabel(lastUpdated());
