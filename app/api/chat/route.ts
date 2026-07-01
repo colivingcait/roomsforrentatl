@@ -156,7 +156,7 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 600,
-        system: buildSystemPrompt(track, { name: brand.name, domain: brand.domain }),
+        system: buildSystemPrompt(track, { key: brand.key, name: brand.name, domain: brand.domain }),
         messages,
       }),
     });

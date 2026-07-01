@@ -48,7 +48,8 @@ export default function ChatLauncher() {
   // Don't proactively pop the room-oriented assistant at long-term leads on the
   // rooms brand's rental pages (the FAB stays). The homes brand can still greet.
   const suppressProactive = onRentalPage && !isHomesBrand;
-  const chatTrack: "unit" | null = isHomesBrand || onRentalPage ? "unit" : null;
+  // Only override the track on rental pages; ChatPanel defaults by brand otherwise.
+  const chatTrack: "unit" | null = onRentalPage ? "unit" : null;
 
   const openChat = () => {
     interacted.current = true;

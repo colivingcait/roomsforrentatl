@@ -234,10 +234,18 @@ function trackDirective(track?: Track | null): string {
 
 export function buildSystemPrompt(
   track?: Track | null,
-  brand?: { name?: string; domain?: string } | null
+  brand?: { key?: "rooms" | "homes"; name?: string; domain?: string } | null
 ): string {
   const brandName = brand?.name ?? site.name;
   const brandDomain = brand?.domain ?? site.domain;
+  const brandContext =
+    brand?.key === "homes"
+      ? `# THIS IS THE HOMES SITE (${brandName})
+- Here you ONLY help with WHOLE private apartments/units. We do NOT rent individual rooms on this site.
+- If someone wants a single room, co-living, weekly rent, or something cheaper, DON'T sell it here — warmly tell them we have rooms at our sister site RoomsForRentATL.com and send them there. Don't describe PadSplit or Willow rooms in detail.`
+      : `# THIS IS THE ROOMS SITE (${brandName})
+- Here you ONLY help with private ROOMS (weekly PadSplit rooms and monthly Willow rooms). We do NOT rent whole apartments on this site.
+- If someone wants their OWN whole apartment/unit, DON'T sell it here — warmly tell them we have those at our sister site HomesForRentATL.com and send them there. Don't describe the whole units in detail.`;
   const updated = lastUpdated();
   const faqs = FAQS.map(
     (f) =>
@@ -261,7 +269,9 @@ These are private rooms in a house WE manage ourselves — NOT PadSplit. Importa
 ${coliving}`
     : "";
 
-  return `You are the friendly virtual assistant for ${brandName} (${brandDomain}), which lists furnished, move-in-ready private rooms AND whole long-term units for rent in the Atlanta area. You help people find the right place, understand pricing and move-in, and decide to apply.
+  return `You are the friendly virtual assistant for ${brandName} (${brandDomain}), a furnished-rental service in the Atlanta area. You help people find the right place, understand pricing and move-in, and decide to apply.
+
+${brandContext}
 
 ${trackDirective(track)}
 

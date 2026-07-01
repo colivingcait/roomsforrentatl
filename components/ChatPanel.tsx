@@ -15,8 +15,16 @@ type BookHouse = {
 type Message = { role: "user" | "assistant"; content: string; houses?: BookHouse[]; chips?: string[] };
 type Track = "room" | "unit" | "both";
 
-const GREETING = "Hi! 👋 Let's find your spot. What are you looking for?";
+const ROOM_GREETING = "Hi! 👋 Let's find your room. Ask me anything, or tap a question to start:";
 const UNIT_GREETING = "Hi! 👋 Happy to help with our apartments. What would you like to know?";
+
+// Rooms site → room mode; homes site (homesforrentatl.com) → unit mode.
+function brandDefaultTrack(): Track {
+  return typeof window !== "undefined" &&
+    window.location.hostname.toLowerCase().includes("homesforrent")
+    ? "unit"
+    : "room";
+}
 
 // The first thing a visitor picks — it tailors every answer that follows.
 const TRACK_OPTIONS: { label: string; track: Track; text: string }[] = [
@@ -170,9 +178,10 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // Which kind of housing they're after — set when they pick an option up front,
-  // or pre-set by context (e.g. the chat opens in "unit" mode on rental pages).
-  const [track, setTrack] = useState<Track | null>(initialTrack);
+  // Each brand is single-category, so start in that track (override wins, e.g.
+  // "unit" on a rental page). The room-vs-place picker no longer appears.
+  const startTrack: Track = initialTrack ?? brandDefaultTrack();
+  const [track, setTrack] = useState<Track | null>(startTrack);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -251,7 +260,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
       {/* Conversation */}
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto px-5 py-4">
         <Bubble role="assistant">
-          <MessageText text={initialTrack === "unit" ? UNIT_GREETING : GREETING} />
+          <MessageText text={startTrack === "unit" ? UNIT_GREETING : ROOM_GREETING} />
         </Bubble>
 
         {messages.map((m, i) => (

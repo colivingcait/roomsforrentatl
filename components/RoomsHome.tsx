@@ -2,12 +2,10 @@ import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
 import FaqButton from "@/components/FaqButton";
-import UnitsSection from "@/components/UnitsSection";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { getColivingHouses } from "@/lib/coliving";
-import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
@@ -23,7 +21,6 @@ export default function RoomsHome() {
     .filter((h) => h.available)
     .sort((a, b) => rank(a.name) - rank(b.name));
   const colivingHouses = getColivingHouses();
-  const units = getUnits();
   const updated = updatedLabel(lastUpdated());
   const openCount = houses.length;
   const totalRooms = houses.reduce((n, h) => n + h.roomsAvailable, 0);
@@ -76,8 +73,6 @@ export default function RoomsHome() {
           </div>
         </div>
       </section>
-
-      <UnitsSection units={units} />
 
       <TrustBand />
 
