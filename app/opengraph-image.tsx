@@ -43,14 +43,17 @@ export default async function OpengraphImage() {
     readFile(join(fontsDir, "inter-800.woff")),
   ]);
 
-  // Use a real listing photo as the background, fetched from the current host.
+  // Use a real listing photo as the background. photoPath may already be a
+  // full URL (e.g. a PadSplit-hosted photo) or a same-site relative path (e.g.
+  // /willow/kitchen.jpg) — only the latter needs the current host prepended.
   // Fully guarded (timeout + size cap) so it can NEVER break the build — falls
   // back to the brand gradient if the photo can't be embedded safely.
   let bg: string | null = null;
   if (copy.photoPath) {
     try {
+      const isAbsolute = /^https?:\/\//i.test(copy.photoPath);
       const host = headers().get("host") ?? "";
-      const abs = host ? `https://${host}${copy.photoPath}` : null;
+      const abs = isAbsolute ? copy.photoPath : host ? `https://${host}${copy.photoPath}` : null;
       if (abs) {
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), 6000);
