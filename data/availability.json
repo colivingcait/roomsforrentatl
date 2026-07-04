@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-07-03T13:01:06.582Z",
+  "updatedAt": "2026-07-04T00:02:59.812Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+      "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": true,
       "rooms": [
         {
@@ -16,7 +16,7 @@
           "name": "Milhoja",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 170,
+          "weeklyRate": 180,
           "recommendedPrice": 177,
           "bathroomType": "shared",
           "bedSize": "full",
@@ -95,6 +95,14 @@
           "height": 4000
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false,
+          "width": 3468,
+          "height": 4624
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
           "category": "common_space",
           "description": "Kitchen with new smooth top range and 2 refrigerators",
@@ -125,14 +133,6 @@
           "primary": false,
           "width": 3000,
           "height": 4000
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
-          "category": "common_space",
-          "description": "Nice backyard patio with table and lights",
-          "primary": false,
-          "width": 3468,
-          "height": 4624
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac.jpg",
@@ -209,38 +209,69 @@
           "height": 4000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
           "category": "common_space",
-          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "description": "Nice backyard patio with table and lights",
           "primary": false,
-          "width": 899,
-          "height": 600
+          "width": 3468,
+          "height": 4624
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 170,
+      "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-03T13:01:06.582Z",
+      "checkedAt": "2026-07-04T00:02:59.812Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 33219,
+          "id": 33218,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Edinburgh - w/ Mini Fridge!",
+          "roomNumber": 5,
+          "description": "",
+          "weeklyRate": 169,
+          "recommendedPrice": 190,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": true,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-05",
+          "image": "https://www.padsplit.com/img/psproperty/8299/img_610b0801-924a-4aec-ab95-a0d09c1081c9.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/8299/img_610b0801-924a-4aec-ab95-a0d09c1081c9.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_16159733-d9ac-46d9-860d-4be53748cc88_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_bd6cbddf-09f7-4262-b006-150a56da8b8d.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_2da1246c-d6fd-40c8-824b-f3601efb9dd9.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_11783891-bfb7-41da-8022-853af4e1dfe0.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_34a2cce2-8cb7-43ff-a51c-3c354222dc95.png"
+          ]
+        },
+        {
+          "id": 33219,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Florence - w/ Mini Fridge!",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 180,
+          "weeklyRate": 168,
           "recommendedPrice": 252,
           "bathroomType": "shared",
           "bedSize": "full",
@@ -460,12 +491,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 180,
+      "roomsAvailable": 2,
+      "fromPrice": 168,
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-07-03T13:01:06.582Z",
+      "checkedAt": "2026-07-04T00:02:59.812Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -707,14 +738,16 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-03T13:01:06.582Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
+      "checkedAt": "2026-07-04T00:02:59.812Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
+      "stale": true,
+      "lastError": "Error: listing did not render (generic shell)"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Lake Commons CT",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_b48c8d8f-e5d8-4998-b906-326ac57e696d.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -886,7 +919,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-03T13:01:06.582Z",
+      "checkedAt": "2026-07-04T00:02:59.812Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -897,37 +930,9 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 110832,
+          "id": 110837,
           "padIndex": 1,
           "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
-          "roomNumber": 2,
-          "description": "",
-          "weeklyRate": 169,
-          "recommendedPrice": 181,
-          "bathroomType": "shared",
-          "bedSize": "full",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-07-05",
-          "image": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png"
-          ]
-        },
-        {
-          "id": 110837,
-          "padIndex": 2,
-          "pagePosition": 2,
           "applyIndex": null,
           "name": "Room 7 - Galway - LARGE downstairs room close to the bathroom!",
           "roomNumber": 7,
@@ -950,6 +955,34 @@
             "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
             "https://www.padsplit.com/img/psproperty/35011/img_d9169666-fb93-40ab-9e60-2f7cfea33884.jpg",
             "https://www.padsplit.com/img/psproperty/35011/img_a5f9e3b7-61d2-48df-a79d-e0f47a71d5a2.jpg"
+          ]
+        },
+        {
+          "id": 110832,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
+          "roomNumber": 2,
+          "description": "",
+          "weeklyRate": 172,
+          "recommendedPrice": 181,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-05",
+          "image": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png"
           ]
         },
         {
@@ -1077,7 +1110,23 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
+          "category": "bedroom",
+          "description": "Spacious bedroom with wood-look flooring, ceiling fan, dual windows with blinds, and a dedicated desk workspace.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_d9169666-fb93-40ab-9e60-2f7cfea33884.jpg",
+          "category": "bedroom",
+          "description": "Spacious bedroom with wood-look tile flooring, ceiling fan light, window blinds, and an open closet for everyday storage.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_a5f9e3b7-61d2-48df-a79d-e0f47a71d5a2.jpg",
           "category": "bedroom",
           "description": null,
           "primary": false,
@@ -1085,25 +1134,9 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
           "category": "bedroom",
-          "description": "Furnished bedroom with a full bed, bedside table, and dedicated desk space, plus a ceiling fan and hardwood floors.",
-          "primary": false,
-          "width": 1500,
-          "height": 1000
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png",
-          "category": "bedroom",
-          "description": "Furnished bedroom with a work desk, open garment rack, and shelving, plus a large window and hardwood floors.",
-          "primary": false,
-          "width": 1388,
-          "height": 1044
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_e37e2366-00c8-4d08-ac94-fa35f614a670.jpg",
-          "category": "bedroom",
-          "description": "Spacious bedroom with wood-look flooring, ceiling fan, dual windows with blinds, and a dedicated desk workspace.",
+          "description": null,
           "primary": false,
           "width": 1500,
           "height": 1000
@@ -1114,7 +1147,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-03T13:01:06.582Z",
+      "checkedAt": "2026-07-04T00:02:59.812Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
