@@ -6,9 +6,9 @@ export const site = {
   name: "RoomsForRentATL",
   domain: "RoomsForRentATL.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com",
-  tagline: "Furnished rooms for rent in Atlanta — move in today.",
+  tagline: "Furnished rooms for rent in Atlanta — next day move in.",
   description:
-    "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, quick move-in. Book your room today.",
+    "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, next day move in. Book your room today.",
   // The Call/Text line — routes to your assistant. Set NEXT_PUBLIC_PHONE in Vercel.
   phone: process.env.NEXT_PUBLIC_PHONE ?? "+1 (404) 555-0100",
   // Pre-filled text shown when someone taps "Text us".

@@ -33,7 +33,7 @@ export default async function OpengraphImage() {
         line1: "Furnished rooms in Atlanta.",
         line2: "Next Day Move In",
         sub: "All-in weekly pricing · utilities & WiFi included",
-        chips: ["Fully furnished", "Utilities + WiFi included", "Flexible weekly lease"],
+        chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],
         photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto,
       };
 
