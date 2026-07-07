@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T13:24:04.336Z",
+  "updatedAt": "2026-07-07T23:55:52.700Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -9,9 +9,37 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 933,
+          "id": 935,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Quiet room with private entrance",
+          "roomNumber": 8,
+          "description": "",
+          "weeklyRate": 170,
+          "recommendedPrice": 188,
+          "bathroomType": "shared",
+          "bedSize": "twinxl",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": true,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-08",
+          "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
+            "https://www.padsplit.com/img/rooms/room_935_1_1581966040.9901974_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/152/img_c2e49a53-81c2-4337-9da1-ac6fa254f2e2.jpg"
+          ]
+        },
+        {
+          "id": 933,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Milhoja",
           "roomNumber": 6,
@@ -217,12 +245,12 @@
           "height": 600
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 180,
+      "roomsAvailable": 2,
+      "fromPrice": 170,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-07T13:24:04.336Z",
+      "checkedAt": "2026-07-07T23:55:52.700Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -240,7 +268,7 @@
           "name": "Florence - w/ Mini Fridge!",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 185,
+          "weeklyRate": 175,
           "recommendedPrice": 252,
           "bathroomType": "shared",
           "bedSize": "full",
@@ -461,11 +489,11 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 185,
+      "fromPrice": 175,
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-07-07T13:24:04.336Z",
+      "checkedAt": "2026-07-07T23:55:52.700Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -676,8 +704,10 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-07T13:24:04.336Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
+      "checkedAt": "2026-07-07T23:55:52.700Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
+      "stale": true,
+      "lastError": "Error: listing did not render (generic shell)"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -855,7 +885,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-07T13:24:04.336Z",
+      "checkedAt": "2026-07-07T23:55:52.700Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1027,7 +1057,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-07T13:24:04.336Z",
+      "checkedAt": "2026-07-07T23:55:52.700Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
