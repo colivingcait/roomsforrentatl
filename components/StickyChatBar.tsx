@@ -6,7 +6,7 @@ import { getVariant } from "@/lib/ab";
 
 const COPY = {
   control: "💬 Have a question? Chat with us",
-  urgent: "💬 Rooms open now — chat to book or ask",
+  urgent: "💬 Chat to find your room",
 } as const;
 
 /**
