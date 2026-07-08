@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 type BookHouse = {
   id: string;
@@ -229,6 +230,11 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
     // from what they tapped/typed — so answers stay tailored to room vs. unit.
     const effectiveTrack = trackOverride ?? track ?? inferTrack(trimmed) ?? undefined;
     if (effectiveTrack && effectiveTrack !== track) setTrack(effectiveTrack);
+    trackEvent("chat_message_sent", {
+      source,
+      track: effectiveTrack ?? "unknown",
+      turn: messages.filter((m) => m.role === "user").length + 1,
+    });
     const next = [...messages, { role: "user" as const, content: trimmed }];
     setMessages(next);
     setInput("");

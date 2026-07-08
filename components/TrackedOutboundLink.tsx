@@ -1,12 +1,11 @@
 "use client";
 
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 
 /**
- * A normal outbound <a> that fires a Vercel Analytics custom event just
- * before navigating (PadSplit "Book this room", TurboTenant "Apply", etc.).
- * `track()` is fire-and-forget (uses sendBeacon), so it never delays or
- * blocks the actual navigation.
+ * A normal outbound <a> that fires an analytics event (Vercel Analytics +
+ * PostHog) just before navigating (PadSplit "Book this room", TurboTenant
+ * "Apply", etc.). Fire-and-forget, so it never delays or blocks navigation.
  */
 export default function TrackedOutboundLink({
   href,
@@ -31,7 +30,7 @@ export default function TrackedOutboundLink({
       target={target}
       rel={rel}
       className={className}
-      onClick={() => track(event, properties)}
+      onClick={() => trackEvent(event, properties)}
     >
       {children}
     </a>

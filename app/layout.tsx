@@ -34,8 +34,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import ChatLauncher from "@/components/ChatLauncher";
+import PostHogInit from "@/components/PostHogInit";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -44,6 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <ChatLauncher />
         <Analytics />
+        <Suspense fallback={null}>
+          <PostHogInit />
+        </Suspense>
       </body>
     </html>
   );

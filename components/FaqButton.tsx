@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import ChatDialog from "./ChatDialog";
 
 /** A trigger button that opens the shared FAQ/chat dialog. */
@@ -22,7 +22,7 @@ export default function FaqButton({
         type="button"
         onClick={() => {
           setOpen(true);
-          if (startTab === "chat") track("chat_opened", { trigger: "button" });
+          if (startTab === "chat") trackEvent("chat_opened", { trigger: "button" });
         }}
         className={className}
       >

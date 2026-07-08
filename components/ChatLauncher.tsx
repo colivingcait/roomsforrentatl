@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import ChatDialog from "./ChatDialog";
 
 // --- Tweak these to taste -------------------------------------------------
@@ -56,7 +56,7 @@ export default function ChatLauncher() {
     interacted.current = true;
     setNudge(false);
     setOpen(true);
-    track("chat_opened", { trigger, path: pathname ?? "" });
+    trackEvent("chat_opened", { trigger, path: pathname ?? "" });
   };
 
   // One-time greeting nudge + optional one-time desktop auto-open on entry.
