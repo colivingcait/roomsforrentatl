@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
 import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
@@ -149,14 +150,16 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             {room.weeklyRate != null && <div className="text-lg font-extrabold text-ink">{priceLabel(room.weeklyRate)}</div>}
             <div className="text-xs text-muted">{moveInLabel(room.moveInDate)}</div>
           </div>
-          <a
+          <TrackedOutboundLink
             href={bookingUrl(house.padsplitUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-book flex-1"
+            event="book_click"
+            properties={{ house: house.id, houseName: house.name, room: String(room.id) }}
           >
             Book this room →
-          </a>
+          </TrackedOutboundLink>
           <Link href={`/house/${house.id}`} className="btn-secondary px-4" aria-label="See more rooms">
             Rooms
           </Link>

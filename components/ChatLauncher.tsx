@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { track } from "@vercel/analytics";
 import ChatDialog from "./ChatDialog";
 
 // --- Tweak these to taste -------------------------------------------------
@@ -51,10 +52,11 @@ export default function ChatLauncher() {
   // Only override the track on rental pages; ChatPanel defaults by brand otherwise.
   const chatTrack: "unit" | null = onRentalPage ? "unit" : null;
 
-  const openChat = () => {
+  const openChat = (trigger: "button" | "auto_open" | "exit_intent" = "button") => {
     interacted.current = true;
     setNudge(false);
     setOpen(true);
+    track("chat_opened", { trigger, path: pathname ?? "" });
   };
 
   // One-time greeting nudge + optional one-time desktop auto-open on entry.
@@ -78,7 +80,7 @@ export default function ChatLauncher() {
         setTimeout(() => {
           if (!interacted.current && !open) {
             mark(AUTO_OPEN_KEY);
-            openChat();
+            openChat("auto_open");
           }
         }, AUTO_OPEN_DELAY)
       );
@@ -98,7 +100,7 @@ export default function ChatLauncher() {
       if (e.clientY <= 0) {
         mark(AUTO_OPEN_KEY);
         document.removeEventListener("mouseout", onLeave);
-        openChat();
+        openChat("exit_intent");
       }
     };
     document.addEventListener("mouseout", onLeave);
@@ -123,7 +125,7 @@ export default function ChatLauncher() {
         )}
         <button
           type="button"
-          onClick={openChat}
+          onClick={() => openChat("button")}
           aria-label="Open chat"
           className="chat-fab flex items-center gap-2 rounded-full bg-accent px-5 py-3.5 font-bold text-white shadow-card hover:bg-accent-dark"
         >

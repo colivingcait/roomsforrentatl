@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import PhotoStrip from "@/components/PhotoStrip";
 import FaqButton from "@/components/FaqButton";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getUnit, getAllUnitIds } from "@/lib/units";
 import { rentLabel, availDateLabel } from "@/lib/format";
 
@@ -158,9 +159,16 @@ export default function RentalPage({ params }: { params: { id: string } }) {
             <div className="text-xs text-muted">{availDateLabel(unit.availableDate)}</div>
           </div>
           {unit.applyUrl ? (
-            <a href={unit.applyUrl} target="_blank" rel="noopener noreferrer" className="btn-book flex-1">
+            <TrackedOutboundLink
+              href={unit.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-book flex-1"
+              event="apply_click"
+              properties={{ unit: unit.id, unitName: unit.title }}
+            >
               Apply now →
-            </a>
+            </TrackedOutboundLink>
           ) : (
             <FaqButton className="btn-book flex-1" label="Ask about this unit" startTab="chat" />
           )}
