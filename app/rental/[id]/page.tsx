@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const unit = getUnit(params.id);
   if (!unit) return { title: "Rental not found" };
   return {
-    title: `${unit.title} — ${unit.type} in ${unit.city}`,
-    description: `${unit.type} for rent in ${unit.city}, ${rentLabel(unit.rent)}.${
-      unit.furnished ? " Furnished." : ""
-    }${unit.utilitiesIncluded ? " Utilities included." : ""} ${availDateLabel(unit.availableDate)}.`,
+    title: `${unit.title} — Furnished Rental in ${unit.city}, GA`,
+    description: `Furnished ${unit.type} for rent in ${unit.city}, Atlanta — ${rentLabel(unit.rent)}, monthly lease.${
+      unit.utilitiesIncluded ? " Utilities included." : ""
+    } ${availDateLabel(unit.availableDate)}.`,
   };
 }
 

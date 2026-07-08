@@ -42,7 +42,11 @@ export default function UnitCard({ unit }: { unit: Unit }) {
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
         {photos.length > 0 ? (
-          <PhotoStrip images={photos} alt={unit.title} sizes="(max-width: 768px) 100vw, 50vw" />
+          <PhotoStrip
+            images={photos}
+            alt={`Furnished apartment for rent in ${unit.city}, Atlanta — ${unit.title}`}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
             <div>

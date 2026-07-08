@@ -28,7 +28,7 @@ export const BRANDS: Record<BrandKey, Brand> = {
     url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com",
     tagline: "Furnished rooms for rent in Atlanta — next day move in.",
     description:
-      "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, quick move-in.",
+      "Furnished rooms for rent in Atlanta — weekly, no lease, next-day move-in. All-in pricing with utilities & WiFi included. Book a PadSplit room today.",
   },
   homes: {
     key: "homes",
@@ -38,7 +38,7 @@ export const BRANDS: Record<BrandKey, Brand> = {
     url: "https://homesforrentatl.com",
     tagline: "Furnished private rentals in Atlanta.",
     description:
-      "Browse furnished private rentals across Atlanta — a full unit that's all yours, monthly lease, utilities included, apply online.",
+      "Furnished private rentals for rent in Atlanta — your own studio or apartment, monthly lease, utilities included. Apply online today.",
   },
 };
 

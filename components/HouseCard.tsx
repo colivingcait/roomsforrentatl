@@ -14,7 +14,7 @@ export default function HouseCard({ house }: { house: House }) {
       className="group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]"
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
-        <PhotoStrip images={photos} alt={house.name} />
+        <PhotoStrip images={photos} alt={`Furnished room for rent in ${house.neighborhood}, Atlanta — ${house.name}`} />
 
         {/* Fully-booked marker spans the top of the card */}
         {!house.available && (

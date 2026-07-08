@@ -75,6 +75,16 @@ export default function RoomsHome() {
 
       <TrustBand />
 
+      <section className="mx-auto max-w-3xl px-4 py-6">
+        <h2 className="text-lg font-bold text-ink">Furnished rooms for rent in Atlanta, GA</h2>
+        <p className="mt-2 text-sm text-muted">
+          Looking for an affordable room for rent in Atlanta? We offer furnished private bedrooms in shared homes
+          across Decatur, Stone Mountain, Snellville, and South Atlanta — all with weekly, no-lease rent. Every
+          PadSplit room includes utilities and WiFi, with next-day move-in once you&apos;re approved. It&apos;s
+          flexible co-living made simple: no long lease, no big deposit, just a private room ready when you are.
+        </p>
+      </section>
+
       <Footer />
       {/* Clearance so the mobile sticky bar never covers the footer. */}
       <div className="h-24 sm:hidden" />

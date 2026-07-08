@@ -9,7 +9,7 @@ import TrustBand from "@/components/TrustBand";
 import CommonAreas from "@/components/CommonAreas";
 import FaqButton from "@/components/FaqButton";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
-import { fromPriceLabel, availabilityLabel, updatedLabel } from "@/lib/format";
+import { fromPriceLabel, availabilityLabel, updatedLabel, priceLabel } from "@/lib/format";
 
 export const revalidate = 3600;
 
@@ -21,11 +21,41 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const house = getHouse(params.id);
   if (!house) return { title: "Home not found" };
   return {
-    title: `${house.name} — ${fromPriceLabel(house)}`,
-    description: `${availabilityLabel(house)} in ${house.neighborhood}, ${house.city}. ${fromPriceLabel(
+    title: `${house.name} — Furnished Room for Rent in ${house.neighborhood}, Atlanta`,
+    description: `Furnished room for rent in ${house.neighborhood}, ${house.city} — ${fromPriceLabel(
       house
-    )} all-in, utilities included. Book a room today.`,
+    )} all-in, utilities included, next-day move-in via PadSplit. ${availabilityLabel(house)}.`,
     openGraph: { images: house.image.startsWith("http") ? [house.image] : [] },
+  };
+}
+
+/** LodgingBusiness structured data — helps search engines understand each listing as a real place to stay. */
+function houseJsonLd(house: ReturnType<typeof getHouse>) {
+  if (!house) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: house.name,
+    description: `Furnished room for rent in ${house.neighborhood}, ${house.city}, weekly, utilities included.`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: house.neighborhood,
+      addressRegion: "GA",
+      addressCountry: "US",
+    },
+    image: house.image.startsWith("http") ? house.image : undefined,
+    ...(house.rating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: house.rating,
+            reviewCount: house.reviewCount ?? 1,
+          },
+        }
+      : {}),
+    ...(house.fromPrice
+      ? { priceRange: priceLabel(house.fromPrice, house.priceUnit) }
+      : {}),
   };
 }
 
@@ -38,10 +68,14 @@ export default function HousePage({ params }: { params: { id: string } }) {
 
   return (
     <main className="min-h-screen pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(houseJsonLd(house)) }}
+      />
       <Header />
 
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
-        <PhotoStrip images={orderedPhotos(house)} alt={house.name} sizes="100vw" priority />
+        <PhotoStrip images={orderedPhotos(house)} alt={`Furnished room for rent in ${house.neighborhood}, Atlanta — ${house.name}`} sizes="100vw" priority />
         <Link
           href="/"
           className="absolute left-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-lg font-bold text-ink shadow active:scale-95"

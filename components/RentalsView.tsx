@@ -35,6 +35,15 @@ export default function RentalsView() {
 
       <UnitsSection units={units} />
 
+      <section className="mx-auto max-w-3xl px-4 py-6">
+        <h2 className="text-lg font-bold text-ink">Furnished apartments for rent in Atlanta, GA</h2>
+        <p className="mt-2 text-sm text-muted">
+          Looking for a furnished apartment or studio for rent in Atlanta? Our private, fully furnished units in
+          Snellville and Decatur come with utilities included and a straightforward monthly lease — no roommates, no
+          shared spaces, just your own place. Apply online through TurboTenant and move in on your schedule.
+        </p>
+      </section>
+
       <Footer />
     </main>
   );
