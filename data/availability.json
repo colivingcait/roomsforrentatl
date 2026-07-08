@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T23:55:52.700Z",
+  "updatedAt": "2026-07-08T12:25:27.177Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -28,7 +28,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
           "photos": [
             "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
@@ -56,7 +56,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
@@ -250,7 +250,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-07T23:55:52.700Z",
+      "checkedAt": "2026-07-08T12:25:27.177Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -280,7 +280,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
@@ -493,7 +493,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-07-07T23:55:52.700Z",
+      "checkedAt": "2026-07-08T12:25:27.177Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -523,7 +523,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
@@ -532,6 +532,68 @@
             "https://www.padsplit.com/img/psproperty/11889/img_cf7d73f9-785c-435b-9b50-72504601bcf2.png",
             "https://www.padsplit.com/img/psproperty/11889/img_3a5847d2-59c3-4b2a-9e41-0acdbea1d3de.jpg",
             "https://www.padsplit.com/img/psproperty/11889/img_83160994-91c5-4b74-a633-85b1c1ebc6cf.jpg"
+          ]
+        },
+        {
+          "id": 41257,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Dove  - large bright room w/ Smart TV!",
+          "roomNumber": 4,
+          "description": "",
+          "weeklyRate": 179,
+          "recommendedPrice": 197,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-09",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_853c017f-083b-42d6-ae14-c9aa8bb803c2.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_853c017f-083b-42d6-ae14-c9aa8bb803c2.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_b34b819f-ac82-4b8a-a3b7-0e588d671a56.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_ec289f1c-330e-4788-b0e8-bc20b63a8b05.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_4be0cde6-e8f8-42d5-b9e6-47163f7bb85f.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_e5950492-0021-4c2a-ac18-bcb95fcc1940.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_74d9988e-b250-4184-b083-2fd5695c156e.jpg"
+          ]
+        },
+        {
+          "id": 41260,
+          "padIndex": 3,
+          "pagePosition": 3,
+          "applyIndex": null,
+          "name": "Grey Heron - Light filled room w/ Private Entrance",
+          "roomNumber": 7,
+          "description": "",
+          "weeklyRate": 206,
+          "recommendedPrice": 200,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": true,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-09",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_af39782f-f657-4308-87b8-2ad94c69a968.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7c9cd389-5f7b-49bd-be5e-ea61d9522b9b.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_bb72670a-3988-40ea-92bd-64ec818dab1e.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_9801dfcc-8806-49fc-bf04-1aa8c88e1288.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7b80f490-ae24-4efd-8bd4-b8ab8010438c.jpg"
           ]
         }
       ],
@@ -699,15 +761,13 @@
           "height": 1067
         }
       ],
-      "roomsAvailable": 1,
+      "roomsAvailable": 3,
       "fromPrice": 172,
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-07T23:55:52.700Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
-      "stale": true,
-      "lastError": "Error: listing did not render (generic shell)"
+      "checkedAt": "2026-07-08T12:25:27.177Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -885,7 +945,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-07T23:55:52.700Z",
+      "checkedAt": "2026-07-08T12:25:27.177Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -896,9 +956,37 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 110835,
+          "id": 110832,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
+          "roomNumber": 2,
+          "description": "",
+          "weeklyRate": 172,
+          "recommendedPrice": 181,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-09",
+          "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png"
+          ]
+        },
+        {
+          "id": 110835,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
           "roomNumber": 5,
@@ -915,7 +1003,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
@@ -925,8 +1013,8 @@
         },
         {
           "id": 110836,
-          "padIndex": 2,
-          "pagePosition": 2,
+          "padIndex": 3,
+          "pagePosition": 3,
           "applyIndex": null,
           "name": "Rm 6 - Finn - Large room downstairs, close to the bathroom!",
           "roomNumber": 6,
@@ -943,7 +1031,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-08",
+          "moveInDate": "2026-07-09",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
@@ -1020,7 +1108,15 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "category": "bedroom",
+          "description": "Furnished bedroom with a full bed, bedside table, and dedicated desk space, plus a ceiling fan and hardwood floors.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
           "category": "bedroom",
           "description": null,
           "primary": false,
@@ -1028,23 +1124,15 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png",
           "category": "bedroom",
-          "description": "Well-sized bedroom with hardwood floors, ceiling fan, and a furnished work area beside the window for studying or remote work",
+          "description": "Furnished bedroom with a work desk, open garment rack, and shelving, plus a large window and hardwood floors.",
           "primary": false,
-          "width": 1500,
-          "height": 1000
+          "width": 1388,
+          "height": 1044
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_8d140d71-6d2c-4610-bd15-fc4004f78c56.jpg",
-          "category": "bedroom",
-          "description": "Spacious bedroom with hardwood floors, ceiling fan, and an open closet for easy storage and daily organization.",
-          "primary": false,
-          "width": 1500,
-          "height": 1000
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "category": "bedroom",
           "description": null,
           "primary": false,
@@ -1052,12 +1140,12 @@
           "height": 1000
         }
       ],
-      "roomsAvailable": 2,
-      "fromPrice": 173,
+      "roomsAvailable": 3,
+      "fromPrice": 172,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-07T23:55:52.700Z",
+      "checkedAt": "2026-07-08T12:25:27.177Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
