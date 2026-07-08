@@ -21,7 +21,7 @@ type Message = {
 };
 type Track = "room" | "unit" | "both";
 
-const ROOM_GREETING = "Hi! 👋 Let's find your room. When are you hoping to move in?";
+const ROOM_GREETING = "Hi! 👋 Let's find your room. When are you looking to move in?";
 const UNIT_GREETING = "Hi! 👋 Let's find your place. When are you hoping to move in?";
 
 // The opener kicks off the concierge flow: first question is move-in timing.
@@ -235,6 +235,23 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
       track: effectiveTrack ?? "unknown",
       turn: messages.filter((m) => m.role === "user").length + 1,
     });
+
+    // Scripted reply to the opening "Tomorrow / ASAP" chip — kept exact and
+    // client-side (skips the API) so it never gets paraphrased by the LLM.
+    if (messages.length === 0 && effectiveTrack === "room" && /^tomorrow\s*\/\s*asap$/i.test(trimmed)) {
+      setMessages([
+        { role: "user", content: trimmed },
+        {
+          role: "assistant",
+          content:
+            "Perfect — our rooms are available for next day move ins once you're approved (takes a couple hours).\n\nWhat matters most to you right now?",
+          chips: ["Location", "Lowest Price", "Private Bathroom"],
+        },
+      ]);
+      setInput("");
+      return;
+    }
+
     const next = [...messages, { role: "user" as const, content: trimmed }];
     setMessages(next);
     setInput("");
