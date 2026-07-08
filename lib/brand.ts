@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 /**
  * Two brands, one codebase. The same app serves both domains; we pick the
  * brand from the request host. Add the domain in Vercel and it just works.
- *   roomsforrentatl.com → "rooms" (co-living rooms, PadSplit + Willow)
+ *   roomsforrentatl.com → "rooms" (co-living rooms, currently all PadSplit)
  *   homesforrentatl.com → "homes" (whole apartments, long-term)
  */
 export type BrandKey = "rooms" | "homes";

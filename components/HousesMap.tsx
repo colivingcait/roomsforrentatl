@@ -9,8 +9,8 @@ import { availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 /**
  * Neighborhood-level map of houses. We plot a soft circle at each house's
  * approximate neighborhood center (never the street address) and cap the zoom
- * so the exact location can't be pinpointed. Willow (non-PadSplit co-living)
- * plots alongside in its own color, linking to its own page.
+ * so the exact location can't be pinpointed. Any non-PadSplit co-living
+ * houses plot alongside in their own color, linking to their own page.
  */
 export default function HousesMap({
   houses,

@@ -12,19 +12,10 @@ type BookHouse = {
   reviewCount?: number | null;
   url: string;
 };
-type WillowHouse = {
-  id: string;
-  name: string;
-  location: string;
-  fromPrice: string | null;
-  roomsAvailable: number;
-  url: string;
-};
 type Message = {
   role: "user" | "assistant";
   content: string;
   houses?: BookHouse[];
-  willow?: WillowHouse[];
   chips?: string[];
 };
 type Track = "room" | "unit" | "both";
@@ -184,7 +175,7 @@ const FOLLOWUPS: Record<string, string[]> = {
 function inferTrack(text: string): Track | null {
   const t = text.toLowerCase();
   if (/\bboth\b/.test(t)) return "both";
-  if (/\broom\b|co-?living|weekly|willow/.test(t)) return "room";
+  if (/\broom\b|co-?living|weekly/.test(t)) return "room";
   if (/whole (place|apartment|unit|home)|entire (unit|place|apartment)|my own place|studio|\bunit\b/.test(t))
     return "unit";
   return null;
@@ -258,7 +249,6 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
             role: "assistant",
             content: data.reply,
             houses: data.houses,
-            willow: data.willow,
             chips: data.chips,
           },
         ]);
@@ -327,13 +317,6 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
               <div className="space-y-2">
                 {m.houses.map((h) => (
                   <BookCard key={h.id} house={h} />
-                ))}
-              </div>
-            )}
-            {m.willow && m.willow.length > 0 && (
-              <div className="space-y-2">
-                {m.willow.map((h) => (
-                  <WillowBookCard key={h.id} house={h} />
                 ))}
               </div>
             )}
@@ -459,28 +442,6 @@ function BookCard({ house }: { house: BookHouse }) {
       <div className="mt-0.5 text-xs font-semibold text-brand">{rooms}</div>
       <a href={house.url} className="btn-book mt-2 block w-full py-2 text-center text-sm">
         Book your room →
-      </a>
-    </div>
-  );
-}
-
-function WillowBookCard({ house }: { house: WillowHouse }) {
-  const rooms = `${house.roomsAvailable} room${house.roomsAvailable === 1 ? "" : "s"} available`;
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
-      <div className="flex items-baseline justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <div className="font-extrabold text-ink">{house.name}</div>
-          <span className="rounded-full bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white">
-            Not on PadSplit
-          </span>
-        </div>
-        {house.fromPrice && <div className="text-sm font-bold text-ink">from {house.fromPrice}</div>}
-      </div>
-      <div className="text-sm text-muted">{house.location}</div>
-      <div className="mt-0.5 text-xs font-semibold text-brand">{rooms} · deposit-free</div>
-      <a href={house.url} className="btn-book mt-2 block w-full py-2 text-center text-sm">
-        See rooms &amp; apply →
       </a>
     </div>
   );

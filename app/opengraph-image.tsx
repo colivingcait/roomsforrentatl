@@ -45,9 +45,9 @@ export default async function OpengraphImage() {
 
   // Use a real listing photo as the background. photoPath may already be a
   // full URL (e.g. a PadSplit-hosted photo) or a same-site relative path (e.g.
-  // /willow/kitchen.jpg) — only the latter needs the current host prepended.
-  // Fully guarded (timeout + size cap) so it can NEVER break the build — falls
-  // back to the brand gradient if the photo can't be embedded safely.
+  // /units/some-unit/photo.jpg) — only the latter needs the current host
+  // prepended. Fully guarded (timeout + size cap) so it can NEVER break the
+  // build — falls back to the brand gradient if the photo can't be embedded safely.
   let bg: string | null = null;
   if (copy.photoPath) {
     try {

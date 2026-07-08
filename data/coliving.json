@@ -1,39 +1,4 @@
 {
-  "_README": "Manually-managed co-living house(s) that are NOT on PadSplit — rooms apply via each room's TurboTenant pre-screener (applyUrl). NEVER store the street address here; only neighborhood/city. Set a house's 'published' to true to show it on the site AND let the chatbot mention it. Set a room's 'leased' true once a lease is signed (hides the apply button); set 'active' false to hide a room entirely (e.g. rooms 1 & 11). TODO before publishing: neighborhood, city, description, photos — and confirm the applyUrl links land on the free pre-screener (not a public listing with the address).",
-  "houses": [
-    {
-      "id": "willow",
-      "name": "Willow",
-      "neighborhood": "Adamsville",
-      "city": "West Atlanta",
-      "lat": 33.7596,
-      "lng": -84.5183,
-      "heroPhoto": "/willow/kitchen.jpg",
-      "transit": "About a 10 minute walk to the bus stop.",
-      "parking": "Driveway and street parking available.",
-      "rentUnit": "month",
-      "utilitiesIncluded": true,
-      "wifi": true,
-      "furnished": true,
-      "notOnPadsplit": true,
-      "deposit": 0,
-      "depositAlternative": "flexible",
-      "applicationFee": null,
-      "published": false,
-      "description": "Move-in-ready private rooms in a spacious, fully furnished home in Adamsville, on Atlanta's west side. Every room comes furnished with all utilities and WiFi included — just bring your things. Pick a room with its own private bath, or a semi-private bath you share with only one other room. Applying is quick and online: start with the free pre-screener, and if it's a good fit, we'll send over the application to get you moved in.",
-      "rooms": [
-        { "id": "1", "label": "Room 1", "bath": "private", "price": 900, "availableDate": null, "applyUrl": null, "photos": [], "leased": false, "active": false },
-        { "id": "2", "label": "Room 2", "bath": "semi-private", "shareWith": "Room 3", "price": 750, "availableDate": null, "applyUrl": "https://turbo.rent/s/44980f24-d114-4457-829d-905f1b40b7ael", "photos": [], "leased": false, "active": true },
-        { "id": "3", "label": "Room 3", "bath": "semi-private", "shareWith": "Room 2", "price": 750, "availableDate": null, "applyUrl": "https://turbo.rent/s/5d2cfd1b-ffe4-47cc-b6c6-23c4ea742905l", "photos": [], "leased": false, "active": true },
-        { "id": "4", "label": "Room 4", "bath": "private", "price": 900, "availableDate": null, "applyUrl": "https://turbo.rent/s/3cdd4bb1-3a88-486b-89cb-904275bbe37dl", "photos": [], "leased": false, "active": true },
-        { "id": "5", "label": "Room 5", "bath": "private", "price": 900, "availableDate": null, "applyUrl": "https://turbo.rent/s/46992bc7-4259-4d99-8cce-06fab1d33f82l", "photos": [], "leased": false, "active": true },
-        { "id": "6", "label": "Room 6", "bath": "private", "price": 900, "availableDate": null, "applyUrl": "https://turbo.rent/s/b8045744-6ce2-4186-a0ca-096a79aebec5l", "photos": [], "leased": false, "active": true },
-        { "id": "7", "label": "Room 7", "bath": "semi-private", "shareWith": "Room 8", "price": 750, "availableDate": null, "applyUrl": "https://turbo.rent/s/4dbf8a4e-bf9b-44e1-97c8-13d71bdc468al", "photos": [], "leased": false, "active": true },
-        { "id": "8", "label": "Room 8", "bath": "semi-private", "shareWith": "Room 7", "price": 750, "availableDate": null, "applyUrl": "https://turbo.rent/s/81b127b5-ea40-4cd5-9485-fb5fe57ed3f2l", "photos": [], "leased": false, "active": true },
-        { "id": "9", "label": "Room 9", "bath": "private", "price": 900, "availableDate": null, "applyUrl": "https://turbo.rent/s/7812f270-bcbf-44fc-a604-58c8ca52d7ddl", "photos": [], "leased": false, "active": true },
-        { "id": "10", "label": "Room 10", "bath": "private", "price": 900, "availableDate": null, "applyUrl": "https://turbo.rent/s/c9d9d61c-5309-4521-a440-d6976191aff3l", "photos": [], "leased": false, "active": true },
-        { "id": "11", "label": "Room 11", "bath": "private", "price": 900, "availableDate": null, "applyUrl": null, "photos": [], "leased": false, "active": false }
-      ]
-    }
-  ]
+  "_README": "Manually-managed co-living house(s) that are NOT on PadSplit — rooms apply via each room's TurboTenant pre-screener (applyUrl). NEVER store the street address here; only neighborhood/city. Set a house's 'published' to true to show it on the site AND let the chatbot mention it. Currently empty — all our co-living rooms are on PadSplit.",
+  "houses": []
 }

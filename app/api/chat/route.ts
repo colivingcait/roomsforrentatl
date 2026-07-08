@@ -1,6 +1,5 @@
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
-import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 import { priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
 
@@ -48,47 +47,6 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
       reviewCount: h.reviewCount ?? null,
       url: `/house/${h.id}#rooms`,
     }));
-
-  return { text: cleaned, cards };
-}
-
-export type WillowCard = {
-  id: string;
-  name: string;
-  location: string;
-  fromPrice: string | null;
-  roomsAvailable: number;
-  url: string;
-};
-
-// The bot ends a Willow reply with `<<<WILLOW: willow>>>`. Turn the house id(s)
-// into cards linking to that house's rooms + apply page. Matches ALL
-// occurrences and tolerates a malformed bracket count, same as extractBookCards.
-function extractWillowCards(text: string): { text: string; cards: WillowCard[] } {
-  const re = /<{2,}\s*WILLOW:\s*([a-z0-9,\-\s]+?)>{2,}/gi;
-  const matches = Array.from(text.matchAll(re));
-  if (!matches.length) return { text, cards: [] };
-
-  const cleaned = text.replace(re, "").trim();
-  const ids = Array.from(
-    new Set(matches.flatMap((m) => m[1].split(",").map((s) => s.trim().toLowerCase()).filter(Boolean)))
-  );
-  const houses = getColivingHouses();
-  const cards: WillowCard[] = ids
-    .map((id) => houses.find((h) => h.id === id))
-    .filter((h): h is NonNullable<typeof h> => !!h)
-    .map((h) => {
-      const rooms = availableColivingRooms(h);
-      const from = colivingFromPrice(h);
-      return {
-        id: h.id,
-        name: h.name,
-        location: [h.neighborhood, h.city].filter(Boolean).join(", "),
-        fromPrice: from != null ? priceLabel(from, h.rentUnit) : null,
-        roomsAvailable: rooms.length,
-        url: `/coliving/${h.id}`,
-      };
-    });
 
   return { text: cleaned, cards };
 }
@@ -240,15 +198,14 @@ export async function POST(req: Request) {
     }
 
     const booked = extractBookCards(reply);
-    const willowed = extractWillowCards(booked.text);
-    const { text: parsed, chips } = extractChips(willowed.text);
+    const { text: parsed, chips } = extractChips(booked.text);
     // Safety net: never let a raw <<<...>>> token reach the visible chat, even
     // if it's malformed (e.g. `>>` instead of `>>>`) or a future token type the
     // extractors above don't know. `{2,}` on both sides catches bracket-count
     // slips that would otherwise dodge the exact-`>>>` extractors entirely.
     const text = parsed.replace(/<{2,}[\s\S]*?>{2,}/g, "").replace(/\n{3,}/g, "\n\n").trim();
     logChat(question, text, source);
-    return Response.json({ reply: text, houses: booked.cards, willow: willowed.cards, chips });
+    return Response.json({ reply: text, houses: booked.cards, chips });
   } catch (err) {
     console.error("Chat route error", err);
     logChat(question, "(error)", source);

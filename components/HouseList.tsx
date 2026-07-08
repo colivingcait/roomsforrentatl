@@ -89,7 +89,7 @@ export default function HouseList({
         </div>
       ) : (
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {/* Pinned home first (Mora), then Willow & other co-living houses, then the rest. */}
+          {/* Pinned home first (Mora), then any other co-living houses, then the rest. */}
           {shown.slice(0, 1).map((h) => (
             <HouseCard key={h.id} house={h} />
           ))}

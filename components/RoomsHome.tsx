@@ -10,8 +10,7 @@ import { updatedLabel } from "@/lib/format";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
 export default function RoomsHome() {
-  // Explicit homepage order for the co-living cards (Willow is inserted right
-  // after the first card by HouseList). Any home not listed falls to the end.
+  // Explicit homepage order for the co-living cards. Any home not listed falls to the end.
   const ORDER = ["mora", "candace", "raven", "chestnut", "meadow"];
   const rank = (name: string) => {
     const i = ORDER.findIndex((n) => name.toLowerCase().includes(n));

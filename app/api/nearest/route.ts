@@ -16,7 +16,7 @@ type NearHome = {
   url: string;
 };
 
-/** PadSplit homes + Willow, normalized to one shape for distance ranking. */
+/** PadSplit homes + any non-PadSplit co-living houses, normalized to one shape for distance ranking. */
 function allNearHomes(): NearHome[] {
   const padsplit: NearHome[] = getHouses()
     .filter((h) => h.available && typeof h.lat === "number" && typeof h.lng === "number")

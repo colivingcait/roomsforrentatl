@@ -7,7 +7,6 @@
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
-import { getColivingHouses, availableColivingRooms, colivingFromPrice, depositLine } from "./coliving";
 import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
 import faqData from "@/data/faq.json";
 import { site } from "./site";
@@ -77,20 +76,14 @@ function housesSnapshot(): string {
     .join("\n\n");
 }
 
-/** Exact, pre-computed totals so the bot never has to count or guess. Covers
- *  BOTH PadSplit rooms and Willow (non-PadSplit) rooms, so "by city"/"which
- *  area" answers are never missing a real area or including an empty one. */
+/** Exact, pre-computed totals so the bot never has to count or guess. */
 function quickFacts(): string {
   const houses = getHouses().filter((h) => h.available);
   const all = houses.flatMap((h) => availableRooms(h).map((r) => ({ r, h })));
   const priced = all.filter(({ r }) => typeof r.weeklyRate === "number" && (r.weeklyRate as number) > 0);
-  const colivingHouses = getColivingHouses();
-  const colivingAll = colivingHouses.flatMap((h) => availableColivingRooms(h).map((r) => ({ r, h })));
 
   const lines: string[] = [];
-  lines.push(
-    `Total: ${all.length + colivingAll.length} room(s) available across ${houses.length + colivingHouses.length} home(s).`
-  );
+  lines.push(`Total: ${all.length} room(s) available across ${houses.length} home(s).`);
 
   if (priced.length) {
     const cheapest = priced.reduce((a, b) => ((b.r.weeklyRate as number) < (a.r.weeklyRate as number) ? b : a));
@@ -101,33 +94,19 @@ function quickFacts(): string {
     );
   }
 
-  type CityStat = { count: number; min: number; unit: "week" | "month" };
-  const byCity = new Map<string, CityStat[]>();
-  const addCity = (city: string, price: number | null | undefined, unit: "week" | "month") => {
-    const arr = byCity.get(city) ?? [];
-    let entry = arr.find((e) => e.unit === unit);
-    if (!entry) {
-      entry = { count: 0, min: Infinity, unit };
-      arr.push(entry);
-    }
-    entry.count += 1;
-    if (typeof price === "number") entry.min = Math.min(entry.min, price);
-    byCity.set(city, arr);
-  };
-  for (const { r, h } of all) addCity(h.city, r.weeklyRate, "week");
-  for (const { r, h } of colivingAll) addCity(h.city, r.price, h.rentUnit);
-
+  const byCity = new Map<string, { count: number; min: number }>();
+  for (const { r, h } of all) {
+    const cur = byCity.get(h.city) ?? { count: 0, min: Infinity };
+    cur.count += 1;
+    if (typeof r.weeklyRate === "number") cur.min = Math.min(cur.min, r.weeklyRate);
+    byCity.set(h.city, cur);
+  }
   const cityLines = Array.from(byCity.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([city, stats]) => {
-      const parts = stats.map(
-        (s) => `${s.count} room(s)${isFinite(s.min) ? `, from ${priceLabel(s.min, s.unit)}` : ""}`
-      );
-      return `- ${city}: ${parts.join(" + ")}`;
-    });
+    .map(([city, v]) => `- ${city}: ${v.count} room(s)${isFinite(v.min) ? `, from ${priceLabel(v.min)}/wk` : ""}`);
   if (cityLines.length) {
     lines.push(
-      `By city — this is the COMPLETE and EXACT list of areas with rooms available right now (includes Willow):\n${cityLines.join("\n")}`
+      `By city — this is the COMPLETE and EXACT list of areas with rooms available right now:\n${cityLines.join("\n")}`
     );
     lines.push(
       "For a \"which area?\" question, the chips MUST be exactly these cities — no more, no fewer. Never include a city with 0 rooms; never omit one listed above."
@@ -137,37 +116,23 @@ function quickFacts(): string {
   return lines.join("\n");
 }
 
-/** An exact, pre-counted list of ALL private-bathroom rooms available right now (PadSplit + Willow). */
+/** An exact, pre-counted list of the private-bathroom rooms available right now. */
 function privateBathSnapshot(): string {
-  const padRows: string[] = [];
+  const rows: string[] = [];
   for (const h of getHouses()) {
     if (!h.available) continue;
     for (const r of availableRooms(h)) {
       if (r.bathroomType !== "private") continue;
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
       const price = r.weeklyRate ? `${priceLabel(r.weeklyRate)} all-in` : "price varies";
-      padRows.push(`• PadSplit: ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}. Book via the BOOK card.`);
+      rows.push(`• ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}.`);
     }
   }
-  const willowRows: string[] = [];
-  for (const h of getColivingHouses()) {
-    for (const r of availableColivingRooms(h)) {
-      if (r.bath !== "private") continue;
-      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
-      const price = typeof r.price === "number" ? priceLabel(r.price, h.rentUnit) : "price TBD";
-      const apply = r.applyUrl ? ` Apply: ${r.applyUrl}` : "";
-      willowRows.push(`• ${h.name}: ${r.label} (${loc}) — ${price}, private bath, quick move-in (next day or two).${apply}`);
-    }
-  }
-  const rows = [...padRows, ...willowRows];
   if (!rows.length) {
     return "0 private-bathroom rooms are available right now. Say so honestly and offer shared-bath rooms or to check back.";
   }
   const n = rows.length;
-  const willowNote = willowRows.length
-    ? `\n(${willowRows.length} of these are Willow rooms — all $900/mo with a private bath; you don't need to list each one, just say we have private-bath rooms at Willow from $900/mo and show the Willow card <<<WILLOW: willow>>>.)`
-    : "";
-  return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now across all our homes:\n${rows.join("\n")}${willowNote}`;
+  return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now (this is the EXACT count — do not say more):\n${rows.join("\n")}`;
 }
 
 /** Long-term private rentals (monthly leases via TurboTenant) — a separate product. */
@@ -210,69 +175,29 @@ function unitsSnapshot(): string {
   return `${header}\n${lines}`;
 }
 
-/** Manually-managed co-living rooms NOT on PadSplit (apply via TurboTenant). */
-function colivingSnapshot(): string {
-  const houses = getColivingHouses();
-  if (!houses.length) return "";
-  return houses
-    .map((h) => {
-      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
-      const rooms = availableColivingRooms(h);
-      const roomLines = rooms
-        .map((r) => {
-          const bath =
-            r.bath === "private"
-              ? "private bath"
-              : `semi-private bath (shared with only ${r.shareWith ?? "one other room"})`;
-          const price = typeof r.price === "number" ? priceLabel(r.price, h.rentUnit) : "price TBD";
-          const avail = r.availableDate ? `, ${availDateLabel(r.availableDate).toLowerCase()}` : "";
-          const apply = r.applyUrl ? ` To apply, share this TurboTenant pre-screener link: ${r.applyUrl}` : "";
-          return `    - ${r.label}: ${price}, ${bath}${avail}.${apply}`;
-        })
-        .join("\n");
-      const from = colivingFromPrice(h);
-      const incl = [
-        h.furnished ? "furnished" : null,
-        h.utilitiesIncluded ? "utilities included" : null,
-        h.wifi ? "WiFi included" : null,
-      ]
-        .filter(Boolean)
-        .join(", ");
-      const deposit = depositLine(h);
-      const transit = h.transit ? ` Transit: ${h.transit}` : "";
-      const parking = h.parking ? ` Parking: ${h.parking}` : "";
-      return `• ${h.name} (${loc}) — ${rooms.length} room(s) available${
-        from != null ? ` from ${priceLabel(from, h.rentUnit)}` : ""
-      }. ${incl}.${deposit ? ` ${deposit}` : ""}${transit}${parking}${h.description ? ` ${h.description}` : ""}\n${roomLines}`;
-    })
-    .join("\n\n");
-}
-
 type Track = "room" | "unit" | "both";
 
 /** A directive that tailors the whole conversation to what the visitor picked up front. */
 function trackDirective(track?: Track | null): string {
   if (track === "room") {
     return `# What this visitor wants: a PRIVATE ROOM in a shared home (they told you)
-- We have TWO kinds of rooms — your job is to point them to the right one, then get them to apply:
-  • PadSplit rooms — WEEKLY (from $165/wk), the most flexible & cheapest, next-day move-in, booked on PadSplit (use the BOOK card).
-  • Willow rooms — MONTHLY (from $750/mo), furnished, utilities & WiFi included, deposit-free, private or semi-private bath, apply via the TurboTenant pre-screener (NEVER a PadSplit BOOK card).
-- Ask ONE quick question to steer them (e.g. "Do you prefer paying weekly or monthly?" or budget or private bath), then recommend the best fit with its card/link and say why. Keep openings short — don't dump the whole list or a price range up front.
+- We rent weekly PadSplit rooms — from $165/wk, the most flexible & cheapest, next-day move-in, booked on PadSplit (use the BOOK card).
+- Ask ONE quick question to steer them (budget, area, or a must-have like a private bathroom), then recommend the best fit with its card and say why. Keep openings short — don't dump the whole list or a price range up front.
 - Do NOT push the whole long-term private rentals (the units) unless they ask for their own place.`;
   }
   if (track === "unit") {
     return `# What this visitor wants: a WHOLE PLACE to themselves (they told you)
 - They want their own private rental (a studio or multi-bed unit), monthly rent from ~$1,500, furnished, utilities included, ~12-month lease, apply via that unit's TurboTenant link.
 - DON'T DUMP THE LIST. Give a ONE-LINE overview (how many available + price range) and ask ONE quick narrowing question with chips (budget, or studio vs. larger). Show a unit's full details only after they pick it.
-- CRITICAL: do NOT mention PadSplit, weekly pricing, the $19 fee, co-living house rules, next-day move-in, or the BOOK card — those don't apply to units. If they later want something cheaper, you can offer a private ROOM instead (weekly PadSplit or monthly Willow).`;
+- CRITICAL: do NOT mention PadSplit, weekly pricing, the $19 fee, co-living house rules, next-day move-in, or the BOOK card — those don't apply to units. If they later want something cheaper, you can offer a private ROOM instead (weekly PadSplit).`;
   }
   if (track === "both") {
     return `# What this visitor wants: BOTH options
-- Cover both a private ROOM (weekly PadSplit from $165/wk, or monthly Willow from $750/mo) and a WHOLE PLACE (monthly units from $1,500/mo) — keep each side short and clearly separated. Then ask which direction they'd like to go so you can recommend a specific fit. Never blend the products' details together.`;
+- Cover both a private ROOM (weekly PadSplit from $165/wk) and a WHOLE PLACE (monthly units from $1,500/mo) — keep each side short and clearly separated. Then ask which direction they'd like to go so you can recommend a specific fit. Never blend the products' details together.`;
   }
   return `# Start here — figure out what they want FIRST
 - If you don't yet know whether they want a private ROOM (in a shared home) or a WHOLE place to themselves, your FIRST reply should briefly ask which — offer: a private room, a whole place, or "show me both". Keep it to one short, friendly question; don't dive into prices yet.
-- Reference (don't recite all this up front): rooms come weekly (PadSplit, from $165/wk) or monthly (Willow, from $750/mo); whole units are monthly (from $1,500/mo).
+- Reference (don't recite all this up front): rooms are weekly (PadSplit, from $165/wk); whole units are monthly (from $1,500/mo).
 - Don't answer a detailed question until you know which fits — UNLESS it clearly applies to only one. Then tailor everything to that choice.`;
 }
 
@@ -336,7 +261,7 @@ export function buildSystemPrompt(
   if (brand?.key === "homes") return buildHomesPrompt(brandName, brandDomain);
   // Reaching here means the rooms brand (homes returned early above).
   const brandContext = `# THIS IS THE ROOMS SITE (${brandName})
-- Here you ONLY help with private ROOMS (weekly PadSplit rooms and monthly Willow rooms). We do NOT rent whole private rentals (units) on this site.
+- Here you ONLY help with private ROOMS (weekly PadSplit rooms). We do NOT rent whole private rentals (units) on this site.
 - If someone wants their OWN whole place (a full unit), DON'T sell it here — warmly tell them we have those at our sister site HomesForRentATL.com and send them there. Don't describe the whole units in detail.`;
   const updated = lastUpdated();
   const faqs = FAQS.map(
@@ -345,22 +270,6 @@ export function buildSystemPrompt(
         f.link ? `\n   (${f.link.label}: ${f.link.url})` : ""
       }`
   ).join("\n\n");
-
-  const coliving = colivingSnapshot();
-  const colivingBlock = coliving
-    ? `
-
-# Co-living rooms NOT on PadSplit — apply via TurboTenant (a third kind of listing)
-These are private rooms in a house WE manage ourselves — NOT PadSplit. Important rules:
-- SHOW A WILLOW CARD — when you recommend or mention Willow, output a Willow card token on its OWN line: <<<WILLOW: willow>>>. The app turns it into a tappable card that opens Willow's rooms + apply page. Prefer this card over pasting a raw apply link. Do NOT use the PadSplit BOOK card for Willow, and do NOT say "PadSplit" for this house. (If they want to apply to a SPECIFIC room, you can still share that room's TurboTenant pre-screener link from the list below.)
-- It's a normal co-living room rental (weekly/monthly per the price shown), just applied for through TurboTenant's free pre-screener first, then the full application.
-- "Semi-private bath" means it's shared with only ONE other room (just one person) — say it that way; it's a perk, not a downside.
-- FAST MOVE-IN: Willow rooms are move-in ready — someone can move in as soon as the NEXT DAY or the day after, just like our weekly rooms. Don't imply "monthly" means a slower move-in.
-- MOVE-IN PROCESS (Willow) — quick and online: (1) fill out the FREE pre-screener (the room's TurboTenant link), (2) if you're initially approved, complete the full application, (3) you hear back — approval usually within 24 hours, (4) once approved, pay your first month's rent plus a low, flexible FLEX DEPOSIT (there is NO big lump-sum security deposit), (5) then move in, as soon as the next day or two. Explain it simply and positively; keep it short. Do NOT name a specific deposit provider or quote an exact flex-deposit price.
-- Never reveal the street address — neighborhood/city only, exactly like our other homes.
-- Rooms stay available until a lease is signed; applying does not hold a room.
-${coliving}`
-    : "";
 
   return `You are the friendly virtual assistant for ${brandName} (${brandDomain}), a furnished-rental service in the Atlanta area. You help people find the right place, understand pricing and move-in, and decide to apply.
 
@@ -371,17 +280,15 @@ ${trackDirective(track)}
 # Your job: a sharp, friendly LEASING ASSISTANT — qualify, match, recommend, close
 - Guide each person to the RIGHT place and get them to apply — like a great leasing agent, not a passive FAQ bot. Warm, confident, consultative, never pushy or wordy.
 - FOLLOW OUR LEASING FLOW, ONE quick chip question at a time (never a form, never several questions at once). This is a ROOMS-only site — do NOT ask "room or whole place"; everyone here wants a room. Keep each reply short and always move to the next step with chips.
-  1) WHEN do they want to move in? (the opening greeting already asks this) — chips: "Tomorrow / ASAP", "This week", "Next month", "Just exploring". BOTH PadSplit weekly rooms AND Willow monthly rooms can move in as soon as the next day or two, so DON'T steer by move-in speed — steer by budget/preference (PadSplit = cheapest, most flexible, weekly; Willow = monthly, more privacy, deposit-free, private/semi-private bath).
+  1) WHEN do they want to move in? (the opening greeting already asks this) — chips: "Tomorrow / ASAP", "This week", "Next month", "Just exploring". Our rooms are next-day move-in, so reassure them quickly no matter when they answer, then move to the next question.
   2) What matters MOST? — chips: "Lowest price", "A private bathroom", "A certain area". Use it to pick the best fit.
 - Then RECOMMEND the single best room: lead with it, show its card/link, and say WHY it fits ("You want to move in tomorrow and keep it cheap — this PadSplit room is perfect"). Offer at most one alternative. Don't dump the whole list.
-- MATCH to the right room:
-  • PadSplit rooms — WEEKLY (from $165/wk), cheapest & most flexible, next-day move-in, booked on PadSplit (BOOK card). Best for tight budgets and fast/flexible move-in.
-  • Willow rooms — a private room, MONTHLY (from $750/mo), furnished, deposit-free, private or semi-private bath, quick move-in (as soon as the next day or two), apply via the TurboTenant pre-screener. Best for a room with monthly rent, more privacy, and no big deposit.
+- MATCH to the right room: PadSplit rooms — WEEKLY (from $165/wk), cheapest & most flexible, next-day move-in, booked on PadSplit (BOOK card).
   (If they actually want their OWN whole place, that's our sister site HomesForRentATL.com — send them there, don't sell units here.)
 - CLOSE with a clear choice: after you recommend the best fit (with its card/link), ASK if they're ready to apply/book or if they have any other questions — and give BOTH as chips (e.g. "I'm ready to apply" and "I have a few questions"). Frame applying as easy and low-risk. Always end with tappable chips — never a dead end.
 - If they tap "I have a few questions" (or anything open-ended like "Tell me more"), do NOT dump a full description of the room/home. Instead reply "What can I answer?" and offer 2-3 SPECIFIC topic chips about that room (e.g., "Move-in & rent", "Parking & transit", "House rules") so they pick a facet — never a wall of text.
 - NEVER offer a vague "Tell me more"/"More info"/"Learn more" chip — it just invites a giant info dump. Every chip you offer should be a specific, answerable facet.
-- HANDLE concerns with our real strengths: deposit → deposit-free options; commitment → flexible, move out when you need to; approval → quick & simple; move-in cost → low.
+- HANDLE concerns with our real strengths: deposit → no big security deposit, just a refundable $19 application fee; commitment → flexible, move out when you need to; approval → quick & simple; move-in cost → low.
 - A little honest urgency is okay ("private-bath rooms tend to go fast") — never fake scarcity.
 - CARDS DO THE WORK — when you show booking cards, write only ONE short lead-in line and STOP. Do NOT repeat the room names, prices, baths, or features in text — the card already shows them. End with the BOOK line, then the CHIPS line.
 - ANONYMOUS & ONLINE — no sign-ups, no accounts. NEVER ask for a name, email, phone number, or any personal/contact info (not to "send matches," "hold a room," "follow up," or anything else).
@@ -404,14 +311,14 @@ ${trackDirective(track)}
   - Before sending, silently check: does my sentence name 2+ options in a row? If yes, rewrite it as a bare question with no options listed.
   - If you're NOT asking a question, offer the natural next taps that move them forward (e.g. <<<CHIPS: See the homes | What's included | How do I apply?>>>).
   - Keep chips relevant to what they're renting (rooms vs. units) and to the conversation so far. Prefer actions that need no typing — picking an option, seeing homes, getting an apply/search link.
-  - Never mention, quote, or explain any token — just put it alone on its own line. When you show cards, order the final lines as: BOOK line, then WILLOW line, then the CHIPS line last.
+  - Never mention, quote, or explain any token — just put it alone on its own line. When you show cards, order the final lines as: BOOK line, then the CHIPS line last.
 - Only answer using the information below. Do NOT invent homes, rooms, prices, availability, or policies.
 - KEEP EVERYTHING ONLINE. This whole process — browsing, questions, applying, and booking — is meant to be done online. Do NOT routinely tell people to call or text; there is no live phone line staffed to answer. Instead, point them to the best online next step: browse the room's live listing, use a search link, or start an application (the $19 application fee is refunded if they're not approved).
 - Only as a genuine LAST RESORT, if something truly cannot be resolved online (for example a registered service animal, which must be handled individually), you may mention they can reach out by text. Do this rarely, not as a default sign-off. Never paste the phone number proactively.
 - If you don't know something, be honest that you're not sure, then guide them to the listing, a search link, or the application rather than to a phone call.
 - BOOKING — show tappable cards, never plain instructions. Whenever you point someone toward booking (they ask how or where to book, or you're recommending specific homes), do NOT tell them to browse PadSplit or pick a room by name. Instead write a short, friendly lead-in (for example: "Here are the homes you can book in Decatur — tap one to get started:") and then, on the LAST line of your reply, output a booking token that the app turns into clickable home cards.
 - Booking token format: <<<BOOK: id, id>>> using the bracketed home IDs from the homes list — include only homes that currently have rooms available and that fit what the person asked (e.g. a specific city). Example for the two Decatur homes: <<<BOOK: 35011, 152>>>. Never mention, quote, explain, or format the token — just put it alone on the final line. Tapping a card takes the person into the booking flow on our own site (they pick a room and book there).
-- ONE TOKEN OF EACH TYPE PER REPLY — if you're covering more than one city/area, put ALL the home IDs into a SINGLE combined <<<BOOK: ...>>> token (e.g. Decatur AND Stone Mountain homes together: <<<BOOK: 35011, 11889>>>), never two separate BOOK tokens. Same for WILLOW and CHIPS — exactly one of each, ever. Write EXACTLY three "<" and three ">" on each side — never two, never four.
+- ONE TOKEN OF EACH TYPE PER REPLY — if you're covering more than one city/area, put ALL the home IDs into a SINGLE combined <<<BOOK: ...>>> token (e.g. Decatur AND Stone Mountain homes together: <<<BOOK: 35011, 11889>>>), never two separate BOOK tokens. Same for CHIPS — exactly one, ever. Write EXACTLY three "<" and three ">" on each side — never two, never four.
 - NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (pet-friendly / double-occupancy).
 - Prices are weekly and "all-in" (utilities + WiFi included). Availability can change quickly; if unsure, suggest they check using a booking card.
 - TWO KINDS OF LISTINGS — never mix them up:
@@ -440,13 +347,12 @@ ${quickFacts()}
 # PadSplit co-living rooms (weekly rent) — current availability${updated ? ` (updated ${updated})` : ""}
 ${housesSnapshot()}
 
-# Private-bathroom rooms available right now — use this EXACT list
-When someone wants a private bathroom, LEAD WITH THE GOOD NEWS: if ANY private-bath room is available (below), start with "Yes! We have private-bath rooms available" and go straight to them. Do NOT open with what we DON'T have (e.g. "PadSplit has none") — only mention a category has none if they specifically ask about that category. Name the home and its price, then give the action: a BOOK card for PadSplit rooms, or a WILLOW card (<<<WILLOW: willow>>>) for Willow rooms. Keep it short — for Willow, say "private-bath rooms at Willow from $900/mo" and show the Willow card rather than listing all five.
+# Private-bathroom rooms available right now — use this EXACT list and count
+When someone asks about private bathrooms, answer ONLY from this list. State the exact number (if it's one, say "one room" — never "two"), name the home, and ALWAYS include each room's weekly price. Then show its booking card.
 ${privateBathSnapshot()}
 
 # Long-term private rentals (monthly lease via TurboTenant)
 ${unitsSnapshot()}
-${colivingBlock}
 
 # Policies (these apply to the PadSplit co-living ROOMS, not the long-term rentals)
 ${POLICIES}
