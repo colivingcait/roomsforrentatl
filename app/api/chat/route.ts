@@ -21,13 +21,19 @@ export type BookCard = {
 
 // The bot ends a booking reply with a token like `<<<BOOK: 35011, 152>>>`.
 // Pull it out, strip it from the visible text, and turn the IDs into cards
-// (only for homes that actually have rooms available right now).
+// (only for homes that actually have rooms available right now). Matches
+// ALL occurrences (the model occasionally emits more than one per reply,
+// e.g. one per city) and tolerates a malformed bracket count (`>>` instead
+// of `>>>`) so a slip never leaks raw token text into the chat.
 function extractBookCards(text: string): { text: string; cards: BookCard[] } {
-  const match = text.match(/<<<\s*BOOK:\s*([0-9,\s]+?)>>>/i);
-  if (!match) return { text, cards: [] };
+  const re = /<{2,}\s*BOOK:\s*([0-9,\s]+?)>{2,}/gi;
+  const matches = Array.from(text.matchAll(re));
+  if (!matches.length) return { text, cards: [] };
 
-  const cleaned = text.replace(match[0], "").trim();
-  const ids = Array.from(new Set(match[1].split(",").map((s) => s.trim()).filter(Boolean)));
+  const cleaned = text.replace(re, "").trim();
+  const ids = Array.from(
+    new Set(matches.flatMap((m) => m[1].split(",").map((s) => s.trim()).filter(Boolean)))
+  );
   const houses = getHouses();
   const cards: BookCard[] = ids
     .map((id) => houses.find((h) => h.id === id))
@@ -56,13 +62,17 @@ export type WillowCard = {
 };
 
 // The bot ends a Willow reply with `<<<WILLOW: willow>>>`. Turn the house id(s)
-// into cards linking to that house's rooms + apply page.
+// into cards linking to that house's rooms + apply page. Matches ALL
+// occurrences and tolerates a malformed bracket count, same as extractBookCards.
 function extractWillowCards(text: string): { text: string; cards: WillowCard[] } {
-  const match = text.match(/<<<\s*WILLOW:\s*([a-z0-9,\-\s]+?)>>>/i);
-  if (!match) return { text, cards: [] };
+  const re = /<{2,}\s*WILLOW:\s*([a-z0-9,\-\s]+?)>{2,}/gi;
+  const matches = Array.from(text.matchAll(re));
+  if (!matches.length) return { text, cards: [] };
 
-  const cleaned = text.replace(match[0], "").trim();
-  const ids = Array.from(new Set(match[1].split(",").map((s) => s.trim().toLowerCase()).filter(Boolean)));
+  const cleaned = text.replace(re, "").trim();
+  const ids = Array.from(
+    new Set(matches.flatMap((m) => m[1].split(",").map((s) => s.trim().toLowerCase()).filter(Boolean)))
+  );
   const houses = getColivingHouses();
   const cards: WillowCard[] = ids
     .map((id) => houses.find((h) => h.id === id))
@@ -85,15 +95,18 @@ function extractWillowCards(text: string): { text: string; cards: WillowCard[] }
 
 // The bot ends a reply with `<<<CHIPS: Option one | Option two>>>` — short,
 // tappable quick replies so the visitor rarely has to type. Pull them out and
-// strip the token from the visible text.
+// strip the token from the visible text. Matches ALL occurrences and
+// tolerates a malformed bracket count (e.g. `>>` instead of `>>>`), since a
+// single missed match otherwise leaks the raw token straight into the chat.
 function extractChips(text: string): { text: string; chips: string[] } {
-  const match = text.match(/<<<\s*CHIPS:\s*([\s\S]+?)>>>/i);
-  if (!match) return { text, chips: [] };
-  const cleaned = text.replace(match[0], "").trim();
+  const re = /<{2,}\s*CHIPS:\s*([\s\S]+?)>{2,}/gi;
+  const matches = Array.from(text.matchAll(re));
+  if (!matches.length) return { text, chips: [] };
+  const cleaned = text.replace(re, "").trim();
   const chips = Array.from(
     new Set(
-      match[1]
-        .split("|")
+      matches
+        .flatMap((m) => m[1].split("|"))
         .map((s) => s.trim().replace(/^[-•*]\s*/, ""))
         .filter(Boolean)
         .map((s) => s.slice(0, 48))
@@ -230,8 +243,10 @@ export async function POST(req: Request) {
     const willowed = extractWillowCards(booked.text);
     const { text: parsed, chips } = extractChips(willowed.text);
     // Safety net: never let a raw <<<...>>> token reach the visible chat, even
-    // if it's malformed or a future token type the extractors above don't know.
-    const text = parsed.replace(/<<<[\s\S]*?>>>/g, "").replace(/\n{3,}/g, "\n\n").trim();
+    // if it's malformed (e.g. `>>` instead of `>>>`) or a future token type the
+    // extractors above don't know. `{2,}` on both sides catches bracket-count
+    // slips that would otherwise dodge the exact-`>>>` extractors entirely.
+    const text = parsed.replace(/<{2,}[\s\S]*?>{2,}/g, "").replace(/\n{3,}/g, "\n\n").trim();
     logChat(question, text, source);
     return Response.json({ reply: text, houses: booked.cards, willow: willowed.cards, chips });
   } catch (err) {
