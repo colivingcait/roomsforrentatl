@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
-import FaqButton from "@/components/FaqButton";
+import StickyChatBar from "@/components/StickyChatBar";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import { getHouses, lastUpdated } from "@/lib/houses";
@@ -80,11 +80,7 @@ export default function RoomsHome() {
       <div className="h-24 sm:hidden" />
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 px-4 pt-3 backdrop-blur sm:hidden">
-        <FaqButton
-          className="btn-book chat-attn w-full"
-          label="💬 Have a question? Chat with us"
-          startTab="chat"
-        />
+        <StickyChatBar />
       </div>
     </main>
   );
