@@ -187,6 +187,8 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // The message that failed, so "Try again" can resend it verbatim.
+  const [lastFailedText, setLastFailedText] = useState<string | null>(null);
   // Each brand is single-category, so start in that track (override wins, e.g.
   // "unit" on a rental page). The room-vs-place picker no longer appears.
   const startTrack: Track = initialTrack ?? brandDefaultTrack();
@@ -226,6 +228,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
     const trimmed = text.trim();
     if (!trimmed || loading) return;
     setError(null);
+    setLastFailedText(null);
     // Lock in the housing track once it's clear — from the picker, or inferred
     // from what they tapped/typed — so answers stay tailored to room vs. unit.
     const effectiveTrack = trackOverride ?? track ?? inferTrack(trimmed) ?? undefined;
@@ -265,6 +268,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
       const data = await res.json();
       if (!res.ok || !data.reply) {
         setError(data.error || "Sorry — something went wrong. Please try again in a moment.");
+        setLastFailedText(trimmed);
       } else {
         setMessages((m) => [
           ...m,
@@ -278,6 +282,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
       }
     } catch {
       setError("Couldn't reach the assistant. Please check your connection and try again.");
+      setLastFailedText(trimmed);
     } finally {
       setLoading(false);
       inputRef.current?.focus();
@@ -315,7 +320,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   }
   remainingSuggestions = remainingSuggestions.slice(0, 3);
   const showSuggestions =
-    !loading && !showTrackOptions && !showBotChips && remainingSuggestions.length > 0;
+    !loading && !error && !showTrackOptions && !showBotChips && remainingSuggestions.length > 0;
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -354,7 +359,32 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
           </Bubble>
         )}
 
-        {error && <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+        {error && (
+          <>
+            <div className="rounded-xl bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            <div className="flex flex-wrap gap-2 pt-1">
+              {lastFailedText && (
+                <button
+                  type="button"
+                  onClick={() => send(lastFailedText, "suggested")}
+                  className="rounded-full bg-brand px-3.5 py-2 text-sm font-semibold text-white shadow-sm active:scale-95"
+                >
+                  Try again
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  setError(null);
+                  setLastFailedText(null);
+                }}
+                className="rounded-full border border-brand/30 bg-brand/5 px-3.5 py-2 text-sm font-semibold text-brand active:scale-95"
+              >
+                Ask something else
+              </button>
+            </div>
+          </>
+        )}
 
         {/* Up-front choice: which kind of housing are they after? */}
         {showTrackOptions && (
