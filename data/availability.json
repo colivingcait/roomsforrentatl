@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-10T00:02:40.499Z",
+  "updatedAt": "2026-07-10T13:16:09.302Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -250,7 +250,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-10T00:02:40.499Z",
+      "checkedAt": "2026-07-10T13:16:09.302Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -493,7 +493,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-07-10T00:02:40.499Z",
+      "checkedAt": "2026-07-10T13:16:09.302Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -523,7 +523,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-09",
+          "moveInDate": "2026-07-11",
           "image": "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
@@ -542,7 +542,7 @@
           "name": "Dove  - large bright room w/ Smart TV!",
           "roomNumber": 4,
           "description": "",
-          "weeklyRate": 179,
+          "weeklyRate": 174,
           "recommendedPrice": 197,
           "bathroomType": "shared",
           "bedSize": "queen",
@@ -554,7 +554,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-09",
+          "moveInDate": "2026-07-11",
           "image": "https://www.padsplit.com/img/psproperty/11889/img_853c017f-083b-42d6-ae14-c9aa8bb803c2.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/11889/img_853c017f-083b-42d6-ae14-c9aa8bb803c2.png",
@@ -573,7 +573,7 @@
           "name": "Grey Heron - Light filled room w/ Private Entrance",
           "roomNumber": 7,
           "description": "",
-          "weeklyRate": 206,
+          "weeklyRate": 185,
           "recommendedPrice": 200,
           "bathroomType": "shared",
           "bedSize": "queen",
@@ -585,7 +585,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-09",
+          "moveInDate": "2026-07-11",
           "image": "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
@@ -766,10 +766,8 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-10T00:02:40.499Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
-      "stale": true,
-      "lastError": "Error: listing did not render (generic shell)"
+      "checkedAt": "2026-07-10T13:16:09.302Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -947,7 +945,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-10T00:02:40.499Z",
+      "checkedAt": "2026-07-10T13:16:09.302Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1147,7 +1145,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-10T00:02:40.499Z",
+      "checkedAt": "2026-07-10T13:16:09.302Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
