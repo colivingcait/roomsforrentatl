@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-12T12:03:55.639Z",
+  "updatedAt": "2026-07-12T23:51:10.125Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -250,7 +250,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-12T12:03:55.639Z",
+      "checkedAt": "2026-07-12T23:51:10.125Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -493,7 +493,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-07-12T12:03:55.639Z",
+      "checkedAt": "2026-07-12T23:51:10.125Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -704,7 +704,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-12T12:03:55.639Z",
+      "checkedAt": "2026-07-12T23:51:10.125Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -883,7 +883,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-12T12:03:55.639Z",
+      "checkedAt": "2026-07-12T23:51:10.125Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1111,7 +1111,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-12T12:03:55.639Z",
+      "checkedAt": "2026-07-12T23:51:10.125Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
