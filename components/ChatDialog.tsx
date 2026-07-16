@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import faqData from "@/data/faq.json";
+import { trackEvent } from "@/lib/analytics";
 import ChatPanel from "./ChatPanel";
 
 type Faq = { q: string; a: string; category?: string; link?: { label: string; url: string } };
@@ -42,6 +43,12 @@ export default function ChatDialog({
   useEffect(() => {
     if (open) setTab(startTab);
   }, [open, startTab]);
+
+  // Track FAQ tab views separately from chat, so we can see whether people
+  // use the FAQ list at all or go straight to chat.
+  useEffect(() => {
+    if (open && tab === "faq") trackEvent("faq_viewed");
+  }, [open, tab]);
 
   // While the dialog is open: lock background scroll and close on Escape.
   useEffect(() => {

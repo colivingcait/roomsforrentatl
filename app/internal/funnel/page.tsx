@@ -25,6 +25,13 @@ function formatDuration(seconds: number): string {
   return `${hours}h ${mins}m`;
 }
 
+const DOW_NAMES = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; // ClickHouse toDayOfWeek: 1=Mon..7=Sun
+
+function formatHour(hour: number): string {
+  const h = hour % 12 === 0 ? 12 : hour % 12;
+  return `${h}${hour < 12 ? "am" : "pm"}`;
+}
+
 function Bar({
   width,
   color,
@@ -181,13 +188,15 @@ export default async function InternalFunnelPage() {
               </div>
             </div>
 
-            {metrics.byHouse.length > 0 && (
+            {metrics.byRoom.length > 0 && (
               <div className="mt-3 border-t border-slate-100 pt-4">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Book clicks by house</p>
-                {metrics.byHouse.map((h) => (
-                  <div key={h.house} className="flex justify-between text-sm">
-                    <span className="text-ink">{h.house}</span>
-                    <span className="font-semibold text-ink">{h.clicks}</span>
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Book clicks by room</p>
+                {metrics.byRoom.map((r) => (
+                  <div key={`${r.house}-${r.room}`} className="flex justify-between text-sm">
+                    <span className="text-ink">
+                      {r.house} <span className="text-muted">— {r.room}</span>
+                    </span>
+                    <span className="font-semibold text-ink">{r.clicks}</span>
                   </div>
                 ))}
               </div>
@@ -265,13 +274,103 @@ export default async function InternalFunnelPage() {
           ))}
 
           <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Repeat visitors</p>
-          <div className="flex justify-between text-sm">
+          <div className="mb-1 flex justify-between text-sm">
             <span className="text-ink">Came back 2+ times</span>
             <span className="font-semibold text-ink">
               {metrics.returningVisitors} / {metrics.uniqueVisitors} (
               {Math.round((metrics.returningVisitors / Math.max(metrics.uniqueVisitors, 1)) * 100)}%)
             </span>
           </div>
+          {metrics.visitsBeforeBooking.map((v) => (
+            <div key={v.bucket} className="flex justify-between text-sm text-muted">
+              <span>Booked on: {v.bucket}</span>
+              <span className="font-semibold text-ink">{v.visitors}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Chat engagement */}
+      {metrics && (
+        <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
+          <h2 className="text-sm font-bold text-ink">Chat engagement</h2>
+          <p className="mb-4 text-xs text-muted">
+            "Book-click rate" here, not confirmed bookings — see PadSplit Applications above for real outcomes.
+          </p>
+
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Chips only vs. typed a message</p>
+          {metrics.chatStyle.map((s) => (
+            <div key={s.style} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{s.style}</span>
+              <span className="text-muted">
+                {s.sessions} sessions ·{" "}
+                <b className="text-ink">{Math.round((s.bookClicks / Math.max(s.sessions, 1)) * 100)}% book-click rate</b>
+              </span>
+            </div>
+          ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Chat depth</p>
+          {metrics.chatDepth.map((d) => (
+            <div key={d.depth} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{d.depth}</span>
+              <span className="text-muted">
+                {d.sessions} sessions ·{" "}
+                <b className="text-ink">{Math.round((d.bookClicks / Math.max(d.sessions, 1)) * 100)}% book-click rate</b>
+              </span>
+            </div>
+          ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">FAQ tab</p>
+          <div className="flex justify-between text-sm">
+            <span className="text-ink">Viewed the FAQ tab</span>
+            <span className="font-semibold text-ink">
+              {metrics.faqSessions} sessions ({metrics.faqViews} views)
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Timing */}
+      {metrics && (
+        <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
+          <h2 className="text-sm font-bold text-ink">Timing</h2>
+          <p className="mb-4 text-xs text-muted">America/New_York · useful for timing Facebook posts</p>
+
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">By day of week</p>
+          {metrics.byDayOfWeek.map((d) => (
+            <div key={d.day} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{DOW_NAMES[d.day] ?? d.day}</span>
+              <span className="text-muted">
+                {d.visits} visits · <b className="text-ink">{d.bookClicks} book clicks</b>
+              </span>
+            </div>
+          ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Peak hours (top 5)</p>
+          {[...metrics.byHour]
+            .sort((a, b) => b.visits - a.visits)
+            .slice(0, 5)
+            .map((h) => (
+              <div key={h.hour} className="mb-1 flex justify-between text-sm">
+                <span className="text-ink">{formatHour(h.hour)}</span>
+                <span className="text-muted">
+                  {h.visits} visits · <b className="text-ink">{h.bookClicks} book clicks</b>
+                </span>
+              </div>
+            ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">By position in the month</p>
+          {metrics.byWeekOfMonth.map((w) => (
+            <div key={w.week} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{w.week}</span>
+              <span className="text-muted">
+                {w.visits} visits · <b className="text-ink">{w.bookClicks} book clicks</b>
+              </span>
+            </div>
+          ))}
+          <p className="mt-3 text-xs text-muted">
+            Still a short window ({DATA_START} onward) — this gets more meaningful as more full months accumulate.
+          </p>
         </div>
       )}
 

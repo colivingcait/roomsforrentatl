@@ -21,6 +21,7 @@ export default function PostHogInit() {
     // event in the session (including this page's own pageview below) carries
     // the variant tag, instead of only sessions that land on one specific page.
     getVariant("mobile_cta", ["control", "urgent"]);
+    getVariant("start_tab", ["chat", "faq"]);
   }, []);
 
   useEffect(() => {

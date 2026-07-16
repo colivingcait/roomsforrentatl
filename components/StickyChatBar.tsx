@@ -17,10 +17,12 @@ const COPY = {
  */
 export default function StickyChatBar() {
   const [variant, setVariant] = useState<keyof typeof COPY>("control");
+  const [startTab, setStartTab] = useState<"chat" | "faq">("chat");
 
   useEffect(() => {
     setVariant(getVariant("mobile_cta", ["control", "urgent"]) as keyof typeof COPY);
+    setStartTab(getVariant("start_tab", ["chat", "faq"]) as "chat" | "faq");
   }, []);
 
-  return <FaqButton className="btn-book chat-attn w-full" label={COPY[variant]} startTab="chat" />;
+  return <FaqButton className="btn-book chat-attn w-full" label={COPY[variant]} startTab={startTab} />;
 }

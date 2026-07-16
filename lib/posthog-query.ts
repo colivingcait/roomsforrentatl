@@ -48,12 +48,21 @@ export interface SiteFunnelMetrics {
   bookClickEvents: number;
   applyClickSessions: number;
   byHouse: { house: string; clicks: number }[];
+  byRoom: { house: string; room: string; clicks: number }[];
   byDevice: { device: string; sessions: number; bookClicks: number; chatOpened: number }[];
   byReferrer: { referrer: string; sessions: number; bookClicks: number }[];
   bookClicksBySource: { source: string; clicks: number }[];
   avgSecondsToBook: number | null;
   uniqueVisitors: number;
   returningVisitors: number;
+  chatStyle: { style: string; sessions: number; bookClicks: number }[];
+  chatDepth: { depth: string; sessions: number; bookClicks: number }[];
+  visitsBeforeBooking: { bucket: string; visitors: number }[];
+  byHour: { hour: number; visits: number; bookClicks: number }[];
+  byDayOfWeek: { day: number; visits: number; bookClicks: number }[];
+  byWeekOfMonth: { week: string; visits: number; bookClicks: number }[];
+  faqSessions: number;
+  faqViews: number;
 }
 
 /**
@@ -65,7 +74,24 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
   const from = dt(dateFrom);
   const to = dt(dateTo);
 
-  const [sessionShape, funnelEvents, byHouse, byDevice, byReferrer, visitors, bookSource, timeToBook] = await Promise.all([
+  const [
+    sessionShape,
+    funnelEvents,
+    byHouse,
+    byDevice,
+    byReferrer,
+    visitors,
+    bookSource,
+    timeToBook,
+    byRoom,
+    chatStyle,
+    chatDepth,
+    visitsBeforeBooking,
+    byHour,
+    byDayOfWeek,
+    faqUsage,
+    byWeekOfMonth,
+  ] = await Promise.all([
     // Sessions + bounce vs explore, from pageview counts per session.
     queryHogQL(`
       SELECT count() AS sessions, countIf(pv_count = 1) AS bounced, countIf(pv_count > 1) AS explored
@@ -189,6 +215,134 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
         HAVING count(DISTINCT event) = 2
       )
     `),
+    // Book clicks by specific room (not just house) — chat bookings link to
+    // the house only (no specific room), so those group under "Chat (house-level)".
+    queryHogQL(`
+      SELECT
+        properties['houseName'] AS house,
+        coalesce(
+          nullif(properties['roomTitle'], ''),
+          if(properties['source'] = 'chat', 'Chat (house-level)', concat('Room ', properties['room']))
+        ) AS room,
+        count() AS clicks
+      FROM events
+      WHERE event = 'book_click' AND timestamp >= ${from} AND timestamp < ${to}
+      GROUP BY house, room
+      ORDER BY clicks DESC
+    `),
+    // Chip taps vs. typed messages — does typing a custom question at least
+    // once correlate with a higher or lower book-click rate?
+    queryHogQL(`
+      SELECT
+        multiIf(has_typed = 1, 'Typed at least once', 'Chips only') AS style,
+        count() AS sessions,
+        countIf(booked = 1) AS book_clicks
+      FROM (
+        SELECT
+          properties['$session_id'] AS session_id,
+          maxIf(1, event = 'chat_message_sent' AND properties['source'] = 'typed') AS has_typed,
+          maxIf(1, event = 'chat_message_sent') AS chatted,
+          maxIf(1, event = 'book_click') AS booked
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to}
+          AND (event = 'chat_message_sent' OR event = 'book_click')
+        GROUP BY session_id
+      )
+      WHERE chatted = 1
+      GROUP BY style
+    `),
+    // Chat depth vs. conversion — do longer conversations convert better?
+    queryHogQL(`
+      SELECT
+        multiIf(max_turn <= 1, '1 message', max_turn <= 3, '2-3 messages', '4+ messages') AS depth,
+        count() AS sessions,
+        countIf(booked = 1) AS book_clicks
+      FROM (
+        SELECT
+          properties['$session_id'] AS session_id,
+          max(toInt32OrZero(toString(properties['turn']))) AS max_turn,
+          maxIf(1, event = 'book_click') AS booked
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to}
+          AND (event = 'chat_message_sent' OR event = 'book_click')
+        GROUP BY session_id
+        HAVING max_turn > 0
+      )
+      GROUP BY depth
+    `),
+    // For visitors who clicked Book at least once in this window, how many
+    // total sessions did they have here (1 vs 2+)? Approximate — counts all
+    // sessions in the window, not strictly "before" the booking session.
+    queryHogQL(`
+      SELECT
+        multiIf(session_count <= 1, '1st visit', '2+ visits') AS bucket,
+        count() AS visitors
+      FROM (
+        SELECT
+          distinct_id,
+          count(DISTINCT properties['$session_id']) AS session_count,
+          maxIf(1, event = 'book_click') AS booked
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to}
+        GROUP BY distinct_id
+      )
+      WHERE booked = 1
+      GROUP BY bucket
+    `),
+    // Visits + book clicks by hour of day (America/New_York, since that's the
+    // market) — for timing Facebook posts.
+    queryHogQL(`
+      SELECT
+        toHour(toTimeZone(ts, 'America/New_York')) AS hour,
+        countIf(ev = '$pageview') AS visits,
+        countIf(ev = 'book_click') AS book_clicks
+      FROM (
+        SELECT timestamp AS ts, event AS ev
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to} AND (event = '$pageview' OR event = 'book_click')
+      )
+      GROUP BY hour
+      ORDER BY hour
+    `),
+    // Same, by day of week (1=Mon..7=Sun).
+    queryHogQL(`
+      SELECT
+        toDayOfWeek(toTimeZone(ts, 'America/New_York')) AS day,
+        countIf(ev = '$pageview') AS visits,
+        countIf(ev = 'book_click') AS book_clicks
+      FROM (
+        SELECT timestamp AS ts, event AS ev
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to} AND (event = '$pageview' OR event = 'book_click')
+      )
+      GROUP BY day
+      ORDER BY day
+    `),
+    // FAQ tab usage.
+    queryHogQL(`
+      SELECT count(DISTINCT properties['$session_id']) AS faq_sessions, count() AS faq_views
+      FROM events
+      WHERE event = 'faq_viewed' AND timestamp >= ${from} AND timestamp < ${to}
+    `),
+    // Visits + book clicks by position in the month — rent/payday timing can
+    // make mid-month behave very differently from the bookends.
+    queryHogQL(`
+      SELECT
+        multiIf(
+          dom <= 7, 'Week 1 (1-7)',
+          dom <= 14, 'Week 2 (8-14)',
+          dom <= 21, 'Week 3 (15-21)',
+          'Week 4+ (22-end)'
+        ) AS week_of_month,
+        countIf(ev = '$pageview') AS visits,
+        countIf(ev = 'book_click') AS book_clicks
+      FROM (
+        SELECT event AS ev, toDayOfMonth(toTimeZone(timestamp, 'America/New_York')) AS dom
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to} AND (event = '$pageview' OR event = 'book_click')
+      )
+      GROUP BY week_of_month
+    `),
   ]);
 
   const row = (r: QueryResult) => r.results[0] ?? [];
@@ -225,5 +379,39 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
     returningVisitors: returningCount ?? 0,
     bookClicksBySource: (bookSource.results as [string, number][]).map(([source, clicks]) => ({ source, clicks })),
     avgSecondsToBook: (row(timeToBook) as [number | null])[0] ?? null,
+    byRoom: (byRoom.results as [string, string, number][])
+      .filter(([house]) => !!house)
+      .map(([house, room, clicks]) => ({ house, room, clicks })),
+    chatStyle: (chatStyle.results as [string, number, number][]).map(([style, sessionsN, bookClicks]) => ({
+      style,
+      sessions: sessionsN,
+      bookClicks,
+    })),
+    chatDepth: (chatDepth.results as [string, number, number][]).map(([depth, sessionsN, bookClicks]) => ({
+      depth,
+      sessions: sessionsN,
+      bookClicks,
+    })),
+    visitsBeforeBooking: (visitsBeforeBooking.results as [string, number][]).map(([bucket, visitorsN]) => ({
+      bucket,
+      visitors: visitorsN,
+    })),
+    byHour: (byHour.results as [number, number, number][]).map(([hour, visits, bookClicks]) => ({
+      hour,
+      visits,
+      bookClicks,
+    })),
+    byDayOfWeek: (byDayOfWeek.results as [number, number, number][]).map(([day, visits, bookClicks]) => ({
+      day,
+      visits,
+      bookClicks,
+    })),
+    byWeekOfMonth: (byWeekOfMonth.results as [string, number, number][]).map(([week, visits, bookClicks]) => ({
+      week,
+      visits,
+      bookClicks,
+    })),
+    faqSessions: (row(faqUsage) as [number, number])[0] ?? 0,
+    faqViews: (row(faqUsage) as [number, number])[1] ?? 0,
   };
 }

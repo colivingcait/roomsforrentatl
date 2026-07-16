@@ -156,7 +156,13 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             rel="noopener noreferrer"
             className="btn-book flex-1"
             event="book_click"
-            properties={{ house: house.id, houseName: house.name, room: String(room.id), source: "page" }}
+            properties={{
+              house: house.id,
+              houseName: house.name,
+              room: String(room.id),
+              roomTitle: roomTitle(room),
+              source: "page",
+            }}
           >
             Book this room →
           </TrackedOutboundLink>

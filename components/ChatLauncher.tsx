@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { trackEvent } from "@/lib/analytics";
+import { getVariant } from "@/lib/ab";
 import ChatDialog from "./ChatDialog";
 
 // --- Tweak these to taste -------------------------------------------------
@@ -51,6 +52,17 @@ export default function ChatLauncher() {
   const suppressProactive = onRentalPage && !isHomesBrand;
   // Only override the track on rental pages; ChatPanel defaults by brand otherwise.
   const chatTrack: "unit" | null = onRentalPage ? "unit" : null;
+
+  // A/B: does opening on the FAQ tab vs straight into chat change engagement?
+  // Only on the plain rooms-brand experience — the FAQ content is room-only,
+  // so it'd be the wrong content for homes-brand or unit-focused rental pages.
+  const [startTab, setStartTab] = useState<"chat" | "faq">("chat");
+  useEffect(() => {
+    if (!isHomesBrand && !onRentalPage) {
+      setStartTab(getVariant("start_tab", ["chat", "faq"]) as "chat" | "faq");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const openChat = (trigger: "button" | "auto_open" | "exit_intent" = "button") => {
     interacted.current = true;
@@ -137,7 +149,7 @@ export default function ChatLauncher() {
       <ChatDialog
         open={open}
         onClose={() => setOpen(false)}
-        startTab="chat"
+        startTab={startTab}
         initialTrack={chatTrack}
       />
     </>
