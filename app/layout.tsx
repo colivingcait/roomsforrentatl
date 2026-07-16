@@ -49,12 +49,12 @@ export function generateMetadata(): Metadata {
         ],
     openGraph: {
       title: headline,
-      description: brand.description,
+      description: brand.tagline,
       url: brand.url,
       siteName: brand.name,
       type: "website",
     },
-    twitter: { card: "summary_large_image", title: headline, description: brand.description },
+    twitter: { card: "summary_large_image", title: headline, description: brand.tagline },
     robots: { index: true, follow: true },
   };
 }
