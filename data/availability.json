@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-16T22:12:24.006Z",
+  "updatedAt": "2026-07-16T22:36:18.626Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -259,7 +259,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-16T22:12:24.006Z",
+      "checkedAt": "2026-07-16T22:36:18.626Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -470,7 +470,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-16T22:12:24.006Z",
+      "checkedAt": "2026-07-16T22:36:18.626Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -721,7 +721,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-16T22:12:24.006Z",
+      "checkedAt": "2026-07-16T22:36:18.626Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -900,7 +900,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-16T22:12:24.006Z",
+      "checkedAt": "2026-07-16T22:36:18.626Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1079,6 +1079,38 @@
           "primary": false,
           "width": 1500,
           "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/6fa691ac-2906-4016-9483-45248d95a203.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/3b503bd6-d0b5-4724-8f7d-ffaa88b5198f.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/6bbc9db8-844c-49cd-a79e-ca1f2c29154c.jpg",
+          "category": "common_space",
+          "description": "Updated full bath with tub/shower combo, built-in surround shelving, and a vanity with countertop sink and large mirror.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/656e1f45-8d7f-4081-a32f-34ac10be210c.jpg",
+          "category": "common_space",
+          "description": "Bathroom with single-sink vanity, framed mirror, and window for ventilation, plus convenient towel bar storage.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
         }
       ],
       "carousel": [
@@ -1115,33 +1147,33 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
-          "category": "bedroom",
-          "description": "Furnished bedroom with a full bed, bedside table, and dedicated desk space, plus a ceiling fan and hardwood floors.",
-          "primary": false,
-          "width": 1500,
-          "height": 1000
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
-          "category": "bedroom",
+          "url": "https://www.padsplit.com/img/psproperty/35011/6fa691ac-2906-4016-9483-45248d95a203.jpg",
+          "category": "common_space",
           "description": null,
           "primary": false,
           "width": 1500,
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png",
-          "category": "bedroom",
-          "description": "Furnished bedroom with a work desk, open garment rack, and shelving, plus a large window and hardwood floors.",
+          "url": "https://www.padsplit.com/img/psproperty/35011/3b503bd6-d0b5-4724-8f7d-ffaa88b5198f.jpg",
+          "category": "common_space",
+          "description": null,
           "primary": false,
-          "width": 1388,
-          "height": 1044
+          "width": 1500,
+          "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
-          "category": "bedroom",
-          "description": null,
+          "url": "https://www.padsplit.com/img/psproperty/35011/6bbc9db8-844c-49cd-a79e-ca1f2c29154c.jpg",
+          "category": "common_space",
+          "description": "Updated full bath with tub/shower combo, built-in surround shelving, and a vanity with countertop sink and large mirror.",
+          "primary": false,
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/656e1f45-8d7f-4081-a32f-34ac10be210c.jpg",
+          "category": "common_space",
+          "description": "Bathroom with single-sink vanity, framed mirror, and window for ventilation, plus convenient towel bar storage.",
           "primary": false,
           "width": 1500,
           "height": 1000
@@ -1152,7 +1184,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-16T22:12:24.006Z",
+      "checkedAt": "2026-07-16T22:36:18.626Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
