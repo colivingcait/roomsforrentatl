@@ -8,6 +8,9 @@ export function generateMetadata(): Metadata {
   const headline = isHomes
     ? `${brand.name} — Furnished Private Rentals in Atlanta, GA`
     : `${brand.name} — Furnished Rooms for Rent in Atlanta, Next-Day Move In`;
+  // Short, punchy title just for link-share previews (Messenger/iMessage/Twitter)
+  // — the full SEO headline above is too long and gets truncated there.
+  const socialTitle = isHomes ? headline : "Apply Today, Move in Tomorrow";
   return {
     metadataBase: new URL(brand.url),
     title: { default: headline, template: `%s · ${brand.name}` },
@@ -48,13 +51,13 @@ export function generateMetadata(): Metadata {
           "room for rent Snellville",
         ],
     openGraph: {
-      title: headline,
+      title: socialTitle,
       description: brand.tagline,
       url: brand.url,
       siteName: brand.name,
       type: "website",
     },
-    twitter: { card: "summary_large_image", title: headline, description: brand.tagline },
+    twitter: { card: "summary_large_image", title: socialTitle, description: brand.tagline },
     robots: { index: true, follow: true },
   };
 }
