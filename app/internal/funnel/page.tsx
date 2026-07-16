@@ -17,6 +17,16 @@ function todayIso(): string {
   return d.toISOString().slice(0, 10);
 }
 
+// The queries filter timestamp < dateTo (exclusive), so passing TODAY's date
+// as the upper bound excluded the entire current day — the dashboard would
+// look frozen until the calendar date rolled over. Pass tomorrow instead so
+// today's events are actually included.
+function tomorrowIso(): string {
+  const d = new Date();
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
 function formatDuration(seconds: number): string {
   if (seconds < 60) return `${Math.round(seconds)}s`;
   if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
@@ -78,13 +88,13 @@ function StatusRow({ label, count, max, color }: { label: string; count: number;
 }
 
 export default async function InternalFunnelPage() {
-  const dateTo = todayIso();
+  const todayDisplay = todayIso();
   const outreach = getOutreachData();
 
   let metrics: Awaited<ReturnType<typeof getSiteFunnelMetrics>> | null = null;
   let metricsError: string | null = null;
   try {
-    metrics = await getSiteFunnelMetrics(DATA_START, dateTo);
+    metrics = await getSiteFunnelMetrics(DATA_START, tomorrowIso());
   } catch (err) {
     metricsError = err instanceof Error ? err.message : "Failed to load PostHog data.";
   }
@@ -106,7 +116,7 @@ export default async function InternalFunnelPage() {
     <main className="mx-auto min-h-screen max-w-2xl px-4 py-8">
       <h1 className="text-xl font-extrabold text-ink">Growth dashboard</h1>
       <p className="mb-6 text-sm text-muted">
-        {DATA_START} → {dateTo} (the window PostHog has data for). Not linked anywhere — bookmark this URL.
+        {DATA_START} → {todayDisplay} (the window PostHog has data for). Not linked anywhere — bookmark this URL.
       </p>
 
       {metrics && metrics.errors.length > 0 && (
