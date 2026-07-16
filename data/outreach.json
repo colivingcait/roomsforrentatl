@@ -12,10 +12,22 @@
       { "name": "Ronald Ferguson", "history": [{ "status": "approved", "observedOn": "2026-07-11" }] },
       { "name": "Stephen Hyler", "history": [{ "status": "pending", "observedOn": "2026-07-11" }] },
       { "name": "(404) 618-7191", "history": [{ "status": "registered", "observedOn": "2026-06-26" }] },
-      { "name": "Kene Williams", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
+      {
+        "name": "Kene Williams",
+        "history": [
+          { "status": "approved", "observedOn": "2026-07-16" },
+          { "status": "move_in", "observedOn": "2026-07-16" }
+        ]
+      },
       { "name": "knowthegame1984@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-14" }] },
       { "name": "Reginald Yearby", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
-      { "name": "Woodkens Beauvoir", "history": [{ "status": "applying", "observedOn": "2026-07-15" }] }
+      { "name": "Woodkens Beauvoir", "history": [{ "status": "applying", "observedOn": "2026-07-15" }] },
+      { "name": "Tyrique Shaw", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
+      { "name": "Melia Lewis", "history": [{ "status": "approved", "observedOn": "2026-06-20" }] },
+      { "name": "Juan Rivera", "history": [{ "status": "approved", "observedOn": "2026-06-21" }] },
+      { "name": "Jodon Lavender", "history": [{ "status": "registered", "observedOn": "2024-11-18" }] },
+      { "name": "Leslie Richardson", "history": [{ "status": "registered", "observedOn": "2026-07-16" }] },
+      { "name": "Ashley Palmer", "history": [{ "status": "move_in", "observedOn": "2026-07-16" }] }
     ]
   }
 }
