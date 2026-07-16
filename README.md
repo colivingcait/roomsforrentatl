@@ -55,11 +55,11 @@ Every **Book** button deep-links to the room's PadSplit page with **your referra
 code appended**, so PadSplit attributes the booking to you. To turn it on, set
 your code once:
 
-- `NEXT_PUBLIC_PADSPLIT_REFERRAL=` — your referral code. Defaults to `B2C2060F`
+- `NEXT_PUBLIC_PADSPLIT_REFERRAL=` — your referral code. Defaults to `0DC68BAB`
   (your code, from your PadSplit share links). Override in Vercel env vars only if
   it ever changes.
 - PadSplit reads it from the `referralCode` query param. Every Book link becomes
-  e.g. `…/rooms-for-rent/listing/35011?referralCode=B2C2060F&ref_source=site&ref_role=host`.
+  e.g. `…/rooms-for-rent/listing/35011?referralCode=0DC68BAB&ref_source=site&ref_role=host`.
 
 The logic lives in `bookingUrl()` in [`lib/site.ts`](lib/site.ts); it won't double-
 append if a listing URL already carries a referral param.

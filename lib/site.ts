@@ -17,7 +17,7 @@ export const site = {
   // referral credit. PadSplit reads it from the `referralCode` query param (seen
   // on real PadSplit share links), alongside ref_source/ref_role attribution.
   referral: {
-    code: process.env.NEXT_PUBLIC_PADSPLIT_REFERRAL ?? "B2C2060F",
+    code: process.env.NEXT_PUBLIC_PADSPLIT_REFERRAL ?? "0DC68BAB",
     param: process.env.NEXT_PUBLIC_PADSPLIT_REFERRAL_PARAM ?? "referralCode",
     // Extra attribution params PadSplit includes on host share links.
     extra: { ref_source: "site", ref_role: "host" } as Record<string, string>,
