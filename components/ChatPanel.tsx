@@ -493,7 +493,13 @@ function BookCard({ house }: { house: BookHouse }) {
       </div>
       <div className="text-sm text-muted">{house.location}</div>
       <div className="mt-0.5 text-xs font-semibold text-brand">{rooms}</div>
-      <a href={house.url} className="btn-book mt-2 block w-full py-2 text-center text-sm">
+      <a
+        href={house.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-book mt-2 block w-full py-2 text-center text-sm"
+        onClick={() => trackEvent("book_click", { house: house.id, houseName: house.name, source: "chat" })}
+      >
         Book your room →
       </a>
     </div>

@@ -50,6 +50,8 @@ export interface SiteFunnelMetrics {
   byHouse: { house: string; clicks: number }[];
   byDevice: { device: string; sessions: number; bookClicks: number; chatOpened: number }[];
   byReferrer: { referrer: string; sessions: number; bookClicks: number }[];
+  bookClicksBySource: { source: string; clicks: number }[];
+  avgSecondsToBook: number | null;
   uniqueVisitors: number;
   returningVisitors: number;
 }
@@ -63,7 +65,7 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
   const from = dt(dateFrom);
   const to = dt(dateTo);
 
-  const [sessionShape, funnelEvents, byHouse, byDevice, byReferrer, visitors] = await Promise.all([
+  const [sessionShape, funnelEvents, byHouse, byDevice, byReferrer, visitors, bookSource, timeToBook] = await Promise.all([
     // Sessions + bounce vs explore, from pageview counts per session.
     queryHogQL(`
       SELECT count() AS sessions, countIf(pv_count = 1) AS bounced, countIf(pv_count > 1) AS explored
@@ -162,6 +164,31 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
         GROUP BY distinct_id
       )
     `),
+    // Book clicks by source: "chat" (a BOOK card inside the chat) vs "page"
+    // (the house/room page's own Book button).
+    queryHogQL(`
+      SELECT coalesce(nullif(properties['source'], ''), 'page') AS source, count() AS clicks
+      FROM events
+      WHERE event = 'book_click' AND timestamp >= ${from} AND timestamp < ${to}
+      GROUP BY source
+      ORDER BY clicks DESC
+    `),
+    // Avg time from a session's first pageview to its first Book click —
+    // only over sessions that actually clicked Book.
+    queryHogQL(`
+      SELECT avg(dateDiff('second', first_pv, first_book)) AS avg_seconds
+      FROM (
+        SELECT
+          properties['$session_id'] AS session_id,
+          minIf(timestamp, event = '$pageview') AS first_pv,
+          minIf(timestamp, event = 'book_click') AS first_book
+        FROM events
+        WHERE timestamp >= ${from} AND timestamp < ${to}
+          AND (event = '$pageview' OR event = 'book_click')
+        GROUP BY session_id
+        HAVING count(DISTINCT event) = 2
+      )
+    `),
   ]);
 
   const row = (r: QueryResult) => r.results[0] ?? [];
@@ -196,5 +223,7 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
     })),
     uniqueVisitors: visitorCount ?? 0,
     returningVisitors: returningCount ?? 0,
+    bookClicksBySource: (bookSource.results as [string, number][]).map(([source, clicks]) => ({ source, clicks })),
+    avgSecondsToBook: (row(timeToBook) as [number | null])[0] ?? null,
   };
 }

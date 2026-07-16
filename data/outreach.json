@@ -1,26 +1,21 @@
 {
-  "_README": "Manual numbers that can't be pulled from any API (Messenger has no personal-account API access; PadSplit's applicant list has no export API). Update this file whenever you have fresh counts and ask Claude to redeploy — everything else on the dashboard pulls live from PostHog.",
-  "_statusValues": "Valid applicant statuses, in pipeline order: registered, applying, pending, approved (screened) -> move_in (booked a room, host TBD) -> then either booking_fee_waived (moved into OUR room - the goal, instant) or paid (moved into another host's room, stayed 14+ consecutive days, $250 payout).",
-  "messenger": {
-    "conversationsSince": "2026-07-08",
-    "conversationCount": 130,
-    "lastUpdated": "2026-07-16"
-  },
+  "_README": "PadSplit's applicant list has no export/API and no history — it only shows CURRENT status + the date of the LAST change, overwriting the earlier date every time someone advances. So we keep our own history here. Workflow: whenever you check PadSplit's applicant list, paste the current full list to Claude. Claude matches each person by name against 'people' below, appends a new history entry ONLY when their status actually changed since last time (dated the day we noticed — that's the best precision possible without PadSplit exposing true transition dates), and adds anyone new as a new person. The more often you paste an update, the more accurate the stage-transition dates get.",
+  "_statusValues": "Valid statuses, in pipeline order: registered, applying, pending, approved (screened) -> move_in (booked a room, host TBD) -> then either booking_fee_waived (moved into OUR room - the goal, instant) or paid (moved into another host's room, stayed 14+ consecutive days, $250 payout).",
   "padsplitApplicants": {
     "lastUpdated": "2026-07-16",
-    "applicants": [
-      { "status": "registered", "date": "2026-06-26" },
-      { "status": "registered", "date": "2026-07-01" },
-      { "status": "registered", "date": "2026-07-01" },
-      { "status": "registered", "date": "2026-07-06" },
-      { "status": "registered", "date": "2026-07-08" },
-      { "status": "registered", "date": "2026-07-11" },
-      { "status": "registered", "date": "2026-07-14" },
-      { "status": "pending", "date": "2026-07-11" },
-      { "status": "applying", "date": "2026-07-15" },
-      { "status": "approved", "date": "2026-07-11" },
-      { "status": "approved", "date": "2026-07-16" },
-      { "status": "approved", "date": "2026-07-16" }
+    "people": [
+      { "name": "Quanton Jordan", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
+      { "name": "Brin Wallace", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
+      { "name": "Michael Darocha", "history": [{ "status": "registered", "observedOn": "2026-07-06" }] },
+      { "name": "Cherokee Nelson", "history": [{ "status": "registered", "observedOn": "2026-07-08" }] },
+      { "name": "Elijah Jewell", "history": [{ "status": "registered", "observedOn": "2026-07-11" }] },
+      { "name": "Ronald Ferguson", "history": [{ "status": "approved", "observedOn": "2026-07-11" }] },
+      { "name": "Stephen Hyler", "history": [{ "status": "pending", "observedOn": "2026-07-11" }] },
+      { "name": "(404) 618-7191", "history": [{ "status": "registered", "observedOn": "2026-06-26" }] },
+      { "name": "Kene Williams", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
+      { "name": "knowthegame1984@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-14" }] },
+      { "name": "Reginald Yearby", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
+      { "name": "Woodkens Beauvoir", "history": [{ "status": "applying", "observedOn": "2026-07-15" }] }
     ]
   }
 }

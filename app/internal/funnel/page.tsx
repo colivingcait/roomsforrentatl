@@ -17,6 +17,14 @@ function todayIso(): string {
   return d.toISOString().slice(0, 10);
 }
 
+function formatDuration(seconds: number): string {
+  if (seconds < 60) return `${Math.round(seconds)}s`;
+  if (seconds < 3600) return `${Math.round(seconds / 60)}m`;
+  const hours = Math.floor(seconds / 3600);
+  const mins = Math.round((seconds % 3600) / 60);
+  return `${hours}h ${mins}m`;
+}
+
 function Bar({
   width,
   color,
@@ -94,18 +102,6 @@ export default async function InternalFunnelPage() {
         {DATA_START} → {dateTo} (the window PostHog has data for). Not linked anywhere — bookmark this URL.
       </p>
 
-      {/* Outreach */}
-      <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-        <div className="flex items-center justify-between rounded-xl bg-brand/10 px-4 py-3.5">
-          <span className="text-sm font-semibold text-muted">Messenger conversations</span>
-          <span className="text-2xl font-extrabold text-ink">~{outreach.messengerConversationCount}</span>
-        </div>
-        <p className="mt-2 text-xs text-muted">
-          Self-reported since {outreach.messengerConversationsSince} · last updated {outreach.messengerLastUpdated}.
-          Can&apos;t be tied to specific site sessions below (no accounts on this site).
-        </p>
-      </div>
-
       {/* Site funnel */}
       <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
         <h2 className="text-sm font-bold text-ink">Site funnel</h2>
@@ -167,8 +163,26 @@ export default async function InternalFunnelPage() {
               value={`${metrics.bookClickSessions} sessions (${metrics.bookClickEvents} clicks)`}
             />
 
+            <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+              <div className="rounded-xl bg-slate-50 px-3 py-2.5">
+                <div className="text-lg font-extrabold text-ink">
+                  {metrics.avgSecondsToBook != null ? formatDuration(metrics.avgSecondsToBook) : "—"}
+                </div>
+                <div className="text-xs text-muted">Avg time on site before clicking Book</div>
+              </div>
+              <div className="rounded-xl bg-slate-50 px-3 py-2.5">
+                {metrics.bookClicksBySource.map((s) => (
+                  <div key={s.source} className="flex justify-between text-sm">
+                    <span className="text-ink capitalize">{s.source}</span>
+                    <span className="font-semibold text-ink">{s.clicks}</span>
+                  </div>
+                ))}
+                <div className="mt-0.5 text-xs text-muted">Book clicks: chat vs house page</div>
+              </div>
+            </div>
+
             {metrics.byHouse.length > 0 && (
-              <div className="mt-5 border-t border-slate-100 pt-4">
+              <div className="mt-3 border-t border-slate-100 pt-4">
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Book clicks by house</p>
                 {metrics.byHouse.map((h) => (
                   <div key={h.house} className="flex justify-between text-sm">
@@ -264,7 +278,7 @@ export default async function InternalFunnelPage() {
       <p className="mt-2 text-xs text-muted">
         "Marketplace (Facebook)" = Facebook-sourced traffic without a Messenger tag (the marketplace link can&apos;t
         carry a tag without looking spammy). "Messenger" = tagged with ?utm_source=messenger on links you paste into
-        chats. Update data/outreach.json (via Claude) whenever you have fresh Messenger/PadSplit counts.
+        chats. Update data/outreach.json (via Claude) whenever you check PadSplit&apos;s applicant list again.
       </p>
     </main>
   );

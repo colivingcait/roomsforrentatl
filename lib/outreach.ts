@@ -16,16 +16,22 @@ export type ApplicantStatus =
   | "booking_fee_waived"
   | "paid";
 
-export interface Applicant {
+export interface StatusEvent {
   status: ApplicantStatus;
-  date: string;
+  /** The day we noticed this status — not necessarily the day it actually happened (PadSplit doesn't expose that). */
+  observedOn: string;
+}
+
+export interface ApplicantPerson {
+  name: string;
+  history: StatusEvent[];
 }
 
 const PAYOUT_PER_PAID = 250;
 
-/** The manual numbers no API can provide: your own Messenger outreach + the PadSplit applicant list. */
+/** The manual applicant pipeline no API can provide — PadSplit has no export/API for this. */
 export function getOutreachData() {
-  const applicants = outreachData.padsplitApplicants.applicants as Applicant[];
+  const people = outreachData.padsplitApplicants.people as ApplicantPerson[];
   const statusCounts: Record<ApplicantStatus, number> = {
     registered: 0,
     applying: 0,
@@ -35,14 +41,14 @@ export function getOutreachData() {
     booking_fee_waived: 0,
     paid: 0,
   };
-  for (const a of applicants) statusCounts[a.status]++;
+  for (const person of people) {
+    const current = person.history[person.history.length - 1]?.status;
+    if (current) statusCounts[current]++;
+  }
 
   return {
-    messengerConversationCount: outreachData.messenger.conversationCount,
-    messengerConversationsSince: outreachData.messenger.conversationsSince,
-    messengerLastUpdated: outreachData.messenger.lastUpdated,
-    applicants,
-    applicantCount: applicants.length,
+    people,
+    applicantCount: people.length,
     statusCounts,
     applicantsLastUpdated: outreachData.padsplitApplicants.lastUpdated,
     cashPayout: statusCounts.paid * PAYOUT_PER_PAID,
