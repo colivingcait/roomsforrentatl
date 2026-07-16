@@ -192,17 +192,19 @@ export async function getSiteFunnelMetrics(dateFrom: string, dateTo: string): Pr
     ),
     // Referring domain, split into: Messenger (explicitly tagged via UTM —
     // the marketplace link can't carry a tag without looking spammy, so it's
-    // untagged), Marketplace (Facebook-sourced but NOT UTM-tagged: referring
-    // domain is facebook.com/m.facebook.com/etc, OR the referrer header got
-    // stripped by Facebook's in-app browser but an fbclid survived on the
-    // URL), Google, and Direct/other (no Facebook signal at all).
+    // untagged), Marketplace (roomsforrentatl.com/l — definitively tagged),
+    // Marketplace, untagged (older/pasted-elsewhere Facebook traffic without
+    // either short link: referring domain is facebook.com/m.facebook.com/etc,
+    // OR the referrer header got stripped by Facebook's in-app browser but an
+    // fbclid survived on the URL), Google, and Direct/other.
     safe(
       "By referrer",
       `
         SELECT
           multiIf(
             utm_source = 'messenger', 'Messenger',
-            (referrer LIKE '%facebook.com%' OR fbclid != ''), 'Marketplace (Facebook)',
+            utm_source = 'marketplace', 'Marketplace (Facebook)',
+            (referrer LIKE '%facebook.com%' OR fbclid != ''), 'Marketplace (Facebook, untagged)',
             referrer LIKE '%google.%', 'Google',
             referrer = '' OR referrer IS NULL, 'Direct',
             referrer
