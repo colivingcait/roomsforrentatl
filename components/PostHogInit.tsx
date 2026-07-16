@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { initPosthog, posthog } from "@/lib/posthog";
+import { getVariant } from "@/lib/ab";
 
 /**
  * Initializes PostHog once, then fires a $pageview on every route change.
@@ -15,6 +16,11 @@ export default function PostHogInit() {
 
   useEffect(() => {
     initPosthog();
+    // Register every running A/B assignment as early as possible, on every
+    // page/device — not just when a test's own UI happens to mount — so every
+    // event in the session (including this page's own pageview below) carries
+    // the variant tag, instead of only sessions that land on one specific page.
+    getVariant("mobile_cta", ["control", "urgent"]);
   }, []);
 
   useEffect(() => {
