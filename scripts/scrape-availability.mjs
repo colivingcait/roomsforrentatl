@@ -79,6 +79,17 @@ async function extractRooms(page) {
     return found.map((r, i) => {
       const a = r.amenities || {};
       const pic = (r.pictures || []).find((p) => p.primary) || (r.pictures || [])[0];
+      // PadSplit's own current list rate (before any active promo discount).
+      const listRate = r.totalWeeklyRate ?? r.basePrice ?? null;
+      // The ACTUAL rate a member pays right now if a promo is active — this is
+      // what PadSplit itself leads with on the listing page, so we should too.
+      const effectiveRate = r.totalPromoAmount ?? listRate;
+      const hasPromo =
+        r.activePromo &&
+        typeof r.activePromo.priceDropPercentage === "number" &&
+        effectiveRate != null &&
+        listRate != null &&
+        effectiveRate < listRate;
       return {
         id: r.id,
         // Raw array order; pagePosition (the real apply index) is computed below.
@@ -88,7 +99,12 @@ async function extractRooms(page) {
         name: typeof r.name === "string" ? r.name : null,
         roomNumber: r.roomNumber ?? null,
         description: r.description ?? null,
-        weeklyRate: r.totalWeeklyRate ?? r.basePrice ?? null,
+        weeklyRate: effectiveRate,
+        originalWeeklyRate: hasPromo ? listRate : null,
+        promo: hasPromo
+          ? { percentOff: r.activePromo.priceDropPercentage, durationWeeks: r.activePromo.durationInWeeks ?? null }
+          : null,
+        noMoveInFee: r.moveInFee === 0 || r.totalMoveInFeeAmount === 0,
         recommendedPrice: r.recommendedPrice ?? null,
         bathroomType: a.bathroomType ?? null, // "private" | "shared"
         bedSize: a.bedSize ?? null,

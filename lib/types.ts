@@ -22,7 +22,14 @@ export interface Room {
   name: string | null;
   roomNumber: number | null;
   description: string | null;
+  /** The current EFFECTIVE rate — reflects an active promo discount if one applies. */
   weeklyRate: number | null;
+  /** The list rate before any active promo discount. Only meaningfully different from weeklyRate when promo is set. */
+  originalWeeklyRate?: number | null;
+  /** An active PadSplit price-drop promo, if any. */
+  promo?: { percentOff: number; durationWeeks: number } | null;
+  /** True when PadSplit is waiving the move-in fee for this room right now. */
+  noMoveInFee?: boolean;
   recommendedPrice: number | null;
   bathroomType: BathroomType | null;
   bedSize: string | null;

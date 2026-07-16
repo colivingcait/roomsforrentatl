@@ -21,11 +21,23 @@ export default function RoomCard({ house, room }: { house: House; room: Room }) 
         <div className="flex items-start justify-between gap-2">
           <h3 className="line-clamp-2 font-semibold leading-tight text-ink">{roomTitle(room)}</h3>
           {room.weeklyRate != null && (
-            <span className="shrink-0 font-extrabold text-ink">{priceLabel(room.weeklyRate)}</span>
+            <span className="shrink-0 text-right">
+              {room.promo && room.originalWeeklyRate != null && (
+                <span className="block text-xs font-medium text-muted line-through">
+                  {priceLabel(room.originalWeeklyRate)}
+                </span>
+              )}
+              <span className="font-extrabold text-ink">{priceLabel(room.weeklyRate)}</span>
+            </span>
           )}
         </div>
         {tagline && <p className="mt-0.5 line-clamp-2 text-sm text-muted">{tagline}</p>}
         <div className="mt-2 flex flex-wrap gap-1.5">
+          {room.promo && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 text-xs font-bold text-brand">
+              🏷️ {room.promo.percentOff}% off
+            </span>
+          )}
           {roomHighlights(room).map((tag) => (
             <span
               key={tag}

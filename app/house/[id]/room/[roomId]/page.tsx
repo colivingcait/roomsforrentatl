@@ -83,10 +83,16 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             </p>
           </div>
           <div className="shrink-0 text-right">
+            {room.promo && room.originalWeeklyRate != null && (
+              <div className="text-sm font-medium text-muted line-through">{priceLabel(room.originalWeeklyRate)}</div>
+            )}
             {room.weeklyRate != null && (
-              <div className="text-2xl font-extrabold text-ink">{priceLabel(room.weeklyRate)}</div>
+              <div className={"text-2xl font-extrabold " + (room.promo ? "text-brand" : "text-ink")}>
+                {priceLabel(room.weeklyRate)}
+              </div>
             )}
             <div className="text-xs text-muted">all-in, bills included</div>
+            {room.noMoveInFee && <div className="text-xs font-semibold text-brand">No move-in fee</div>}
           </div>
         </div>
 
@@ -105,6 +111,16 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
         </div>
 
         {tagline && <p className="mt-4 text-slate-600">{tagline}</p>}
+
+        {room.promo && (
+          <div className="mt-5 rounded-xl border border-slate-100 bg-slate-50 p-4">
+            <p className="text-sm font-bold text-ink">Special promotion</p>
+            <p className="mt-1.5 flex items-center gap-2 text-ink">
+              🏷️ {room.promo.percentOff}% off your first {room.promo.durationWeeks} week
+              {room.promo.durationWeeks === 1 ? "" : "s"}
+            </p>
+          </div>
+        )}
 
         <h2 className="mt-7 text-lg font-bold text-ink">Room features</h2>
         <dl className="mt-3 grid grid-cols-2 gap-3">
@@ -147,6 +163,9 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
       >
         <div className="mx-auto flex max-w-3xl items-center gap-3">
           <div className="hidden sm:block">
+            {room.promo && room.originalWeeklyRate != null && (
+              <div className="text-xs font-medium text-muted line-through">{priceLabel(room.originalWeeklyRate)}</div>
+            )}
             {room.weeklyRate != null && <div className="text-lg font-extrabold text-ink">{priceLabel(room.weeklyRate)}</div>}
             <div className="text-xs text-muted">{moveInLabel(room.moveInDate)}</div>
           </div>
