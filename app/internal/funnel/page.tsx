@@ -75,7 +75,17 @@ export default async function InternalFunnelPage() {
   }
 
   const sc = outreach.statusCounts;
-  const maxStatus = Math.max(sc.registered, sc.applying, sc.pending, sc.approved, 1);
+  const maxStatus = Math.max(
+    sc.registered,
+    sc.applying,
+    sc.pending,
+    sc.approved,
+    sc.move_in,
+    sc.booking_fee_waived,
+    sc.paid,
+    1
+  );
+  const movedIn = sc.move_in + sc.booking_fee_waived + sc.paid;
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-4 py-8">
@@ -188,15 +198,30 @@ export default async function InternalFunnelPage() {
             <div className="text-2xl font-extrabold text-ink">{sc.approved}</div>
             <div className="text-xs text-muted">Approved</div>
           </div>
+          <div className="text-muted">→</div>
+          <div>
+            <div className="text-2xl font-extrabold text-ink">{movedIn}</div>
+            <div className="text-xs text-muted">Moved in</div>
+          </div>
         </div>
         <StatusRow label="Registered" count={sc.registered} max={maxStatus} color="#94a3b8" />
         <StatusRow label="Applying" count={sc.applying} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Pending" count={sc.pending} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Approved" count={sc.approved} max={maxStatus} color="#16a34a" />
-        <p className="mt-3 text-xs text-muted">
-          {outreach.applicantCount} total applied · {sc.approved} approved (
-          {Math.round((sc.approved / Math.max(outreach.applicantCount, 1)) * 100)}%)
-        </p>
+        <StatusRow label="Move in" count={sc.move_in} max={maxStatus} color="#0369a1" />
+        <StatusRow label="Booking fee waived" count={sc.booking_fee_waived} max={maxStatus} color="#0E7C66" />
+        <StatusRow label="Paid ($250)" count={sc.paid} max={maxStatus} color="#FF6B35" />
+
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+          <div className="rounded-xl bg-brand/10 px-3 py-2.5">
+            <div className="text-lg font-extrabold text-ink">{sc.booking_fee_waived}</div>
+            <div className="text-xs text-muted">Moved into YOUR room — the goal</div>
+          </div>
+          <div className="rounded-xl bg-accent/10 px-3 py-2.5">
+            <div className="text-lg font-extrabold text-ink">${outreach.cashPayout.toLocaleString()}</div>
+            <div className="text-xs text-muted">Cash earned ({sc.paid} × ${outreach.payoutPerPaid}, other hosts)</div>
+          </div>
+        </div>
       </div>
 
       {/* Additional signals */}
