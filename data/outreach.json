@@ -1,0 +1,25 @@
+{
+  "_README": "Manual numbers that can't be pulled from any API (Messenger has no personal-account API access; PadSplit's applicant list has no export API). Update this file whenever you have fresh counts and ask Claude to redeploy — everything else on the dashboard pulls live from PostHog.",
+  "messenger": {
+    "conversationsSince": "2026-07-08",
+    "conversationCount": 130,
+    "lastUpdated": "2026-07-16"
+  },
+  "padsplitApplicants": {
+    "lastUpdated": "2026-07-16",
+    "applicants": [
+      { "status": "registered", "date": "2026-06-26" },
+      { "status": "registered", "date": "2026-07-01" },
+      { "status": "registered", "date": "2026-07-01" },
+      { "status": "registered", "date": "2026-07-06" },
+      { "status": "registered", "date": "2026-07-08" },
+      { "status": "registered", "date": "2026-07-11" },
+      { "status": "registered", "date": "2026-07-14" },
+      { "status": "pending", "date": "2026-07-11" },
+      { "status": "applying", "date": "2026-07-15" },
+      { "status": "approved", "date": "2026-07-11" },
+      { "status": "approved", "date": "2026-07-16" },
+      { "status": "approved", "date": "2026-07-16" }
+    ]
+  }
+}
