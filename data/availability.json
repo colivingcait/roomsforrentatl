@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-17T12:15:13.600Z",
+  "updatedAt": "2026-07-17T23:50:45.325Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -259,7 +259,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-17T12:15:13.600Z",
+      "checkedAt": "2026-07-17T23:50:45.325Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -470,7 +470,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-17T12:15:13.600Z",
+      "checkedAt": "2026-07-17T23:50:45.325Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -481,9 +481,80 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 41260,
+          "id": 41255,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
+          "roomNumber": 2,
+          "description": "",
+          "weeklyRate": 164,
+          "originalWeeklyRate": 172,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 199,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": true,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-18",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_d09e00b4-13ee-443d-839c-5c4650905114.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_921b35bc-1e04-402c-a6b0-e36bcfafaaba.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_cf7d73f9-785c-435b-9b50-72504601bcf2.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_3a5847d2-59c3-4b2a-9e41-0acdbea1d3de.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_83160994-91c5-4b74-a633-85b1c1ebc6cf.jpg"
+          ]
+        },
+        {
+          "id": 41256,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Cardinal  - large room w/ Mini Fridge & Smart TV!",
+          "roomNumber": 3,
+          "description": "",
+          "weeklyRate": 181,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": true,
+          "recommendedPrice": 203,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": true,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-18",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_ac070251-5e50-4fb1-852c-d71ec6aaf7f1.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_ac070251-5e50-4fb1-852c-d71ec6aaf7f1.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_6ba5c066-2e7c-4463-ac9d-92a54a9697ee.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_31ab9fec-0498-4424-b194-5a1ec5e3fef5.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_9b199d1e-18f3-4fd6-b628-7e37fd33a825.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_4fe75ab3-850a-4948-ade2-a0caa99adffe.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_e87b7125-6822-41dd-8dde-6f8facd7735b.jpg"
+          ]
+        },
+        {
+          "id": 41260,
+          "padIndex": 3,
+          "pagePosition": 3,
           "applyIndex": null,
           "name": "Grey Heron - Light filled room w/ Private Entrance",
           "roomNumber": 7,
@@ -679,12 +750,12 @@
           "height": 1067
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 185,
+      "roomsAvailable": 3,
+      "fromPrice": 164,
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-17T12:15:13.600Z",
+      "checkedAt": "2026-07-17T23:50:45.325Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -863,7 +934,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-17T12:15:13.600Z",
+      "checkedAt": "2026-07-17T23:50:45.325Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1147,7 +1218,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-17T12:15:13.600Z",
+      "checkedAt": "2026-07-17T23:50:45.325Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
