@@ -9,8 +9,9 @@ export const RENTAL_QUALIFICATIONS: string[] = [
 ];
 
 export const MOVE_IN_STEPS: string[] = [
-  "Apply for FREE online through TurboTenant — takes 5 minutes, 24 hours for approval.",
-  "Once approved, sign your lease.",
+  "Apply for FREE online through TurboTenant — takes 5 minutes.",
+  "Schedule an in-person showing.",
+  "Once application is approved, sign your lease.",
   "Pay first month's rent plus your refundable security deposit.",
   "Move in on your scheduled date!",
 ];
