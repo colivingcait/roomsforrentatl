@@ -1,12 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
 import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
-import HouseCard from "@/components/HouseCard";
 import Footer from "@/components/Footer";
 import StickyChatBar from "@/components/StickyChatBar";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
+import UnitsSection from "@/components/UnitsSection";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { getColivingHouses } from "@/lib/coliving";
+import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
@@ -21,6 +24,7 @@ export default function RoomsHome() {
   const houses = allHouses.filter((h) => h.available).sort((a, b) => rank(a.name) - rank(b.name));
   const fullyOccupied = allHouses.filter((h) => !h.available);
   const colivingHouses = getColivingHouses();
+  const units = getUnits();
   const updated = updatedLabel(lastUpdated());
   const openCount = houses.length;
   const totalRooms = houses.reduce((n, h) => n + h.roomsAvailable, 0);
@@ -73,14 +77,31 @@ export default function RoomsHome() {
           </div>
 
           {fullyOccupied.length > 0 && (
-            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mt-4 space-y-2 border-t border-slate-100 pt-4">
               {fullyOccupied.map((h) => (
-                <HouseCard key={h.id} house={h} />
+                <Link
+                  key={h.id}
+                  href={`/house/${h.id}`}
+                  className="flex items-center gap-3 rounded-xl bg-slate-50 p-2 opacity-70 grayscale transition active:scale-[0.99]"
+                >
+                  <div className="relative h-10 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-200">
+                    <Image src={h.image} alt={h.name} fill sizes="56px" className="object-cover" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-ink">{h.name}</p>
+                    <p className="text-xs text-muted">{h.city}</p>
+                  </div>
+                  <span className="shrink-0 rounded-full bg-slate-900/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                    Fully Occupied
+                  </span>
+                </Link>
               ))}
             </div>
           )}
         </div>
       </section>
+
+      <UnitsSection units={units} />
 
       <TrustBand />
 
