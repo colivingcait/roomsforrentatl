@@ -128,7 +128,7 @@ export async function POST(req: Request) {
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
     return Response.json(
-      { error: "The chat assistant isn't configured yet. Please text us instead." },
+      { error: "The chat assistant isn't configured yet. Please check back shortly." },
       { status: 503 }
     );
   }
