@@ -259,7 +259,7 @@ ${deadEndScenarios("unit")}
 
 # Move-in
 - These are whole units on a ~12-month lease. To move in: first month's rent + a refundable security deposit (1 month's rent), plus a background & credit check (handled in the TurboTenant application). Furnished, utilities included.
-- Qualifications: income of at least 2.5x the monthly rent; no felonies, violent misdemeanors, or evictions in the past 7 years.
+- Qualifications: income at least 2.5x the monthly rent; no felonies, violent misdemeanors, or evictions in the past 7 years; no minimum credit score but verifiable income is required; valid photo ID + proof of income (pay stubs or offer letter); a co-signer/guarantor is accepted if the income requirement isn't met alone; renters insurance required for the lease term; no smoking indoors.
 
 # Our private rentals (monthly lease via TurboTenant)
 ${unitsSnapshot()}

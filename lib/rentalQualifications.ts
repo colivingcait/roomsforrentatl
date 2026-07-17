@@ -2,6 +2,11 @@
 export const RENTAL_QUALIFICATIONS: string[] = [
   "Income at least 2.5x the monthly rent",
   "No felonies, violent misdemeanors, or evictions in the past 7 years",
+  "No minimum credit score — verifiable income required",
+  "Valid photo ID + proof of income (pay stubs or offer letter)",
+  "Co-signer/guarantor accepted if income requirement isn't met alone",
+  "Renters insurance required for the lease term",
+  "No smoking indoors",
   "1 month refundable security deposit",
 ];
 
