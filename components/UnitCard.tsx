@@ -63,7 +63,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
 
         {unit.tourUrl && (
           <span className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-black/65 px-2.5 py-1 text-xs font-bold text-white shadow">
-            🎦 3D Tour
+            🎦 Video Tour
           </span>
         )}
       </div>

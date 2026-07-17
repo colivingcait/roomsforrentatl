@@ -94,7 +94,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           >
             <span className="flex items-center gap-2">
               <span className="text-lg leading-none">🎦</span>
-              Take the 3D virtual tour
+              Watch the virtual tour
             </span>
             <span aria-hidden>→</span>
           </a>

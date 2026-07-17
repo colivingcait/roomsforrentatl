@@ -165,7 +165,7 @@ function unitsSnapshot(): string {
       const apply = u.applyUrl
         ? ` To apply, share this TurboTenant link: ${u.applyUrl}`
         : " (no application link yet — tell them applications are opening soon and to ask us to get on the list)";
-      const tour = u.tourUrl ? ` 3D tour: ${u.tourUrl}` : "";
+      const tour = u.tourUrl ? ` Virtual tour: ${u.tourUrl}` : "";
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
       const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
       const desc = u.description ? ` Details: ${u.description.replace(/\s+/g, " ")}` : "";
