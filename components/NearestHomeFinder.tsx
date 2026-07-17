@@ -112,7 +112,7 @@ export default function NearestHomeFinder() {
                   <span className="text-sm font-bold text-ink">from {top.fromPrice}</span>
                 )}
               </div>
-              <div className="text-sm text-muted">{top.neighborhood}</div>
+              <div className="text-sm text-muted">{top.city}</div>
               <div className="mt-1 text-sm font-semibold text-brand">
                 about {top.carLow}–{top.carHigh} min by car
               </div>
@@ -124,7 +124,7 @@ export default function NearestHomeFinder() {
             {also && (
               <p className="mt-2 text-xs text-muted">
                 Also nearby: <span className="font-semibold text-ink">{also.name}</span> in{" "}
-                {also.neighborhood} (about {also.carLow}–{also.carHigh} min by car).
+                {also.city} (about {also.carLow}–{also.carHigh} min by car).
               </p>
             )}
 

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
+import HouseCard from "@/components/HouseCard";
 import Footer from "@/components/Footer";
 import StickyChatBar from "@/components/StickyChatBar";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
@@ -16,9 +17,9 @@ export default function RoomsHome() {
     const i = ORDER.findIndex((n) => name.toLowerCase().includes(n));
     return i === -1 ? ORDER.length : i;
   };
-  const houses = getHouses()
-    .filter((h) => h.available)
-    .sort((a, b) => rank(a.name) - rank(b.name));
+  const allHouses = getHouses();
+  const houses = allHouses.filter((h) => h.available).sort((a, b) => rank(a.name) - rank(b.name));
+  const fullyOccupied = allHouses.filter((h) => !h.available);
   const colivingHouses = getColivingHouses();
   const updated = updatedLabel(lastUpdated());
   const openCount = houses.length;
@@ -84,6 +85,20 @@ export default function RoomsHome() {
           flexible co-living made simple: no long lease, no big deposit, just a private room ready when you are.
         </p>
       </section>
+
+      {fullyOccupied.length > 0 && (
+        <section className="mx-auto max-w-3xl px-4 pb-6">
+          <h2 className="text-lg font-bold text-ink">Fully occupied right now</h2>
+          <p className="mt-1 text-sm text-muted">
+            These homes don&apos;t have any open rooms at the moment — check back soon!
+          </p>
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {fullyOccupied.map((h) => (
+              <HouseCard key={h.id} house={h} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
       {/* Clearance so the mobile sticky bar never covers the footer. */}

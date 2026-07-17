@@ -11,7 +11,10 @@ export default function HouseCard({ house }: { house: House }) {
   return (
     <Link
       href={`/house/${house.id}`}
-      className="group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]"
+      className={
+        "group block overflow-hidden rounded-2xl bg-white shadow-card transition active:scale-[0.99]" +
+        (house.available ? "" : " opacity-60 grayscale")
+      }
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
         <PhotoStrip images={photos} alt={`Furnished room for rent in ${house.neighborhood}, Atlanta — ${house.name}`} />
@@ -19,7 +22,7 @@ export default function HouseCard({ house }: { house: House }) {
         {/* Fully-booked marker spans the top of the card */}
         {!house.available && (
           <div className="absolute inset-x-0 top-0 bg-slate-900/85 py-1.5 text-center text-xs font-bold uppercase tracking-wide text-white">
-            Fully booked!
+            Fully Occupied
           </div>
         )}
 
