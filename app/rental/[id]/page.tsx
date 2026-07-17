@@ -8,6 +8,7 @@ import FaqButton from "@/components/FaqButton";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getUnit, getAllUnitIds } from "@/lib/units";
 import { rentLabel, availDateLabel } from "@/lib/format";
+import { RENTAL_QUALIFICATIONS, MOVE_IN_STEPS } from "@/lib/rentalQualifications";
 
 export const revalidate = 3600;
 
@@ -132,14 +133,33 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           </div>
         )}
 
-        <div className="mt-4 rounded-xl bg-slate-50 p-3 text-sm text-slate-600">
-          <p className="font-semibold text-ink">How to apply</p>
-          <p className="mt-1">
-            {unit.applyUrl
-              ? "Tap “Apply now” to submit your application securely through TurboTenant — screening and lease are handled there."
-              : "Applications for this unit are opening soon. Tap “Ask about this unit” to message us and we’ll get you on the list."}
+        <h2 className="mt-7 text-lg font-bold text-ink">Qualifications</h2>
+        <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          {RENTAL_QUALIFICATIONS.map((q) => (
+            <li key={q} className="flex items-center gap-2 text-ink">
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">✓</span>
+              {q}
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="mt-7 text-lg font-bold text-ink">Move-in process</h2>
+        <ol className="mt-3 space-y-2">
+          {MOVE_IN_STEPS.map((step, i) => (
+            <li key={step} className="flex items-start gap-3 rounded-xl border border-slate-100 bg-white p-3">
+              <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">
+                {i + 1}
+              </span>
+              <span className="text-ink">{step}</span>
+            </li>
+          ))}
+        </ol>
+        {!unit.applyUrl && (
+          <p className="mt-3 text-sm text-slate-600">
+            Applications for this unit are opening soon. Tap &ldquo;Ask about this unit&rdquo; below to message us and
+            we&rsquo;ll get you on the list.
           </p>
-        </div>
+        )}
 
         <p className="mt-3 text-xs text-slate-400">
           This is a private long-term rental (monthly lease), separate from our weekly co-living rooms. Photos show the

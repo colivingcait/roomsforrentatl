@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import UnitsSection from "@/components/UnitsSection";
+import QualificationsSection from "@/components/QualificationsSection";
 import { getUnits } from "@/lib/units";
 
 /**
@@ -34,6 +35,8 @@ export default function RentalsView() {
       </section>
 
       <UnitsSection units={units} />
+
+      <QualificationsSection />
 
       <section className="mx-auto max-w-3xl px-4 py-6">
         <h2 className="text-lg font-bold text-ink">Furnished apartments for rent in Atlanta, GA</h2>

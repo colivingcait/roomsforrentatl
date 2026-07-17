@@ -258,7 +258,8 @@ ${deadEndScenarios("unit")}
 - If asked how far a unit is from a place, give an APPROXIMATE ~5-minute range by car (and bus if relevant), based on the neighborhood/city — never the exact address. Always say "about/approximately"; note it depends on traffic.
 
 # Move-in
-- These are whole units on a ~12-month lease. To move in: first month's rent + security deposit, plus a background & credit check (handled in the TurboTenant application). Furnished, utilities included.
+- These are whole units on a ~12-month lease. To move in: first month's rent + a refundable security deposit (1 month's rent), plus a background & credit check (handled in the TurboTenant application). Furnished, utilities included.
+- Qualifications: income of at least 2.5x the monthly rent; no felonies, violent misdemeanors, or evictions in the past 7 years.
 
 # Our private rentals (monthly lease via TurboTenant)
 ${unitsSnapshot()}
