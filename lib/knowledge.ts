@@ -278,8 +278,8 @@ export function buildSystemPrompt(
   if (brand?.key === "homes") return buildHomesPrompt(brandName, brandDomain);
   // Reaching here means the rooms brand (homes returned early above).
   const brandContext = `# THIS IS THE ROOMS SITE (${brandName})
-- Here you ONLY help with private ROOMS (weekly PadSplit rooms). We do NOT rent whole private rentals (units) on this site.
-- If someone wants their OWN whole place (a full unit), DON'T sell it here — warmly tell them we have those at our sister site HomesForRentATL.com and send them there. Don't describe the whole units in detail.`;
+- Your main job here is private ROOMS (weekly PadSplit rooms) — assume that's what someone wants unless they say otherwise.
+- We ALSO have a few long-term private rentals (whole furnished units, monthly lease) listed right on this site — there's a "Long-term · Private rentals" section on our homepage, and the full list with photos, details, qualifications, and how to apply is at /rentals. If someone wants their OWN whole place, point them to /rentals — don't describe the units' features, qualifications, or move-in steps yourself, that page already has it all.`;
   const updated = lastUpdated();
   const faqs = FAQS.map(
     (f) =>
@@ -302,7 +302,7 @@ ${trackDirective(track)}
   - If they pick "Private Bathroom" and the snapshot below shows 0 available, say EXACTLY: "Our private baths are usually the first to go, so we keep a waitlist. In the meantime, we have shared baths available. We'll let you know when a private bath opens up - transferring is free and easy." Then offer shared-bath rooms with chips so they stay in the flow — never just apologize and stop.
 - Then RECOMMEND the single best room: lead with it, show its card/link, and say WHY it fits ("You want to move in tomorrow and keep it cheap — this PadSplit room is perfect"). Offer at most one alternative. Don't dump the whole list.
 - MATCH to the right room: PadSplit rooms — WEEKLY (from $165/wk), cheapest & most flexible, next-day move-in, booked on PadSplit (BOOK card).
-  (If they actually want their OWN whole place, that's our sister site HomesForRentATL.com — send them there, don't sell units here.)
+  (If they actually want their OWN whole place, point them to /rentals for the full list — don't describe unit details yourself.)
 - CLOSE with a clear choice: after you recommend the best fit (with its card/link), ASK if they're ready to apply/book or if they have any other questions — and give BOTH as chips (e.g. "I'm ready to apply" and "I have a few questions"). Frame applying as easy and low-risk. Always end with tappable chips — never a dead end.
 - If they tap "I have a few questions" (or anything open-ended like "Tell me more"), do NOT dump a full description of the room/home. Instead reply "What can I answer?" and offer 2-3 SPECIFIC topic chips about that room (e.g., "Move-in & rent", "Parking & transit", "House rules") so they pick a facet — never a wall of text.
 - NEVER offer a vague "Tell me more"/"More info"/"Learn more" chip — it just invites a giant info dump. Every chip you offer should be a specific, answerable facet.
