@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T12:02:51.093Z",
+  "updatedAt": "2026-07-19T15:51:39.572Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -9,46 +9,15 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 935,
+          "id": 933,
           "padIndex": 1,
           "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Quiet room with private entrance",
-          "roomNumber": 8,
-          "description": "",
-          "weeklyRate": 170,
-          "originalWeeklyRate": null,
-          "promo": null,
-          "noMoveInFee": false,
-          "recommendedPrice": 188,
-          "bathroomType": "shared",
-          "bedSize": "twinxl",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": true,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-07-20",
-          "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
-            "https://www.padsplit.com/img/rooms/room_935_1_1581966040.9901974_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/152/img_c2e49a53-81c2-4337-9da1-ac6fa254f2e2.jpg"
-          ]
-        },
-        {
-          "id": 933,
-          "padIndex": 2,
-          "pagePosition": 2,
           "applyIndex": null,
           "name": "Quiet Room with Workspace",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 171,
-          "originalWeeklyRate": 180,
+          "weeklyRate": 162,
+          "originalWeeklyRate": 170,
           "promo": {
             "percentOff": 5,
             "durationWeeks": 6
@@ -71,6 +40,40 @@
             "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
             "https://www.padsplit.com/img/psproperty/152/img_d168cc65-d787-44ea-af93-72813f09d22b.jpg",
             "https://www.padsplit.com/img/psproperty/152/img_498ac228-bcb3-4d3b-8519-c30192447d03.jpg"
+          ]
+        },
+        {
+          "id": 935,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Quiet room with private entrance",
+          "roomNumber": 8,
+          "description": "",
+          "weeklyRate": 162,
+          "originalWeeklyRate": 170,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 188,
+          "bathroomType": "shared",
+          "bedSize": "twinxl",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": true,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-20",
+          "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
+            "https://www.padsplit.com/img/rooms/room_935_1_1581966040.9901974_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/152/img_c2e49a53-81c2-4337-9da1-ac6fa254f2e2.jpg"
           ]
         }
       ],
@@ -255,11 +258,11 @@
         }
       ],
       "roomsAvailable": 2,
-      "fromPrice": 170,
+      "fromPrice": 162,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-19T12:02:51.093Z",
+      "checkedAt": "2026-07-19T15:51:39.572Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -470,7 +473,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-19T12:02:51.093Z",
+      "checkedAt": "2026-07-19T15:51:39.572Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -525,9 +528,12 @@
           "name": "Cardinal  - large room w/ Mini Fridge & Smart TV!",
           "roomNumber": 3,
           "description": "",
-          "weeklyRate": 181,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 171,
+          "originalWeeklyRate": 176,
+          "promo": {
+            "percentOff": 3,
+            "durationWeeks": 6
+          },
           "noMoveInFee": true,
           "recommendedPrice": 203,
           "bathroomType": "shared",
@@ -559,9 +565,12 @@
           "name": "Grey Heron - Light filled room w/ Private Entrance",
           "roomNumber": 7,
           "description": "",
-          "weeklyRate": 185,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 173,
+          "originalWeeklyRate": 185,
+          "promo": {
+            "percentOff": 7,
+            "durationWeeks": 6
+          },
           "noMoveInFee": true,
           "recommendedPrice": 200,
           "bathroomType": "shared",
@@ -755,7 +764,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-19T12:02:51.093Z",
+      "checkedAt": "2026-07-19T15:51:39.572Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -934,7 +943,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-19T12:02:51.093Z",
+      "checkedAt": "2026-07-19T15:51:39.572Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -952,8 +961,8 @@
           "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
           "roomNumber": 2,
           "description": "",
-          "weeklyRate": 164,
-          "originalWeeklyRate": 172,
+          "weeklyRate": 161,
+          "originalWeeklyRate": 169,
           "promo": {
             "percentOff": 5,
             "durationWeeks": 6
@@ -986,8 +995,8 @@
           "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
           "roomNumber": 5,
           "description": "",
-          "weeklyRate": 165,
-          "originalWeeklyRate": 173,
+          "weeklyRate": 162,
+          "originalWeeklyRate": 170,
           "promo": {
             "percentOff": 5,
             "durationWeeks": 6
@@ -1020,8 +1029,8 @@
           "name": "Rm 6 - Finn - Large room downstairs, close to the bathroom!",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 165,
-          "originalWeeklyRate": 173,
+          "weeklyRate": 162,
+          "originalWeeklyRate": 170,
           "promo": {
             "percentOff": 5,
             "durationWeeks": 6
@@ -1054,11 +1063,11 @@
           "name": "Room 3 - Clare - Private bath!",
           "roomNumber": 3,
           "description": "",
-          "weeklyRate": 228,
-          "originalWeeklyRate": 240,
+          "weeklyRate": 222,
+          "originalWeeklyRate": 233,
           "promo": {
             "percentOff": 5,
-            "durationWeeks": 12
+            "durationWeeks": 6
           },
           "noMoveInFee": true,
           "recommendedPrice": 250,
@@ -1214,11 +1223,11 @@
         }
       ],
       "roomsAvailable": 4,
-      "fromPrice": 164,
+      "fromPrice": 161,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-19T12:02:51.093Z",
+      "checkedAt": "2026-07-19T15:51:39.572Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
