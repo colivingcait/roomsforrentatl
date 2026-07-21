@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-21T12:26:35.582Z",
+  "updatedAt": "2026-07-21T23:54:20.548Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -16,14 +16,11 @@
           "name": "Quiet room with private entrance",
           "roomNumber": 8,
           "description": "",
-          "weeklyRate": 162,
-          "originalWeeklyRate": 170,
-          "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
-          },
+          "weeklyRate": 169,
+          "originalWeeklyRate": null,
+          "promo": null,
           "noMoveInFee": true,
-          "recommendedPrice": 188,
+          "recommendedPrice": 182,
           "bathroomType": "shared",
           "bedSize": "twinxl",
           "roomSize": "standard",
@@ -224,11 +221,11 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 162,
+      "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-21T12:26:35.582Z",
+      "checkedAt": "2026-07-21T23:54:20.548Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -439,7 +436,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-21T12:26:35.582Z",
+      "checkedAt": "2026-07-21T23:54:20.548Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -457,12 +454,9 @@
           "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
           "roomNumber": 2,
           "description": "",
-          "weeklyRate": 164,
-          "originalWeeklyRate": 172,
-          "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
-          },
+          "weeklyRate": 169,
+          "originalWeeklyRate": null,
+          "promo": null,
           "noMoveInFee": true,
           "recommendedPrice": 228,
           "bathroomType": "shared",
@@ -494,12 +488,9 @@
           "name": "Cardinal  - large room w/ Mini Fridge & Smart TV!",
           "roomNumber": 3,
           "description": "",
-          "weeklyRate": 171,
-          "originalWeeklyRate": 176,
-          "promo": {
-            "percentOff": 3,
-            "durationWeeks": 6
-          },
+          "weeklyRate": 174,
+          "originalWeeklyRate": null,
+          "promo": null,
           "noMoveInFee": true,
           "recommendedPrice": 232,
           "bathroomType": "shared",
@@ -531,14 +522,11 @@
           "name": "Grey Heron - Light filled room w/ Private Entrance",
           "roomNumber": 7,
           "description": "",
-          "weeklyRate": 173,
-          "originalWeeklyRate": 185,
-          "promo": {
-            "percentOff": 7,
-            "durationWeeks": 6
-          },
+          "weeklyRate": 184,
+          "originalWeeklyRate": null,
+          "promo": null,
           "noMoveInFee": true,
-          "recommendedPrice": 200,
+          "recommendedPrice": 228,
           "bathroomType": "shared",
           "bedSize": "queen",
           "roomSize": "large",
@@ -726,11 +714,11 @@
         }
       ],
       "roomsAvailable": 3,
-      "fromPrice": 164,
+      "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-21T12:26:35.582Z",
+      "checkedAt": "2026-07-21T23:54:20.548Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -909,7 +897,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-21T12:26:35.582Z",
+      "checkedAt": "2026-07-21T23:54:20.548Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -927,11 +915,11 @@
           "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
           "roomNumber": 2,
           "description": "",
-          "weeklyRate": 161,
+          "weeklyRate": 164,
           "originalWeeklyRate": 169,
           "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
+            "percentOff": 3,
+            "durationWeeks": 12
           },
           "noMoveInFee": true,
           "recommendedPrice": 180,
@@ -961,14 +949,14 @@
           "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
           "roomNumber": 5,
           "description": "",
-          "weeklyRate": 162,
-          "originalWeeklyRate": 170,
+          "weeklyRate": 164,
+          "originalWeeklyRate": 169,
           "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
+            "percentOff": 3,
+            "durationWeeks": 12
           },
           "noMoveInFee": true,
-          "recommendedPrice": 185,
+          "recommendedPrice": 183,
           "bathroomType": "shared",
           "bedSize": "full",
           "roomSize": "standard",
@@ -995,14 +983,14 @@
           "name": "Rm 6 - Finn - Large room downstairs, close to the bathroom!",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 162,
-          "originalWeeklyRate": 170,
+          "weeklyRate": 164,
+          "originalWeeklyRate": 169,
           "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
+            "percentOff": 3,
+            "durationWeeks": 12
           },
           "noMoveInFee": true,
-          "recommendedPrice": 185,
+          "recommendedPrice": 183,
           "bathroomType": "shared",
           "bedSize": "full",
           "roomSize": "standard",
@@ -1029,12 +1017,9 @@
           "name": "Room 3 - Clare - Private bath!",
           "roomNumber": 3,
           "description": "",
-          "weeklyRate": 218,
-          "originalWeeklyRate": 229,
-          "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
-          },
+          "weeklyRate": 230,
+          "originalWeeklyRate": null,
+          "promo": null,
           "noMoveInFee": true,
           "recommendedPrice": 249,
           "bathroomType": "private",
@@ -1189,11 +1174,11 @@
         }
       ],
       "roomsAvailable": 4,
-      "fromPrice": 161,
+      "fromPrice": 164,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-21T12:26:35.582Z",
+      "checkedAt": "2026-07-21T23:54:20.548Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
