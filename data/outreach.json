@@ -2,7 +2,7 @@
   "_README": "PadSplit's applicant list has no export/API and no history — it only shows CURRENT status + the date of the LAST change, overwriting the earlier date every time someone advances. So we keep our own history here. Workflow: whenever you check PadSplit's applicant list, paste the current full list to Claude. Claude matches each person by name against 'people' below, appends a new history entry ONLY when their status actually changed since last time (dated the day we noticed — that's the best precision possible without PadSplit exposing true transition dates), and adds anyone new as a new person. The more often you paste an update, the more accurate the stage-transition dates get.",
   "_statusValues": "Valid statuses, in pipeline order: registered, applying, pending, approved (screened) -> move_in (booked a room, host TBD) -> then either booking_fee_waived (moved into OUR room - the goal, instant) or paid (moved into another host's room, stayed 14+ consecutive days, $250 payout).",
   "padsplitApplicants": {
-    "lastUpdated": "2026-07-16",
+    "lastUpdated": "2026-07-22",
     "people": [
       { "name": "Quanton Jordan", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
       { "name": "Brin Wallace", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
@@ -16,7 +16,8 @@
         "name": "Kene Williams",
         "history": [
           { "status": "approved", "observedOn": "2026-07-16" },
-          { "status": "move_in", "observedOn": "2026-07-16" }
+          { "status": "move_in", "observedOn": "2026-07-16" },
+          { "status": "booking_fee_waived", "observedOn": "2026-07-19" }
         ]
       },
       { "name": "knowthegame1984@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-14" }] },
@@ -27,7 +28,30 @@
       { "name": "Juan Rivera", "history": [{ "status": "approved", "observedOn": "2026-06-21" }] },
       { "name": "Jodon Lavender", "history": [{ "status": "registered", "observedOn": "2024-11-18" }] },
       { "name": "Leslie Richardson", "history": [{ "status": "registered", "observedOn": "2026-07-16" }] },
-      { "name": "Ashley Palmer", "history": [{ "status": "move_in", "observedOn": "2026-07-16" }] }
+      {
+        "name": "Ashley Palmer",
+        "history": [
+          { "status": "move_in", "observedOn": "2026-07-16" },
+          { "status": "booking_fee_waived", "observedOn": "2026-07-17" }
+        ]
+      },
+      { "name": "Paris Senavanh", "history": [{ "status": "registered", "observedOn": "2026-07-17" }] },
+      { "name": "Joshua Allanah", "history": [{ "status": "registered", "observedOn": "2026-07-17" }] },
+      { "name": "Jarmel Wright", "history": [{ "status": "approved", "observedOn": "2026-07-19" }] },
+      { "name": "Christopher Marshall", "history": [{ "status": "approved", "observedOn": "2026-07-19" }] },
+      { "name": "Minghao Zha", "history": [{ "status": "move_in", "observedOn": "2026-07-20" }] },
+      { "name": "Veronique Grimes", "history": [{ "status": "registered", "observedOn": "2026-07-17" }] },
+      { "name": "Paul Ridgway", "history": [{ "status": "registered", "observedOn": "2026-07-21" }] },
+      { "name": "Jamel Starks", "history": [{ "status": "registered", "observedOn": "2023-02-15" }] },
+      { "name": "Crystal Pride", "history": [{ "status": "registered", "observedOn": "2026-07-21" }] },
+      { "name": "Mohammad Radhi", "history": [{ "status": "approved", "observedOn": "2026-07-19" }] },
+      { "name": "Jordan Sturgies", "history": [{ "status": "registered", "observedOn": "2026-06-02" }] },
+      { "name": "Kamira Ransom", "history": [{ "status": "registered", "observedOn": "2026-06-03" }] },
+      { "name": "Madeline Smith", "history": [{ "status": "approved", "observedOn": "2026-06-28" }] },
+      { "name": "Paolo Tejada", "history": [{ "status": "registered", "observedOn": "2026-06-27" }] },
+      { "name": "Gary Riddick", "history": [{ "status": "registered", "observedOn": "2026-07-04" }] },
+      { "name": "Alyah Bridges", "history": [{ "status": "applying", "observedOn": "2026-06-28" }] },
+      { "name": "Ewan Kim", "history": [{ "status": "registered", "observedOn": "2026-06-30" }] }
     ]
   }
 }
