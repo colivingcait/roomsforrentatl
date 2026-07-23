@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-22T23:59:39.445Z",
+  "updatedAt": "2026-07-23T12:27:44.115Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -225,7 +225,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-22T23:59:39.445Z",
+      "checkedAt": "2026-07-23T12:27:44.115Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -436,7 +436,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-22T23:59:39.445Z",
+      "checkedAt": "2026-07-23T12:27:44.115Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -447,43 +447,9 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 41256,
+          "id": 41255,
           "padIndex": 1,
           "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Cardinal  - large room w/ Mini Fridge & Smart TV!",
-          "roomNumber": 3,
-          "description": "",
-          "weeklyRate": 174,
-          "originalWeeklyRate": null,
-          "promo": null,
-          "noMoveInFee": true,
-          "recommendedPrice": 232,
-          "bathroomType": "shared",
-          "bedSize": "queen",
-          "roomSize": "large",
-          "workspace": true,
-          "miniFridge": true,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-07-24",
-          "image": "https://www.padsplit.com/img/psproperty/11889/img_ac070251-5e50-4fb1-852c-d71ec6aaf7f1.png",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/11889/img_ac070251-5e50-4fb1-852c-d71ec6aaf7f1.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_6ba5c066-2e7c-4463-ac9d-92a54a9697ee.jpg",
-            "https://www.padsplit.com/img/psproperty/11889/img_31ab9fec-0498-4424-b194-5a1ec5e3fef5.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_9b199d1e-18f3-4fd6-b628-7e37fd33a825.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_4fe75ab3-850a-4948-ade2-a0caa99adffe.jpg",
-            "https://www.padsplit.com/img/psproperty/11889/img_e87b7125-6822-41dd-8dde-6f8facd7735b.jpg"
-          ]
-        },
-        {
-          "id": 41255,
-          "padIndex": 2,
-          "pagePosition": 2,
           "applyIndex": null,
           "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
           "roomNumber": 2,
@@ -515,6 +481,40 @@
             "https://www.padsplit.com/img/psproperty/11889/img_cf7d73f9-785c-435b-9b50-72504601bcf2.png",
             "https://www.padsplit.com/img/psproperty/11889/img_3a5847d2-59c3-4b2a-9e41-0acdbea1d3de.jpg",
             "https://www.padsplit.com/img/psproperty/11889/img_83160994-91c5-4b74-a633-85b1c1ebc6cf.jpg"
+          ]
+        },
+        {
+          "id": 41260,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Grey Heron - Light filled room w/ Private Entrance",
+          "roomNumber": 7,
+          "description": "",
+          "weeklyRate": 184,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": true,
+          "recommendedPrice": 228,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": true,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-24",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_af39782f-f657-4308-87b8-2ad94c69a968.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7c9cd389-5f7b-49bd-be5e-ea61d9522b9b.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_bb72670a-3988-40ea-92bd-64ec818dab1e.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_9801dfcc-8806-49fc-bf04-1aa8c88e1288.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7b80f490-ae24-4efd-8bd4-b8ab8010438c.jpg"
           ]
         }
       ],
@@ -683,11 +683,11 @@
         }
       ],
       "roomsAvailable": 2,
-      "fromPrice": 174,
+      "fromPrice": 180,
       "priceUnit": "week",
       "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-22T23:59:39.445Z",
+      "checkedAt": "2026-07-23T12:27:44.115Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -866,7 +866,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-22T23:59:39.445Z",
+      "checkedAt": "2026-07-23T12:27:44.115Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -902,7 +902,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-23",
+          "moveInDate": "2026-07-24",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -936,7 +936,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-23",
+          "moveInDate": "2026-07-24",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
@@ -970,7 +970,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-23",
+          "moveInDate": "2026-07-24",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
@@ -1001,7 +1001,7 @@
           "windows": 2,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-23",
+          "moveInDate": "2026-07-24",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_4f242b9f-8d7f-495c-b6e8-f586852d99a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_4f242b9f-8d7f-495c-b6e8-f586852d99a8.jpg",
@@ -1147,7 +1147,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-22T23:59:39.445Z",
+      "checkedAt": "2026-07-23T12:27:44.115Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     }
   }
