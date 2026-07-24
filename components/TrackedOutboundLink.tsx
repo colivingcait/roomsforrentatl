@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { applyReferralOverride } from "@/lib/site";
 
 /**
  * A normal outbound <a> that fires an analytics event (Vercel Analytics +
@@ -24,9 +26,19 @@ export default function TrackedOutboundLink({
   target?: string;
   rel?: string;
 }) {
+  // The server-rendered href always uses the site-wide default referral code
+  // (pages are statically generated, so they can't vary per visitor). Once
+  // hydrated, swap in the visitor's ref_override cookie if they have one —
+  // this runs before any click/right-click can happen, so "copy link" and
+  // "open in new tab" get the right code too, not just a direct click.
+  const [resolvedHref, setResolvedHref] = useState(href);
+  useEffect(() => {
+    setResolvedHref(applyReferralOverride(href));
+  }, [href]);
+
   return (
     <a
-      href={href}
+      href={resolvedHref}
       target={target}
       rel={rel}
       className={className}

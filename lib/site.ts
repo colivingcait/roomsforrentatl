@@ -21,6 +21,36 @@ export const site = {
 };
 
 /**
+ * Per-visitor referral override — lets two "versions" of the site run at
+ * once, each crediting a different PadSplit host profile, chosen by which
+ * short link (/lustra or /covilla) a visitor came in on. Set as a cookie by
+ * that route, read back here on every "Book" link. Falls back to the
+ * default `site.referral.code` above when no override cookie is set.
+ */
+export const REFERRAL_COOKIE = "ref_override";
+export const REFERRAL_OVERRIDES: Record<string, string> = {
+  lustra: "B2C2060F",
+  covilla: "0DC68BAB",
+};
+
+/** Client-side only: rewrites a PadSplit booking URL's referral code to match the visitor's ref_override cookie, if any. Safe no-op on the server or for non-PadSplit URLs. */
+export function applyReferralOverride(href: string): string {
+  if (typeof document === "undefined") return href;
+  const match = document.cookie.match(/(?:^|;\s*)ref_override=([^;]*)/);
+  const key = match ? decodeURIComponent(match[1]) : null;
+  const overrideCode = key ? REFERRAL_OVERRIDES[key] : null;
+  if (!overrideCode) return href;
+  try {
+    const u = new URL(href);
+    if (!u.hostname.endsWith("padsplit.com")) return href;
+    u.searchParams.set(site.referral.param, overrideCode);
+    return u.toString();
+  } catch {
+    return href;
+  }
+}
+
+/**
  * Builds the "Book" link for a room: the room's live PadSplit page with your
  * referral code attached so you get credit for the booking. If no referral
  * code is configured, it returns the plain PadSplit URL unchanged. Won't
