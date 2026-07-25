@@ -2,17 +2,21 @@ import outreachData from "@/data/outreach.json";
 
 /**
  * The full PadSplit referral pipeline, in order:
- *   registered/applying/pending -> approved (screened) -> move_in (booked a room) ->
+ *   registered -> applying -> approved (screened) -> move_in (booked a room) ->
  *   then ONE of:
  *     booking_fee_waived - moved into YOUR room (the goal: instant fee waiver)
- *     paid               - moved into another host's room, stayed 14+ days ($250 payout)
+ *     pending            - moved into ANOTHER host's room; PadSplit shows this
+ *                          while the 14-day reward-confirmation clock runs
+ *     paid               - the 14 days passed, other host's room, $250 payout confirmed
+ * "Pending" only ever means the reward-confirmation wait AFTER move-in — PadSplit
+ * doesn't use it for an earlier "application under review" state.
  */
 export type ApplicantStatus =
   | "registered"
   | "applying"
-  | "pending"
   | "approved"
   | "move_in"
+  | "pending"
   | "booking_fee_waived"
   | "paid";
 
@@ -20,6 +24,15 @@ export interface StatusEvent {
   status: ApplicantStatus;
   /** The day we noticed this status — not necessarily the day it actually happened (PadSplit doesn't expose that). */
   observedOn: string;
+  /**
+   * Only present when observedOn is an ESTIMATE, not PadSplit's literal displayed
+   * date — e.g. PadSplit sometimes shows an implausible old date (2023/2024) for a
+   * person whose neighbors in the same list are all recent. When that happens,
+   * estimate the real date from the surrounding entries and record the original
+   * bogus date here. If a future paste shows that same bogus date again for this
+   * person, it's the known issue, not a new anomaly — don't re-derive it.
+   */
+  note?: string;
 }
 
 export interface ApplicantPerson {
@@ -35,9 +48,9 @@ export function getOutreachData() {
   const statusCounts: Record<ApplicantStatus, number> = {
     registered: 0,
     applying: 0,
-    pending: 0,
     approved: 0,
     move_in: 0,
+    pending: 0,
     booking_fee_waived: 0,
     paid: 0,
   };

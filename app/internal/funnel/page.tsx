@@ -110,7 +110,10 @@ export default async function InternalFunnelPage() {
     sc.paid,
     1
   );
-  const movedIn = sc.move_in + sc.booking_fee_waived + sc.paid;
+  // "pending" means they've already moved into another host's room and are in
+  // PadSplit's 14-day reward-confirmation window — so it counts as moved in.
+  const movedIn = sc.move_in + sc.pending + sc.booking_fee_waived + sc.paid;
+  const approvedOrBeyond = sc.approved + movedIn;
 
   return (
     <main className="mx-auto min-h-screen max-w-2xl px-4 py-8">
@@ -242,7 +245,7 @@ export default async function InternalFunnelPage() {
           </div>
           <div className="text-muted">→</div>
           <div>
-            <div className="text-2xl font-extrabold text-ink">{sc.approved}</div>
+            <div className="text-2xl font-extrabold text-ink">{approvedOrBeyond}</div>
             <div className="text-xs text-muted">Approved</div>
           </div>
           <div className="text-muted">→</div>
@@ -253,10 +256,10 @@ export default async function InternalFunnelPage() {
         </div>
         <StatusRow label="Registered" count={sc.registered} max={maxStatus} color="#94a3b8" />
         <StatusRow label="Applying" count={sc.applying} max={maxStatus} color="#f59e0b" />
-        <StatusRow label="Pending" count={sc.pending} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Approved" count={sc.approved} max={maxStatus} color="#16a34a" />
         <StatusRow label="Move in" count={sc.move_in} max={maxStatus} color="#0369a1" />
         <StatusRow label="Booking fee waived" count={sc.booking_fee_waived} max={maxStatus} color="#0E7C66" />
+        <StatusRow label="Pending (14-day reward clock)" count={sc.pending} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Paid ($250)" count={sc.paid} max={maxStatus} color="#FF6B35" />
 
         <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
