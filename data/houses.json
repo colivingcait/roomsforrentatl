@@ -100,6 +100,24 @@
       ],
       "lat": 33.746,
       "lng": -84.252
+    },
+    {
+      "id": "39708",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/39708",
+      "name": "Willow",
+      "neighborhood": "Adamsville",
+      "city": "Atlanta, GA",
+      "image": "/rooms/westside-bankhead.svg",
+      "badge": "All Private Baths!",
+      "transit": "Best suited for residents who drive or rideshare.",
+      "amenities": [
+        "All 6 rooms have private bathrooms",
+        "2 full kitchens",
+        "Separate upstairs & downstairs entry",
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ]
     }
   ]
 }
