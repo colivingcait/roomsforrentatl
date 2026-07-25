@@ -74,15 +74,17 @@ function Bar({
 function StatusRow({ label, count, max, color }: { label: string; count: number; max: number; color: string }) {
   const width = max > 0 ? Math.max((count / max) * 100, count > 0 ? 6 : 0) : 0;
   return (
-    <div className="mb-2.5 grid grid-cols-[100px_1fr_28px] items-center gap-2.5 text-sm">
-      <div className="flex items-center gap-1.5 font-semibold text-ink">
-        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: color }} />
-        {label}
+    <div className="mb-3">
+      <div className="mb-1 flex items-center justify-between gap-3 text-sm">
+        <span className="flex min-w-0 items-center gap-1.5 font-semibold text-ink">
+          <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: color }} />
+          {label}
+        </span>
+        <span className="shrink-0 font-bold text-ink">{count}</span>
       </div>
-      <div className="h-4">
-        <div className="h-4 rounded" style={{ width: `${width}%`, background: color }} />
+      <div className="h-3 overflow-hidden rounded-full bg-slate-100">
+        <div className="h-3 rounded-full" style={{ width: `${width}%`, background: color }} />
       </div>
-      <div className="text-right font-bold text-ink">{count}</div>
     </div>
   );
 }
@@ -259,7 +261,7 @@ export default async function InternalFunnelPage() {
         <StatusRow label="Approved" count={sc.approved} max={maxStatus} color="#16a34a" />
         <StatusRow label="Move in" count={sc.move_in} max={maxStatus} color="#0369a1" />
         <StatusRow label="Booking fee waived" count={sc.booking_fee_waived} max={maxStatus} color="#0E7C66" />
-        <StatusRow label="Pending (14-day reward clock)" count={sc.pending} max={maxStatus} color="#f59e0b" />
+        <StatusRow label="Reward pending (14 days)" count={sc.pending} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Paid ($250)" count={sc.paid} max={maxStatus} color="#FF6B35" />
 
         <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
