@@ -42,35 +42,47 @@ function formatHour(hour: number): string {
   return `${h}${hour < 12 ? "am" : "pm"}`;
 }
 
-function Bar({
-  width,
-  color,
+const pct = (n: number, of: number) => (of > 0 ? (n / of) * 100 : 0);
+
+/** One step of a real, cumulative funnel — count plus its conversion % relative to a previous step. */
+function FunnelBar({
   label,
-  value,
+  count,
+  pctOf,
+  pctLabel,
+  color,
 }: {
-  width: number; // 0-100
-  color: string;
   label: string;
-  value: string | number;
+  count: number | string;
+  /** 0-100, or null for the funnel's first step (no "% of" to show). */
+  pctOf: number | null;
+  /** What the % is relative to, e.g. "of visits" / "of applied". */
+  pctLabel?: string;
+  color: string;
 }) {
+  const numeric = typeof count === "number" ? count : 1;
+  const barWidth = pctOf == null ? 100 : Math.max(Math.min(pctOf, 100), numeric > 0 ? 2 : 0);
   return (
-    <div className="mb-5">
-      <div className="mb-1.5 flex items-baseline justify-between text-sm">
+    <div className="mb-4">
+      <div className="mb-1 flex items-baseline justify-between gap-3 text-sm">
         <span className="font-semibold text-ink">{label}</span>
-        <span className="text-muted">{value}</span>
+        <span className="text-right">
+          <span className="font-bold text-ink">{count}</span>
+          {pctOf != null && (
+            <span className="ml-1.5 text-xs text-muted">
+              {Math.round(pctOf)}%{pctLabel ? ` ${pctLabel}` : ""}
+            </span>
+          )}
+        </span>
       </div>
-      <div className="flex h-6 items-center gap-2">
-        <div
-          className="h-6 min-w-[4px] rounded"
-          style={{ width: `${Math.max(width, 2)}%`, background: color }}
-          title={`${label}: ${value}`}
-        />
-        <span className="text-sm font-bold text-ink">{value}</span>
+      <div className="h-3 overflow-hidden rounded-full bg-slate-100">
+        <div className="h-3 rounded-full" style={{ width: `${barWidth}%`, background: color }} />
       </div>
     </div>
   );
 }
 
+/** A single applicant's CURRENT status — a snapshot distribution, not a cumulative funnel step. */
 function StatusRow({ label, count, max, color }: { label: string; count: number; max: number; color: string }) {
   const width = max > 0 ? Math.max((count / max) * 100, count > 0 ? 6 : 0) : 0;
   return (
@@ -85,6 +97,16 @@ function StatusRow({ label, count, max, color }: { label: string; count: number;
       <div className="h-3 overflow-hidden rounded-full bg-slate-100">
         <div className="h-3 rounded-full" style={{ width: `${width}%`, background: color }} />
       </div>
+    </div>
+  );
+}
+
+function SectionCard({ title, sub, children }: { title: string; sub?: string; children: React.ReactNode }) {
+  return (
+    <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
+      <h2 className="text-sm font-bold text-ink">{title}</h2>
+      {sub && <p className="mb-4 text-xs text-muted">{sub}</p>}
+      {children}
     </div>
   );
 }
@@ -105,9 +127,9 @@ export default async function InternalFunnelPage() {
   const maxStatus = Math.max(
     sc.registered,
     sc.applying,
-    sc.pending,
     sc.approved,
     sc.move_in,
+    sc.pending,
     sc.booking_fee_waived,
     sc.paid,
     1
@@ -138,11 +160,8 @@ export default async function InternalFunnelPage() {
         </div>
       )}
 
-      {/* Site funnel */}
-      <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-        <h2 className="text-sm font-bold text-ink">Site funnel</h2>
-        <p className="mb-4 text-xs text-muted">All traffic in this window, from PostHog</p>
-
+      {/* Booking funnel — one sequential path: visit -> explore -> book. */}
+      <SectionCard title="Booking funnel" sub="Site visits this window, from PostHog">
         {metricsError ? (
           <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
             {metricsError.includes("POSTHOG_PERSONAL_API_KEY")
@@ -151,111 +170,145 @@ export default async function InternalFunnelPage() {
           </p>
         ) : metrics ? (
           <>
-            <div className="mb-1.5 flex items-baseline justify-between text-sm">
-              <span className="font-semibold text-ink">Site visits</span>
-              <span className="text-muted">{metrics.sessions}</span>
-            </div>
-            <div className="mb-1 flex h-6 gap-0.5">
-              <div
-                className="h-6 rounded-l"
-                style={{ width: `${(metrics.bounced / Math.max(metrics.sessions, 1)) * 100}%`, background: "#94a3b8" }}
-                title={`Bounced: ${metrics.bounced}`}
-              />
-              <div
-                className="h-6 rounded-r"
-                style={{ width: `${(metrics.explored / Math.max(metrics.sessions, 1)) * 100}%`, background: "#13A083" }}
-                title={`Explored: ${metrics.explored}`}
-              />
-            </div>
-            <div className="mb-5 flex flex-wrap gap-4 text-xs text-muted">
-              <span>
-                <span className="mr-1 inline-block h-2 w-2 rounded-full align-middle" style={{ background: "#94a3b8" }} />
-                Bounced — {metrics.bounced} (
-                {Math.round((metrics.bounced / Math.max(metrics.sessions, 1)) * 100)}%), one page and gone
-              </span>
-              <span>
-                <span className="mr-1 inline-block h-2 w-2 rounded-full align-middle" style={{ background: "#13A083" }} />
-                Explored — {metrics.explored} (
-                {Math.round((metrics.explored / Math.max(metrics.sessions, 1)) * 100)}%), 2+ pages
-              </span>
-            </div>
-
-            <Bar
-              width={(metrics.chatOpenedSessions / Math.max(metrics.sessions, 1)) * 100}
-              color="#0E7C66"
-              label="Opened chat"
-              value={metrics.chatOpenedSessions}
+            <FunnelBar label="Site visits" count={metrics.sessions} pctOf={null} color="#334155" />
+            <FunnelBar
+              label="Explored 2+ pages"
+              count={metrics.explored}
+              pctOf={pct(metrics.explored, metrics.sessions)}
+              pctLabel="of visits"
+              color="#13A083"
             />
-            <Bar
-              width={(metrics.chatMessageSentSessions / Math.max(metrics.sessions, 1)) * 100}
-              color="#0A5C4C"
-              label="Sent a chat message"
-              value={metrics.chatMessageSentSessions}
-            />
-            <Bar
-              width={(metrics.bookClickSessions / Math.max(metrics.sessions, 1)) * 100}
-              color="#FF6B35"
+            <FunnelBar
               label="Clicked Book on PadSplit"
-              value={`${metrics.bookClickSessions} sessions (${metrics.bookClickEvents} clicks)`}
+              count={`${metrics.bookClickSessions} sessions (${metrics.bookClickEvents} clicks)`}
+              pctOf={pct(metrics.bookClickSessions, metrics.sessions)}
+              pctLabel="of visits"
+              color="#FF6B35"
             />
+            <p className="mt-1 text-xs text-muted">
+              {metrics.bounced} visit{metrics.bounced === 1 ? "" : "s"} (
+              {Math.round(pct(metrics.bounced, metrics.sessions))}%) bounced — one page and gone.
+            </p>
 
-            <div className="mt-5 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
+            <div className="mt-4 grid grid-cols-1 gap-3 border-t border-slate-100 pt-4">
               <div className="rounded-xl bg-slate-50 px-3 py-2.5">
                 <div className="text-lg font-extrabold text-ink">
                   {metrics.avgSecondsToBook != null ? formatDuration(metrics.avgSecondsToBook) : "—"}
                 </div>
                 <div className="text-xs text-muted">Avg time on site before clicking Book</div>
               </div>
-              <div className="rounded-xl bg-slate-50 px-3 py-2.5">
-                {metrics.bookClicksBySource.map((s) => (
-                  <div key={s.source} className="flex justify-between text-sm">
-                    <span className="text-ink capitalize">{s.source}</span>
-                    <span className="font-semibold text-ink">{s.clicks}</span>
-                  </div>
-                ))}
-                <div className="mt-0.5 text-xs text-muted">Book clicks: chat vs house page</div>
-              </div>
             </div>
-
-            {metrics.byRoom.length > 0 && (
-              <div className="mt-3 border-t border-slate-100 pt-4">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Book clicks by room</p>
-                {metrics.byRoom.map((r) => (
-                  <div key={`${r.house}-${r.room}`} className="flex justify-between text-sm">
-                    <span className="text-ink">
-                      {r.house} <span className="text-muted">— {r.room}</span>
-                    </span>
-                    <span className="font-semibold text-ink">{r.clicks}</span>
-                  </div>
-                ))}
-              </div>
-            )}
           </>
         ) : null}
-      </div>
+      </SectionCard>
 
-      {/* PadSplit applications */}
-      <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-        <h2 className="text-sm font-bold text-ink">PadSplit applications</h2>
-        <p className="mb-4 text-xs text-muted">
-          From your applicant list · last updated {outreach.applicantsLastUpdated}
-        </p>
-        <div className="mb-4 flex items-center gap-6">
-          <div>
-            <div className="text-2xl font-extrabold text-ink">{outreach.applicantCount}</div>
-            <div className="text-xs text-muted">Applied</div>
+      {/* Chat — a parallel, optional path. Most bookings still happen straight from browsing (see below). */}
+      {metrics && !metricsError && (
+        <SectionCard title="Chat" sub="How much people use the concierge, and whether it leads to a Book click">
+          <FunnelBar
+            label="Opened chat"
+            count={metrics.chatOpenedSessions}
+            pctOf={pct(metrics.chatOpenedSessions, metrics.sessions)}
+            pctLabel="of visits"
+            color="#0E7C66"
+          />
+          <FunnelBar
+            label="Sent a chat message"
+            count={metrics.chatMessageSentSessions}
+            pctOf={pct(metrics.chatMessageSentSessions, metrics.chatOpenedSessions)}
+            pctLabel="of chat-openers"
+            color="#0A5C4C"
+          />
+
+          {metrics.bookClicksBySource.length > 0 && (
+            <div className="mt-3 rounded-xl bg-slate-50 px-3 py-2.5">
+              {metrics.bookClicksBySource.map((s) => (
+                <div key={s.source} className="flex justify-between text-sm">
+                  <span className="text-ink capitalize">{s.source}</span>
+                  <span className="font-semibold text-ink">{s.clicks}</span>
+                </div>
+              ))}
+              <div className="mt-0.5 text-xs text-muted">
+                Book clicks by where they happened — most still come straight from the page, not chat.
+              </div>
+            </div>
+          )}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">
+            Chips only vs. typed a message
+          </p>
+          {metrics.chatStyle.map((s) => (
+            <div key={s.style} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{s.style}</span>
+              <span className="text-muted">
+                {s.sessions} sessions ·{" "}
+                <b className="text-ink">{Math.round(pct(s.bookClicks, s.sessions))}% book-click rate</b>
+              </span>
+            </div>
+          ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Chat depth</p>
+          {metrics.chatDepth.map((d) => (
+            <div key={d.depth} className="mb-1 flex justify-between text-sm">
+              <span className="text-ink">{d.depth}</span>
+              <span className="text-muted">
+                {d.sessions} sessions ·{" "}
+                <b className="text-ink">{Math.round(pct(d.bookClicks, d.sessions))}% book-click rate</b>
+              </span>
+            </div>
+          ))}
+
+          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">FAQ tab</p>
+          <div className="flex justify-between text-sm">
+            <span className="text-ink">Viewed the FAQ tab</span>
+            <span className="font-semibold text-ink">
+              {metrics.faqSessions} sessions ({metrics.faqViews} views)
+            </span>
           </div>
-          <div className="text-muted">→</div>
-          <div>
-            <div className="text-2xl font-extrabold text-ink">{approvedOrBeyond}</div>
-            <div className="text-xs text-muted">Approved</div>
-          </div>
-          <div className="text-muted">→</div>
-          <div>
-            <div className="text-2xl font-extrabold text-ink">{movedIn}</div>
-            <div className="text-xs text-muted">Moved in</div>
-          </div>
+        </SectionCard>
+      )}
+
+      {/* Application funnel — a SEPARATE population/timeframe from the site funnel above
+          (the applicant pool spans months; don't chain these two funnels' percentages together). */}
+      <SectionCard title="Application funnel" sub={`From your applicant list · last updated ${outreach.applicantsLastUpdated}`}>
+        <FunnelBar label="Applied" count={outreach.applicantCount} pctOf={null} color="#334155" />
+        <FunnelBar
+          label="Approved (or beyond)"
+          count={approvedOrBeyond}
+          pctOf={pct(approvedOrBeyond, outreach.applicantCount)}
+          pctLabel="of applied"
+          color="#16a34a"
+        />
+        <FunnelBar
+          label="Moved in (or beyond)"
+          count={movedIn}
+          pctOf={pct(movedIn, approvedOrBeyond)}
+          pctLabel="of approved"
+          color="#0369a1"
+        />
+        <div className="grid grid-cols-2 gap-3">
+          <FunnelBar
+            label="Booking fee waived"
+            count={sc.booking_fee_waived}
+            pctOf={pct(sc.booking_fee_waived, movedIn)}
+            pctLabel="of moved-in"
+            color="#0E7C66"
+          />
+          <FunnelBar
+            label="Paid ($250)"
+            count={sc.paid}
+            pctOf={pct(sc.paid, movedIn)}
+            pctLabel="of moved-in"
+            color="#FF6B35"
+          />
         </div>
+        <p className="mb-4 text-xs text-muted">
+          Fee waived and Paid are two different outcomes once someone moves in — not sequential steps.
+        </p>
+
+        <p className="mb-2 mt-2 border-t border-slate-100 pt-4 text-xs font-semibold uppercase tracking-wide text-muted">
+          Current stage of every applicant (a snapshot, not the funnel above)
+        </p>
         <StatusRow label="Registered" count={sc.registered} max={maxStatus} color="#94a3b8" />
         <StatusRow label="Applying" count={sc.applying} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Approved" count={sc.approved} max={maxStatus} color="#16a34a" />
@@ -274,20 +327,32 @@ export default async function InternalFunnelPage() {
             <div className="text-xs text-muted">Cash earned ({sc.paid} × ${outreach.payoutPerPaid}, other hosts)</div>
           </div>
         </div>
-      </div>
+      </SectionCard>
 
-      {/* Additional signals */}
-      {metrics && (
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-          <h2 className="mb-4 text-sm font-bold text-ink">Additional signals</h2>
+      {/* Book clicks by room — detail, not part of the funnel shape, so it lives below both funnels. */}
+      {metrics && !metricsError && metrics.byRoom.length > 0 && (
+        <SectionCard title="Book clicks by room" sub="Which specific rooms get tapped">
+          {metrics.byRoom.map((r) => (
+            <div key={`${r.house}-${r.room}`} className="flex justify-between text-sm">
+              <span className="text-ink">
+                {r.house} <span className="text-muted">— {r.room}</span>
+              </span>
+              <span className="font-semibold text-ink">{r.clicks}</span>
+            </div>
+          ))}
+        </SectionCard>
+      )}
 
+      {/* Segments */}
+      {metrics && !metricsError && (
+        <SectionCard title="Segments">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">By device</p>
           {metrics.byDevice.map((d) => (
             <div key={d.device} className="mb-1 flex justify-between text-sm">
               <span className="text-ink">{d.device}</span>
               <span className="text-muted">
-                {d.sessions} sessions · <b className="text-ink">{Math.round((d.bookClicks / Math.max(d.sessions, 1)) * 100)}% booked</b> ·{" "}
-                {Math.round((d.chatOpened / Math.max(d.sessions, 1)) * 100)}% chatted
+                {d.sessions} sessions · <b className="text-ink">{Math.round(pct(d.bookClicks, d.sessions))}% booked</b> ·{" "}
+                {Math.round(pct(d.chatOpened, d.sessions))}% chatted
               </span>
             </div>
           ))}
@@ -297,7 +362,7 @@ export default async function InternalFunnelPage() {
             <div key={r.referrer} className="mb-1 flex justify-between text-sm">
               <span className="text-ink">{r.referrer}</span>
               <span className="text-muted">
-                {r.sessions} sessions · <b className="text-ink">{Math.round((r.bookClicks / Math.max(r.sessions, 1)) * 100)}% booked</b>
+                {r.sessions} sessions · <b className="text-ink">{Math.round(pct(r.bookClicks, r.sessions))}% booked</b>
               </span>
             </div>
           ))}
@@ -307,7 +372,7 @@ export default async function InternalFunnelPage() {
             <span className="text-ink">Came back 2+ times</span>
             <span className="font-semibold text-ink">
               {metrics.returningVisitors} / {metrics.uniqueVisitors} (
-              {Math.round((metrics.returningVisitors / Math.max(metrics.uniqueVisitors, 1)) * 100)}%)
+              {Math.round(pct(metrics.returningVisitors, metrics.uniqueVisitors))}%)
             </span>
           </div>
           {metrics.visitsBeforeBooking.map((v) => (
@@ -316,55 +381,12 @@ export default async function InternalFunnelPage() {
               <span className="font-semibold text-ink">{v.visitors}</span>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Chat engagement */}
-      {metrics && (
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-          <h2 className="text-sm font-bold text-ink">Chat engagement</h2>
-          <p className="mb-4 text-xs text-muted">
-            "Book-click rate" here, not confirmed bookings — see PadSplit Applications above for real outcomes.
-          </p>
-
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Chips only vs. typed a message</p>
-          {metrics.chatStyle.map((s) => (
-            <div key={s.style} className="mb-1 flex justify-between text-sm">
-              <span className="text-ink">{s.style}</span>
-              <span className="text-muted">
-                {s.sessions} sessions ·{" "}
-                <b className="text-ink">{Math.round((s.bookClicks / Math.max(s.sessions, 1)) * 100)}% book-click rate</b>
-              </span>
-            </div>
-          ))}
-
-          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">Chat depth</p>
-          {metrics.chatDepth.map((d) => (
-            <div key={d.depth} className="mb-1 flex justify-between text-sm">
-              <span className="text-ink">{d.depth}</span>
-              <span className="text-muted">
-                {d.sessions} sessions ·{" "}
-                <b className="text-ink">{Math.round((d.bookClicks / Math.max(d.sessions, 1)) * 100)}% book-click rate</b>
-              </span>
-            </div>
-          ))}
-
-          <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-muted">FAQ tab</p>
-          <div className="flex justify-between text-sm">
-            <span className="text-ink">Viewed the FAQ tab</span>
-            <span className="font-semibold text-ink">
-              {metrics.faqSessions} sessions ({metrics.faqViews} views)
-            </span>
-          </div>
-        </div>
+        </SectionCard>
       )}
 
       {/* Timing */}
-      {metrics && (
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card">
-          <h2 className="text-sm font-bold text-ink">Timing</h2>
-          <p className="mb-4 text-xs text-muted">America/New_York · useful for timing Facebook posts</p>
-
+      {metrics && !metricsError && (
+        <SectionCard title="Timing" sub="America/New_York · useful for timing Facebook posts">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">By day of week</p>
           {metrics.byDayOfWeek.map((d) => (
             <div key={d.day} className="mb-1 flex justify-between text-sm">
@@ -400,7 +422,7 @@ export default async function InternalFunnelPage() {
           <p className="mt-3 text-xs text-muted">
             Still a short window ({DATA_START} onward) — this gets more meaningful as more full months accumulate.
           </p>
-        </div>
+        </SectionCard>
       )}
 
       <p className="mt-2 text-xs text-muted">
