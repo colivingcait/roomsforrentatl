@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-07-26T12:09:15.630Z",
+  "updatedAt": "2026-07-26T23:58:07.301Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
       "utilitiesIncluded": true,
       "rooms": [
         {
@@ -34,7 +34,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-27",
+          "moveInDate": "2026-07-28",
           "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
           "photos": [
             "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
@@ -101,14 +101,6 @@
           "height": 4000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
-          "category": "common_space",
-          "description": "Nice backyard patio with table and lights",
-          "primary": false,
-          "width": 3468,
-          "height": 4624
-        },
-        {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
           "category": "common_space",
           "description": "Kitchen with new smooth top range and 2 refrigerators",
@@ -139,6 +131,14 @@
           "primary": false,
           "width": 3000,
           "height": 4000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false,
+          "width": 3468,
+          "height": 4624
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac.jpg",
@@ -215,12 +215,12 @@
           "height": 4000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
           "category": "common_space",
-          "description": "Nice backyard patio with table and lights",
+          "description": "Kitchen with new smooth top range and 2 refrigerators",
           "primary": false,
-          "width": 3468,
-          "height": 4624
+          "width": 899,
+          "height": 600
         }
       ],
       "roomsAvailable": 1,
@@ -228,14 +228,14 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
+      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
       "utilitiesIncluded": true,
       "rooms": [],
       "commonAreas": [
@@ -439,7 +439,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -447,8 +447,46 @@
       "neighborhood": "Off Stephenson",
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/11889/img_2c79d9b7-84c4-4ecb-a0a4-960edc1c65cd.png",
-      "utilitiesIncluded": false,
-      "rooms": [],
+      "utilitiesIncluded": true,
+      "rooms": [
+        {
+          "id": 41260,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Grey Heron - Light filled room w/ Private Entrance",
+          "roomNumber": 7,
+          "description": "",
+          "weeklyRate": 179,
+          "originalWeeklyRate": 184,
+          "promo": {
+            "percentOff": 3,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 228,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": true,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-07-27",
+          "image": "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11889/img_a593b725-aee0-43e6-9a19-ccfbdaffbc68.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_af39782f-f657-4308-87b8-2ad94c69a968.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7c9cd389-5f7b-49bd-be5e-ea61d9522b9b.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_bb72670a-3988-40ea-92bd-64ec818dab1e.png",
+            "https://www.padsplit.com/img/psproperty/11889/img_9801dfcc-8806-49fc-bf04-1aa8c88e1288.jpg",
+            "https://www.padsplit.com/img/psproperty/11889/img_7b80f490-ae24-4efd-8bd4-b8ab8010438c.jpg"
+          ]
+        }
+      ],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/31721219-2ea3-4377-867b-ab03a0250691.jpg",
@@ -613,19 +651,19 @@
           "height": 1067
         }
       ],
-      "roomsAvailable": 0,
-      "fromPrice": null,
+      "roomsAvailable": 1,
+      "fromPrice": 179,
       "priceUnit": "week",
-      "available": false,
+      "available": true,
       "rating": 4.3,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Lake Commons CT",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_59616cb1-08c3-4b00-a014-05e4cc6fb895.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -797,7 +835,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1081,7 +1119,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1108,92 +1146,52 @@
           "height": 3840
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/5548/9160eab8-3e1a-4dca-bf28-033454e07640_improved.jpg",
+          "category": "common_space",
+          "description": "living_room, detected:",
+          "primary": true,
+          "width": 3024,
+          "height": 4032
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/6aebf092-12c4-4273-a015-ff7137a3188b_improved.jpg",
+          "category": "common_space",
+          "description": "kitchen, detected:kitchen stove, refrigerator, stove, gas stove",
+          "primary": false,
+          "width": 2048,
+          "height": 1365
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/12d354cf-7750-4634-aca3-9f9b489de20a_improved.jpg",
+          "category": "common_space",
+          "description": "living_room, detected:",
+          "primary": false,
+          "width": 2048,
+          "height": 1365
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/f05c3f1f-0b5b-4448-af0d-b0e4c729bd2f_improved.jpg",
+          "category": "common_space",
+          "description": "dining_room, detected:",
+          "primary": false,
+          "width": 3024,
+          "height": 4032
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/b703a6a4-701b-4a3c-a22a-47d83565ecee_improved.jpg",
+          "category": "common_space",
+          "description": "other, detected:",
+          "primary": false,
+          "width": 3024,
+          "height": 4032
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/25074/ecdb6713-1a34-4445-9a9b-486ddc58c609.png",
           "category": "common_space",
           "description": null,
           "primary": false,
           "width": 1536,
           "height": 1024
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/0cbd048a-eb9d-446d-8064-c8d31490767d.jpg",
-          "category": "common_space",
-          "description": "Kitchen with granite breakfast bar, ample shaker cabinetry, and stainless-steel appliances for everyday cooking.",
-          "primary": true,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/a688085a-6e79-4fe6-96d3-dc397a9219cb.jpg",
-          "category": "common_space",
-          "description": "Open kitchen with granite peninsula, stainless appliances, and pendant lighting flows into a dedicated dining area.",
-          "primary": false,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/6b4eb60f-e9cb-4693-ad33-f875deedfa29.jpg",
-          "category": "common_space",
-          "description": "Open kitchen with breakfast bar seating, ample cabinetry, and stainless-steel appliances flowing into the main area.",
-          "primary": false,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/8c071c9c-f6a6-4844-b65a-c80ddcee8aac_improved.jpg",
-          "category": "common_space",
-          "description": "kitchen, detected: refrigerator, microwave, hood",
-          "primary": false,
-          "width": 7926,
-          "height": 5287
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/7c43af37-2d67-4bc9-ab03-5ae8ad67a532_improved.jpg",
-          "category": "common_space",
-          "description": "kitchen, detected: refrigerator, oven, microwave, hood",
-          "primary": false,
-          "width": 7923,
-          "height": 5285
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/10b90a15-d6ef-49a9-9d9d-fbf8b5b50228_improved.jpg",
-          "category": "common_space",
-          "description": "dining room",
-          "primary": false,
-          "width": 7917,
-          "height": 5281
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/9f0f3958-a02c-4c2e-b375-df2a74d7c02e_improved.jpg",
-          "category": "common_space",
-          "description": "dining room",
-          "primary": false,
-          "width": 7926,
-          "height": 5287
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/d3715b5d-c185-43e1-b5cd-a0299701aa34_improved.jpg",
-          "category": "common_space",
-          "description": "laundry room",
-          "primary": false,
-          "width": 7926,
-          "height": 5287
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/a2601b34-5d1a-4f9f-853c-038ff18b39e3_improved.jpg",
-          "category": "common_space",
-          "description": "bathroom, detected: toilet",
-          "primary": false,
-          "width": 7920,
-          "height": 5283
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/ac292b0e-e7da-4e66-9d03-e3abe4581437_improved.jpg",
-          "category": "common_space",
-          "description": "bathroom, detected: toilet",
-          "primary": false,
-          "width": 7923,
-          "height": 5285
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/33282/bathrooms/img_a72ea397-02be-4253-830e-e31c36e78697.png",
@@ -1218,6 +1216,46 @@
           "primary": false,
           "width": 2880,
           "height": 3840
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/38862/434d53e4-a598-4f5c-8aa7-5cf6ccc7cdc4.jpg",
+          "category": "common_space",
+          "description": "Two-story home exterior with covered entry, private driveway, and fenced yard space for outdoor use.",
+          "primary": true,
+          "width": 3840,
+          "height": 2562
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/38862/725a1829-2ddb-4a42-8331-5a6eb0ec3821.jpg",
+          "category": "common_space",
+          "description": "Efficient galley kitchen with quartz-style counters, ample cabinetry, stainless range and microwave, and a large window.",
+          "primary": false,
+          "width": 3840,
+          "height": 2562
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/38862/8260e95d-0647-4ba9-b7b4-7b3e898cbeb3.jpg",
+          "category": "common_space",
+          "description": "Spacious kitchen with a large island breakfast bar, stainless-steel appliances, and ample white cabinetry for storage.",
+          "primary": false,
+          "width": 3840,
+          "height": 2562
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/38862/8980cab9-aba5-4a78-9bf6-af33e75469a2.jpg",
+          "category": "common_space",
+          "description": "Dedicated dining area with a four-seat table, large windows with blinds, and durable wood-look flooring near the entry.",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/38862/479d91db-9378-4632-8983-c20cbafaaf24.jpg",
+          "category": "common_space",
+          "description": "Open living room with ample seating, ceiling fan, and large windows with blinds—ideal for relaxing or entertaining.",
+          "primary": false,
+          "width": 3840,
+          "height": 2562
         }
       ],
       "carousel": [
@@ -1238,52 +1276,52 @@
           "height": 3840
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/5548/9160eab8-3e1a-4dca-bf28-033454e07640_improved.jpg",
+          "category": "common_space",
+          "description": "living_room, detected:",
+          "primary": true,
+          "width": 3024,
+          "height": 4032
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/6aebf092-12c4-4273-a015-ff7137a3188b_improved.jpg",
+          "category": "common_space",
+          "description": "kitchen, detected:kitchen stove, refrigerator, stove, gas stove",
+          "primary": false,
+          "width": 2048,
+          "height": 1365
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/12d354cf-7750-4634-aca3-9f9b489de20a_improved.jpg",
+          "category": "common_space",
+          "description": "living_room, detected:",
+          "primary": false,
+          "width": 2048,
+          "height": 1365
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/f05c3f1f-0b5b-4448-af0d-b0e4c729bd2f_improved.jpg",
+          "category": "common_space",
+          "description": "dining_room, detected:",
+          "primary": false,
+          "width": 3024,
+          "height": 4032
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/5548/b703a6a4-701b-4a3c-a22a-47d83565ecee_improved.jpg",
+          "category": "common_space",
+          "description": "other, detected:",
+          "primary": false,
+          "width": 3024,
+          "height": 4032
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/25074/ecdb6713-1a34-4445-9a9b-486ddc58c609.png",
           "category": "common_space",
           "description": null,
           "primary": false,
           "width": 1536,
           "height": 1024
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/0cbd048a-eb9d-446d-8064-c8d31490767d.jpg",
-          "category": "common_space",
-          "description": "Kitchen with granite breakfast bar, ample shaker cabinetry, and stainless-steel appliances for everyday cooking.",
-          "primary": true,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/a688085a-6e79-4fe6-96d3-dc397a9219cb.jpg",
-          "category": "common_space",
-          "description": "Open kitchen with granite peninsula, stainless appliances, and pendant lighting flows into a dedicated dining area.",
-          "primary": false,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/33042/6b4eb60f-e9cb-4693-ad33-f875deedfa29.jpg",
-          "category": "common_space",
-          "description": "Open kitchen with breakfast bar seating, ample cabinetry, and stainless-steel appliances flowing into the main area.",
-          "primary": false,
-          "width": 3840,
-          "height": 1774
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/8c071c9c-f6a6-4844-b65a-c80ddcee8aac_improved.jpg",
-          "category": "common_space",
-          "description": "kitchen, detected: refrigerator, microwave, hood",
-          "primary": false,
-          "width": 7926,
-          "height": 5287
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/959/7c43af37-2d67-4bc9-ab03-5ae8ad67a532_improved.jpg",
-          "category": "common_space",
-          "description": "kitchen, detected: refrigerator, oven, microwave, hood",
-          "primary": false,
-          "width": 7923,
-          "height": 5285
         }
       ],
       "roomsAvailable": 0,
@@ -1291,7 +1329,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-26T12:09:15.630Z",
+      "checkedAt": "2026-07-26T23:58:07.301Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
