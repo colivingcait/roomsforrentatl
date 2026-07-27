@@ -15,14 +15,14 @@ import { updatedLabel } from "@/lib/format";
 /** The rooms-first homepage (roomsforrentatl.com). */
 export default function RoomsHome() {
   // Explicit homepage order for the co-living cards. Any home not listed falls to the end.
-  const ORDER = ["mora", "candace", "raven", "chestnut", "meadow"];
+  const ORDER = ["willow", "mora", "candace", "raven", "chestnut", "meadow"];
   const rank = (name: string) => {
     const i = ORDER.findIndex((n) => name.toLowerCase().includes(n));
     return i === -1 ? ORDER.length : i;
   };
   const allHouses = getHouses();
   const houses = allHouses.filter((h) => h.available).sort((a, b) => rank(a.name) - rank(b.name));
-  const fullyOccupied = allHouses.filter((h) => !h.available);
+  const fullyOccupied = allHouses.filter((h) => !h.available).sort((a, b) => rank(a.name) - rank(b.name));
   const colivingHouses = getColivingHouses();
   const units = getUnits();
   const updated = updatedLabel(lastUpdated());
