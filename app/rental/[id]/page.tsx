@@ -154,11 +154,21 @@ export default function RentalPage({ params }: { params: { id: string } }) {
             </li>
           ))}
         </ol>
-        {!unit.applyUrl && (
+        {unit.offMarket ? (
           <p className="mt-3 text-sm text-slate-600">
-            Applications for this unit are opening soon. Tap &ldquo;Ask about this unit&rdquo; below to message us and
-            we&rsquo;ll get you on the list.
+            This unit is currently off the market and not accepting applications.{" "}
+            <Link href="/rentals" className="font-semibold text-brand">
+              See other available rentals
+            </Link>
+            .
           </p>
+        ) : (
+          !unit.applyUrl && (
+            <p className="mt-3 text-sm text-slate-600">
+              Applications for this unit are opening soon. Tap &ldquo;Ask about this unit&rdquo; below to message us and
+              we&rsquo;ll get you on the list.
+            </p>
+          )
         )}
 
         <p className="mt-3 text-xs text-slate-400">
@@ -178,7 +188,11 @@ export default function RentalPage({ params }: { params: { id: string } }) {
             <div className="text-lg font-extrabold text-ink">{rentLabel(unit.rent)}</div>
             <div className="text-xs text-muted">{availDateLabel(unit.availableDate)}</div>
           </div>
-          {unit.applyUrl ? (
+          {unit.offMarket ? (
+            <Link href="/rentals" className="btn-book flex-1 text-center">
+              See other rentals →
+            </Link>
+          ) : unit.applyUrl ? (
             <TrackedOutboundLink
               href={unit.applyUrl}
               target="_blank"

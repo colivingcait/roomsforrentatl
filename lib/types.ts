@@ -121,6 +121,7 @@ export interface Unit {
   features?: string[];
   applyUrl?: string | null; // TurboTenant link; absent if not ready yet
   comingSoon?: boolean; // show a simple "Coming soon" card, pinned last
+  offMarket?: boolean; // not currently for rent — hidden from listings, but the page still exists
   photos?: string[];
   tourUrl?: string | null;
 }
