@@ -1,48 +1,13 @@
 {
-  "updatedAt": "2026-07-30T12:49:18.627Z",
+  "updatedAt": "2026-07-30T23:59:32.092Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
-      "utilitiesIncluded": true,
-      "rooms": [
-        {
-          "id": 935,
-          "padIndex": 1,
-          "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Quiet room with private entrance",
-          "roomNumber": 8,
-          "description": "",
-          "weeklyRate": 164,
-          "originalWeeklyRate": 169,
-          "promo": {
-            "percentOff": 3,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 182,
-          "bathroomType": "shared",
-          "bedSize": "twinxl",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": true,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-07-31",
-          "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
-            "https://www.padsplit.com/img/rooms/room_935_1_1581966040.9901974_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/152/img_c2e49a53-81c2-4337-9da1-ac6fa254f2e2.jpg"
-          ]
-        }
-      ],
+      "utilitiesIncluded": false,
+      "rooms": [],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/152/0ba10f9c-e46a-42ae-be6f-e04e214978e4_improved.jpg",
@@ -223,12 +188,12 @@
           "height": 4624
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 164,
+      "roomsAvailable": 0,
+      "fromPrice": null,
       "priceUnit": "week",
-      "available": true,
+      "available": false,
       "rating": null,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -439,7 +404,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -618,7 +583,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.3,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -797,7 +762,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1047,7 +1012,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1083,7 +1048,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-31",
+          "moveInDate": "2026-08-01",
           "image": "https://www.padsplit.com/img/psproperty/39708/img_acb2f549-3a07-4651-81ef-c0a8f63aa7cd.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/39708/img_acb2f549-3a07-4651-81ef-c0a8f63aa7cd.png",
@@ -1119,7 +1084,7 @@
           "windows": 2,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-31",
+          "moveInDate": "2026-08-01",
           "image": "https://www.padsplit.com/img/psproperty/39708/img_2868e0d6-1c52-49c1-a560-cc1f0abbd62c.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/39708/img_2868e0d6-1c52-49c1-a560-cc1f0abbd62c.png",
@@ -1130,9 +1095,44 @@
           ]
         },
         {
-          "id": 125452,
+          "id": 125451,
           "padIndex": 3,
           "pagePosition": 3,
+          "applyIndex": null,
+          "name": "Rm5 \"Elvis\" Downstairs w/ Private Bathroom!",
+          "roomNumber": 5,
+          "description": "",
+          "weeklyRate": 226,
+          "originalWeeklyRate": 232,
+          "promo": {
+            "percentOff": 3,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 225,
+          "bathroomType": "private",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-08-01",
+          "image": "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
+            "https://www.padsplit.com/img/psproperty/39708/img_b70c4be4-9f66-473a-98b3-46fce6dab12e.jpg",
+            "https://www.padsplit.com/img/psproperty/39708/img_64db7920-86d4-41ce-a480-f85378dec3dc.jpg",
+            "https://www.padsplit.com/img/psproperty/39708/img_a4381aa7-18bd-4ce3-9076-2161d5da5543.jpg"
+          ]
+        },
+        {
+          "id": 125452,
+          "padIndex": 4,
+          "pagePosition": 4,
           "applyIndex": null,
           "name": "Rm6 \"Frank\" Downstairs w/ Private Bathroom!",
           "roomNumber": 6,
@@ -1155,7 +1155,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-07-31",
+          "moveInDate": "2026-08-01",
           "image": "https://www.padsplit.com/img/psproperty/39708/img_2500240f-985d-4dac-af55-1671f59e0a0f.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/39708/img_2500240f-985d-4dac-af55-1671f59e0a0f.png",
@@ -1289,12 +1289,12 @@
           "height": 843
         }
       ],
-      "roomsAvailable": 3,
+      "roomsAvailable": 4,
       "fromPrice": 216,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-30T12:49:18.627Z",
+      "checkedAt": "2026-07-30T23:59:32.092Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
