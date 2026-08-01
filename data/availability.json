@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-31T23:59:10.042Z",
+  "updatedAt": "2026-08-01T12:05:27.401Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -404,7 +404,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -583,7 +583,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.3,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -762,7 +762,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -798,7 +798,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-01",
+          "moveInDate": "2026-08-02",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -832,7 +832,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-01",
+          "moveInDate": "2026-08-02",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
@@ -866,7 +866,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-01",
+          "moveInDate": "2026-08-02",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_fd6de68e-e86d-4296-99c8-239f270cb65f.jpg",
@@ -1012,7 +1012,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1187,7 +1187,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-07-31T23:59:10.042Z",
+      "checkedAt": "2026-08-01T12:05:27.401Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
