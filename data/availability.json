@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T00:06:25.465Z",
+  "updatedAt": "2026-08-04T13:06:03.631Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -211,7 +211,7 @@
           "name": "Florence w/ TV & Workspace!",
           "roomNumber": 6,
           "description": "",
-          "weeklyRate": 175,
+          "weeklyRate": 179,
           "originalWeeklyRate": null,
           "promo": null,
           "noMoveInFee": true,
@@ -435,11 +435,11 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 175,
+      "fromPrice": 179,
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -618,7 +618,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.4,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -797,7 +797,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -808,15 +808,49 @@
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 110835,
+          "id": 110832,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
+          "roomNumber": 2,
+          "description": "",
+          "weeklyRate": 169,
+          "originalWeeklyRate": 174,
+          "promo": {
+            "percentOff": 3,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 180,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-08-05",
+          "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png"
+          ]
+        },
+        {
+          "id": 110835,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
           "roomNumber": 5,
           "description": "",
-          "weeklyRate": 169,
-          "originalWeeklyRate": 174,
+          "weeklyRate": 173,
+          "originalWeeklyRate": 178,
           "promo": {
             "percentOff": 3,
             "durationWeeks": 6
@@ -974,12 +1008,12 @@
           "height": 1000
         }
       ],
-      "roomsAvailable": 1,
+      "roomsAvailable": 2,
       "fromPrice": 169,
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -997,8 +1031,8 @@
           "name": "Rm5 \"Elvis\" Downstairs w/ Private Bathroom!",
           "roomNumber": 5,
           "description": "",
-          "weeklyRate": 256,
-          "originalWeeklyRate": 263,
+          "weeklyRate": 260,
+          "originalWeeklyRate": 268,
           "promo": {
             "percentOff": 3,
             "durationWeeks": 6
@@ -1150,11 +1184,11 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 256,
+      "fromPrice": 260,
       "priceUnit": "week",
       "available": true,
-      "rating": null,
-      "checkedAt": "2026-08-04T00:06:25.465Z",
+      "rating": 5,
+      "checkedAt": "2026-08-04T13:06:03.631Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
