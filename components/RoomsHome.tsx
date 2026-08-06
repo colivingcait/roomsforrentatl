@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/Header";
 import HouseList from "@/components/HouseList";
 import Footer from "@/components/Footer";
@@ -75,45 +73,23 @@ export default function RoomsHome() {
           </p>
 
           <div className="mt-4">
-            <HouseList houses={houses} colivingHouses={colivingHouses} />
+            {/* Fully-occupied homes are included (not hidden) so their city still
+                shows as a filter option — otherwise it looks like we don't have
+                a home there, instead of that home just being fully booked. */}
+            <HouseList houses={[...houses, ...fullyOccupied]} colivingHouses={colivingHouses} />
           </div>
 
-          {fullyOccupied.length > 0 && (
-            <div className="mt-4 space-y-2 border-t border-slate-100 pt-4">
-              {fullyOccupied.map((h) => (
-                <Link
-                  key={h.id}
-                  href={`/house/${h.id}`}
-                  className="flex items-center gap-3 rounded-xl bg-slate-50 p-2 opacity-70 grayscale transition active:scale-[0.99]"
-                >
-                  <div className="relative h-10 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-200">
-                    <Image src={h.image} alt={h.name} fill sizes="56px" className="object-cover" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-ink">{h.name}</p>
-                    <p className="text-xs text-muted">{h.city}</p>
-                  </div>
-                  <span className="shrink-0 rounded-full bg-slate-900/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                    Fully Occupied
-                  </span>
-                </Link>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm text-muted">
-            Don&apos;t see what you&apos;re looking for?{" "}
-            <TrackedOutboundLink
-              href={generalSearchUrl()}
-              event="general_search_click"
-              properties={{ source: "homepage" }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand"
-            >
-              See other options on PadSplit →
-            </TrackedOutboundLink>
-          </div>
+          <TrackedOutboundLink
+            href={generalSearchUrl()}
+            event="general_search_click"
+            properties={{ source: "homepage" }}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 font-semibold text-brand active:scale-[0.99]"
+          >
+            <span>Don&apos;t see what you&apos;re looking for? Find more options here</span>
+            <span aria-hidden>→</span>
+          </TrackedOutboundLink>
         </div>
       </section>
 

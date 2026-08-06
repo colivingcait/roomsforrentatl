@@ -180,19 +180,17 @@ export default function HousePage({ params }: { params: { id: string } }) {
           address is shared after booking.
         </p>
 
-        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm text-muted">
-          Not the right fit?{" "}
-          <TrackedOutboundLink
-            href={generalSearchUrl()}
-            event="general_search_click"
-            properties={{ source: "house_page", house: house.id }}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-brand"
-          >
-            See other options on PadSplit →
-          </TrackedOutboundLink>
-        </div>
+        <TrackedOutboundLink
+          href={generalSearchUrl()}
+          event="general_search_click"
+          properties={{ source: "house_page", house: house.id }}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 font-semibold text-brand active:scale-[0.99]"
+        >
+          <span>Don&apos;t see what you&apos;re looking for? Find more options here</span>
+          <span aria-hidden>→</span>
+        </TrackedOutboundLink>
       </div>
 
       <TrustBand />
