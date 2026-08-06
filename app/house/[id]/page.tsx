@@ -8,8 +8,10 @@ import PhotoStrip from "@/components/PhotoStrip";
 import TrustBand from "@/components/TrustBand";
 import CommonAreas from "@/components/CommonAreas";
 import FaqButton from "@/components/FaqButton";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos, lastUpdated } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, updatedLabel, priceLabel } from "@/lib/format";
+import { generalSearchUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -177,6 +179,20 @@ export default function HousePage({ params }: { params: { id: string } }) {
           Rooms &amp; pricing sync from PadSplit{updated ? ` (${updated.toLowerCase()})` : ""} and may change. Exact
           address is shared after booking.
         </p>
+
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm text-muted">
+          Not the right fit?{" "}
+          <TrackedOutboundLink
+            href={generalSearchUrl()}
+            event="general_search_click"
+            properties={{ source: "house_page", house: house.id }}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-brand"
+          >
+            See other options on PadSplit →
+          </TrackedOutboundLink>
+        </div>
       </div>
 
       <TrustBand />

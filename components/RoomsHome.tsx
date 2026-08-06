@@ -7,10 +7,12 @@ import StickyChatBar from "@/components/StickyChatBar";
 import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import UnitsSection from "@/components/UnitsSection";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { getColivingHouses } from "@/lib/coliving";
 import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
+import { generalSearchUrl } from "@/lib/site";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
 export default function RoomsHome() {
@@ -98,6 +100,20 @@ export default function RoomsHome() {
               ))}
             </div>
           )}
+
+          <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-center text-sm text-muted">
+            Don&apos;t see what you&apos;re looking for?{" "}
+            <TrackedOutboundLink
+              href={generalSearchUrl()}
+              event="general_search_click"
+              properties={{ source: "homepage" }}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-brand"
+            >
+              See other options on PadSplit →
+            </TrackedOutboundLink>
+          </div>
         </div>
       </section>
 

@@ -83,6 +83,23 @@ export function roomAnchorUrl(houseUrl: string, roomId?: number | string | null)
   return `${base}#${hash}`;
 }
 
+/**
+ * PadSplit's general site-wide search page (not tied to any one house) —
+ * for people who don't like any of your specific rooms but might still book
+ * something else on PadSplit. Sending them here (instead of losing them)
+ * still credits your referral code.
+ */
+export function generalSearchUrl(): string {
+  const { code, param } = site.referral;
+  const u = new URL("https://www.padsplit.com/");
+  u.searchParams.set("sign-up", "");
+  if (code) u.searchParams.set(param, code);
+  u.searchParams.set("ref_device", "desktop");
+  u.searchParams.set("ref_role", "host");
+  u.searchParams.set("ref_source", "link");
+  return u.toString();
+}
+
 export function bookingUrl(padsplitUrl: string, roomId?: string | number): string {
   const { code, param, extra } = site.referral;
   try {
