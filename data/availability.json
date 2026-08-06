@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T23:57:47.676Z",
+  "updatedAt": "2026-08-06T13:00:30.168Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -226,7 +226,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-06",
+          "moveInDate": "2026-08-07",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
@@ -439,7 +439,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -618,7 +618,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -797,7 +797,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -833,7 +833,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-06",
+          "moveInDate": "2026-08-07",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -867,7 +867,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-06",
+          "moveInDate": "2026-08-07",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
@@ -1013,7 +1013,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1021,44 +1021,8 @@
       "neighborhood": "Baker Hills",
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/39708/bathrooms/img_3558baaf-cc73-4f55-a246-24bd21f47217.jpg",
-      "utilitiesIncluded": true,
-      "rooms": [
-        {
-          "id": 125451,
-          "padIndex": 1,
-          "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Rm5 \"Elvis\" Downstairs w/ Private Bathroom!",
-          "roomNumber": 5,
-          "description": "",
-          "weeklyRate": 260,
-          "originalWeeklyRate": 268,
-          "promo": {
-            "percentOff": 3,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 225,
-          "bathroomType": "private",
-          "bedSize": "full",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-08-07",
-          "image": "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
-            "https://www.padsplit.com/img/psproperty/39708/img_b70c4be4-9f66-473a-98b3-46fce6dab12e.jpg",
-            "https://www.padsplit.com/img/psproperty/39708/img_64db7920-86d4-41ce-a480-f85378dec3dc.jpg",
-            "https://www.padsplit.com/img/psproperty/39708/img_a4381aa7-18bd-4ce3-9076-2161d5da5543.jpg"
-          ]
-        }
-      ],
+      "utilitiesIncluded": false,
+      "rooms": [],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
@@ -1175,20 +1139,20 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_0ad7c864-bc5f-4edc-8e2b-b1640c29f782.jpg",
           "category": "bedroom",
-          "description": "Furnished bedroom with a full bed, dedicated desk and chair, and a window for natural light over durable wood-look flooring.",
+          "description": "Spacious bedroom with two windows, ceiling fan, wood-look flooring, and room for a bed plus a dedicated desk area.",
           "primary": false,
-          "width": 1264,
-          "height": 843
+          "width": 1500,
+          "height": 1000
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 260,
+      "roomsAvailable": 0,
+      "fromPrice": null,
       "priceUnit": "week",
-      "available": true,
+      "available": false,
       "rating": 4.5,
-      "checkedAt": "2026-08-05T23:57:47.676Z",
+      "checkedAt": "2026-08-06T13:00:30.168Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
