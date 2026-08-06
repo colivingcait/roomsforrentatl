@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-05T12:59:08.310Z",
+  "updatedAt": "2026-08-05T23:57:47.676Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -439,7 +439,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -618,7 +618,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -797,7 +797,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1013,7 +1013,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1049,7 +1049,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-06",
+          "moveInDate": "2026-08-07",
           "image": "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/39708/img_9d1ef398-e061-4976-9d95-7f44b163a9be.png",
@@ -1188,7 +1188,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.5,
-      "checkedAt": "2026-08-05T12:59:08.310Z",
+      "checkedAt": "2026-08-05T23:57:47.676Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
