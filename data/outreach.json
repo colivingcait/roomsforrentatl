@@ -2,7 +2,7 @@
   "_README": "PadSplit's applicant list has no export/API and no history — it only shows CURRENT status + the date of the LAST change, overwriting the earlier date every time someone advances. So we keep our own history here. Workflow: whenever you check PadSplit's applicant list, paste the current full list to Claude. Claude matches each person by name against 'people' below, appends a new history entry ONLY when their status actually changed since last time (dated the day we noticed — that's the best precision possible without PadSplit exposing true transition dates), and adds anyone new as a new person. The more often you paste an update, the more accurate the stage-transition dates get. Occasionally PadSplit shows an implausible old date (2023/2024) for someone whose neighbors in the list are all recent — when that happens, estimate the real date from the surrounding entries and record BOTH the estimate (as observedOn) and the original bogus date (in that entry's 'note' field). If a future paste shows that same bogus date again for that person, check for an existing 'note' first — it's the known issue, not a new anomaly to re-derive.",
   "_statusValues": "Valid statuses, in pipeline order: registered -> applying -> approved (screened) -> move_in (booked a room) -> then either booking_fee_waived (moved into OUR room - the goal, instant) or pending -> paid (moved into ANOTHER host's room: 'pending' means PadSplit's 14-day reward-confirmation clock is running post-move-in; after 14 days it becomes paid, $250 payout). IMPORTANT: 'pending' only ever means this post-move-in reward wait -- PadSplit does not use it for an earlier 'application under review' stage, despite where it might look like it sits in a raw applicant list.",
   "padsplitApplicants": {
-    "lastUpdated": "2026-07-25",
+    "lastUpdated": "2026-08-06",
     "people": [
       { "name": "Quanton Jordan", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
       { "name": "Brin Wallace", "history": [{ "status": "registered", "observedOn": "2026-07-01" }] },
@@ -10,7 +10,13 @@
       { "name": "Cherokee Nelson", "history": [{ "status": "registered", "observedOn": "2026-07-08" }] },
       { "name": "Elijah Jewell", "history": [{ "status": "registered", "observedOn": "2026-07-11" }] },
       { "name": "Ronald Ferguson", "history": [{ "status": "approved", "observedOn": "2026-07-11" }] },
-      { "name": "Stephen Hyler", "history": [{ "status": "pending", "observedOn": "2026-07-11" }] },
+      {
+        "name": "Stephen Hyler",
+        "history": [
+          { "status": "pending", "observedOn": "2026-07-11" },
+          { "status": "paid", "observedOn": "2026-07-26" }
+        ]
+      },
       { "name": "(404) 618-7191", "history": [{ "status": "registered", "observedOn": "2026-06-26" }] },
       {
         "name": "Kene Williams",
@@ -21,7 +27,13 @@
         ]
       },
       { "name": "knowthegame1984@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-14" }] },
-      { "name": "Reginald Yearby", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
+      {
+        "name": "Reginald Yearby",
+        "history": [
+          { "status": "approved", "observedOn": "2026-07-16" },
+          { "status": "move_in", "observedOn": "2026-08-06" }
+        ]
+      },
       { "name": "Woodkens Beauvoir", "history": [{ "status": "applying", "observedOn": "2026-07-15" }] },
       { "name": "Tyrique Shaw", "history": [{ "status": "approved", "observedOn": "2026-07-16" }] },
       { "name": "Melia Lewis", "history": [{ "status": "approved", "observedOn": "2026-06-20" }] },
@@ -52,7 +64,12 @@
         "name": "Minghao Zha",
         "history": [
           { "status": "move_in", "observedOn": "2026-07-20" },
-          { "status": "pending", "observedOn": "2026-07-20" }
+          { "status": "pending", "observedOn": "2026-07-20" },
+          {
+            "status": "approved",
+            "observedOn": "2026-07-25",
+            "note": "Unusual: went from pending (post-move-in reward clock) back to approved. Most likely the original move-in fell through and they're now approved for a different room, rather than a data glitch — but flagging since it breaks the normal forward pipeline order. Worth confirming with them if this happens again."
+          }
         ]
       },
       { "name": "Veronique Grimes", "history": [{ "status": "registered", "observedOn": "2026-07-17" }] },
@@ -90,9 +107,29 @@
       },
       { "name": "Michael Ulumenfo", "history": [{ "status": "approved", "observedOn": "2026-07-23" }] },
       { "name": "5rgfhntsr8@privaterelay.appleid.com", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
-      { "name": "Zerman Demma", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
+      {
+        "name": "Zerihun Demma",
+        "history": [
+          { "status": "registered", "observedOn": "2026-07-24" },
+          { "status": "applying", "observedOn": "2026-08-05" }
+        ]
+      },
       { "name": "jodymyjody5@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-23" }] },
-      { "name": "Masi Syed", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] }
+      { "name": "Masi Syed", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
+      { "name": "Adrienne Sneed", "history": [{ "status": "approved", "observedOn": "2026-08-06" }] },
+      { "name": "Bilal Ahmad", "history": [{ "status": "registered", "observedOn": "2026-04-15" }] },
+      { "name": "Korry Bishop", "history": [{ "status": "registered", "observedOn": "2026-08-02" }] },
+      { "name": "Trina Peacher", "history": [{ "status": "registered", "observedOn": "2026-02-23" }] },
+      { "name": "Alyas Nishat", "history": [{ "status": "booking_fee_waived", "observedOn": "2026-07-26" }] },
+      { "name": "Solomon Kolawole", "history": [{ "status": "pending", "observedOn": "2026-08-02" }] },
+      { "name": "Kennedy Barnum", "history": [{ "status": "registered", "observedOn": "2026-06-27" }] },
+      { "name": "Christina Gillis", "history": [{ "status": "applying", "observedOn": "2026-08-05" }] },
+      { "name": "Chris", "history": [{ "status": "pending", "observedOn": "2026-07-29" }] },
+      { "name": "Antonio Rivera", "history": [{ "status": "registered", "observedOn": "2026-08-01" }] },
+      { "name": "Tamaya Brown", "history": [{ "status": "registered", "observedOn": "2026-08-03" }] },
+      { "name": "Malcolm Stacy", "history": [{ "status": "approved", "observedOn": "2026-08-04" }] },
+      { "name": "Coackmm Sally", "history": [{ "status": "registered", "observedOn": "2026-08-05" }] },
+      { "name": "Wilford Sims", "history": [{ "status": "registered", "observedOn": "2026-08-04" }] }
     ]
   }
 }
