@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T11:50:20.392Z",
+  "updatedAt": "2026-08-07T23:30:52.876Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,16 +193,14 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/152",
-      "stale": true,
-      "lastError": "Error: blocked or error (status 502)"
+      "checkedAt": "2026-08-07T23:30:52.876Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
       "rooms": [
         {
@@ -441,7 +439,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
+      "checkedAt": "2026-08-07T23:30:52.876Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -619,15 +617,15 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "rating": 4,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
+      "rating": 4.4,
+      "checkedAt": "2026-08-07T23:30:52.876Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Lake Commons CT",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_59616cb1-08c3-4b00-a014-05e4cc6fb895.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -799,7 +797,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
+      "checkedAt": "2026-08-07T23:30:52.876Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1015,14 +1013,14 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
+      "checkedAt": "2026-08-07T23:30:52.876Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
       "title": "🤩 ALL PRIVATE BATHROOMS with TWO Kitchens 🤩 Top-Tier Home w/ a Responsive Host - Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Baker Hills",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/39708/bathrooms/img_3558baaf-cc73-4f55-a246-24bd21f47217.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -1141,12 +1139,12 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/39708/img_0ad7c864-bc5f-4edc-8e2b-b1640c29f782.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_52fcad53-08a6-457d-8a9c-8803eee614fe.png",
           "category": "bedroom",
-          "description": "Spacious bedroom with two windows, ceiling fan, wood-look flooring, and room for a bed plus a dedicated desk area.",
+          "description": "Spacious bedroom with ceiling fan, wood-look flooring, a dedicated desk area, and windows for natural light.",
           "primary": false,
-          "width": 1500,
-          "height": 1000
+          "width": 1264,
+          "height": 843
         }
       ],
       "roomsAvailable": 0,
@@ -1154,7 +1152,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.7,
-      "checkedAt": "2026-08-07T11:50:20.392Z",
+      "checkedAt": "2026-08-07T23:30:52.876Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
