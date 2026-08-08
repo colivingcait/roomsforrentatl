@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T11:34:13.768Z",
+  "updatedAt": "2026-08-08T23:25:13.504Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -192,8 +192,8 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "rating": null,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "rating": 4,
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -202,42 +202,7 @@
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
-      "rooms": [
-        {
-          "id": 33219,
-          "padIndex": 1,
-          "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Florence w/ TV & Workspace!",
-          "roomNumber": 6,
-          "description": "",
-          "weeklyRate": 179,
-          "originalWeeklyRate": null,
-          "promo": null,
-          "noMoveInFee": true,
-          "recommendedPrice": 185,
-          "bathroomType": "shared",
-          "bedSize": "full",
-          "roomSize": "large",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-08-09",
-          "image": "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/8299/img_a087c75f-7d7b-4fca-acbb-abbe437fdc4e.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_46aadfa5-9b81-4862-b934-d69764c9ec6d.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_ad3ccabb-2498-4c65-a002-88cf347d8bfc_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_2303e433-5f8f-41af-9863-1da7895eba21.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_b439e0fc-c1f1-4041-9f6f-9b9a8c2e9dd8.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_0432efc9-662b-4cec-af88-7183abd2d2b4.png"
-          ]
-        }
-      ],
+      "rooms": [],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
@@ -434,12 +399,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 179,
+      "roomsAvailable": 0,
+      "fromPrice": null,
       "priceUnit": "week",
-      "available": true,
+      "available": false,
       "rating": 4.7,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -618,7 +583,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.4,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -797,7 +762,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1013,7 +978,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1152,7 +1117,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.7,
-      "checkedAt": "2026-08-08T11:34:13.768Z",
+      "checkedAt": "2026-08-08T23:25:13.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
