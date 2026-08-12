@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T11:52:54.040Z",
+  "updatedAt": "2026-08-12T23:38:05.743Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -404,7 +404,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.7,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -412,46 +412,8 @@
       "neighborhood": "Off Stephenson",
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/11889/img_2c79d9b7-84c4-4ecb-a0a4-960edc1c65cd.png",
-      "utilitiesIncluded": true,
-      "rooms": [
-        {
-          "id": 41255,
-          "padIndex": 1,
-          "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
-          "roomNumber": 2,
-          "description": "",
-          "weeklyRate": 180,
-          "originalWeeklyRate": 189,
-          "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 228,
-          "bathroomType": "shared",
-          "bedSize": "queen",
-          "roomSize": "large",
-          "workspace": true,
-          "miniFridge": true,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-08-13",
-          "image": "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_d09e00b4-13ee-443d-839c-5c4650905114.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_921b35bc-1e04-402c-a6b0-e36bcfafaaba.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_cf7d73f9-785c-435b-9b50-72504601bcf2.png",
-            "https://www.padsplit.com/img/psproperty/11889/img_3a5847d2-59c3-4b2a-9e41-0acdbea1d3de.jpg",
-            "https://www.padsplit.com/img/psproperty/11889/img_83160994-91c5-4b74-a633-85b1c1ebc6cf.jpg"
-          ]
-        }
-      ],
+      "utilitiesIncluded": false,
+      "rooms": [],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/11889/31721219-2ea3-4377-867b-ab03a0250691.jpg",
@@ -616,12 +578,12 @@
           "height": 1067
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 180,
+      "roomsAvailable": 0,
+      "fromPrice": null,
       "priceUnit": "week",
-      "available": true,
+      "available": false,
       "rating": 4.4,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -800,7 +762,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1016,7 +978,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1155,7 +1117,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.2,
-      "checkedAt": "2026-08-12T11:52:54.040Z",
+      "checkedAt": "2026-08-12T23:38:05.743Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
