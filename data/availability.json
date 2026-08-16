@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-16T11:25:46.157Z",
+  "updatedAt": "2026-08-16T23:16:20.884Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
+      "checkedAt": "2026-08-16T23:16:20.884Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -202,7 +202,42 @@
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
-      "rooms": [],
+      "rooms": [
+        {
+          "id": 33215,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Budapest - Private Bathroom!",
+          "roomNumber": 2,
+          "description": "",
+          "weeklyRate": 256,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": true,
+          "recommendedPrice": 233,
+          "bathroomType": "private",
+          "bedSize": "full",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-08-17",
+          "image": "https://www.padsplit.com/img/psproperty/8299/img_4eab8340-b2a7-432f-b93c-c0a1a58dd838.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/8299/img_4eab8340-b2a7-432f-b93c-c0a1a58dd838.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_f6199c5a-753c-47ed-9691-598716560fee_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_2340952e-9875-4c7d-90d3-cb34c37825bb.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_ef2ed9ab-978d-4ed2-b9c7-194d6289779a_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_80988247-d723-4ed8-b947-234c40a9ccc5_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_574761fd-8997-4c1b-9597-33450cfc337a_improved.jpg"
+          ]
+        }
+      ],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
@@ -399,12 +434,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 0,
-      "fromPrice": null,
+      "roomsAvailable": 1,
+      "fromPrice": 256,
       "priceUnit": "week",
-      "available": false,
+      "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
+      "checkedAt": "2026-08-16T23:16:20.884Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -621,8 +656,10 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.4,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
+      "checkedAt": "2026-08-16T23:16:20.884Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
+      "stale": true,
+      "lastError": "Error: blocked or error (status 502)"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -800,7 +837,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
+      "checkedAt": "2026-08-16T23:16:20.884Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1016,7 +1053,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
+      "checkedAt": "2026-08-16T23:16:20.884Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1191,7 +1228,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.2,
-      "checkedAt": "2026-08-16T11:25:46.157Z",
+      "checkedAt": "2026-08-16T23:16:20.884Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
