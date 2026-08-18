@@ -10,6 +10,10 @@ import outreachData from "@/data/outreach.json";
  *     paid               - the 14 days passed, other host's room, $250 payout confirmed
  * "Pending" only ever means the reward-confirmation wait AFTER move-in — PadSplit
  * doesn't use it for an earlier "application under review" state.
+ *
+ * "not_eligible" is a terminal rejection — PadSplit or the host screening turned
+ * them down. It's an off-ramp, not a pipeline step, so it's excluded from the
+ * funnel's forward-progress math (approvedOrBeyond/movedIn) but still counted.
  */
 export type ApplicantStatus =
   | "registered"
@@ -18,7 +22,8 @@ export type ApplicantStatus =
   | "move_in"
   | "pending"
   | "booking_fee_waived"
-  | "paid";
+  | "paid"
+  | "not_eligible";
 
 export interface StatusEvent {
   status: ApplicantStatus;
@@ -53,6 +58,7 @@ export function getOutreachData() {
     pending: 0,
     booking_fee_waived: 0,
     paid: 0,
+    not_eligible: 0,
   };
   for (const person of people) {
     const current = person.history[person.history.length - 1]?.status;

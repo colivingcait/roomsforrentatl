@@ -132,6 +132,7 @@ export default async function InternalFunnelPage() {
     sc.pending,
     sc.booking_fee_waived,
     sc.paid,
+    sc.not_eligible,
     1
   );
   // "pending" means they've already moved into another host's room and are in
@@ -316,6 +317,7 @@ export default async function InternalFunnelPage() {
         <StatusRow label="Booking fee waived" count={sc.booking_fee_waived} max={maxStatus} color="#0E7C66" />
         <StatusRow label="Reward pending (14 days)" count={sc.pending} max={maxStatus} color="#f59e0b" />
         <StatusRow label="Paid ($250)" count={sc.paid} max={maxStatus} color="#FF6B35" />
+        <StatusRow label="Not eligible" count={sc.not_eligible} max={maxStatus} color="#dc2626" />
 
         <div className="mt-4 grid grid-cols-2 gap-3 border-t border-slate-100 pt-4">
           <div className="rounded-xl bg-brand/10 px-3 py-2.5">
