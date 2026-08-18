@@ -1,12 +1,36 @@
 {
-  "_README": "PadSplit's applicant list has no export/API and no history — it only shows CURRENT status + the date of the LAST change, overwriting the earlier date every time someone advances. So we keep our own history here. Workflow: whenever you check PadSplit's applicant list, paste the current full list to Claude. Claude matches each person by name against 'people' below, appends a new history entry ONLY when their status actually changed since last time (dated the day we noticed — that's the best precision possible without PadSplit exposing true transition dates), and adds anyone new as a new person. The more often you paste an update, the more accurate the stage-transition dates get. Occasionally PadSplit shows an implausible old date (2023/2024) for someone whose neighbors in the list are all recent — when that happens, estimate the real date from the surrounding entries and record BOTH the estimate (as observedOn) and the original bogus date (in that entry's 'note' field). If a future paste shows that same bogus date again for that person, check for an existing 'note' first — it's the known issue, not a new anomaly to re-derive. IMPORTANT SCOPE RULE (set 2026-08-18): only track applicants who first registered on/after 2026-07-21 — the day roomsforrentatl.com itself started sending PadSplit traffic. Anyone whose earliest known status predates that (even a good outcome like a paid reward) belongs to PadSplit's general/pre-existing pipeline, not this site, and should be left out entirely rather than added. The two known date-glitch people (Jamel Starks, Anthony Johnson) are kept as an explicit exception since their corrected real dates are within the tracked window.",
+  "_README": "PadSplit's applicant list has no export/API and no history — it only shows CURRENT status + the date of the LAST change, overwriting the earlier date every time someone advances. So we keep our own history here. Workflow: whenever you check PadSplit's applicant list, paste the current full list to Claude. Claude matches each person by name against 'people' below, appends a new history entry ONLY when their status actually changed since last time (dated the day we noticed — that's the best precision possible without PadSplit exposing true transition dates), and adds anyone new as a new person. The more often you paste an update, the more accurate the stage-transition dates get. Occasionally PadSplit shows an implausible old date (2023/2024) for someone whose neighbors in the list are all recent — when that happens, estimate the real date from the surrounding entries and record BOTH the estimate (as observedOn) and the original bogus date (in that entry's 'note' field). If a future paste shows that same bogus date again for that person, check for an existing 'note' first — it's the known issue, not a new anomaly to re-derive. IMPORTANT SCOPE RULE (set 2026-08-18): only track applicants who first registered on/after 2026-06-28 — the day roomsforrentatl.com itself started sending PadSplit traffic. Anyone whose earliest known status predates that (even a good outcome like a paid reward) belongs to PadSplit's general/pre-existing pipeline, not this site, and should be left out entirely rather than added. The two known date-glitch people (Jamel Starks, Anthony Johnson) are kept as an explicit exception since their corrected real dates are within the tracked window.",
   "_statusValues": "Valid statuses, in pipeline order: registered -> applying -> approved (screened) -> move_in (booked a room) -> then either booking_fee_waived (moved into OUR room - the goal, instant) or pending -> paid (moved into ANOTHER host's room: 'pending' means PadSplit's 14-day reward-confirmation clock is running post-move-in; after 14 days it becomes paid, $250 payout). IMPORTANT: 'pending' only ever means this post-move-in reward wait -- PadSplit does not use it for an earlier 'application under review' stage, despite where it might look like it sits in a raw applicant list. A separate terminal status, not_eligible, means PadSplit or the host screening rejected the applicant — it's an off-ramp, not a pipeline step.",
   "padsplitApplicants": {
     "lastUpdated": "2026-08-18",
     "people": [
-      { "name": "Taylor Foote", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
-      { "name": "Zoe Fleming", "history": [{ "status": "registered", "observedOn": "2026-07-25" }] },
-      { "name": "Paul Ridgway", "history": [{ "status": "registered", "observedOn": "2026-07-21" }] },
+      {
+        "name": "Taylor Foote",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-24"
+          }
+        ]
+      },
+      {
+        "name": "Zoe Fleming",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-25"
+          }
+        ]
+      },
+      {
+        "name": "Paul Ridgway",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-21"
+          }
+        ]
+      },
       {
         "name": "Jamel Starks",
         "history": [
@@ -17,7 +41,15 @@
           }
         ]
       },
-      { "name": "Crystal Pride", "history": [{ "status": "registered", "observedOn": "2026-07-21" }] },
+      {
+        "name": "Crystal Pride",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-21"
+          }
+        ]
+      },
       {
         "name": "Anthony Johnson",
         "history": [
@@ -28,53 +60,555 @@
           }
         ]
       },
-      { "name": "Michael Ulumenfo", "history": [{ "status": "approved", "observedOn": "2026-07-23" }] },
-      { "name": "5rgfhntsr8@privaterelay.appleid.com", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
-      { "name": "jodymyjody5@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-23" }] },
-      { "name": "Masi Syed", "history": [{ "status": "registered", "observedOn": "2026-07-24" }] },
+      {
+        "name": "Michael Ulumenfo",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-23"
+          }
+        ]
+      },
+      {
+        "name": "5rgfhntsr8@privaterelay.appleid.com",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-24"
+          }
+        ]
+      },
+      {
+        "name": "jodymyjody5@icloud.com",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-23"
+          }
+        ]
+      },
+      {
+        "name": "Masi Syed",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-24"
+          }
+        ]
+      },
       {
         "name": "Zerihun Demma",
         "history": [
-          { "status": "registered", "observedOn": "2026-07-24" },
-          { "status": "applying", "observedOn": "2026-08-05" }
+          {
+            "status": "registered",
+            "observedOn": "2026-07-24"
+          },
+          {
+            "status": "applying",
+            "observedOn": "2026-08-05"
+          }
         ]
       },
-      { "name": "Adrienne Sneed", "history": [{ "status": "approved", "observedOn": "2026-08-06" }] },
-      { "name": "Korry Bishop", "history": [{ "status": "registered", "observedOn": "2026-08-02" }] },
-      { "name": "Alyas Nishat", "history": [{ "status": "booking_fee_waived", "observedOn": "2026-07-26" }] },
+      {
+        "name": "Adrienne Sneed",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-08-06"
+          }
+        ]
+      },
+      {
+        "name": "Korry Bishop",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-02"
+          }
+        ]
+      },
+      {
+        "name": "Alyas Nishat",
+        "history": [
+          {
+            "status": "booking_fee_waived",
+            "observedOn": "2026-07-26"
+          }
+        ]
+      },
       {
         "name": "Solomon Kolawole",
         "history": [
-          { "status": "pending", "observedOn": "2026-08-02" },
-          { "status": "paid", "observedOn": "2026-08-18" }
+          {
+            "status": "pending",
+            "observedOn": "2026-08-02"
+          },
+          {
+            "status": "paid",
+            "observedOn": "2026-08-18"
+          }
         ]
       },
-      { "name": "Christina Gillis", "history": [{ "status": "applying", "observedOn": "2026-08-05" }] },
+      {
+        "name": "Christina Gillis",
+        "history": [
+          {
+            "status": "applying",
+            "observedOn": "2026-08-05"
+          }
+        ]
+      },
       {
         "name": "Chris",
         "history": [
-          { "status": "pending", "observedOn": "2026-07-29" },
-          { "status": "paid", "observedOn": "2026-08-15" }
+          {
+            "status": "pending",
+            "observedOn": "2026-07-29"
+          },
+          {
+            "status": "paid",
+            "observedOn": "2026-08-15"
+          }
         ]
       },
-      { "name": "Antonio Rivera", "history": [{ "status": "registered", "observedOn": "2026-08-01" }] },
-      { "name": "Tamaya Brown", "history": [{ "status": "registered", "observedOn": "2026-08-03" }] },
-      { "name": "Malcolm Stacy", "history": [{ "status": "approved", "observedOn": "2026-08-04" }] },
-      { "name": "Coackmm Sally", "history": [{ "status": "registered", "observedOn": "2026-08-05" }] },
-      { "name": "Wilford Sims", "history": [{ "status": "registered", "observedOn": "2026-08-04" }] },
-      { "name": "Tucker Parvin", "history": [{ "status": "registered", "observedOn": "2026-07-25" }] },
-      { "name": "Tee Covin", "history": [{ "status": "registered", "observedOn": "2026-08-18" }] },
-      { "name": "Aamiyah Jordan", "history": [{ "status": "registered", "observedOn": "2026-08-16" }] },
-      { "name": "Anna Mulenga", "history": [{ "status": "registered", "observedOn": "2026-08-12" }] },
-      { "name": "Heavyn Broadus", "history": [{ "status": "applying", "observedOn": "2026-08-08" }] },
-      { "name": "Vita Dejong", "history": [{ "status": "registered", "observedOn": "2026-08-15" }] },
-      { "name": "brandon112089@icloud.com", "history": [{ "status": "registered", "observedOn": "2026-07-30" }] },
-      { "name": "Daylon Grant", "history": [{ "status": "registered", "observedOn": "2026-08-08" }] },
-      { "name": "dm4szrsgv9@privaterelay.appleid.com", "history": [{ "status": "registered", "observedOn": "2026-08-08" }] },
-      { "name": "Adhil James", "history": [{ "status": "applying", "observedOn": "2026-08-08" }] },
-      { "name": "Ali Ousmane Ngahounou", "history": [{ "status": "registered", "observedOn": "2026-08-11" }] },
-      { "name": "Kayla Maiten", "history": [{ "status": "registered", "observedOn": "2026-08-11" }] },
-      { "name": "Treavonta Riley", "history": [{ "status": "registered", "observedOn": "2026-08-12" }] }
+      {
+        "name": "Antonio Rivera",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-01"
+          }
+        ]
+      },
+      {
+        "name": "Tamaya Brown",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-03"
+          }
+        ]
+      },
+      {
+        "name": "Malcolm Stacy",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-08-04"
+          }
+        ]
+      },
+      {
+        "name": "Coackmm Sally",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-05"
+          }
+        ]
+      },
+      {
+        "name": "Wilford Sims",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-04"
+          }
+        ]
+      },
+      {
+        "name": "Tucker Parvin",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-25"
+          }
+        ]
+      },
+      {
+        "name": "Tee Covin",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-18"
+          }
+        ]
+      },
+      {
+        "name": "Aamiyah Jordan",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-16"
+          }
+        ]
+      },
+      {
+        "name": "Anna Mulenga",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-12"
+          }
+        ]
+      },
+      {
+        "name": "Heavyn Broadus",
+        "history": [
+          {
+            "status": "applying",
+            "observedOn": "2026-08-08"
+          }
+        ]
+      },
+      {
+        "name": "Vita Dejong",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-15"
+          }
+        ]
+      },
+      {
+        "name": "brandon112089@icloud.com",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-30"
+          }
+        ]
+      },
+      {
+        "name": "Daylon Grant",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-08"
+          }
+        ]
+      },
+      {
+        "name": "dm4szrsgv9@privaterelay.appleid.com",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-08"
+          }
+        ]
+      },
+      {
+        "name": "Adhil James",
+        "history": [
+          {
+            "status": "applying",
+            "observedOn": "2026-08-08"
+          }
+        ]
+      },
+      {
+        "name": "Ali Ousmane Ngahounou",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-11"
+          }
+        ]
+      },
+      {
+        "name": "Kayla Maiten",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-11"
+          }
+        ]
+      },
+      {
+        "name": "Treavonta Riley",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-08-12"
+          }
+        ]
+      },
+      {
+        "name": "Quanton Jordan",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "name": "Brin Wallace",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-01"
+          }
+        ]
+      },
+      {
+        "name": "Michael Darocha",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-06"
+          }
+        ]
+      },
+      {
+        "name": "Cherokee Nelson",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-08"
+          }
+        ]
+      },
+      {
+        "name": "Elijah Jewell",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-11"
+          }
+        ]
+      },
+      {
+        "name": "Ronald Ferguson",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-11"
+          }
+        ]
+      },
+      {
+        "name": "Stephen Hyler",
+        "history": [
+          {
+            "status": "pending",
+            "observedOn": "2026-07-11"
+          },
+          {
+            "status": "paid",
+            "observedOn": "2026-07-26"
+          }
+        ]
+      },
+      {
+        "name": "Kene Williams",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-16"
+          },
+          {
+            "status": "move_in",
+            "observedOn": "2026-07-16"
+          },
+          {
+            "status": "booking_fee_waived",
+            "observedOn": "2026-07-19"
+          }
+        ]
+      },
+      {
+        "name": "knowthegame1984@icloud.com",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-14"
+          }
+        ]
+      },
+      {
+        "name": "Reginald Yearby",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-16"
+          },
+          {
+            "status": "move_in",
+            "observedOn": "2026-08-06"
+          },
+          {
+            "status": "pending",
+            "observedOn": "2026-08-06"
+          }
+        ]
+      },
+      {
+        "name": "Woodkens Beauvoir",
+        "history": [
+          {
+            "status": "applying",
+            "observedOn": "2026-07-15"
+          }
+        ]
+      },
+      {
+        "name": "Tyrique Shaw",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-16"
+          }
+        ]
+      },
+      {
+        "name": "Jodon Lavender",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-01",
+            "note": "PadSplit shows 'Nov 18, 2024' here — implausible, a known bad date for this person. Estimated 2026-07-01 from neighboring entries (Juan Rivera Jun21, Jul17-19 cluster). If a future paste shows Nov 18 2024 again for Jodon, it's this same known issue, not a new anomaly."
+          }
+        ]
+      },
+      {
+        "name": "Leslie Richardson",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-16"
+          }
+        ]
+      },
+      {
+        "name": "Ashley Palmer",
+        "history": [
+          {
+            "status": "move_in",
+            "observedOn": "2026-07-16"
+          },
+          {
+            "status": "booking_fee_waived",
+            "observedOn": "2026-07-17"
+          }
+        ]
+      },
+      {
+        "name": "Paris Senavanh",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-17"
+          }
+        ]
+      },
+      {
+        "name": "Joshua Allanah",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-17"
+          }
+        ]
+      },
+      {
+        "name": "Jarmel Wright",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-19"
+          }
+        ]
+      },
+      {
+        "name": "Christopher Marshall",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-19"
+          }
+        ]
+      },
+      {
+        "name": "Minghao Zha",
+        "history": [
+          {
+            "status": "move_in",
+            "observedOn": "2026-07-20"
+          },
+          {
+            "status": "pending",
+            "observedOn": "2026-07-20"
+          },
+          {
+            "status": "approved",
+            "observedOn": "2026-07-25",
+            "note": "Unusual: went from pending (post-move-in reward clock) back to approved. Most likely the original move-in fell through and they're now approved for a different room, rather than a data glitch — but flagging since it breaks the normal forward pipeline order. Worth confirming with them if this happens again."
+          },
+          {
+            "status": "not_eligible",
+            "observedOn": "2026-08-08"
+          }
+        ]
+      },
+      {
+        "name": "Veronique Grimes",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-17"
+          }
+        ]
+      },
+      {
+        "name": "Mohammad Radhi",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-07-19"
+          },
+          {
+            "status": "not_eligible",
+            "observedOn": "2026-08-16"
+          }
+        ]
+      },
+      {
+        "name": "Madeline Smith",
+        "history": [
+          {
+            "status": "approved",
+            "observedOn": "2026-06-28"
+          }
+        ]
+      },
+      {
+        "name": "Gary Riddick",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-07-04"
+          }
+        ]
+      },
+      {
+        "name": "Alyah Bridges",
+        "history": [
+          {
+            "status": "applying",
+            "observedOn": "2026-06-28"
+          }
+        ]
+      },
+      {
+        "name": "Ewan Kim",
+        "history": [
+          {
+            "status": "registered",
+            "observedOn": "2026-06-30"
+          }
+        ]
+      }
     ]
   }
 }
