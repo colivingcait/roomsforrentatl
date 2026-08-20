@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-20T11:32:31.011Z",
+  "updatedAt": "2026-08-20T23:22:24.366Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
+      "checkedAt": "2026-08-20T23:22:24.366Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -442,7 +442,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
+      "checkedAt": "2026-08-20T23:22:24.366Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -450,19 +450,179 @@
       "neighborhood": "Off Stephenson",
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/11889/img_2c79d9b7-84c4-4ecb-a0a4-960edc1c65cd.png",
-      "utilitiesIncluded": true,
+      "utilitiesIncluded": false,
       "rooms": [],
-      "commonAreas": [],
-      "carousel": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/31721219-2ea3-4377-867b-ab03a0250691.jpg",
+          "category": "other",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/f566e043-db88-4832-9f52-de9f6da5dd0d.png",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/e8b5ad5e-88a6-4abf-ac83-a9a504599955.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/aaf9d405-2f70-4912-91ea-1069c912040e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/1e1cc647-1ba0-4885-8e9f-2487d79d911f.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/c41896b5-87ef-4638-9a86-567fe233315e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/d83bc5c8-004e-4be5-a0a2-dcbfe343712d.jpg",
+          "category": "common_space",
+          "description": "Living Room",
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/8056af91-de58-4e5d-97d2-e95227f5612a.jpg",
+          "category": "common_space",
+          "description": "Downstairs Bathroom",
+          "primary": false,
+          "width": 1600,
+          "height": 1067
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/7972baf1-99d2-4441-bdd8-665b89169aa8.jpg",
+          "category": "common_space",
+          "description": "upstairs bathroom",
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/d932489c-6d93-4b13-84a8-090961b13eb4.jpg",
+          "category": "common_space",
+          "description": "upstairs bathroom",
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/9bd6e165-3964-4651-85e6-0c5b3e06b632.jpg",
+          "category": "common_space",
+          "description": "upstairs bathroom",
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        }
+      ],
+      "carousel": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/f566e043-db88-4832-9f52-de9f6da5dd0d.png",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/e8b5ad5e-88a6-4abf-ac83-a9a504599955.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/aaf9d405-2f70-4912-91ea-1069c912040e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/1e1cc647-1ba0-4885-8e9f-2487d79d911f.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1600,
+          "height": 1066
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/c41896b5-87ef-4638-9a86-567fe233315e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/d83bc5c8-004e-4be5-a0a2-dcbfe343712d.jpg",
+          "category": "common_space",
+          "description": "Living Room",
+          "primary": false,
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/8056af91-de58-4e5d-97d2-e95227f5612a.jpg",
+          "category": "common_space",
+          "description": "Downstairs Bathroom",
+          "primary": false,
+          "width": 1600,
+          "height": 1067
+        }
+      ],
       "roomsAvailable": 0,
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "rating": null,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
-      "stale": true,
-      "lastError": "Error: listing did not render (generic shell)"
+      "rating": 4.4,
+      "checkedAt": "2026-08-20T23:22:24.366Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -640,7 +800,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
+      "checkedAt": "2026-08-20T23:22:24.366Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -926,7 +1086,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
+      "checkedAt": "2026-08-20T23:22:24.366Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1101,7 +1261,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.8,
-      "checkedAt": "2026-08-20T11:32:31.011Z",
+      "checkedAt": "2026-08-20T23:22:24.366Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
