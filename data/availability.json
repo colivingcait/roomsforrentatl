@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T06:45:08.221Z",
+  "updatedAt": "2026-08-28T21:20:33.008Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
+      "checkedAt": "2026-08-28T21:20:33.008Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -202,45 +202,7 @@
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
-      "rooms": [
-        {
-          "id": 33215,
-          "padIndex": 1,
-          "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Budapest - Private Bathroom!",
-          "roomNumber": 2,
-          "description": "",
-          "weeklyRate": 231,
-          "originalWeeklyRate": 256,
-          "promo": {
-            "percentOff": 10,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 233,
-          "bathroomType": "private",
-          "bedSize": "full",
-          "roomSize": "large",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-08-29",
-          "image": "https://www.padsplit.com/img/psproperty/8299/img_4eab8340-b2a7-432f-b93c-c0a1a58dd838.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/8299/img_4eab8340-b2a7-432f-b93c-c0a1a58dd838.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_f6199c5a-753c-47ed-9691-598716560fee_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_2340952e-9875-4c7d-90d3-cb34c37825bb.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_ef2ed9ab-978d-4ed2-b9c7-194d6289779a_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_80988247-d723-4ed8-b947-234c40a9ccc5_improved.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_574761fd-8997-4c1b-9597-33450cfc337a_improved.jpg"
-          ]
-        }
-      ],
+      "rooms": [],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
@@ -437,12 +399,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 231,
+      "roomsAvailable": 0,
+      "fromPrice": null,
       "priceUnit": "week",
-      "available": true,
+      "available": false,
       "rating": 4.7,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
+      "checkedAt": "2026-08-28T21:20:33.008Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -460,10 +422,10 @@
           "name": "Blue Jay w/ Mini Fridge & Smart TV Near the Kitchen!",
           "roomNumber": 2,
           "description": "",
-          "weeklyRate": 180,
-          "originalWeeklyRate": 189,
+          "weeklyRate": 163,
+          "originalWeeklyRate": 181,
           "promo": {
-            "percentOff": 5,
+            "percentOff": 10,
             "durationWeeks": 6
           },
           "noMoveInFee": true,
@@ -478,7 +440,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-08-27",
+          "moveInDate": "2026-08-29",
           "image": "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/11889/img_629bbab8-536f-4695-bc52-de5789617d63.png",
@@ -655,14 +617,12 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 180,
+      "fromPrice": 163,
       "priceUnit": "week",
       "available": true,
       "rating": 4.4,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
-      "stale": true,
-      "lastError": "Error: listing did not render (generic shell)"
+      "checkedAt": "2026-08-28T21:20:33.008Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -840,7 +800,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
+      "checkedAt": "2026-08-28T21:20:33.008Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1092,7 +1052,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
+      "checkedAt": "2026-08-28T21:20:33.008Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1230,8 +1190,8 @@
       "fromPrice": null,
       "priceUnit": "week",
       "available": false,
-      "rating": 4.8,
-      "checkedAt": "2026-08-28T06:45:08.221Z",
+      "rating": 4.6,
+      "checkedAt": "2026-08-28T21:20:33.008Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
