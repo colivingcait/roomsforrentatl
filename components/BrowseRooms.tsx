@@ -208,7 +208,7 @@ export default function BrowseRooms({
                   </div>
                 </div>
                 <Link
-                  href={`/house/${h.id}/waitlist`}
+                  href={`/house/${h.id}`}
                   className="shrink-0 rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-[7px] text-[12.5px] font-bold text-brand"
                 >
                   Text me

@@ -89,6 +89,24 @@ export function roomTagline(room: Room): string | null {
   return room.description && room.description.trim() ? room.description.trim() : null;
 }
 
+/**
+ * PadSplit's real room names are long marketing titles (e.g. "Room 2 - Brook
+ * - Affordable room, close to the kitchen & back door!"). This pulls out just
+ * the identifying part ("Room 2 · Brook") for tight spaces — room pickers,
+ * sticky CTAs — where the full title would overflow.
+ */
+export function shortRoomName(room: Room): string {
+  const full = roomTitle(room);
+  const parts = full
+    .split(/\s+-\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (parts.length >= 2) return `${parts[0]} · ${parts[1]}`;
+  const cut = full.split(/\s+w\/|\(|,|!/)[0].trim();
+  if (cut.length > 0 && cut.length < full.length) return cut;
+  return full.length > 28 ? `${full.slice(0, 25).trim()}…` : full;
+}
+
 /** Monthly rent for long-term units, e.g. "$1,500/mo". */
 export function rentLabel(rent: number): string {
   return `$${rent.toLocaleString()}/mo`;
