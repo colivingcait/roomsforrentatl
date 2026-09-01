@@ -1,97 +1,43 @@
 import Header from "@/components/Header";
-import HouseList from "@/components/HouseList";
+import BrowseRooms from "@/components/BrowseRooms";
 import Footer from "@/components/Footer";
 import StickyChatBar from "@/components/StickyChatBar";
-import NearestHomeFinder from "@/components/NearestHomeFinder";
 import TrustBand from "@/components/TrustBand";
 import UnitsSection from "@/components/UnitsSection";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getHouses, lastUpdated } from "@/lib/houses";
-import { getColivingHouses } from "@/lib/coliving";
+import { buildRoomListings } from "@/lib/browse";
 import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 import { generalSearchUrl } from "@/lib/site";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
 export default function RoomsHome() {
-  // Explicit homepage order for the co-living cards. Any home not listed falls to the end.
-  const ORDER = ["willow", "mora", "candace", "raven", "chestnut", "meadow"];
-  const rank = (name: string) => {
-    const i = ORDER.findIndex((n) => name.toLowerCase().includes(n));
-    return i === -1 ? ORDER.length : i;
-  };
   const allHouses = getHouses();
-  const houses = allHouses.filter((h) => h.available).sort((a, b) => rank(a.name) - rank(b.name));
-  const fullyOccupied = allHouses.filter((h) => !h.available).sort((a, b) => rank(a.name) - rank(b.name));
-  const colivingHouses = getColivingHouses();
+  const soldOut = allHouses.filter((h) => !h.available);
+  const rooms = buildRoomListings(allHouses);
   const units = getUnits();
   const updated = updatedLabel(lastUpdated());
-  const openCount = houses.length;
-  const totalRooms = houses.reduce((n, h) => n + h.roomsAvailable, 0);
 
   return (
     <main className="min-h-screen">
       <Header />
 
-      <section className="bg-gradient-to-b from-brand to-brand-dark px-4 pb-8 pt-7 text-white">
-        <div className="mx-auto max-w-3xl">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wide">
-            ● Atlanta{updated ? ` · ${updated}` : ""}
-          </span>
-          <h1 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">
-            Furnished rooms for rent. <br className="hidden sm:block" />
-            <span className="text-accent">Next-day move-in.</span>
-          </h1>
-          <p className="mt-2 max-w-md text-white/80">
-            {totalRooms > 0
-              ? `${totalRooms} room${totalRooms === 1 ? "" : "s"} open right now across ${openCount} Atlanta home${openCount === 1 ? "" : "s"}.`
-              : "Browse furnished Atlanta homes."}{" "}
-            All-in weekly pricing — utilities &amp; WiFi included.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2 text-sm font-medium text-white/90">
-            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Flexible lease</span>
-            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Fully furnished</span>
-            <span className="rounded-lg bg-white/10 px-3 py-1.5">✓ Utilities included</span>
-          </div>
-        </div>
-      </section>
+      <BrowseRooms rooms={rooms} soldOut={soldOut} updated={updated} />
 
-      <NearestHomeFinder />
-
-      {/* Co-living rooms section */}
-      <section className="mx-auto max-w-3xl px-4 pt-6">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
-              Co-living
-            </span>
-            <h2 className="text-lg font-extrabold text-ink">Furnished rooms for rent</h2>
-          </div>
-          <p className="mt-1.5 text-sm text-muted">
-            A private furnished room in a shared home — weekly all-in pricing with utilities &amp; WiFi included. Ready
-            for next-day move-in!
-          </p>
-
-          <div className="mt-4">
-            {/* Fully-occupied homes are included (not hidden) so their city still
-                shows as a filter option — otherwise it looks like we don't have
-                a home there, instead of that home just being fully booked. */}
-            <HouseList houses={[...houses, ...fullyOccupied]} colivingHouses={colivingHouses} />
-          </div>
-
-          <TrackedOutboundLink
-            href={generalSearchUrl()}
-            event="general_search_click"
-            properties={{ source: "homepage" }}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 font-semibold text-brand active:scale-[0.99]"
-          >
-            <span>Don&apos;t see what you&apos;re looking for? Find more options here</span>
-            <span aria-hidden>→</span>
-          </TrackedOutboundLink>
-        </div>
-      </section>
+      <div className="mx-auto max-w-3xl px-4">
+        <TrackedOutboundLink
+          href={generalSearchUrl()}
+          event="general_search_click"
+          properties={{ source: "homepage" }}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 font-semibold text-brand active:scale-[0.99]"
+        >
+          <span>Don&apos;t see what you&apos;re looking for? Find more options here</span>
+          <span aria-hidden>→</span>
+        </TrackedOutboundLink>
+      </div>
 
       <UnitsSection units={units} />
 
