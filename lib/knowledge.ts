@@ -19,7 +19,7 @@ const FAQS = faqData.faqs as {
 }[];
 
 const POLICIES = `
-- Move-in cost: a $19 application fee to apply (refunded if you're not approved). Once approved, the first week's rent is due to move in. No large security deposit.
+- Move-in cost: a $19 application fee, charged when you apply (refunded if you're not approved). The first week's rent is charged once you're approved by both PadSplit and the host team — not at application. No large security deposit.
 - Rent: paid weekly, in advance, billed automatically on the same weekday each week. Utilities and WiFi are included. There is no monthly payment option, but residents can ask about paying bi-weekly if that fits their schedule better.
 - Approval: every applicant is approved by BOTH PadSplit's background screening AND our host team — usually the same day. Requirements: income of at least 2x the rent; no felonies, violent misdemeanors, or evictions in the past 7 years.
 - The move-in process, start to finish: apply → get approved by both PadSplit and our host team (usually the same day) → pay your first week's rent → get your door code → move in. Always describe it this way.
@@ -54,8 +54,25 @@ function housesSnapshot(): string {
       const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
       const transit = h.transit ? ` Transit: ${h.transit}` : "";
       const tour = h.tourUrl ? ` 3D virtual tour: ${h.tourUrl}` : "";
+      // Real physical capacity (owner-confirmed), for "how many people/bathrooms" questions —
+      // separate from roomsAvailable, which is just what's currently open.
+      const capacity =
+        h.totalRooms != null && h.totalBaths != null
+          ? (() => {
+              const priv = h.privateBaths ?? 0;
+              const sharedRooms = h.totalRooms! - priv;
+              const sharedBaths = h.totalBaths! - priv;
+              const ratio =
+                priv === h.totalBaths
+                  ? "every room has its own private bathroom, no sharing"
+                  : sharedBaths > 0
+                    ? `${sharedRooms} rooms share ${sharedBaths} bathroom${sharedBaths === 1 ? "" : "s"} (about ${Math.round(sharedRooms / sharedBaths)} people per bath)${priv ? `, plus ${priv} room${priv === 1 ? "" : "s"} with a private bath` : ""}`
+                    : "no bathrooms configured — check the listing";
+              return ` House total: ${h.totalRooms} bedrooms, ${h.totalBaths} bathroom${h.totalBaths === 1 ? "" : "s"} — ${ratio}.`;
+            })()
+          : "";
       if (!h.available) {
-        return `• ${h.name} (${loc}) [id ${h.id}] — currently fully booked.${transit}${tour}`;
+        return `• ${h.name} (${loc}) [id ${h.id}] — currently fully booked.${transit}${tour}${capacity}`;
       }
       const rooms = availableRooms(h);
       const roomLines = rooms.length
@@ -71,7 +88,7 @@ function housesSnapshot(): string {
             .join("\n")
         : "    - rooms available; see the listing for details.";
       const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}/week` : "";
-      return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}${tour}\n${roomLines}`;
+      return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}${tour}${capacity}\n${roomLines}`;
     })
     .join("\n\n");
 }

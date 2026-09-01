@@ -78,6 +78,12 @@ export interface SeedHouse {
   reviewCount?: number;
   /** Matterport / 3D virtual tour URL, if the home has one. */
   tourUrl?: string;
+  /** Total bedrooms in the house (occupied + available) — confirmed by the owner, not scraped. Used for "X of Y rooms open" copy. */
+  totalRooms?: number;
+  /** Total bathrooms in the house — confirmed by the owner, not scraped. */
+  totalBaths?: number;
+  /** How many of totalBaths are private (en-suite to one bedroom) — confirmed by the owner, not scraped. */
+  privateBaths?: number;
 }
 
 /** Live values written by the daily scraper into data/availability.json. */

@@ -101,13 +101,13 @@
       "category": "The home & your room",
       "q": "How many people share a bathroom?",
       "variants": ["How many people am I sharing the bathroom with?", "What's the bathroom situation?", "How many share a bath?"],
-      "a": "You're typically sharing with 2 to 4 people. Everyone's on different schedules and cleans up after themselves, so we really don't get complaints about the shared bathrooms."
+      "a": "It varies by home — typically 2 to 4 people share a bath. Willow's rooms are all private baths, no sharing at all, and Meadow has the lightest sharing of our shared-bath homes. Everyone's on different schedules and cleans up after themselves, so we really don't get complaints about the shared bathrooms. Ask about a specific home and I can give you its exact bathroom count."
     },
     {
       "category": "The home & your room",
       "q": "How many people live in each home?",
       "variants": ["How many bedrooms?", "How many roommates?", "How many people does the house fit?", "How big is the house?"],
-      "a": "Our homes are over 2,500 sq ft across multiple floors, with standard-size bedrooms (10x12 and larger). They comfortably fit up to 8 residents, each in their own private room."
+      "a": "Our homes are over 2,500 sq ft across multiple floors, with standard-size bedrooms (10x12 and larger). Most fit up to 8 residents, each in their own private room — a couple of our homes are smaller (5 or 6 residents). Ask about a specific home and I'll give you its exact room count."
     },
     {
       "category": "The home & your room",
