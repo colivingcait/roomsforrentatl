@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-04T14:53:36.260Z",
+  "updatedAt": "2026-09-05T00:37:04.052Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
+      "checkedAt": "2026-09-05T00:37:04.052Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -202,7 +202,117 @@
       "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
-      "rooms": [],
+      "rooms": [
+        {
+          "id": 64283,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Geneva - w/ Ceiling Fan & Workspace!",
+          "roomNumber": 7,
+          "description": "",
+          "weeklyRate": 152,
+          "originalWeeklyRate": 160,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 168,
+          "bathroomType": "shared",
+          "bedSize": "twinxl",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-09-06",
+          "image": "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_7482e7be-711d-41eb-a8e3-d8f1166b8096.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_33476469-d865-471f-8413-0e9c0c26c703.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_59fc1589-3585-4808-a849-f25abddf2e8f.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_360e76cf-172f-436f-8d7f-1e8d88acc3d3.png"
+          ]
+        },
+        {
+          "id": 33217,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Dublin - w/ Workspace, Smart TV & Ceiling Fan!",
+          "roomNumber": 4,
+          "description": "",
+          "weeklyRate": 170,
+          "originalWeeklyRate": 178,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 175,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-09-06",
+          "image": "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_3b58dd55-581b-45c8-8c5e-07a5d15f7067_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_50cedef8-30dd-4892-8620-aae396b5fca3_improved.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_091f5b84-da19-4ddf-9d21-ce30c541abe6.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_c3356145-5cb2-4d32-b5f7-2fc8d7ad9110.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_8859dfce-08c6-4197-8fcb-9f16fe13b565_improved.jpg"
+          ]
+        },
+        {
+          "id": 64284,
+          "padIndex": 3,
+          "pagePosition": 3,
+          "applyIndex": null,
+          "name": "Hanover-  Oversized room 10x20 w/ desk and extra space!",
+          "roomNumber": 8,
+          "description": "",
+          "weeklyRate": 178,
+          "originalWeeklyRate": 187,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 179,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "window-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-09-06",
+          "image": "https://www.padsplit.com/img/psproperty/8299/img_6211e6ba-d1b3-4a7b-8913-88f25d3dc470.png",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/8299/img_6211e6ba-d1b3-4a7b-8913-88f25d3dc470.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_02272516-7662-4fb3-8ddf-780ce53eb4ff.jpg",
+            "https://www.padsplit.com/img/psproperty/8299/img_d020c886-d63c-4dd4-a00c-b08c8fa67192.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_8c270a89-c443-4020-bbbb-c9c95e7df775.png",
+            "https://www.padsplit.com/img/psproperty/8299/img_af05b9d8-6f11-4e66-a92c-55d38d5c5973.png"
+          ]
+        }
+      ],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/8299/f4e03540-890b-40a8-a848-31b033867264_improved.jpg",
@@ -399,12 +509,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 0,
-      "fromPrice": null,
+      "roomsAvailable": 3,
+      "fromPrice": 152,
       "priceUnit": "week",
-      "available": false,
+      "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
+      "checkedAt": "2026-09-05T00:37:04.052Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -621,8 +731,10 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.4,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
+      "checkedAt": "2026-09-05T00:37:04.052Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
+      "stale": true,
+      "lastError": "Error: listing did not render (generic shell)"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
@@ -800,7 +912,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
+      "checkedAt": "2026-09-05T00:37:04.052Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -836,46 +948,12 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-05",
+          "moveInDate": "2026-09-06",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
             "https://www.padsplit.com/img/psproperty/35011/img_62ea9c0b-c651-4016-8b1d-0ccdbe1967db.jpg",
             "https://www.padsplit.com/img/psproperty/35011/img_fb516a1d-0c31-4cf3-bd72-4c8a0fa9b66e.png"
-          ]
-        },
-        {
-          "id": 110835,
-          "padIndex": 2,
-          "pagePosition": 2,
-          "applyIndex": null,
-          "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
-          "roomNumber": 5,
-          "description": "",
-          "weeklyRate": 151,
-          "originalWeeklyRate": 167,
-          "promo": {
-            "percentOff": 10,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 175,
-          "bathroomType": "shared",
-          "bedSize": "full",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-09-05",
-          "image": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
-            "https://www.padsplit.com/img/psproperty/35011/img_8d140d71-6d2c-4610-bd15-fc4004f78c56.jpg"
           ]
         }
       ],
@@ -1011,12 +1089,12 @@
           "height": 1000
         }
       ],
-      "roomsAvailable": 2,
+      "roomsAvailable": 1,
       "fromPrice": 151,
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
+      "checkedAt": "2026-09-05T00:37:04.052Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1155,7 +1233,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-09-04T14:53:36.260Z",
+      "checkedAt": "2026-09-05T00:37:04.052Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
