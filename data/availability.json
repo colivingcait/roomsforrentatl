@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-05T13:48:35.132Z",
+  "updatedAt": "2026-09-06T00:32:53.504Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
+      "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -66,6 +66,14 @@
           "height": 4000
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
+          "category": "common_space",
+          "description": "Nice backyard patio with table and lights",
+          "primary": false,
+          "width": 3468,
+          "height": 4624
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
           "category": "common_space",
           "description": "Kitchen with new smooth top range and 2 refrigerators",
@@ -96,14 +104,6 @@
           "primary": false,
           "width": 3000,
           "height": 4000
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
-          "category": "common_space",
-          "description": "Nice backyard patio with table and lights",
-          "primary": false,
-          "width": 3468,
-          "height": 4624
         },
         {
           "url": "https://www.padsplit.com/img/psproperty/152/dbf6dbfc-b358-4c17-8c5f-3d7c0a4f29ac.jpg",
@@ -180,12 +180,12 @@
           "height": 4000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/152/img_1605046692.9338074.jpg",
           "category": "common_space",
-          "description": "Kitchen with new smooth top range and 2 refrigerators",
+          "description": "Nice backyard patio with table and lights",
           "primary": false,
-          "width": 899,
-          "height": 600
+          "width": 3468,
+          "height": 4624
         }
       ],
       "roomsAvailable": 0,
@@ -193,56 +193,20 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
+      "checkedAt": "2026-09-06T00:32:53.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community with Smart TV and Private Workspace in Every Room",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/8299/img_207a9ee2-2bdb-4d6c-b709-0ab02f7a1347.png",
       "utilitiesIncluded": true,
       "rooms": [
         {
-          "id": 64283,
+          "id": 33217,
           "padIndex": 1,
           "pagePosition": 1,
-          "applyIndex": null,
-          "name": "Geneva - w/ Ceiling Fan & Workspace!",
-          "roomNumber": 7,
-          "description": "",
-          "weeklyRate": 152,
-          "originalWeeklyRate": 160,
-          "promo": {
-            "percentOff": 5,
-            "durationWeeks": 6
-          },
-          "noMoveInFee": true,
-          "recommendedPrice": 168,
-          "bathroomType": "shared",
-          "bedSize": "twinxl",
-          "roomSize": "standard",
-          "workspace": true,
-          "miniFridge": false,
-          "privateAccess": false,
-          "climateControl": "central-ac",
-          "windows": 1,
-          "status": 1,
-          "detailedStatus": "listed",
-          "moveInDate": "2026-09-06",
-          "image": "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
-          "photos": [
-            "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_7482e7be-711d-41eb-a8e3-d8f1166b8096.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_33476469-d865-471f-8413-0e9c0c26c703.jpg",
-            "https://www.padsplit.com/img/psproperty/8299/img_59fc1589-3585-4808-a849-f25abddf2e8f.png",
-            "https://www.padsplit.com/img/psproperty/8299/img_360e76cf-172f-436f-8d7f-1e8d88acc3d3.png"
-          ]
-        },
-        {
-          "id": 33217,
-          "padIndex": 2,
-          "pagePosition": 2,
           "applyIndex": null,
           "name": "Dublin - w/ Workspace, Smart TV & Ceiling Fan!",
           "roomNumber": 4,
@@ -265,7 +229,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-06",
+          "moveInDate": "2026-09-08",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
@@ -278,8 +242,8 @@
         },
         {
           "id": 64284,
-          "padIndex": 3,
-          "pagePosition": 3,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Hanover-  Oversized room 10x20 w/ desk and extra space!",
           "roomNumber": 8,
@@ -302,7 +266,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-06",
+          "moveInDate": "2026-09-08",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_6211e6ba-d1b3-4a7b-8913-88f25d3dc470.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_6211e6ba-d1b3-4a7b-8913-88f25d3dc470.png",
@@ -509,12 +473,12 @@
           "height": 3024
         }
       ],
-      "roomsAvailable": 3,
-      "fromPrice": 152,
+      "roomsAvailable": 2,
+      "fromPrice": 170,
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
+      "checkedAt": "2026-09-06T00:32:53.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -768,14 +732,16 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.4,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
-      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
+      "checkedAt": "2026-09-06T00:32:53.504Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
+      "stale": true,
+      "lastError": "Error: listing did not render (generic shell)"
     },
     "30251": {
       "title": "🏆 Top-Tier Home w/ Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Lake Commons CT",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_59616cb1-08c3-4b00-a014-05e4cc6fb895.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -947,7 +913,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
+      "checkedAt": "2026-09-06T00:32:53.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -965,10 +931,10 @@
           "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
           "roomNumber": 2,
           "description": "",
-          "weeklyRate": 142,
-          "originalWeeklyRate": 167,
+          "weeklyRate": 170,
+          "originalWeeklyRate": 178,
           "promo": {
-            "percentOff": 15,
+            "percentOff": 5,
             "durationWeeks": 6
           },
           "noMoveInFee": true,
@@ -983,7 +949,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-06",
+          "moveInDate": "2026-09-08",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -1125,18 +1091,18 @@
         }
       ],
       "roomsAvailable": 1,
-      "fromPrice": 142,
+      "fromPrice": 170,
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
+      "checkedAt": "2026-09-06T00:32:53.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
       "title": "🤩 ALL PRIVATE BATHROOMS with TWO Kitchens 🤩 Top-Tier Home w/ a Responsive Host - Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "Baker Hills",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/39708/bathrooms/img_3558baaf-cc73-4f55-a246-24bd21f47217.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
       "commonAreas": [
@@ -1255,12 +1221,12 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/39708/img_0ad7c864-bc5f-4edc-8e2b-b1640c29f782.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_52fcad53-08a6-457d-8a9c-8803eee614fe.png",
           "category": "bedroom",
-          "description": "Spacious bedroom with two windows, ceiling fan, wood-look flooring, and room for a bed plus a dedicated desk area.",
+          "description": "Spacious bedroom with ceiling fan, wood-look flooring, a dedicated desk area, and windows for natural light.",
           "primary": false,
-          "width": 1500,
-          "height": 1000
+          "width": 1264,
+          "height": 843
         }
       ],
       "roomsAvailable": 0,
@@ -1268,7 +1234,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-09-05T13:48:35.132Z",
+      "checkedAt": "2026-09-06T00:32:53.504Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
