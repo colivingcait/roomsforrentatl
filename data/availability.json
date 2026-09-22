@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-09-21T16:55:53.337Z",
+  "updatedAt": "2026-09-22T01:25:06.185Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
-      "city": "Decatur, GA",
+      "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": true,
       "rooms": [
@@ -34,7 +34,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-22",
+          "moveInDate": "2026-09-23",
           "image": "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
           "photos": [
             "https://www.padsplit.com/img/rooms/room_935_0_1581966040.9901974_improved.jpg",
@@ -228,7 +228,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -264,7 +264,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-22",
+          "moveInDate": "2026-09-23",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_b5713971-3a2c-41f1-8f29-1648216af468.jpg",
@@ -477,7 +477,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -656,7 +656,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -835,7 +835,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -871,7 +871,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-09-22",
+          "moveInDate": "2026-09-23",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -1017,7 +1017,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1156,7 +1156,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-09-21T16:55:53.337Z",
+      "checkedAt": "2026-09-22T01:25:06.185Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
