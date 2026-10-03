@@ -17,7 +17,7 @@ export type SiteFaq = {
 export const PHONE_ANSWER = `You can call us at ${site.phone}. That number is for calls only — we can't text.`;
 
 export const SCREENING_ANSWER =
-  "You'll need income of at least 2x the rent, no felony convictions in the last 7 years, and no more than 1 eviction in the last 7 years. I can't say how a specific application will turn out — each one is reviewed on its own.";
+  "You'll need income of at least 2x the rent, no felony convictions in the last 7 years, and no more than 1 eviction in the last 7 years. I can't say how a specific application will turn out, but if you apply and are declined, your application fee is refunded.";
 
 export const PETS_ANSWER = "Our homes don't allow pets. Service animals are allowed.";
 
