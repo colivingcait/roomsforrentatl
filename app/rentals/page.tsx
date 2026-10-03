@@ -1,12 +1,19 @@
 import RentalsView from "@/components/RentalsView";
+import { getMarket } from "@/lib/market";
+import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
-export const metadata = {
-  title: "Furnished Private Rentals & Apartments for Rent in Atlanta, GA",
-  description:
-    "Furnished private rentals and apartments for rent in the Atlanta area — a full unit that's all yours, monthly lease, utilities included. Apply online today.",
-};
+export function generateMetadata(): Metadata {
+  const market = getMarket();
+  if (!market.homesRentalsTitle) {
+    return { title: "Not found", robots: { index: false, follow: false } };
+  }
+  return {
+    title: market.homesRentalsTitle,
+    description: market.homesRentalsDescription,
+  };
+}
 
 // A units-only page (also the homepage on the homes brand).
 export default function RentalsPage() {

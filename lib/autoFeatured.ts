@@ -22,7 +22,7 @@ export type AutoFeaturedRoom = {
 };
 
 export async function getAutoFeaturedRooms(): Promise<AutoFeaturedRoom[]> {
-  if (getMarket().featuredSources.length > 0) return [];
+  if (getMarket().listingSource !== "search") return [];
 
   const ranked = await rankedListings({});
   if (!ranked) return [];

@@ -20,14 +20,22 @@ const ART = "artifacts";
 mkdirSync(ART, { recursive: true });
 // re-run trigger: pick up newly-listed rooms (Chestnut Hill)
 
+const UA =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required/i;
+
+const marketArg = process.argv.indexOf("--market");
+const SCRAPE_MARKET = marketArg === -1 ? "atl" : process.argv[marketArg + 1];
+if (SCRAPE_MARKET === "sa") {
+  const { scrapeSanAntonio } = await import("./scrape-sa.mjs");
+  const code = await scrapeSanAntonio({ chromium, UA, CHALLENGE, ART });
+  process.exit(code);
+}
+
 const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses;
 const prev = existsSync("data/availability.json")
   ? JSON.parse(readFileSync("data/availability.json", "utf8"))
   : { houses: {} };
-
-const UA =
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
-const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required/i;
 
 /** House-level bits from the rendered text/html (neighborhood + lead photo). */
 function parseHouseMeta(text, html) {

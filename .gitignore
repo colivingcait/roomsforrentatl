@@ -6,6 +6,7 @@
 # next.js
 /.next/
 /.next-dfw/
+/.next-sa/
 /out/
 next-env.d.ts
 

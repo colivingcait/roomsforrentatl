@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:sa": "node scripts/check-sa-isolation.mjs .next-sa"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

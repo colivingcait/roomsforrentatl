@@ -1,4 +1,5 @@
 import type { House, Room, Photo, PriceUnit, BathroomType } from "./types";
+import { getMarket } from "./market";
 
 /** A clean space label (Kitchen, Bathroom, Living room…) from PadSplit's photo data. */
 export function photoLabel(p: Pick<Photo, "description" | "category">): string {
@@ -35,23 +36,44 @@ export function isStreetishPlace(value: string | null | undefined): boolean {
   return !!value && STREET_TYPE.test(value);
 }
 
+/** A neighborhood or city that can be shown. San Antonio also rejects digits. */
+export function isPublicPlaceName(value: string | null | undefined): boolean {
+  const text = (value ?? "").trim();
+  if (!text || isStreetishPlace(text)) return false;
+  if (process.env.NEXT_PUBLIC_MARKET === "sa" && /\d/.test(text)) return false;
+  return true;
+}
+
 /**
  * Public submarket for a home: the city, never a street.
- * Baker Hills / Adamsville / Willow are labeled West Atlanta.
+ * Baker Hills / Adamsville / Willow use the market's west label.
+ * San Antonio uses the neighborhood when it is not a street and has no digits,
+ * then the city, then the metro name.
  */
 export function submarketLabel(house: {
   id?: string;
   neighborhood?: string | null;
   city?: string | null;
 }): string {
+  const market = getMarket();
   const hood = (house.neighborhood ?? "").trim();
-  if (house.id === "39708" || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
-    return "West Atlanta";
+  const city = (house.city ?? "").replace(/,?\s*(ga|tx)$/i, "").trim();
+  if (market.id === "sa") {
+    if (isPublicPlaceName(hood)) return hood;
+    if (isPublicPlaceName(city)) return city;
+    return market.metro;
   }
-  const city = (house.city ?? "").replace(/,?\s*ga$/i, "").trim();
+  if (market.id === "dfw") {
+    if (city && !isStreetishPlace(city)) return city;
+    if (hood && !isStreetishPlace(hood)) return hood;
+    return market.metro;
+  }
+  if (house.id === market.shortHouses?.willow || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
+    return market.westLabel ?? market.metro;
+  }
   if (city && !isStreetishPlace(city)) return city;
   if (hood && !isStreetishPlace(hood)) return hood;
-  return "Atlanta";
+  return market.metro;
 }
 
 /** Neighborhood + submarket for a listing, with street-type names removed. */
@@ -62,7 +84,20 @@ export function listingPlace(house: {
 }): string {
   const sub = submarketLabel(house);
   const hood = (house.neighborhood ?? "").trim();
-  if (!hood || isStreetishPlace(hood) || sub === "West Atlanta") return sub;
+  const market = getMarket();
+  if (market.id === "sa") {
+    const city = (house.city ?? "").replace(/,?\s*tx$/i, "").trim();
+    if (
+      isPublicPlaceName(hood) &&
+      isPublicPlaceName(city) &&
+      hood.toLowerCase() !== city.toLowerCase() &&
+      !hood.toLowerCase().includes(city.toLowerCase())
+    ) {
+      return `${hood}, ${city}`;
+    }
+    return sub;
+  }
+  if (!hood || isStreetishPlace(hood) || (market.id !== "dfw" && market.westLabel != null && sub === market.westLabel)) return sub;
   if (hood.toLowerCase().includes(sub.toLowerCase())) return hood;
   return [hood, sub].filter(Boolean).join(", ");
 }

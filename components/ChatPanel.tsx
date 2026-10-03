@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { getMarket } from "@/lib/market";
 
 type BookHouse = {
   id: string;
@@ -604,15 +605,19 @@ function linkLabel(url: string): string {
       if (u.searchParams.get("moveInTime") === "instant_move_in") return "See instant-book rooms →";
       if (u.searchParams.get("noMoveInFee") === "true") return "See rooms with no move-in fee →";
       if (u.searchParams.get("roomsCount") === "6") return "See homes with fewer housemates →";
-      const city = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-ga$/)?.[1];
-      if (city && city !== "atlanta") {
-        const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-        return `See rooms in ${name} →`;
-      }
-      const texas = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-tx$/)?.[1];
-      if (texas && !(texas === "dallas" && u.searchParams.has("latMax"))) {
-        const name = texas.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-        return `See rooms in ${name} →`;
+      const place = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-(ga|tx)$/);
+      if (place) {
+        const slug = `${place[1]}-${place[2]}`;
+        const market = getMarket();
+        const metroSearch = slug === market.padsplit.searchPath && u.searchParams.has("latMax");
+        const unlabeledMetro = slug === market.padsplit.searchPath && !market.metroLinkIsCity;
+        if (!metroSearch && !unlabeledMetro) {
+          const name = place[1]
+            .split("-")
+            .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(" ");
+          return `See rooms in ${name} →`;
+        }
       }
       if (u.searchParams.get("sortBy") === "price") return "See lowest-priced rooms →";
       return "View on PadSplit →";

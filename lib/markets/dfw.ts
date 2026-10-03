@@ -8,6 +8,7 @@ export const DFW_MARKET: Market = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentdfw.com",
   metro: "Dallas–Fort Worth",
   phone: null,
+  listingSource: "search",
   tagline: "Furnished rooms for rent in Dallas–Fort Worth. Move in as soon as tomorrow.",
   description:
     "Furnished rooms for rent in Dallas–Fort Worth — weekly, no lease, next-day move-in. All-in pricing with utilities and Wi-Fi included. Book through PadSplit.",
@@ -62,6 +63,27 @@ export const DFW_MARKET: Market = {
     { slug: "mesquite", name: "Mesquite" },
     { slug: "garland", name: "Garland" },
   ],
+  areas: [
+    { slug: "dallas", label: "Dallas–Fort Worth", pattern: "dallas\\s*[–-]\\s*fort\\s+worth|\\bdfw\\b", wide: true },
+    { slug: "fort-worth", label: "Fort Worth", pattern: "\\bfort\\s+worth\\b" },
+    { slug: "grand-prairie", label: "Grand Prairie", pattern: "\\bgrand\\s+prairie\\b" },
+    { slug: "arlington", label: "Arlington", pattern: "\\barlington\\b" },
+    { slug: "dallas", label: "Dallas", pattern: "\\bdallas\\b" },
+    { slug: "irving", label: "Irving", pattern: "\\birving\\b" },
+    { slug: "mesquite", label: "Mesquite", pattern: "\\bmesquite\\b" },
+    { slug: "garland", label: "Garland", pattern: "\\bgarland\\b" },
+  ],
+  areaChips: ["Dallas", "Fort Worth", "Arlington", "Grand Prairie", "Irving"],
+  metroLinkIsCity: true,
+  og: {
+    alt: "Furnished rooms in Dallas–Fort Worth",
+    letter: "R",
+    word: "Rooms",
+    line1: "Furnished rooms in Dallas–Fort Worth.",
+    line2: "Next Day Move In",
+    sub: "All-in weekly pricing · utilities and Wi-Fi included",
+    chips: ["Fully furnished", "Utilities + Wi-Fi included", "Stay as long as you need"],
+  },
 };
 
 export const ACTIVE_MARKET = DFW_MARKET;

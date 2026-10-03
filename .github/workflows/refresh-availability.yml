@@ -12,7 +12,9 @@ on:
   push:
     paths:
       - "scripts/scrape-availability.mjs"
+      - "scripts/scrape-sa.mjs"
       - "data/houses.json"
+      - "data/houses-sa.json"
       - ".github/workflows/refresh-availability.yml"
 
 permissions:
@@ -44,6 +46,11 @@ jobs:
         run: node scripts/scrape-availability.mjs
         continue-on-error: true
 
+      - name: Scrape San Antonio host list
+        id: scrape-sa
+        run: node scripts/scrape-availability.mjs --market sa
+        continue-on-error: true
+
       - name: Upload rendered pages + screenshots (for verification)
         if: always()
         uses: actions/upload-artifact@v4
@@ -55,10 +62,17 @@ jobs:
       - name: Commit updated availability (if any)
         if: always()
         run: |
+          files=""
           if [ -n "$(git status --porcelain data/availability.json 2>/dev/null)" ]; then
+            files="$files data/availability.json"
+          fi
+          if [ -n "$(git status --porcelain data/availability-sa.json data/houses-sa.json 2>/dev/null)" ]; then
+            files="$files data/availability-sa.json data/houses-sa.json"
+          fi
+          if [ -n "$files" ]; then
             git config user.name "rfr-availability-bot"
             git config user.email "actions@github.com"
-            git add data/availability.json
+            git add $files
             git commit -m "chore: refresh room availability from PadSplit [skip ci]"
             # Rebase + retry so a concurrent push to the branch doesn't drop the update.
             for i in 1 2 3 4 5; do
@@ -72,7 +86,7 @@ jobs:
           fi
 
       - name: Fail if every house was blocked
-        if: steps.scrape.outcome == 'failure'
+        if: steps.scrape.outcome == 'failure' || steps.scrape-sa.outcome == 'failure'
         run: |
-          echo "::error::Scraper could not read any house (blocked or errored). See the padsplit-probe artifact."
+          echo "::error::Scraper could not read a market (blocked or errored). See the padsplit-probe artifact."
           exit 1

@@ -156,7 +156,7 @@ export async function POST(req: Request) {
 
   const filterPrices = await getFilterStartingPrices();
   const code = referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value);
-  const autoFeatured = getMarket().id === "dfw" ? await getAutoFeaturedRooms() : [];
+  const autoFeatured = getMarket().listingSource === "search" ? await getAutoFeaturedRooms() : [];
 
   // Search needs get a PadSplit referral link first. This does not use the model,
   // so a private-bath or budget tap can't fall back to a featured-room pitch.

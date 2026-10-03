@@ -1,4 +1,5 @@
 import { getHouses } from "@/lib/houses";
+import { getMarket } from "@/lib/market";
 import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 import { priceLabel } from "@/lib/format";
 
@@ -95,7 +96,7 @@ async function fetchJson(url: string, timeoutMs = 6000): Promise<unknown | null>
   try {
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "RoomsForRentATL/1.0 (https://roomsforrentatl.com)",
+        "User-Agent": `${getMarket().name}/1.0 (${getMarket().url})`,
         Accept: "application/json",
       },
       signal: ctrl.signal,
@@ -201,7 +202,7 @@ export async function POST(req: Request) {
     return Response.json(
       {
         error:
-          "That address doesn't look like it's in the Atlanta area. Try adding the neighborhood or city (e.g. \"…, Decatur, GA\").",
+          `That address doesn't look like it's in the ${getMarket().metro} area. Try adding the neighborhood or city.`,
       },
       { status: 422 }
     );

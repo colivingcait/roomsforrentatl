@@ -1,8 +1,12 @@
 import { getUnit } from "@/lib/units";
 import { rentLabel, availDateLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt = "Furnished rental in Atlanta";
+const market = getMarket();
+const homesCard = market.homesOg ?? market.og;
+
+export const alt = homesCard.alt;
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -13,14 +17,7 @@ export default async function UnitOpengraphImage({ params }: { params: { id: str
   const unit = getUnit(params.id);
 
   if (!unit) {
-    return renderOgCard({
-      letter: "H",
-      word: "Homes",
-      line1: "Furnished rentals in Atlanta.",
-      line2: "Your own private space",
-      sub: "Monthly lease · utilities included",
-      chips: ["Fully furnished", "Utilities included", "Apply online today"],
-    });
+    return renderOgCard(homesCard);
   }
 
   const chips = [
@@ -30,8 +27,8 @@ export default async function UnitOpengraphImage({ params }: { params: { id: str
   ].filter((c): c is string => Boolean(c));
 
   return renderOgCard({
-    letter: "H",
-    word: "Homes",
+    letter: homesCard.letter,
+    word: homesCard.word,
     line1: unit.title,
     line2: rentLabel(unit.rent),
     sub: `${unit.type} · ${unit.city} — apply online today`,

@@ -44,7 +44,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
         {photos.length > 0 ? (
           <PhotoStrip
             images={photos}
-            alt={`Furnished apartment for rent in ${unit.city}, Atlanta — ${unit.title}`}
+            alt={`Furnished apartment for rent in ${unit.city} — ${unit.title}`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (

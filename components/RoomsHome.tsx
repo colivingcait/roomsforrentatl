@@ -17,7 +17,7 @@ export default async function RoomsHome() {
   const rooms = buildRoomListings(allHouses);
   const filterPrices = await getFilterStartingPrices();
   const market = getMarket();
-  const autoFeatured = market.featuredSources.length === 0 ? await getAutoFeaturedRooms() : [];
+  const autoFeatured = market.listingSource === "search" ? await getAutoFeaturedRooms() : [];
 
   return (
     <main className="min-h-screen bg-white">

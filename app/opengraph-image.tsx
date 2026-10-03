@@ -4,8 +4,7 @@ import { getBrand } from "@/lib/brand";
 import { getMarket } from "@/lib/market";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt =
-  getMarket().id === "dfw" ? "Furnished rooms in Dallas–Fort Worth" : "Furnished rentals in Atlanta";
+export const alt = getMarket().og.alt;
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -14,39 +13,13 @@ export const contentType = ogContentType;
 // and unit pages have their own listing-specific preview (see their
 // opengraph-image.tsx) — this one is only the site-wide/homepage card.
 export default async function OpengraphImage() {
-  if (getMarket().id === "dfw") {
-    return renderOgCard({
-      letter: "R",
-      word: "Rooms",
-      line1: "Furnished rooms in Dallas–Fort Worth.",
-      line2: "Next Day Move In",
-      sub: "All-in weekly pricing · utilities and Wi-Fi included",
-      chips: ["Fully furnished", "Utilities + Wi-Fi included", "Stay as long as you need"],
-    });
-  }
+  const market = getMarket();
   const brand = getBrand();
-  const isHomes = brand.key === "homes";
+  const homes = brand.key === "homes" && market.homesOg;
+  const copy = homes ? market.homesOg! : market.og;
+  const photoPath = homes
+    ? (unitsData.units as Array<{ photos?: string[] }>).find((u) => u.photos && u.photos.length)?.photos?.[0]
+    : (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto;
 
-  const copy = isHomes
-    ? {
-        letter: "H",
-        word: "Homes",
-        line1: "Furnished rentals in Atlanta.",
-        line2: "Your own private space",
-        sub: "Monthly lease · utilities included",
-        chips: ["Fully furnished", "Utilities included", "A place that's all yours"],
-        photoPath: (unitsData.units as Array<{ photos?: string[] }>).find((u) => u.photos && u.photos.length)
-          ?.photos?.[0],
-      }
-    : {
-        letter: "R",
-        word: "Rooms",
-        line1: "Furnished rooms in Atlanta.",
-        line2: "Next Day Move In",
-        sub: "All-in weekly pricing · utilities & WiFi included",
-        chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],
-        photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto,
-      };
-
-  return renderOgCard(copy);
+  return renderOgCard({ ...copy, photoPath });
 }

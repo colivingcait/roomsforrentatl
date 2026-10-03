@@ -1,16 +1,37 @@
 /**
- * One codebase, two room sites. Dallas–Fort Worth production sets
- * NEXT_PUBLIC_MARKET=dfw. Unset keeps Atlanta, including Atlanta production.
- * This pull request's Vercel preview also builds as Dallas–Fort Worth
- * (see lib/market-env.js). That build swaps ./markets/atl for ./markets/dfw
- * in next.config.js, so the Atlanta copy is what this module loads unless
- * that swap runs.
+ * One codebase, one market per build. Dallas–Fort Worth production sets
+ * NEXT_PUBLIC_MARKET=dfw. San Antonio production sets NEXT_PUBLIC_MARKET=sa.
+ * Unset keeps Atlanta, including Atlanta production.
+ * next.config.js swaps ./markets/atl for the active market, so the Atlanta
+ * copy is what this module loads unless that swap runs.
  *
- * Renters on one market must never see the other market's name, homes,
+ * Renters on one market must never see another market's name, homes,
  * phone, or links.
  */
 
-export type MarketId = "atl" | "dfw";
+export type MarketId = "atl" | "dfw" | "sa";
+
+export interface MarketArea {
+  slug: string;
+  label: string;
+  /** Source for `new RegExp(pattern, "i")`. */
+  pattern: string;
+  /** Metro-wide search instead of a city path. */
+  wide?: boolean;
+  /** Featured-room city match. Defaults to the label. */
+  cityIncludes?: string;
+  cityExcludes?: string;
+}
+
+export interface MarketOg {
+  alt: string;
+  letter: string;
+  word: string;
+  line1: string;
+  line2: string;
+  sub: string;
+  chips: string[];
+}
 
 export interface MarketCity {
   slug: string;
@@ -26,8 +47,16 @@ export interface Market {
   url: string;
   /** Metro name used in copy, e.g. "Atlanta". */
   metro: string;
+  /** Atlanta-only label for a few west-side neighborhoods. */
+  westLabel?: string;
   /** null hides every phone number and call button. */
   phone: string | null;
+  /**
+   * "sources" — featuredSources ids in the houses file.
+   * "file" — every house in the houses file (rewritten by the scrape).
+   * "search" — no local homes; the homepage uses the cheapest search cards.
+   */
+  listingSource: "sources" | "file" | "search";
   tagline: string;
   /** Brand meta description. */
   description: string;
@@ -37,6 +66,8 @@ export interface Market {
   heroKicker: string;
   /** Interior hero photos. Null keeps a flat brand field. */
   heroPhoto: { mobile: string; desktop: string } | null;
+  /** Local interior card photos keyed by house id. Other markets use scraped photos. */
+  cardPhotos?: Record<string, { src: string; alt: string }>;
   seoHeading: string;
   seoBody: string;
   footerLine: string;
@@ -62,6 +93,22 @@ export interface Market {
   };
   /** Slugs that keep referralCode on /rooms-for-rent/<slug>-<state>. */
   cities: MarketCity[];
+  areas: MarketArea[];
+  areaChips: string[];
+  /**
+   * When true, /rooms-for-rent/<searchPath> without metro bounds is labeled
+   * as that city. Atlanta leaves this false so atlanta-ga stays the metro search.
+   */
+  metroLinkIsCity: boolean;
+  /** Atlanta short links. Absent on other markets, so those paths 404. */
+  shortHouses?: Record<string, string>;
+  og: MarketOg;
+  homesSeoTitle?: string;
+  homesKeywords?: string[];
+  homesOg?: MarketOg;
+  homesSister?: { label: string; name: string; url: string };
+  homesRentalsTitle?: string;
+  homesRentalsDescription?: string;
 }
 
 import { ACTIVE_MARKET } from "./markets/atl";

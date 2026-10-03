@@ -26,7 +26,7 @@ const SHORT_LINKS = new Set([
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  if (resolveMarketId() === "dfw" && ATL_ONLY_PATH.test(pathname)) {
+  if (resolveMarketId() !== "atl" && ATL_ONLY_PATH.test(pathname)) {
     const url = req.nextUrl.clone();
     url.pathname = "/market-unavailable";
     return NextResponse.rewrite(url);

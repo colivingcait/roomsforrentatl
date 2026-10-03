@@ -18,6 +18,9 @@ function featuredIdSet(): Set<string> {
 
 /** Seeds this market lists, in houses.json order. */
 function featuredSeeds(): SeedHouse[] {
+  const source = getMarket().listingSource;
+  if (source === "file") return SEED;
+  if (source === "search") return [];
   const ids = featuredIdSet();
   return SEED.filter((house) => ids.has(house.id));
 }
@@ -72,15 +75,25 @@ export function availableRooms(house: House): Room[] {
     });
 }
 
+const EXTERIOR_PHOTO =
+  /outside|\byard\b|patio|porch|\bstreet\b|facade|façade|\bmap\b|\blogo\b|marketing|exterior|frontage/i;
+
+/** PadSplit category `other`, or a common-space caption that reads as outside. */
+export function isExteriorPhoto(photo: Pick<Photo, "category" | "description">): boolean {
+  const category = (photo.category || "").toLowerCase();
+  if (category === "other") return true;
+  if (/exterior|frontage|outside/.test(category)) return true;
+  if (category === "common_space" && EXTERIOR_PHOTO.test(photo.description || "")) return true;
+  return false;
+}
+
 /**
- * Photos for the card/hero gallery, in this order:
- *   1. the biggest kitchen photo
- *   2. the first 6 room photos
- *   3. bathrooms
- *   4. other common areas (dining, living, patio, laundry, …)
- *   5. any remaining room photos
+ * Photos for the card/hero gallery.
+ * San Antonio: kitchen and dining, then bedrooms (open rooms first), then baths, then other commons.
+ * Atlanta keeps the kitchen lead, then rooms, baths, and the remaining commons.
  */
 export function orderedPhotos(house: House): string[] {
+  if (getMarket().id === "sa") return orderedSanAntonioPhotos(house);
   const roomPics = availableRooms(house).flatMap((r) =>
     r.photos?.length ? r.photos : r.image ? [r.image] : []
   );
@@ -130,12 +143,39 @@ export function orderedPhotos(house: House): string[] {
   return out.length ? out.slice(0, 20) : [house.image];
 }
 
+function orderedSanAntonioPhotos(house: House): string[] {
+  const commons = house.commonAreas.filter((c) => !isExteriorPhoto(c));
+  const text = (c: Photo) => `${c.description ?? ""} ${c.category}`;
+  const kitchen = commons.filter((c) => /kitchen|dining/i.test(text(c)) && !/bath|shower/i.test(text(c)));
+  const baths = commons.filter((c) => /bath|shower|restroom/i.test(text(c)) || c.category === "bathroom");
+  const kitchenUrls = new Set(kitchen.map((c) => c.url));
+  const bathUrls = new Set(baths.map((c) => c.url));
+  const other = commons.filter((c) => !kitchenUrls.has(c.url) && !bathUrls.has(c.url));
+
+  const roomPics = (rooms: House["rooms"]) =>
+    rooms.flatMap((r) => (r.photos?.length ? r.photos : r.image ? [r.image] : []));
+  const open = roomPics(availableRooms(house));
+  const taken = roomPics(house.rooms.filter((r) => !r.available));
+
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const url of [...kitchen.map((c) => c.url), ...open, ...taken, ...baths.map((c) => c.url), ...other.map((c) => c.url)]) {
+    if (url && !seen.has(url)) {
+      seen.add(url);
+      out.push(url);
+    }
+  }
+  return out.length ? out.slice(0, 24) : house.image ? [house.image] : [];
+}
+
 /** Drop scraped names that are really a street (e.g. "Lake Commons CT"). */
 function publicNeighborhood(live?: string | null, seed?: string | null): string {
+  const ok = (value: string) =>
+    !!value && !isStreetishPlace(value) && !(process.env.NEXT_PUBLIC_MARKET === "sa" && /\d/.test(value));
   const liveTrim = (live ?? "").trim();
-  if (liveTrim && !isStreetishPlace(liveTrim)) return liveTrim;
+  if (ok(liveTrim)) return liveTrim;
   const seedTrim = (seed ?? "").trim();
-  if (seedTrim && !isStreetishPlace(seedTrim)) return seedTrim;
+  if (ok(seedTrim)) return seedTrim;
   return "";
 }
 

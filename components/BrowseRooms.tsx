@@ -84,18 +84,6 @@ const FILTER_CARDS = [
   },
 ] as const;
 
-/** Interior photos from the approved mockup. Never an exterior or a street shot. */
-const CARD_PHOTO: Record<string, { src: string; alt: string }> = {
-  "35011": {
-    src: "/photos/mora-room-2.jpg",
-    alt: "Furnished bedroom with a bed and shelving, kitchen through the door, at The Mora House",
-  },
-  "8299": {
-    src: "/photos/candace-room-3.jpg",
-    alt: "Furnished bedroom with a bed, desk, and window at The Candace House",
-  },
-};
-
 export default function BrowseRooms({
   rooms,
   soldOut,
@@ -128,10 +116,18 @@ export default function BrowseRooms({
     <>
       <section className="relative overflow-hidden bg-[#042C25] text-white">
         {market.heroPhoto ? (
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]"
-          />
+          <>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:hidden"
+              style={{ backgroundImage: `url("${market.heroPhoto.mobile}")` }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 hidden bg-cover bg-[center_72%] bg-no-repeat md:block"
+              style={{ backgroundImage: `url("${market.heroPhoto.desktop}")` }}
+            />
+          </>
         ) : null}
         <div
           aria-hidden
@@ -268,7 +264,7 @@ export default function BrowseRooms({
           <div className="mt-4 grid gap-4 md:mt-[22px] md:grid-cols-2 md:gap-5">
             {visible.map((r) => {
               const house = houseById.get(r.houseId);
-              const photo = CARD_PHOTO[r.houseId];
+              const photo = market.cardPhotos?.[r.houseId];
               const tags = featureTags(r, house);
               return (
                 <Link
@@ -372,9 +368,11 @@ export default function BrowseRooms({
               <summary className="flex cursor-pointer list-none items-center gap-2 py-2.5 text-[13.5px] font-bold text-slate-700 [&::-webkit-details-marker]:hidden">
                 {soldOut.length} more home{soldOut.length === 1 ? " is" : "s are"} full right now
                 <span className="text-accent transition group-open:rotate-90">▸</span>
-                <span className="hidden text-xs font-medium text-muted md:inline">
-                  Call {site.phone} to ask about openings
-                </span>
+                {site.phone ? (
+                  <span className="hidden text-xs font-medium text-muted md:inline">
+                    Call {site.phone} to ask about openings
+                  </span>
+                ) : null}
               </summary>
               <ul className="overflow-hidden rounded-[14px] bg-white shadow-card">
                 {soldOut.map((h) => (
@@ -383,12 +381,14 @@ export default function BrowseRooms({
                       {h.name}
                       <small className="block text-[12.5px] font-normal text-muted">{submarketLabel(h)}</small>
                     </div>
-                    <a
-                      href={phoneTelHref()}
-                      className="rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-1.5 text-[12.5px] font-bold text-brand"
-                    >
-                      Call
-                    </a>
+                    {site.phone ? (
+                      <a
+                        href={phoneTelHref()}
+                        className="rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-1.5 text-[12.5px] font-bold text-brand"
+                      >
+                        Call
+                      </a>
+                    ) : null}
                   </li>
                 ))}
               </ul>

@@ -5,9 +5,7 @@ import { phoneTelHref, site } from "@/lib/site";
 export default function Footer({ clearance = false }: { clearance?: boolean }) {
   const brand = getBrand();
   const rooms = brand.key === "rooms";
-  const sister = rooms
-    ? null
-    : { label: "Looking for a single room?", name: "RoomsForRentATL.com", url: "https://roomsforrentatl.com" };
+  const sister = rooms ? null : getMarket().homesSister ?? null;
 
   return (
     <footer

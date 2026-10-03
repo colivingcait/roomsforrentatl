@@ -1,0 +1,1186 @@
+{
+  "updatedAt": "2026-10-03T23:20:21.300Z",
+  "exteriorPhotosDropped": 0,
+  "houses": {
+    "10761": {
+      "rooms": [
+        {
+          "id": 39121,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 3,
+          "weeklyRate": 152,
+          "originalWeeklyRate": 168,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": false,
+          "recommendedPrice": 171,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-04",
+          "image": "https://www.padsplit.com/img/psproperty/10761/img_adc49e6f-41b5-4612-84dd-e563264cef09.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/10761/img_adc49e6f-41b5-4612-84dd-e563264cef09.jpg",
+            "https://www.padsplit.com/img/psproperty/10761/img_f9fbbe03-ab2c-4b84-ae57-91493b5097c0.jpg"
+          ]
+        },
+        {
+          "id": 39122,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 4,
+          "weeklyRate": 160,
+          "originalWeeklyRate": 177,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": false,
+          "recommendedPrice": 175,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": null,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-04",
+          "image": "https://www.padsplit.com/img/psproperty/10761/img_729f04e0-a545-4c18-84dc-11df487903c9.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/10761/img_729f04e0-a545-4c18-84dc-11df487903c9.jpg",
+            "https://www.padsplit.com/img/psproperty/10761/img_b44169c9-40d5-4ba2-8364-208614b66310.jpg"
+          ]
+        },
+        {
+          "id": 39119,
+          "padIndex": 3,
+          "pagePosition": 3,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 1,
+          "weeklyRate": 189,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": false,
+          "recommendedPrice": 179,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-04",
+          "image": "https://www.padsplit.com/img/psproperty/10761/img_e20330f1-bac3-4f8d-80e3-e1cd0bf3749a.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/10761/img_e20330f1-bac3-4f8d-80e3-e1cd0bf3749a.jpg",
+            "https://www.padsplit.com/img/psproperty/10761/img_427873c1-30e7-4a92-9d83-079c99c2f77d.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/250df57d-28f3-4e22-a9fa-59431895287b.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/9af1bc76-da4a-4d23-a8be-26ae50413dca.jpg",
+          "category": "common_space",
+          "description": "Living room and Dining area",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/c2a02c19-0135-48f0-95dd-4c5cb81b1040.jpg",
+          "category": "common_space",
+          "description": "Living room",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/682794f9-5e5a-42f7-8010-766d75e321f8.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1025,
+          "height": 1536
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/8e2d6dd4-ca3b-4348-8f73-023b50a7e54a.jpg",
+          "category": "common_space",
+          "description": "Kitchen Bar",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/f7966977-0db4-4a3d-9616-95947681e1c9.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/df8350f5-3f5c-4704-9a77-cc1044d83a7b.jpg",
+          "category": "common_space",
+          "description": "Dining Area",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/2844db24-77db-4019-919d-0898aa6c1506.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1024,
+          "height": 1536
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/7d2cbbe7-08c9-4675-ad7c-f170d6d79fb7.jpg",
+          "category": "common_space",
+          "description": "Kitchen",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/56f6425d-0657-4dac-b90a-7d526c30f250.jpg",
+          "category": "common_space",
+          "description": "Kitchen",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/ca4722de-a27a-44bb-86ac-3138d02e1fd0.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 2048,
+          "height": 1024
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/7ca2189e-a166-4c14-9e46-00dbbc342b6e.jpg",
+          "category": "common_space",
+          "description": "Laundry area",
+          "primary": false,
+          "width": 1024,
+          "height": 1536
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/bathrooms/img_3941a538-bd5e-4d50-85ff-32949901162b.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/bathrooms/img_7c955fd6-6ce1-4d76-ad11-07673597dd26.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 1025,
+          "height": 1536
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/bathrooms/img_cc4ae446-2e16-49d4-a3f8-e0de6541444b.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 1024,
+          "height": 1536
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/10761/bathrooms/img_5dd22fa4-caee-45db-af1c-f6a18a3bc69b.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 2048,
+          "height": 1366
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 3,
+      "fromPrice": 152,
+      "priceUnit": "week",
+      "neighborhood": "Valencia",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/10761/9af1bc76-da4a-4d23-a8be-26ae50413dca.jpg",
+      "available": true,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/10761",
+      "exteriorPhotosDropped": 0
+    },
+    "11202": {
+      "rooms": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/94b63309-5699-4a10-893d-4887a695f6e4.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/5aff1bed-c4e4-4f01-b511-598d0e2046e8.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3464,
+          "height": 5196
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/81a15522-0e70-4af0-9572-b881ae816c57.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/34641d59-f4ae-44b3-8dc4-b4fd477191b3.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/ddc10a6e-cefa-49f5-b380-eb9c7208ee1f.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/0bd27c2f-f0a0-4e0b-8518-d076bbd6a2f7.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/e783f58f-c07a-4bd0-9471-6026ad4a8ca7.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/3dbc6c77-ddb7-49a4-a7fa-cc59715c5562.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3464,
+          "height": 5196
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/eff4b989-7d6c-40ae-a08e-7a7c69e775a5.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/ab4861f9-9019-4a2a-8abf-e618db96e5eb.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/914ec6f4-5ca0-4a58-ac97-dea8e663369d.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/bathrooms/img_e9e7b0bc-1fa6-44d5-9c3c-5f3ecf7b73df.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/bathrooms/img_3fe4b823-506d-40a2-b84e-61e65015f2be.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3464,
+          "height": 5196
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/bathrooms/img_4063a323-a3c1-413d-9e7e-d259f4558934.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3464,
+          "height": 5196
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/bathrooms/img_c798a4d9-1eb0-420f-8474-80bd785e6fc4.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 0,
+      "fromPrice": null,
+      "priceUnit": "week",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/11202/94b63309-5699-4a10-893d-4887a695f6e4.jpg",
+      "available": false,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11202",
+      "exteriorPhotosDropped": 0
+    },
+    "11842": {
+      "rooms": [
+        {
+          "id": 40705,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 5,
+          "weeklyRate": 167,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": false,
+          "recommendedPrice": 176,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-04",
+          "image": "https://www.padsplit.com/img/psproperty/11842/img_458c0268-012a-4921-9ae8-ba9c3a51edd4.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11842/img_458c0268-012a-4921-9ae8-ba9c3a51edd4.jpg",
+            "https://www.padsplit.com/img/psproperty/11842/img_7a3d81c5-3557-4a03-9256-3e0d3dc3e6b1.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/56591365-3456-4538-864b-5b5a3fa59eac.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/93bb217a-a073-473b-8a8c-f2470f486c60.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/b8ea9f79-83aa-48bf-8e0d-d49097d293e9.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/cac7560a-9c09-46e2-9321-c7199ef296b7.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/f00c0bd0-0aaa-4329-b5a8-c148ebbce65a.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/a5e1e24b-368b-413f-a5f2-f00941ebe1fc.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/80edff96-d7b1-4760-a45e-7e33ecf9050c.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/bffb50b2-954b-4e1e-9935-d57e5836d241.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/d26a1f4d-8aee-4ee8-b5cc-3d1c2ac0d8f9.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/a78c835b-9e41-4ae1-9c93-69d383da11f1.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": true,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/51e2f25a-90e9-4e7d-8d6f-f94829cd4c29.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/6fa4a538-5f8f-4400-ae54-58ce63ffa2ad.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/63e9c4a0-a448-4f12-9d37-f956e86ddc49.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/9a5f4fb7-745a-407f-90ee-073815b7c5bf.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/bathrooms/img_9060f9c3-3a58-4e73-ac8d-6bc2b38ea8bf.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/bathrooms/img_e7b3ed69-d248-4a10-bb35-7e2fb8e5fbc6.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11842/bathrooms/img_65f8be01-7a36-4470-b3bc-74d1f3ddafe0.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 1,
+      "fromPrice": 167,
+      "priceUnit": "week",
+      "neighborhood": "Northeast Side",
+      "city": "Converse",
+      "image": "https://www.padsplit.com/img/psproperty/11842/img_458c0268-012a-4921-9ae8-ba9c3a51edd4.jpg",
+      "available": true,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/11842",
+      "exteriorPhotosDropped": 0
+    },
+    "13051": {
+      "rooms": [
+        {
+          "id": 44080,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 6,
+          "weeklyRate": 167,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": false,
+          "recommendedPrice": 167,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "cozy",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": null,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-04",
+          "image": "https://www.padsplit.com/img/psproperty/13051/img_ecdf83e3-64f1-463f-bd44-2e03e660b024.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/13051/img_ecdf83e3-64f1-463f-bd44-2e03e660b024.jpg",
+            "https://www.padsplit.com/img/psproperty/13051/img_a5ddbac9-35b9-45c0-8889-b5c69586317d.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/f3646f56-99a3-42d7-aae0-ffe8facf3dfc.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/e26a6c29-4d21-4f7a-b2b6-6fa83c301d9c.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/13efad41-dd73-4eaf-ba22-b8441643746d.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/986b8cd4-0d5c-4962-9264-a8f1fea33096.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/289d615d-79e1-432b-b1cc-ab093b6d86a0.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/4471a4f6-5e0c-4d20-8c00-1f07bb9120b0.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/6d388f01-c844-4761-aa41-849040a3d0f7.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/db6b1f42-3acb-4fbb-9df2-6e46970cda8f.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/bathrooms/img_0b7d21e9-08cd-4f7b-8f02-6aa70c877aea.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/bathrooms/img_5545d173-9fc5-4ead-962a-34a48bf969bb.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/13051/bathrooms/img_1886eb65-1443-4959-adc2-f020869aab6e.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3464,
+          "height": 5196
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 1,
+      "fromPrice": 167,
+      "priceUnit": "week",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/13051/img_ecdf83e3-64f1-463f-bd44-2e03e660b024.jpg",
+      "available": true,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/13051",
+      "exteriorPhotosDropped": 0
+    },
+    "18970": {
+      "rooms": [
+        {
+          "id": 71969,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Nice size room, full bed, desk, dresser, TV and closet space.",
+          "roomNumber": 4,
+          "weeklyRate": 150,
+          "originalWeeklyRate": 166,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": false,
+          "recommendedPrice": 161,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-05",
+          "image": "https://www.padsplit.com/img/psproperty/18970/img_14242272-b8de-48a2-a83b-e41824398c43.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/18970/img_14242272-b8de-48a2-a83b-e41824398c43.jpg",
+            "https://www.padsplit.com/img/psproperty/18970/img_be583dbf-c336-4b83-8a43-e0820924bb0e.jpg"
+          ]
+        },
+        {
+          "id": 74014,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": "Larger room, full size bed, desk, dresser, TV and closet.",
+          "roomNumber": 7,
+          "weeklyRate": 152,
+          "originalWeeklyRate": 168,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": false,
+          "recommendedPrice": 164,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 2,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-05",
+          "image": "https://www.padsplit.com/img/psproperty/18970/img_68432b4e-9b63-447b-94a2-da5c9e9f20ea.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/18970/img_68432b4e-9b63-447b-94a2-da5c9e9f20ea.jpg",
+            "https://www.padsplit.com/img/psproperty/18970/img_1620a064-9b91-4e8d-abf5-26db89c72709.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/be13ec7b-0c1b-419f-aef2-b7a4111e1eac.jpg",
+          "category": "common_space",
+          "description": "Comfortable dining space!",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/736adb96-288a-4f5a-b0dc-7510c743035a.jpg",
+          "category": "common_space",
+          "description": "Large capacity laundry & hanging area!",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/9008ee32-b6d8-4f95-afd6-0a67dc80ca41.jpg",
+          "category": "common_space",
+          "description": "Plenty of room to fold laundry!",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/c7074c2c-dbb8-4ed0-90d8-18cecc9db341.jpg",
+          "category": "common_space",
+          "description": "Fully equipped kitchen with extra storage.",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/bathrooms/img_12bc098f-b492-4436-8009-790bd6bf9e94.jpg",
+          "category": "bathroom",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/bathrooms/img_d0f24f02-50af-48a5-9c95-942e5dfc1467.jpg",
+          "category": "bathroom",
+          "description": "Bathroom with storage.",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/18970/bathrooms/img_995fe0f5-c90f-4765-953e-6a2dd271e59a.jpg",
+          "category": "bathroom",
+          "description": "Bathroom with storage.",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 2,
+      "fromPrice": 150,
+      "priceUnit": "week",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/18970/be13ec7b-0c1b-419f-aef2-b7a4111e1eac.jpg",
+      "available": true,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/18970",
+      "exteriorPhotosDropped": 0
+    },
+    "23243": {
+      "rooms": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/c9e6089c-6498-4d80-be7b-738b91ce7cea.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/41c06287-61a8-438a-aa1c-1d03b4e5e038.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": true,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/57bce89a-243f-4684-9c8b-440c1b14cc4e.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/ce04ce4b-55f2-44e1-acae-7c690a6d8cad.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/9fa54d2c-b6fb-4f4f-a8f3-8e99b9bc7a08.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/dc9acc3e-74e0-4171-af44-5e5720f019f5.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/8d0b6234-8a90-4f42-8b44-c78bcf4fe835.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/c2f52d2b-7823-4e32-b796-aecdf20b6df5.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/a4346ac9-4629-4f5e-a4b0-8b28fcc65ee4.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/d81cf3fb-6079-44f3-a19b-821e63b57d45.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/bathrooms/img_f47d50e5-e75c-4521-9eeb-f2ca590d0186.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/bathrooms/img_35570503-bd99-4997-a820-0ebff20a7abd.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/23243/bathrooms/img_d4006aec-dce9-41a2-921a-8aa093fa7c91.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 1920,
+          "height": 1280
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 0,
+      "fromPrice": null,
+      "priceUnit": "week",
+      "neighborhood": "Valencia",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/23243/c9e6089c-6498-4d80-be7b-738b91ce7cea.jpg",
+      "available": false,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/23243",
+      "exteriorPhotosDropped": 0
+    },
+    "28119": {
+      "rooms": [
+        {
+          "id": 87974,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 5,
+          "weeklyRate": 165,
+          "originalWeeklyRate": 183,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 178,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-05",
+          "image": "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
+            "https://www.padsplit.com/img/psproperty/28119/img_17ddeff5-d49b-41d1-a585-f56740070c35.jpg"
+          ]
+        }
+      ],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/68e0200a-34c6-4633-a8ae-7ca821e40fae.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/4d31cdc7-548d-4a7c-925e-34dbe5692c43.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": true,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/a8e38973-8394-4cc8-bbf2-42f430dca2c0.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/9551c890-2d11-4f5b-853d-71495c6375ab.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/dab5751b-23d8-4514-b59b-b87c7d21fecb.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/3b70d70a-575b-4c9c-8faf-de863859ef18.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/c92ba900-867e-45c9-b929-c0b2ce133772.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/bathrooms/img_cc2a737a-e6c7-404a-aa05-b1ea98f1f1a6.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/bathrooms/img_36330b3d-84a5-4b53-9717-aaf95b89c438.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/bathrooms/img_2d5674aa-2f90-4523-b909-9f49e2491fe9.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/bathrooms/img_32dcdb48-cb9c-45e6-9dc2-5a0ee66e6309.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/28119/bathrooms/img_b83704c1-89ec-489a-b543-25aa647b81ec.jpg",
+          "category": "bathroom",
+          "description": "Bathroom",
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 1,
+      "fromPrice": 165,
+      "priceUnit": "week",
+      "neighborhood": "Northeast Side",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
+      "available": true,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/28119",
+      "exteriorPhotosDropped": 0
+    },
+    "33710": {
+      "rooms": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/ec0c6dae-9b92-4375-b50b-edcff67616d7.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 2496,
+          "height": 1726
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/035aacee-963f-4503-9679-999a4e827111.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": true,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/01af5247-9faa-4ca9-a260-c5ae02b5f053.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/64d6e00e-37ab-4cba-8d6f-0912ed4d8fbb.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/4fbfffc3-d405-42e5-b3db-7028559e94df.jpg",
+          "category": "common_space",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/bathrooms/img_9d3a6b28-ca43-463f-8a3b-535abd688cca.jpg",
+          "category": "bathroom",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/bathrooms/img_bb97d737-0149-4b30-859c-a0ff3ade7953.jpg",
+          "category": "bathroom",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/33710/bathrooms/img_e0d61198-a676-41b7-86cf-ff8979070ceb.jpg",
+          "category": "bathroom",
+          "description": null,
+          "primary": false,
+          "width": 3840,
+          "height": 2560
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 0,
+      "fromPrice": null,
+      "priceUnit": "week",
+      "neighborhood": "Lone Star",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/33710/ec0c6dae-9b92-4375-b50b-edcff67616d7.jpg",
+      "available": false,
+      "checkedAt": "2026-10-03T23:20:21.300Z",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/33710",
+      "exteriorPhotosDropped": 0
+    }
+  }
+}

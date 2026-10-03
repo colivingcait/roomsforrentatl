@@ -8,6 +8,7 @@ import FaqButton from "@/components/FaqButton";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getUnit, getAllUnitIds } from "@/lib/units";
 import { rentLabel, availDateLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 import { RENTAL_QUALIFICATIONS, MOVE_IN_STEPS } from "@/lib/rentalQualifications";
 
 export const revalidate = 3600;
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   if (!unit) return { title: "Rental not found" };
   return {
     title: `${unit.title} — Furnished Rental in ${unit.city}, GA`,
-    description: `Furnished ${unit.type} for rent in ${unit.city}, Atlanta — ${rentLabel(unit.rent)}, monthly lease.${
+    description: `Furnished ${unit.type} for rent in ${unit.city}, ${getMarket().metro} — ${rentLabel(unit.rent)}, monthly lease.${
       unit.utilitiesIncluded ? " Utilities included." : ""
     } ${availDateLabel(unit.availableDate)}.`,
   };

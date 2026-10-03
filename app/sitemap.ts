@@ -14,6 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [{ url: base, changeFrequency: "daily" as const, priority: 1 }];
   }
 
+  if (getMarket().id === "sa") {
+    const houses = getAllHouseIds().map((id) => ({
+      url: `${base}/house/${id}`,
+      changeFrequency: "daily" as const,
+      priority: 0.8,
+    }));
+    return [{ url: base, changeFrequency: "daily" as const, priority: 1 }, ...houses];
+  }
+
   if (brand.key === "homes") {
     const units = getUnits()
       .filter((u) => !u.comingSoon)
