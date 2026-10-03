@@ -1,4 +1,5 @@
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 import { phoneTelHref, site } from "@/lib/site";
 
 export default function Footer({ clearance = false }: { clearance?: boolean }) {
@@ -24,16 +25,16 @@ export default function Footer({ clearance = false }: { clearance?: boolean }) {
       >
         <div className="text-base font-extrabold text-ink">
           {brand.word}
-          <span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
+          <span className="text-brand">For</span>Rent<span className="text-accent">{getMarket().mark}</span>
         </div>
         <p className="mt-1 max-w-md">
-          {rooms ? "Furnished rooms for rent in Atlanta. Move in as soon as tomorrow." : brand.tagline}
+          {rooms ? getMarket().footerLine : brand.tagline}
         </p>
         <p className="mt-3">
           Have a question? Tap <span className="font-semibold text-brand">“Have a question?”</span>
           {rooms ? " to chat with our assistant anytime." : " at the top to chat with our assistant anytime."}
         </p>
-        {rooms && (
+        {rooms && site.phone && (
           <p className="mt-3">
             Questions? Call{" "}
             <a href={phoneTelHref()} className="font-semibold text-brand underline">

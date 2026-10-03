@@ -16,7 +16,9 @@ export type SiteFaq = {
   link?: { label: string; url: string };
 };
 
-export const PHONE_ANSWER = `You can call us at ${site.phone}. That number is for calls only — we can't text.`;
+export const PHONE_ANSWER = site.phone
+  ? `You can call us at ${site.phone}. That number is for calls only — we can't text.`
+  : "We don't publish a phone number. Ask in this chat and I'll help.";
 
 export const SCREENING_ANSWER =
   "You'll need income of at least 2x the rent, no felony convictions in the last 7 years, and no more than 1 eviction in the last 7 years. I can't say how a specific application will turn out, but if you apply and are declined, your application fee is refunded.";

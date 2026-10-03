@@ -1,10 +1,14 @@
 import Header from "@/components/Header";
 import BrowseRooms from "@/components/BrowseRooms";
+import CityList from "@/components/CityList";
 import Footer from "@/components/Footer";
+import PageFaq from "@/components/PageFaq";
 import TrustBand from "@/components/TrustBand";
 import { getHouses } from "@/lib/houses";
 import { buildRoomListings } from "@/lib/browse";
 import { getFilterStartingPrices } from "@/lib/filterPrices";
+import { getAutoFeaturedRooms } from "@/lib/autoFeatured";
+import { getMarket } from "@/lib/market";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
 export default async function RoomsHome() {
@@ -12,24 +16,29 @@ export default async function RoomsHome() {
   const soldOut = allHouses.filter((h) => !h.available);
   const rooms = buildRoomListings(allHouses);
   const filterPrices = await getFilterStartingPrices();
+  const market = getMarket();
+  const autoFeatured = market.featuredSources.length === 0 ? await getAutoFeaturedRooms() : [];
 
   return (
     <main className="min-h-screen bg-white">
       <Header wide />
-      <BrowseRooms rooms={rooms} soldOut={soldOut} houses={allHouses} filterPrices={filterPrices} />
+      <BrowseRooms
+        rooms={rooms}
+        soldOut={soldOut}
+        houses={allHouses}
+        filterPrices={filterPrices}
+        autoFeatured={autoFeatured}
+      />
+      {market.showCityList ? <CityList /> : null}
       <TrustBand variant="band" />
 
       <section className="bg-white">
         <div className="mx-auto max-w-[1080px] px-[18px] py-[30px] md:px-6">
-          <h2 className="text-[17px] font-extrabold text-ink">Furnished rooms for rent in Atlanta, GA</h2>
-          <p className="mt-1.5 max-w-[720px] text-sm text-muted">
-            Looking for an affordable room to rent in Atlanta? We have furnished private bedrooms in shared homes
-            across the entire Atlanta metro area with no long lease and weekly or biweekly pay. Every furnished room
-            on this site is booked through PadSplit, with utilities, parking and Wi-Fi included. Once you&apos;re
-            approved, you can move in as soon as the next day.
-          </p>
+          <h2 className="text-[17px] font-extrabold text-ink">{market.seoHeading}</h2>
+          <p className="mt-1.5 max-w-[720px] text-sm text-muted">{market.seoBody}</p>
         </div>
       </section>
+      {market.showPageFaq ? <PageFaq /> : null}
 
       <Footer clearance />
     </main>

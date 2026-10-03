@@ -609,6 +609,11 @@ function linkLabel(url: string): string {
         const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         return `See rooms in ${name} →`;
       }
+      const texas = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-tx$/)?.[1];
+      if (texas && !(texas === "dallas" && u.searchParams.has("latMax"))) {
+        const name = texas.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        return `See rooms in ${name} →`;
+      }
       if (u.searchParams.get("sortBy") === "price") return "See lowest-priced rooms →";
       return "View on PadSplit →";
     }
