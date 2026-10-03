@@ -13,7 +13,6 @@ import type { NextRequest } from "next/server";
 const SHORT_LINKS = new Set([
   "m",
   "l",
-  "lustra",
   "covilla",
   "willow",
   "mora",

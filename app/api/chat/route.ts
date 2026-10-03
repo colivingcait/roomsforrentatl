@@ -1,7 +1,10 @@
+import { cookies } from "next/headers";
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
-import { priceLabel } from "@/lib/format";
+import { listingPlace, priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
+import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
+import { getFilterStartingPrices } from "@/lib/filterPrices";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
@@ -40,7 +43,7 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
     .map((h) => ({
       id: h.id,
       name: h.name,
-      location: [h.neighborhood, h.city].filter(Boolean).join(", "),
+      location: listingPlace(h),
       fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
       roomsAvailable: h.roomsAvailable,
       rating: h.rating ?? null,
@@ -154,6 +157,8 @@ export async function POST(req: Request) {
     rawTrack === "room" || rawTrack === "unit" || rawTrack === "both" ? rawTrack : null;
   const brand = BRANDS[brandFromHost(req.headers.get("host"))];
 
+  const filterPrices = await getFilterStartingPrices();
+
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
@@ -165,7 +170,12 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 600,
-        system: buildSystemPrompt(track, { key: brand.key, name: brand.name, domain: brand.domain }),
+        system: buildSystemPrompt(
+          track,
+          { key: brand.key, name: brand.name, domain: brand.domain },
+          referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value),
+          filterPrices.instant
+        ),
         messages,
       }),
     });

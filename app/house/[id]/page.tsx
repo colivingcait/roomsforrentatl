@@ -6,7 +6,7 @@ import PhotoStrip from "@/components/PhotoStrip";
 import TrustBand from "@/components/TrustBand";
 import HouseDetail from "@/components/HouseDetail";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos } from "@/lib/houses";
-import { fromPriceLabel, availabilityLabel, priceLabel } from "@/lib/format";
+import { fromPriceLabel, availabilityLabel, priceLabel, listingPlace, submarketLabel } from "@/lib/format";
 
 export const revalidate = 3600;
 
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const house = getHouse(params.id);
   if (!house) return { title: "Home not found" };
   return {
-    title: `${house.name} — Furnished Room for Rent in ${house.neighborhood}, Atlanta`,
-    description: `Furnished room for rent in ${house.neighborhood}, ${house.city} — ${fromPriceLabel(
+    title: `${house.name} — Furnished Room for Rent in ${listingPlace(house)}`,
+    description: `Furnished room for rent in ${listingPlace(house)} — ${fromPriceLabel(
       house
     )} all-in, utilities included, next-day move-in via PadSplit. ${availabilityLabel(house)}.`,
     openGraph: { images: house.image.startsWith("http") ? [house.image] : [] },
@@ -33,10 +33,10 @@ function houseJsonLd(house: ReturnType<typeof getHouse>) {
     "@context": "https://schema.org",
     "@type": "LodgingBusiness",
     name: house.name,
-    description: `Furnished room for rent in ${house.neighborhood}, ${house.city}, weekly, utilities included.`,
+    description: `Furnished room for rent in ${listingPlace(house)}, weekly, utilities included.`,
     address: {
       "@type": "PostalAddress",
-      addressLocality: house.neighborhood,
+      addressLocality: submarketLabel(house),
       addressRegion: "GA",
       addressCountry: "US",
     },
@@ -72,7 +72,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
       <Header />
 
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:rounded-2xl">
-        <PhotoStrip images={orderedPhotos(house)} alt={`Furnished room for rent in ${house.neighborhood}, Atlanta — ${house.name}`} sizes="100vw" priority />
+        <PhotoStrip images={orderedPhotos(house)} alt={`Furnished room for rent in ${listingPlace(house)} — ${house.name}`} sizes="100vw" priority />
         <Link
           href="/"
           className="absolute left-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-lg font-bold text-ink shadow active:scale-95"
@@ -92,7 +92,7 @@ export default function HousePage({ params }: { params: { id: string } }) {
           <div>
             <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-ink">{house.name}</h1>
             <p className="mt-1 text-[15px] text-muted">
-              {[house.neighborhood, house.city].filter(Boolean).join(", ")}
+              {listingPlace(house)}
               {house.rating != null ? ` · ★ ${house.rating.toFixed(1)}` : ""}
             </p>
           </div>

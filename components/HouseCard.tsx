@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { House } from "@/lib/types";
 import PhotoStrip from "./PhotoStrip";
 import { orderedPhotos } from "@/lib/houses";
-import { fromPriceLabel, availabilityLabel, bathroomBreakdown, prettyBath, priceLabel } from "@/lib/format";
+import { fromPriceLabel, availabilityLabel, bathroomBreakdown, prettyBath, priceLabel, listingPlace } from "@/lib/format";
 
 export default function HouseCard({ house }: { house: House }) {
   const breakdown = bathroomBreakdown(house);
@@ -17,7 +17,7 @@ export default function HouseCard({ house }: { house: House }) {
       }
     >
       <div className="relative aspect-[4/3] w-full bg-slate-100">
-        <PhotoStrip images={photos} alt={`Furnished room for rent in ${house.neighborhood}, Atlanta — ${house.name}`} />
+        <PhotoStrip images={photos} alt={`Furnished room for rent in ${listingPlace(house)} — ${house.name}`} />
 
         {/* Fully-booked marker spans the top of the card */}
         {!house.available && (

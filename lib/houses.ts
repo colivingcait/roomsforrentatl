@@ -1,6 +1,7 @@
 import housesData from "@/data/houses.json";
 import availability from "@/data/availability.json";
 import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./types";
+import { isStreetishPlace } from "./format";
 
 const SEED = (housesData.houses as SeedHouse[]) ?? [];
 const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {};
@@ -113,6 +114,15 @@ export function orderedPhotos(house: House): string[] {
   return out.length ? out.slice(0, 20) : [house.image];
 }
 
+/** Drop scraped names that are really a street (e.g. "Lake Commons CT"). */
+function publicNeighborhood(live?: string | null, seed?: string | null): string {
+  const liveTrim = (live ?? "").trim();
+  if (liveTrim && !isStreetishPlace(liveTrim)) return liveTrim;
+  const seedTrim = (seed ?? "").trim();
+  if (seedTrim && !isStreetishPlace(seedTrim)) return seedTrim;
+  return "";
+}
+
 function merge(seed: SeedHouse): House {
   const live = LIVE[seed.id] ?? {};
   const rooms: Room[] = (live.rooms ?? []).map((r) => ({ ...r, available: r.status === 1 }));
@@ -124,7 +134,7 @@ function merge(seed: SeedHouse): House {
 
   return {
     ...seed,
-    neighborhood: live.neighborhood || seed.neighborhood,
+    neighborhood: publicNeighborhood(live.neighborhood, seed.neighborhood),
     image: live.image || seed.image,
     rooms,
     commonAreas: live.commonAreas ?? [],

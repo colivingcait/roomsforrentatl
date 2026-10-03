@@ -17,6 +17,7 @@ export default function TrackedOutboundLink({
   children,
   target,
   rel,
+  ariaLabel,
 }: {
   href: string;
   event: string;
@@ -25,6 +26,7 @@ export default function TrackedOutboundLink({
   children: React.ReactNode;
   target?: string;
   rel?: string;
+  ariaLabel?: string;
 }) {
   // The server-rendered href always uses the site-wide default referral code
   // (pages are statically generated, so they can't vary per visitor). Once
@@ -42,6 +44,7 @@ export default function TrackedOutboundLink({
       target={target}
       rel={rel}
       className={className}
+      aria-label={ariaLabel}
       onClick={() => trackEvent(event, properties)}
     >
       {children}

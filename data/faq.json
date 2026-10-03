@@ -3,6 +3,20 @@
   "faqs": [
     {
       "category": "Moving in",
+      "q": "Can I book instantly?",
+      "a": "Yes. Apply and lock in your room today. No waiting on host approval.",
+      "variants": [
+        "book today",
+        "move in today",
+        "I need a room today",
+        "instant booking",
+        "book instantly",
+        "can I move in today",
+        "no host approval"
+      ]
+    },
+    {
+      "category": "Moving in",
       "q": "How fast can I move in?",
       "a": "Most rooms are next-day move-in once you're approved, and approval is usually quick. If a room is available and you apply early enough in the day, same-day move-in is often possible too."
     },
@@ -39,7 +53,7 @@
     {
       "category": "Getting approved",
       "q": "What do I need to get approved?",
-      "a": "You'll need income of at least 2x the rent, and no felonies, violent misdemeanors, or evictions in the past 7 years. You're approved by both PadSplit's background screening and our host team — usually the same day."
+      "a": "You'll need income of at least 2x the rent, no felony convictions in the last 7 years, and no more than 1 eviction in the last 7 years. I can't say how a specific application will turn out, but if you apply and are declined, your application fee is refunded."
     },
     {
       "category": "Getting approved",
@@ -74,7 +88,7 @@
     {
       "category": "The home & your room",
       "q": "Do rooms have private bathrooms?",
-      "a": "Some rooms have a private bathroom and others share — it's listed on each room. Private-bath rooms cost a bit more and tend to go quickly."
+      "a": "Some rooms have a private bathroom and others share — it's listed on each room. Private-bath rooms cost a bit more and tend to go quickly. For more private-bath rooms, see PadSplit's Atlanta search."
     },
     {
       "category": "The home & your room",
@@ -132,20 +146,14 @@
     {
       "category": "House rules & sharing",
       "q": "Are animals allowed?",
-      "a": "No, our homes are pet-free. To find a home for you and your furry friend, search here. (Registered service animals are considered separately, case by case.)",
-      "link": {
-        "label": "Search pet-friendly homes",
-        "url": "https://www.padsplit.com/?sign-up=&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link"
-      }
+      "variants": ["Can I bring a pet?", "Are pets allowed?", "Do you allow dogs?", "Service animal"],
+      "a": "Our homes don't allow pets. Service animals are allowed."
     },
     {
       "category": "House rules & sharing",
       "q": "Can two people share a room?",
-      "a": "Most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — you can search for rooms that allow double occupancy here. (Bringing a child? Some homes allow it for a fee — use the same search to find family-friendly homes.)",
-      "link": {
-        "label": "Search double-occupancy rooms",
-        "url": "https://www.padsplit.com/?sign-up=&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link"
-      }
+      "variants": ["Can my partner stay with me?", "Do you allow couples?", "Room for two people", "Can my family stay?", "I have kids"],
+      "a": "If you're looking for a room for more than one person, here's the link for that. Some hosts charge an additional fee for a second person."
     },
     {
       "category": "House rules & sharing",
@@ -204,6 +212,12 @@
       "category": "Good to know",
       "q": "Do I need renters insurance?",
       "a": "It's not required, though you're welcome to insure your personal belongings if you'd like."
+    },
+    {
+      "category": "Good to know",
+      "q": "Can I call you?",
+      "variants": ["What's your phone number?", "Can I text you?", "Do you have a number?", "Can I call?"],
+      "a": "You can call us at (678) 490-9917. That number is for calls only — we can't text."
     },
     {
       "category": "Good to know",

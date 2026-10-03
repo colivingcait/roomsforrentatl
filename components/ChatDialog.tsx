@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import faqData from "@/data/faq.json";
 import { trackEvent } from "@/lib/analytics";
+import { getFaqs, type SiteFaq } from "@/lib/faqs";
+import TrackedOutboundLink from "./TrackedOutboundLink";
 import ChatPanel from "./ChatPanel";
 
-type Faq = { q: string; a: string; category?: string; link?: { label: string; url: string } };
-const FAQS = faqData.faqs as Faq[];
+type Faq = SiteFaq;
+const FAQS = getFaqs();
 
 // Group FAQs by category, preserving the order they first appear.
 const FAQ_GROUPS: { category: string; items: Faq[] }[] = [];
@@ -49,6 +50,18 @@ export default function ChatDialog({
   useEffect(() => {
     if (open && tab === "faq") trackEvent("faq_viewed");
   }, [open, tab]);
+
+  // Opening chat (from the header, the FAB, or the mobile teaser) counts as
+  // engagement so the homepage teaser does not appear again this session.
+  useEffect(() => {
+    if (!open) return;
+    try {
+      sessionStorage.setItem("rfr_chatEngaged", "1");
+    } catch {
+      /* private mode */
+    }
+    window.dispatchEvent(new Event("rfr-chat-engaged"));
+  }, [open]);
 
   // While the dialog is open: lock background scroll and close on Escape.
   useEffect(() => {
@@ -179,14 +192,16 @@ function FaqItem({ faq }: { faq: Faq }) {
         <div className="pb-3">
           <p className="text-sm leading-relaxed text-muted">{faq.a}</p>
           {faq.link && (
-            <a
+            <TrackedOutboundLink
               href={faq.link.url}
+              event="faq_outbound_click"
+              properties={{ question: faq.q }}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand underline"
             >
               {faq.link.label} →
-            </a>
+            </TrackedOutboundLink>
           )}
         </div>
       )}
