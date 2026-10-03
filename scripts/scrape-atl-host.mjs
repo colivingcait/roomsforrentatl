@@ -1,11 +1,13 @@
 /**
  * Host's Atlanta-metro houses, added beside the curated six.
  *
+ * Confirmed source: rooms-for-rent/atlanta-ga?searchCode=935a685108fc43c
  * Ids come from
- *   GET /api/property_search/?search_code=935a685108fc43c&city_slug=<metro>&page_size=50
- * A search without city_slug also returns Texas and Arizona homes, so a row is
- * kept only when address.city_slug is an Atlanta-metro Georgia slug. Curated
- * houses (Mora, Candace, Raven, Meadow, Chestnut, Willow) are never rewritten.
+ *   GET /api/property_search/?search_code=935a685108fc43c&city_slug=atlanta-ga&page_size=50
+ * paginated. That search center also returns Decatur and Stone Mountain.
+ * A row is kept only when address.city_slug is an Atlanta-metro Georgia slug.
+ * The referral code on that page link is ignored. Curated houses (Mora,
+ * Candace, Raven, Meadow, Chestnut, Willow) are never rewritten.
  * About 4 seconds between requests. A failed house keeps its last-known row.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
@@ -22,13 +24,12 @@ const AVAIL_PATH = "data/availability.json";
 const CURATED = new Set(["35011", "8299", "11889", "30251", "152", "39708"]);
 const RESERVED_NAMES = new Set(["Mora", "Candace", "Raven", "Meadow", "Chestnut", "Willow"]);
 
-/**
- * Slugs we query. PadSplit's city filter is a search center: atlanta-ga also
- * returns Decatur and Stone Mountain. A result is kept only when its own
- * city slug is in ATL_METRO_SET.
- */
-const QUERY_SLUGS = [
-  "atlanta-ga",
+/** The confirmed host search. PadSplit treats this as a center, not a hard city filter. */
+const CITY_SLUG = "atlanta-ga";
+
+/** A result is kept only when its own city slug is in this set. */
+const ATL_METRO_SET = new Set([
+  CITY_SLUG,
   "decatur-ga",
   "stone-mountain-ga",
   "east-point-ga",
@@ -45,9 +46,6 @@ const QUERY_SLUGS = [
   "fayetteville-ga",
   "newnan-ga",
   "snellville-ga",
-];
-const ATL_METRO_SET = new Set([
-  ...QUERY_SLUGS,
   "smyrna-ga",
   "sandy-springs-ga",
   "roswell-ga",
@@ -151,41 +149,37 @@ function submarket(city) {
   return placeOk(name) ? name : "Atlanta";
 }
 
-async function fetchSlug(slug, page) {
+async function fetchPage(page) {
   const url = new URL(SEARCH);
   url.searchParams.set("search_code", SEARCH_CODE);
-  url.searchParams.set("city_slug", slug);
+  url.searchParams.set("city_slug", CITY_SLUG);
   url.searchParams.set("page_size", String(PAGE_SIZE));
   url.searchParams.set("page", String(page));
   const res = await fetch(url, { headers: { accept: "application/json", "user-agent": "Mozilla/5.0" } });
-  if (!res.ok) throw new Error(`host search ${slug} failed (${res.status})`);
+  if (!res.ok) throw new Error(`host search ${CITY_SLUG} failed (${res.status})`);
   return res.json();
 }
 
 async function fetchHostIds() {
   const ids = [];
   const seen = new Set();
-  let requests = 0;
-  for (const slug of QUERY_SLUGS) {
-    let page = 1;
-    let totalPages = 1;
-    while (page <= totalPages && page <= 20) {
-      if (requests > 0) await sleep(PAUSE_MS);
-      requests += 1;
-      const data = await fetchSlug(slug, page);
-      const reported = Number(data.total_pages);
-      if (Number.isFinite(reported) && reported >= 1) totalPages = reported;
-      for (const row of data.results || []) {
-        const citySlug = row?.address?.city_slug || row?.address?.citySlug || "";
-        if (!ATL_METRO_SET.has(citySlug)) continue;
-        const id = row?.id != null ? String(row.id) : "";
-        if (!/^\d+$/.test(id) || seen.has(id) || CURATED.has(id)) continue;
-        seen.add(id);
-        ids.push(id);
-      }
-      if (!data.next || page >= totalPages) break;
-      page += 1;
+  let page = 1;
+  let totalPages = 1;
+  while (page <= totalPages && page <= 20) {
+    if (page > 1) await sleep(PAUSE_MS);
+    const data = await fetchPage(page);
+    const reported = Number(data.total_pages);
+    if (Number.isFinite(reported) && reported >= 1) totalPages = reported;
+    for (const row of data.results || []) {
+      const citySlug = row?.address?.city_slug || row?.address?.citySlug || "";
+      if (!ATL_METRO_SET.has(citySlug)) continue;
+      const id = row?.id != null ? String(row.id) : "";
+      if (!/^\d+$/.test(id) || seen.has(id) || CURATED.has(id)) continue;
+      seen.add(id);
+      ids.push(id);
     }
+    if (!data.next || page >= totalPages) break;
+    page += 1;
   }
   return ids;
 }
