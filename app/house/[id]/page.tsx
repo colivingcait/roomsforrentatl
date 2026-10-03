@@ -7,6 +7,7 @@ import TrustBand from "@/components/TrustBand";
 import HouseDetail from "@/components/HouseDetail";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, priceLabel, listingPlace, submarketLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 
 export const revalidate = 3600;
 
@@ -37,7 +38,7 @@ function houseJsonLd(house: ReturnType<typeof getHouse>) {
     address: {
       "@type": "PostalAddress",
       addressLocality: submarketLabel(house),
-      addressRegion: "GA",
+      addressRegion: getMarket().padsplit.state === "tx" ? "TX" : "GA",
       addressCountry: "US",
     },
     image: house.image.startsWith("http") ? house.image : undefined,

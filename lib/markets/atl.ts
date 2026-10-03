@@ -9,6 +9,11 @@ export const ATL_MARKET: Market = {
   domain: "RoomsForRentATL.com",
   url: SITE_URL,
   metro: "Atlanta",
+  browseDescription:
+    "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, next day move in. Book your room today.",
+  placeFallback: "Atlanta",
+  westLabel: "West Atlanta",
+  westHouseId: "39708",
   phone: "(678) 490-9917",
   tagline: "Furnished rooms for rent in Atlanta — next day move in.",
   description:
@@ -38,6 +43,18 @@ export const ATL_MARKET: Market = {
   heroPhoto: {
     mobile: "/photos/candace-room-1-wide.jpg",
     desktop: "/photos/mora-room-1-lg.jpg",
+  },
+  heroBackdropClass:
+    "absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]",
+  cardPhotos: {
+    "35011": {
+      src: "/photos/mora-room-2.jpg",
+      alt: "Furnished bedroom with a bed and shelving, kitchen through the door, at The Mora House",
+    },
+    "8299": {
+      src: "/photos/candace-room-3.jpg",
+      alt: "Furnished bedroom with a bed, desk, and window at The Candace House",
+    },
   },
   seoHeading: "Furnished rooms for rent in Atlanta, GA",
   seoBody:

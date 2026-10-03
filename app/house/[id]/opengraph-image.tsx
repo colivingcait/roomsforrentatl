@@ -1,8 +1,9 @@
 import { getHouse, orderedPhotos } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt = "Furnished room for rent in Atlanta";
+export const alt = `Furnished room for rent in ${getMarket().metro}`;
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -15,7 +16,7 @@ export default async function HouseOpengraphImage({ params }: { params: { id: st
     return renderOgCard({
       letter: "R",
       word: "Rooms",
-      line1: "Furnished rooms in Atlanta.",
+      line1: `Furnished rooms in ${getMarket().metro}.`,
       line2: "Next Day Move In",
       sub: "All-in weekly pricing · utilities & WiFi included",
       chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],

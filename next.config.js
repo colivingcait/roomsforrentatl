@@ -28,6 +28,8 @@ const nextConfig = {
         webpack: (config) => {
           const dfwMarket = path.join(__dirname, "lib/markets/dfw.ts");
           const dfwFaq = path.join(__dirname, "data/faq-dfw.json");
+          const emptyHouses = path.join(__dirname, "data/houses.empty.json");
+          const emptyAvailability = path.join(__dirname, "data/availability.empty.json");
           config.plugins.push({
             apply(compiler) {
               compiler.hooks.normalModuleFactory.tap("DfwMarketSwap", (nmf) => {
@@ -36,6 +38,8 @@ const nextConfig = {
                   const request = `${data.request || ""}`;
                   if (request.includes("markets/atl")) data.request = dfwMarket;
                   else if (/\/faq\.json$/.test(request) || request.endsWith("faq.json")) data.request = dfwFaq;
+                  else if (/houses\.json$/.test(request)) data.request = emptyHouses;
+                  else if (/availability\.json$/.test(request)) data.request = emptyAvailability;
                 });
               });
             },

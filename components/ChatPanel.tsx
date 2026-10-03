@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { linkContext, rewritePadsplitAnchor } from "@/lib/attribution";
+import { getMarket } from "@/lib/market";
 
 type BookHouse = {
   id: string;
@@ -692,8 +693,9 @@ function linkLabel(url: string): string {
       if (u.searchParams.get("moveInTime") === "instant_move_in") return "See instant-book rooms →";
       if (u.searchParams.get("noMoveInFee") === "true") return "See rooms with no move-in fee →";
       if (u.searchParams.get("roomsCount") === "6") return "See homes with fewer housemates →";
+      const wideSlug = getMarket().padsplit.searchPath.split("-")[0];
       const city = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-ga$/)?.[1];
-      if (city && city !== "atlanta") {
+      if (city && city !== wideSlug) {
         const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         return `See rooms in ${name} →`;
       }

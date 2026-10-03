@@ -26,6 +26,17 @@ export interface Market {
   url: string;
   /** Metro name used in copy, e.g. "Atlanta". */
   metro: string;
+  /**
+   * Homepage browse blurb. Atlanta keeps its existing sentence, which is
+   * different from the meta description.
+   */
+  browseDescription: string;
+  /** Shown when a home has no public city. */
+  placeFallback: string;
+  /** Special submarket label. Null on markets that do not use one. */
+  westLabel: string | null;
+  /** House id that uses westLabel. Ignored when westLabel is null. */
+  westHouseId: string | null;
   /** null hides every phone number and call button. */
   phone: string | null;
   tagline: string;
@@ -37,6 +48,10 @@ export interface Market {
   heroKicker: string;
   /** Interior hero photos. Null keeps a flat brand field. */
   heroPhoto: { mobile: string; desktop: string } | null;
+  /** CSS class for the hero photo. Null skips the image. */
+  heroBackdropClass: string | null;
+  /** Interior card photos keyed by listing id. */
+  cardPhotos: Record<string, { src: string; alt: string }>;
   seoHeading: string;
   seoBody: string;
   footerLine: string;

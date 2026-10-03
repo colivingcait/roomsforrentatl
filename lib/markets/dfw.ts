@@ -7,6 +7,11 @@ export const DFW_MARKET: Market = {
   domain: "RoomsForRentDFW.com",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentdfw.com",
   metro: "Dallas–Fort Worth",
+  browseDescription:
+    "Furnished rooms for rent in Dallas–Fort Worth — weekly, no lease, next-day move-in. All-in pricing with utilities and Wi-Fi included. Book through PadSplit.",
+  placeFallback: "Dallas–Fort Worth",
+  westLabel: null,
+  westHouseId: null,
   phone: null,
   tagline: "Furnished rooms for rent in Dallas–Fort Worth. Move in as soon as tomorrow.",
   description:
@@ -30,6 +35,8 @@ export const DFW_MARKET: Market = {
   ],
   heroKicker: "Furnished rooms across Dallas–Fort Worth",
   heroPhoto: null,
+  heroBackdropClass: null,
+  cardPhotos: {},
   seoHeading: "Furnished rooms for rent in Dallas–Fort Worth, TX",
   seoBody:
     "Looking for an affordable room to rent in Dallas–Fort Worth? Furnished private bedrooms in shared homes across the Dallas–Fort Worth metro are booked through PadSplit, with no long lease and weekly or biweekly pay. Every furnished room on this site is booked through PadSplit, with utilities, parking and Wi-Fi included. Once you're approved, you can move in as soon as the next day.",

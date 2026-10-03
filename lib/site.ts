@@ -11,10 +11,7 @@ export const site = {
   domain: market.domain,
   url: market.url,
   tagline: market.tagline,
-  description:
-    market.id === "atl"
-      ? "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, next day move in. Book your room today."
-      : market.description,
+  description: market.browseDescription,
   // Your PadSplit referral. The code is appended to every "Book" link so you get
   // referral credit. PadSplit reads it from the `referralCode` query param (seen
   // on real PadSplit share links), alongside ref_source/ref_role attribution.

@@ -85,18 +85,6 @@ const FILTER_CARDS = [
   },
 ] as const;
 
-/** Interior photos from the approved mockup. Never an exterior or a street shot. */
-const CARD_PHOTO: Record<string, { src: string; alt: string }> = {
-  "35011": {
-    src: "/photos/mora-room-2.jpg",
-    alt: "Furnished bedroom with a bed and shelving, kitchen through the door, at The Mora House",
-  },
-  "8299": {
-    src: "/photos/candace-room-3.jpg",
-    alt: "Furnished bedroom with a bed, desk, and window at The Candace House",
-  },
-};
-
 export default function BrowseRooms({
   rooms,
   soldOut,
@@ -128,11 +116,8 @@ export default function BrowseRooms({
   return (
     <>
       <section className="relative overflow-hidden bg-[#042C25] text-white">
-        {market.heroPhoto ? (
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]"
-          />
+        {market.heroBackdropClass ? (
+          <div aria-hidden className={market.heroBackdropClass} />
         ) : null}
         <div
           aria-hidden
@@ -271,7 +256,7 @@ export default function BrowseRooms({
           <div className="mt-4 grid gap-4 md:mt-[22px] md:grid-cols-2 md:gap-5">
             {visible.map((r, index) => {
               const house = houseById.get(r.houseId);
-              const photo = CARD_PHOTO[r.houseId];
+              const photo = market.cardPhotos[r.houseId];
               const tags = featureTags(r, house);
               return (
                 <Link
