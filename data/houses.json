@@ -75,28 +75,6 @@
       "privateBaths": 1
     },
     {
-      "id": "30251",
-      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/30251",
-      "name": "Meadow",
-      "neighborhood": "Atlanta",
-      "city": "Atlanta",
-      "image": "/rooms/meadowchase.svg",
-      "transit": "Not within walking distance of a bus line — best suited to residents who drive or rideshare.",
-      "amenities": [
-        "Fully furnished",
-        "All utilities + WiFi included",
-        "Washer & dryer",
-        "Monthly cleaning"
-      ],
-      "lat": 33.86,
-      "lng": -84,
-      "rating": 5,
-      "badge": "Highly Rated!",
-      "totalRooms": 5,
-      "totalBaths": 3,
-      "privateBaths": 0
-    },
-    {
       "id": "152",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/152",
       "name": "Chestnut",
