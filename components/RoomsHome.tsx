@@ -3,11 +3,9 @@ import BrowseRooms from "@/components/BrowseRooms";
 import Footer from "@/components/Footer";
 import StickyChatBar from "@/components/StickyChatBar";
 import TrustBand from "@/components/TrustBand";
-import UnitsSection from "@/components/UnitsSection";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getHouses, lastUpdated } from "@/lib/houses";
 import { buildRoomListings } from "@/lib/browse";
-import { getUnits } from "@/lib/units";
 import { updatedLabel } from "@/lib/format";
 import { generalSearchUrl } from "@/lib/site";
 
@@ -16,7 +14,6 @@ export default function RoomsHome() {
   const allHouses = getHouses();
   const soldOut = allHouses.filter((h) => !h.available);
   const rooms = buildRoomListings(allHouses);
-  const units = getUnits();
   const updated = updatedLabel(lastUpdated());
 
   return (
@@ -38,8 +35,6 @@ export default function RoomsHome() {
           <span aria-hidden>→</span>
         </TrackedOutboundLink>
       </div>
-
-      <UnitsSection units={units} />
 
       <TrustBand />
 

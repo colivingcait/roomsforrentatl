@@ -1,5 +1,5 @@
 import faqData from "@/data/faq.json";
-import { PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "./site";
+import { PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "./site";
 
 export type SiteFaq = {
   q: string;
@@ -9,21 +9,26 @@ export type SiteFaq = {
   link?: { label: string; url: string };
 };
 
-const PRIVATE_BATH_QUESTION = "Do rooms have private bathrooms?";
+/** FAQ answers whose outbound link must stay on the named PadSplit search constants. */
+const LINK_BY_QUESTION: Record<string, { label: string; url: string }> = {
+  "Do rooms have private bathrooms?": {
+    label: "See private-bath rooms on PadSplit",
+    url: PADSPLIT_PRIVATE_BATH_SEARCH_URL,
+  },
+  "Can two people share a room?": {
+    label: "See double-occupancy rooms on PadSplit",
+    url: PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL,
+  },
+};
 
 /**
  * FAQs for the "Have a question?" popup and the chat assistant.
- * The private-bath answer's link always comes from PADSPLIT_PRIVATE_BATH_SEARCH_URL.
+ * Private-bath and double-occupancy links always come from the site constants.
  */
 export function getFaqs(): SiteFaq[] {
   return (faqData.faqs as SiteFaq[]).map((faq) => {
-    if (faq.q !== PRIVATE_BATH_QUESTION) return faq;
-    return {
-      ...faq,
-      link: {
-        label: "See private-bath rooms on PadSplit",
-        url: PADSPLIT_PRIVATE_BATH_SEARCH_URL,
-      },
-    };
+    const link = LINK_BY_QUESTION[faq.q];
+    if (!link) return faq;
+    return { ...faq, link };
   });
 }

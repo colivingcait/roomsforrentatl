@@ -7,10 +7,23 @@ import type { House } from "@/lib/types";
 import type { RoomListing } from "@/lib/browse";
 import { APPLICATION_FEE } from "@/lib/browse";
 import { priceLabel } from "@/lib/format";
-import { PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "@/lib/site";
+import { PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
 
 type FilterKey = "tomorrow" | "priv" | "bus";
+
+const PADSPLIT_SEARCH_LINKS = [
+  {
+    href: PADSPLIT_PRIVATE_BATH_SEARCH_URL,
+    label: "Need a private bathroom? See private-bath rooms on PadSplit",
+    event: "private_bath_search_click",
+  },
+  {
+    href: PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL,
+    label: "Need a room for two? See double-occupancy rooms on PadSplit",
+    event: "double_occupancy_search_click",
+  },
+] as const;
 
 const FILTERS: { key: FilterKey; label: string }[] = [
   { key: "tomorrow", label: "Move in tomorrow" },
@@ -190,16 +203,21 @@ export default function BrowseRooms({
           </div>
         )}
 
-        <a
-          href={PADSPLIT_PRIVATE_BATH_SEARCH_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackEvent("private_bath_search_click", { source: "homepage" })}
-          className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 text-[14px] font-semibold leading-snug text-brand active:scale-[0.99]"
-        >
-          <span>Need a private bathroom? See private-bath rooms on PadSplit</span>
-          <span aria-hidden>→</span>
-        </a>
+        <div className="mt-3 flex flex-col gap-2">
+          {PADSPLIT_SEARCH_LINKS.map((item) => (
+            <a
+              key={item.event}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent(item.event, { source: "homepage" })}
+              className="flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 text-[14px] font-semibold leading-snug text-brand active:scale-[0.99]"
+            >
+              <span>{item.label}</span>
+              <span aria-hidden>→</span>
+            </a>
+          ))}
+        </div>
       </div>
 
       {soldOut.length > 0 && (

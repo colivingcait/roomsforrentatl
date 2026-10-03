@@ -9,7 +9,7 @@ import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
 import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
 import { getFaqs } from "./faqs";
-import { site, generalSearchUrl, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "./site";
+import { site, generalSearchUrl, PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "./site";
 
 const FAQS = getFaqs();
 
@@ -20,7 +20,7 @@ const POLICIES = `
 - The move-in process, start to finish: apply → get approved by both PadSplit and our host team (usually the same day) → pay your first week's rent → get your door code → move in. Always describe it this way.
 - Lease: no long lease — weekly payments, stay as long as you like (most residents stay 6–12 months).
 - Pets: our homes are pet-free. If someone needs a pet-friendly home, they can search here: ${generalSearchUrl()} . Registered service animals are considered separately, case by case (this is one of the rare situations where it's fine to invite them to reach out directly).
-- Occupancy: most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — people can search double-occupancy rooms here: ${generalSearchUrl()} . Bringing a child varies by home; point them to the search or the home's listing.
+- Occupancy: most rooms are single-occupancy. Some homes allow double occupancy for an additional fee — people can search double-occupancy rooms here: ${PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL} . Bringing a child varies by home; point them to the search or the home's listing.
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
 - The exact street address of a home is shared after booking, for resident privacy.
@@ -291,7 +291,7 @@ export function buildSystemPrompt(
   // Reaching here means the rooms brand (homes returned early above).
   const brandContext = `# THIS IS THE ROOMS SITE (${brandName})
 - Your main job here is private ROOMS (weekly PadSplit rooms) — assume that's what someone wants unless they say otherwise.
-- We ALSO have a few long-term private rentals (whole furnished units, monthly lease) listed right on this site — there's a "Long-term · Private rentals" section on our homepage, and the full list with photos, details, qualifications, and how to apply is at /rentals. If someone wants their OWN whole place, point them to /rentals — don't describe the units' features, qualifications, or move-in steps yourself, that page already has it all.`;
+- Long-term private rentals are not listed on this homepage. If someone wants their OWN whole place, point them to /rentals — don't describe the units' features, qualifications, or move-in steps yourself, that page already has it all.`;
   const updated = lastUpdated();
   const faqs = FAQS.map(
     (f) =>

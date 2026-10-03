@@ -92,6 +92,14 @@ export const PADSPLIT_PRIVATE_BATH_SEARCH_URL =
   "https://www.padsplit.com/rooms-for-rent/atlanta-ga?latMax=33.9698383740918&lngMax=-84.10153814955288&latMin=33.497148095320355&lngMin=-84.56500806987017&bathroomType=private_bathroom&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link";
 
 /**
+ * PadSplit's Atlanta search, filtered to rooms that allow two people, with the
+ * same host referral params. Swap this one string when the referral link changes.
+ * Leave `sign-up` off so a sign-up modal does not cover the search.
+ */
+export const PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL =
+  "https://www.padsplit.com/rooms-for-rent/atlanta-ga?latMax=33.9698383740918&lngMax=-84.10153814955288&latMin=33.497148095320355&lngMin=-84.56500806987017&roomFeatures=allow_multiple_occupants&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link";
+
+/**
  * PadSplit's general site-wide search page (not tied to any one house) —
  * for people who don't like any of your specific rooms but might still book
  * something else on PadSplit. Sending them here (instead of losing them)
