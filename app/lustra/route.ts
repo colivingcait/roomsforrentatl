@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import { REFERRAL_COOKIE } from "@/lib/site";
 
 /**
- * Short link for traffic you want credited to the Lustra House PadSplit
- * profile — roomsforrentatl.com/lustra instead of a long tagged URL. Sets a
- * 30-day cookie so every "Book" link this visitor sees uses that referral
- * code, then redirects to the homepage.
+ * Short link at /lustra. Sets a 30-day referral cookie, then redirects home.
+ * The cookie keeps the main referral code. It is not a house name.
  */
 export function GET(req: Request) {
   const url = new URL(req.url);

@@ -5,7 +5,7 @@ import { getBrand } from "@/lib/brand";
 export default function Header({ wide = false }: { wide?: boolean }) {
   const brand = getBrand();
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-100 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-[#F1F5F9] bg-white/[0.92] backdrop-blur-[10px]">
       <div
         className={
           "mx-auto flex items-center justify-between " +
@@ -16,12 +16,12 @@ export default function Header({ wide = false }: { wide?: boolean }) {
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand text-sm font-black text-white">
             {brand.word[0]}
           </span>
-          <span className="text-lg font-extrabold tracking-tight text-ink">
+          <span className="text-lg font-extrabold tracking-[-0.01em] text-ink">
             {brand.word}
             <span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
           </span>
         </Link>
-        <FaqButton className="text-sm font-semibold text-brand" />
+        <FaqButton className="text-sm font-semibold text-brand" startTab={wide ? "chat" : "faq"} />
       </div>
     </header>
   );

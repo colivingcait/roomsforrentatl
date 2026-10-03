@@ -75,7 +75,7 @@ function BandItem({ icon, title, body }: { icon: ReactNode; title: string; body:
     <li className="flex flex-col gap-[3px]">
       <i className="mb-1.5 grid h-[34px] w-[34px] place-items-center rounded-[10px] bg-white/10 text-[#5EEAD4]">{icon}</i>
       <b className="text-sm font-extrabold leading-snug">{title}</b>
-      <span className="text-[12.5px] leading-snug text-slate-300">{body}</span>
+      <span className="text-[12.5px] leading-[1.45] text-[#CBD5E1]">{body}</span>
     </li>
   );
 }

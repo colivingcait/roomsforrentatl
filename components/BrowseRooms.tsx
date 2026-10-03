@@ -120,13 +120,13 @@ export default function BrowseRooms({
             <i className="h-2 w-2 rounded-full bg-[#4ADE80] shadow-[0_0_0_3px_rgba(74,222,128,.25)]" />
             Furnished rooms across Atlanta
           </span>
-          <h1 className="mt-3 max-w-[880px] text-[33px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,.25)] md:text-[54px]">
+          <h1 className="mt-3 text-[33px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,.25)] md:max-w-[880px] md:text-[54px]">
             Open rooms at every price. Move in as soon as{" "}
-            <span className="whitespace-nowrap bg-[linear-gradient(transparent_78%,#FF6B35_78%,#FF6B35_94%,transparent_94%)]">
+            <span className="relative z-0 whitespace-nowrap after:absolute after:inset-x-0 after:bottom-[0.02em] after:z-[-1] after:h-[0.16em] after:rounded-[4px] after:bg-accent after:opacity-95">
               tomorrow.
             </span>
           </h1>
-          <ul className="mt-[18px] flex max-w-[760px] flex-wrap gap-2 md:mt-[26px]">
+          <ul className="mt-[18px] flex flex-wrap gap-2 md:mt-[26px] md:max-w-[760px]">
             <Pill>
               ${APPLICATION_FEE} to apply <small className="text-[13px] font-medium text-white/80">· refunded if not approved</small>
             </Pill>
@@ -144,7 +144,7 @@ export default function BrowseRooms({
           <h2 className="mt-1.5 text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
             What do you need?
           </h2>
-          <div className="mt-3.5 grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+          <div className="mt-3.5 grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
             {FILTER_CARDS.map((card) => (
               <TrackedOutboundLink
                 key={card.event}
@@ -159,10 +159,14 @@ export default function BrowseRooms({
                   card.tint
                 }
               >
-                <span className={"grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] " + card.tone}>
+                <span
+                  aria-hidden
+                  className={"pointer-events-none absolute -bottom-10 -right-[30px] h-[110px] w-[110px] rounded-full opacity-[0.07] " + card.tone}
+                />
+                <span className={"relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] " + card.tone}>
                   <FilterIcon name={card.icon} />
                 </span>
-                <span className="flex min-w-0 flex-col">
+                <span className="relative flex min-w-0 flex-col">
                   <span className="text-[16.5px] font-extrabold leading-tight text-ink">{card.label}</span>
                   <span className="mt-[3px] flex items-baseline gap-1.5 leading-none">
                     <span className="text-[13px] font-semibold text-muted">from</span>
@@ -175,7 +179,7 @@ export default function BrowseRooms({
                     <span className="mt-1.5 text-[12.5px] font-semibold leading-snug text-slate-600">{card.note}</span>
                   )}
                 </span>
-                <span className="absolute right-3.5 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_3px_rgba(15,23,42,.12)] transition group-hover:bg-accent group-hover:text-white md:right-5 md:top-5 md:translate-y-0">
+                <span className="absolute right-3.5 top-1/2 z-[1] grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_3px_rgba(15,23,42,.12)] transition group-hover:bg-accent group-hover:text-white md:right-5 md:top-5 md:translate-y-0">
                   <ExternalIcon />
                 </span>
               </TrackedOutboundLink>
@@ -372,7 +376,7 @@ function featureTags(room: RoomListing, house: House | undefined): string[] {
 
 function Pill({ children }: { children: ReactNode }) {
   return (
-    <li className="flex items-center gap-[7px] rounded-full border border-white/30 bg-white/15 py-[7px] pl-2 pr-[13px] text-sm font-bold text-white backdrop-blur-sm md:text-[15px]">
+    <li className="flex items-center gap-[7px] rounded-full border border-white/[0.28] bg-white/[0.14] py-[7px] pl-2 pr-[13px] text-sm font-bold text-white backdrop-blur-[6px] md:text-[15px]">
       <i className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent text-white">
         <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M5 12.5l4.5 4.5L19 7.5" />

@@ -158,7 +158,7 @@ export default function ChatLauncher() {
     <>
       {roomsHome && teaser && !open && (
         <div
-          className="fixed bottom-[84px] right-4 z-[41] w-[min(290px,calc(100vw-32px))] md:hidden"
+          className="fixed bottom-[84px] right-4 z-[41] w-[min(290px,calc(100vw-32px))] motion-safe:animate-[rfr-teaser_.25s_ease] md:hidden"
           aria-live="polite"
         >
           <button

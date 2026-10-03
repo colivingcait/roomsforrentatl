@@ -72,6 +72,11 @@ body:has([data-bottom-bar]) .chat-launcher {
   animation: chat-nudge 4s ease-in-out infinite, chat-glow 2.6s ease-in-out infinite;
 }
 
+@keyframes rfr-teaser {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .chat-fab,
   .chat-attn {

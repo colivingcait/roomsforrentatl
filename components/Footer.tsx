@@ -11,12 +11,17 @@ export default function Footer({ clearance = false }: { clearance?: boolean }) {
   return (
     <footer
       className={
-        "border-t border-slate-100 text-sm text-muted " +
-        (rooms ? "bg-[#F8FAFC] " : "mt-8 bg-white ") +
-        (clearance ? "pb-28 md:pb-11" : "")
+        "border-t border-[#F1F5F9] text-sm text-muted " +
+        (rooms ? "bg-[#F8FAFC]" : "mt-8 bg-white")
       }
     >
-      <div className={"mx-auto px-4 py-8 " + (rooms ? "max-w-[1080px] px-[18px] pt-[30px] md:px-6" : "max-w-3xl")}>
+      <div
+        className={
+          rooms
+            ? "mx-auto max-w-[1080px] px-[18px] pb-[110px] pt-[30px] md:px-6 md:pb-11"
+            : "mx-auto max-w-3xl px-4 py-8" + (clearance ? " pb-28 md:pb-11" : "")
+        }
+      >
         <div className="text-base font-extrabold text-ink">
           {brand.word}
           <span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
