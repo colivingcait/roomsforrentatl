@@ -174,7 +174,8 @@ export async function POST(req: Request) {
           track,
           { key: brand.key, name: brand.name, domain: brand.domain },
           referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value),
-          filterPrices.instant
+          filterPrices.instant,
+          filterPrices.noFee
         ),
         messages,
       }),

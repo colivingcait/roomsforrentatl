@@ -104,9 +104,14 @@ const FOLLOWUPS: Record<string, string[]> = {
   ],
   // Cost / payment
   "How much does it cost to move in?": [
+    "Can I find a room with no move-in fee?",
     "What's included in the rent?",
-    "Can I pay monthly?",
     "Are there any other fees?",
+    "How fast can I move in?",
+  ],
+  "Can I find a room with no move-in fee?": [
+    "How much does it cost to move in?",
+    "What's available now?",
     "How fast can I move in?",
   ],
   "What's included in the rent?": [

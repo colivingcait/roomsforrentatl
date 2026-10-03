@@ -33,7 +33,7 @@
     {
       "category": "Cost & payment",
       "q": "What does it cost to move in?",
-      "a": "Just a $19 application fee to apply — and it's refunded if you're not approved. Once you're approved, your first week's rent is due to move in. There's no big security deposit."
+      "a": "$19 to apply, then your first week's rent, plus a move-in fee if that host charges one. The $19 is refunded if you're not approved. There's no security deposit. When a host charges a move-in fee, it's often around $100 and it's shown on the listing."
     },
     {
       "category": "Cost & payment",
@@ -47,8 +47,21 @@
     },
     {
       "category": "Cost & payment",
+      "q": "Can I find a room with no move-in fee?",
+      "a": "Some hosts charge a one-time move-in fee and some don't. This search lists homes where at least one room has no move-in fee. That does not mean every room in the home is fee-free. A featured room with a No move-in fee badge has no host move-in fee.",
+      "variants": [
+        "no move-in fee",
+        "no move in fee",
+        "skip the move-in fee",
+        "skip the host fee",
+        "without a move-in fee",
+        "rooms with no move-in fee"
+      ]
+    },
+    {
+      "category": "Cost & payment",
       "q": "Are there any other fees or hidden costs?",
-      "a": "No hidden costs. Your weekly rent covers the room, all utilities, and WiFi. The only upfront items are the $19 application fee and your first week's rent. (Optional extras like double occupancy cost a little more.)"
+      "a": "Your weekly rent covers the room, all utilities, and WiFi. Up front you pay the $19 application fee and your first week's rent, plus a one-time move-in fee if that host charges one. Some hosts don't. Optional extras like double occupancy cost a little more."
     },
     {
       "category": "Getting approved",
@@ -58,12 +71,12 @@
     {
       "category": "Getting approved",
       "q": "Do you check credit?",
-      "a": "There's no minimum credit score. Approval is based on a background screening and proof you earn at least 2x the rent — not a traditional credit check."
+      "a": "No credit check. Approval is based on a background screening and income of at least 2x the rent."
     },
     {
       "category": "Getting approved",
       "q": "How do I show proof of income?",
-      "a": "During your application you can upload recent pay stubs, a bank statement, or an offer letter. We generally look for income of about 2x the rent, and the application walks you through exactly what to provide."
+      "a": "Submit pay stubs, bank statements or an offer letter. We look for income of at least 2x the rent."
     },
     {
       "category": "Getting approved",

@@ -22,6 +22,8 @@ export interface RoomListing {
   photo: string;
   /** Rate + the $19 application fee — "to get the keys" total. */
   total: number | null;
+  /** True only when the listing's moveInFee is 0. */
+  noMoveInFee: boolean;
 }
 
 /** Every currently-bookable room across all houses, cheapest first. */
@@ -47,6 +49,7 @@ export function buildRoomListings(houses: House[]): RoomListing[] {
         movesInSoon: moveInLabel(r.moveInDate) === "Available now",
         photo: r.image || h.image,
         total: r.weeklyRate != null ? r.weeklyRate + APPLICATION_FEE : null,
+        noMoveInFee: r.noMoveInFee === true,
       });
     }
   }

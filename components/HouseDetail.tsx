@@ -68,7 +68,7 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
       return {
         title: "You'd clear the income bar",
         color: "#065F46",
-        body: `You'll need income of about ${priceLabel((selected?.weeklyRate ?? 0) * 2).replace("/wk", "/week")} — a pay stub, bank statement, or offer letter all work as proof.`,
+        body: `You'll need income of about ${priceLabel((selected?.weeklyRate ?? 0) * 2).replace("/wk", "/week")}. Submit pay stubs, bank statements or an offer letter.`,
       };
     }
     const cheaper = rooms
@@ -95,7 +95,9 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
       bullets: [
         `$${APPLICATION_FEE} to apply, charged when you apply — refunded if you're not approved`,
         "First week's rent charged once you're approved by both PadSplit and the host team, not before",
-        "No security deposit, no last month, no admin or move-in fee",
+        selected?.noMoveInFee
+          ? "No security deposit, no last month, no admin or move-in fee"
+          : "No security deposit and no last month. Some hosts charge a one-time move-in fee, shown on the listing.",
         "Rent recurs weekly, on a weekday you pick — utilities, WiFi, and laundry included",
       ],
     },
@@ -125,7 +127,7 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
     {
       key: "qualify",
       q: "Would I get approved?",
-      body: "Income of about 2× the rent, no minimum credit score. No felonies, violent misdemeanors, or evictions in the past 7 years — older is usually fine, and anything inside 7 years is reviewed case by case. Upload a pay stub, bank statement, or offer letter. PadSplit screens automatically, then our host team reviews — usually the same day.",
+      body: "Income of about 2× the rent, and no credit check. No felony convictions within 7 years, and no more than 1 eviction in the last 7 years. Submit pay stubs, bank statements or an offer letter. PadSplit screens automatically, then our host team reviews — usually the same day.",
     },
     {
       key: "who",

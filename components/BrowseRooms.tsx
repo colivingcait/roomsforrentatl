@@ -1,16 +1,16 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { House } from "@/lib/types";
 import type { RoomListing } from "@/lib/browse";
-import { APPLICATION_FEE } from "@/lib/browse";
 import { priceLabel, submarketLabel } from "@/lib/format";
 import {
   doubleOccupancySearchUrl,
   fewerHousematesSearchUrl,
   instantBookingSearchUrl,
+  noMoveInFeeSearchUrl,
   phoneTelHref,
   privateBathSearchUrl,
   site,
@@ -67,6 +67,18 @@ const FILTER_CARDS = [
     priceColor: "text-ink",
     icon: "home" as const,
     note: null,
+  },
+  {
+    key: "noFee" as const,
+    href: noMoveInFeeSearchUrl(),
+    event: "no_move_in_fee_search_click",
+    label: "No move-in fee",
+    aria: "Rooms with no move-in fee",
+    tint: "bg-[#F3F0FF]",
+    tone: "bg-[#6D28D9]",
+    priceColor: "text-[#6D28D9]",
+    icon: "fee" as const,
+    note: "Skip the one-time host fee.",
   },
 ] as const;
 
@@ -126,13 +138,9 @@ export default function BrowseRooms({
               tomorrow.
             </span>
           </h1>
-          <ul className="mt-[18px] flex flex-wrap gap-2 md:mt-[26px] md:max-w-[760px]">
-            <Pill>
-              ${APPLICATION_FEE} to apply <small className="text-[13px] font-medium text-white/80">· refunded if not approved</small>
-            </Pill>
-            <Pill>No deposit</Pill>
-            <Pill>Pay weekly or biweekly</Pill>
-          </ul>
+          <p className="mt-[18px] max-w-[640px] text-[13px] font-medium leading-snug text-white/85 md:mt-[22px] md:text-sm">
+            Some hosts charge a one-time move-in fee (often around $100), shown on each listing.
+          </p>
         </div>
       </section>
 
@@ -144,9 +152,10 @@ export default function BrowseRooms({
           <h2 className="mt-1.5 text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
             What do you need?
           </h2>
-          <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-4 lg:gap-3">
-            {FILTER_CARDS.map((card) => {
+          <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-6 lg:gap-3 xl:grid-cols-5">
+            {FILTER_CARDS.map((card, index) => {
               const price = filterPrices[card.key];
+              const wideSecondRow = index >= 3 ? " lg:col-span-3" : " lg:col-span-2";
               return (
               <TrackedOutboundLink
                 key={card.event}
@@ -157,7 +166,9 @@ export default function BrowseRooms({
                 rel="noopener noreferrer"
                 ariaLabel={price != null ? `${card.aria} from $${price} a week` : card.aria}
                 className={
-                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[176px] lg:flex-col lg:items-start lg:gap-3 lg:p-4 lg:pr-4 " +
+                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[168px] lg:flex-col lg:items-start lg:gap-2.5 lg:p-3.5 lg:pr-3.5 xl:col-span-1 xl:min-h-[176px] xl:gap-2 xl:p-3" +
+                  wideSecondRow +
+                  " " +
                   card.tint
                 }
               >
@@ -165,15 +176,15 @@ export default function BrowseRooms({
                   aria-hidden
                   className={"pointer-events-none absolute -bottom-10 -right-[30px] h-[110px] w-[110px] rounded-full opacity-[0.07] " + card.tone}
                 />
-                <span className={"relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] lg:h-12 lg:w-12 " + card.tone}>
+                <span className={"relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] lg:h-11 lg:w-11 xl:h-10 xl:w-10 " + card.tone}>
                   <FilterIcon name={card.icon} />
                 </span>
                 <span className="relative flex min-w-0 flex-col">
-                  <span className="text-[16.5px] font-extrabold leading-tight text-ink lg:text-[15px]">{card.label}</span>
+                  <span className="text-[16.5px] font-extrabold leading-tight text-ink lg:text-[15px] xl:text-[13px]">{card.label}</span>
                   {price != null && (
-                    <span className="mt-[3px] flex items-baseline gap-1.5 whitespace-nowrap leading-none">
+                    <span className="mt-[3px] flex items-baseline gap-1 whitespace-nowrap leading-none">
                       <span className="text-[13px] font-semibold text-muted lg:text-xs">from</span>
-                      <b className={"text-[28px] font-black tracking-[-0.03em] lg:text-[26px] " + card.priceColor}>
+                      <b className={"text-[28px] font-black tracking-[-0.03em] lg:text-[24px] xl:text-[22px] " + card.priceColor}>
                         ${price}
                       </b>
                       <span className="-ml-1 text-[15px] font-bold text-slate-700 lg:text-sm">/wk</span>
@@ -201,11 +212,8 @@ export default function BrowseRooms({
         <div className="mx-auto max-w-[1080px] px-[18px] pb-[30px] pt-[34px] md:px-6 md:pb-11 md:pt-12">
           <div className="md:flex md:items-end md:justify-between md:gap-6">
             <div>
-              <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-[0.08em] text-accent before:h-[3px] before:w-[18px] before:rounded-sm before:bg-accent">
-                Our own homes
-              </span>
-              <h2 className="mt-1.5 text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
-                Featured rooms
+              <h2 className="text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
+                Featured Rooms
               </h2>
               <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>
             </div>
@@ -282,6 +290,9 @@ export default function BrowseRooms({
                       {house ? submarketLabel(house) : r.area}
                     </p>
                     <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {r.noMoveInFee && (
+                        <span className="rounded-lg bg-brand px-[9px] py-1 text-xs font-bold text-white">No move-in fee</span>
+                      )}
                       {tags.map((tag) => (
                         <span
                           key={tag}
@@ -379,20 +390,7 @@ function featureTags(room: RoomListing, house: House | undefined): string[] {
   return tags.slice(0, 3);
 }
 
-function Pill({ children }: { children: ReactNode }) {
-  return (
-    <li className="flex items-center gap-[7px] rounded-full border border-white/[0.28] bg-white/[0.14] py-[7px] pl-2 pr-[13px] text-sm font-bold text-white backdrop-blur-[6px] md:text-[15px]">
-      <i className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent text-white">
-        <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 12.5l4.5 4.5L19 7.5" />
-        </svg>
-      </i>
-      {children}
-    </li>
-  );
-}
-
-function FilterIcon({ name }: { name: "bath" | "people" | "home" | "bolt" }) {
+function FilterIcon({ name }: { name: "bath" | "people" | "home" | "bolt" | "fee" }) {
   if (name === "bolt") {
     return (
       <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -415,6 +413,14 @@ function FilterIcon({ name }: { name: "bath" | "people" | "home" | "bolt" }) {
         <circle cx="8.5" cy="8" r="3" />
         <circle cx="16" cy="9" r="2.5" />
         <path d="M3 20a5.5 5.5 0 0 1 11 0M14 20a4 4 0 0 1 7-2.6" />
+      </svg>
+    );
+  }
+  if (name === "fee") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M8 12.5l2.5 2.5L16 9.5" />
       </svg>
     );
   }
