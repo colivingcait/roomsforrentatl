@@ -80,11 +80,13 @@ import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import ChatLauncher from "@/components/ChatLauncher";
 import PostHogInit from "@/components/PostHogInit";
+import { referralRewriteScript } from "@/lib/attribution";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <script dangerouslySetInnerHTML={{ __html: referralRewriteScript() }} />
         {children}
         <ChatLauncher />
         <Analytics />

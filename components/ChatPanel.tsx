@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { linkContext, rewritePadsplitAnchor } from "@/lib/attribution";
 
 type BookHouse = {
   id: string;
@@ -342,7 +343,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
       {/* Conversation */}
       <div ref={scrollRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto px-5 py-4">
         <Bubble role="assistant">
-          <MessageText text={startTrack === "unit" ? UNIT_GREETING : ROOM_GREETING} />
+          <MessageText text={startTrack === "unit" ? UNIT_GREETING : ROOM_GREETING} messageTurn={0} />
         </Bubble>
 
         {messages.map((m, i) => (
@@ -354,19 +355,19 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
             className="space-y-2"
           >
             <Bubble role={m.role}>
-              <MessageText text={m.content} isUser={m.role === "user"} />
+              <MessageText text={m.content} isUser={m.role === "user"} messageTurn={i + 1} />
             </Bubble>
             {m.houses && m.houses.length > 0 && (
               <div className="space-y-2">
                 {m.houses.map((h) => (
-                  <BookCard key={h.id} house={h} />
+                  <BookCard key={h.id} house={h} messageTurn={i + 1} />
                 ))}
               </div>
             )}
             {m.rooms && m.rooms.length > 0 && (
               <div className="space-y-2">
                 {m.rooms.map((r) => (
-                  <SearchRoomCard key={r.id} room={r} />
+                  <SearchRoomCard key={r.id} room={r} messageTurn={i + 1} />
                 ))}
               </div>
             )}
@@ -497,7 +498,8 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   );
 }
 
-function SearchRoomCard({ room }: { room: SearchRoom }) {
+function SearchRoomCard({ room, messageTurn }: { room: SearchRoom; messageTurn: number }) {
+  const ids = splitListingId(room.id);
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
       <div className="flex items-baseline justify-between gap-2">
@@ -506,20 +508,22 @@ function SearchRoomCard({ room }: { room: SearchRoom }) {
       </div>
       <div className="text-sm text-muted">{room.location}</div>
       <div className="mt-0.5 text-xs font-semibold text-brand">{room.name} · Private bath</div>
-      <a
+      <ChatAnswerLink
         href={room.url}
-        target="_blank"
-        rel="noopener noreferrer"
         className="btn-book mt-2 block w-full py-2 text-center text-sm"
-        onClick={() => trackEvent("book_click", { house: room.id, houseName: room.houseName, source: "chat" })}
+        messageTurn={messageTurn}
+        house={ids.house}
+        room={ids.room}
+        houseName={room.houseName}
+        book
       >
         View this room →
-      </a>
+      </ChatAnswerLink>
     </div>
   );
 }
 
-function BookCard({ house }: { house: BookHouse }) {
+function BookCard({ house, messageTurn }: { house: BookHouse; messageTurn: number }) {
   const rooms = `${house.roomsAvailable} room${house.roomsAvailable === 1 ? "" : "s"} available`;
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
@@ -537,17 +541,24 @@ function BookCard({ house }: { house: BookHouse }) {
       </div>
       <div className="text-sm text-muted">{house.location}</div>
       <div className="mt-0.5 text-xs font-semibold text-brand">{rooms}</div>
-      <a
+      <ChatAnswerLink
         href={house.url}
-        target="_blank"
-        rel="noopener noreferrer"
         className="btn-book mt-2 block w-full py-2 text-center text-sm"
-        onClick={() => trackEvent("book_click", { house: house.id, houseName: house.name, source: "chat" })}
+        messageTurn={messageTurn}
+        house={house.id}
+        houseName={house.name}
+        book
       >
         Book your room →
-      </a>
+      </ChatAnswerLink>
     </div>
   );
+}
+
+function splitListingId(id: string): { house: string; room: string | null } {
+  const match = /^(\d+)-(\d+)$/.exec(id);
+  if (!match) return { house: id, room: null };
+  return { house: match[1], room: match[2] };
 }
 
 function Bubble({ role, children }: { role: "user" | "assistant"; children: React.ReactNode }) {
@@ -570,28 +581,105 @@ function Bubble({ role, children }: { role: "user" | "assistant"; children: Reac
 // pastes a full PadSplit URL — show a friendly label instead of the raw text).
 const URL_RE = /(https?:\/\/[^\s)]+)/g;
 
-function MessageText({ text, isUser = false }: { text: string; isUser?: boolean }) {
+function MessageText({
+  text,
+  isUser = false,
+  messageTurn = 0,
+}: {
+  text: string;
+  isUser?: boolean;
+  messageTurn?: number;
+}) {
   const parts = text.split(URL_RE);
   return (
     <>
       {parts.map((part, i) =>
         /^https?:\/\//.test(part) ? (
-          <a
-            key={i}
-            href={part}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={
-              "font-semibold underline [overflow-wrap:anywhere] " + (isUser ? "text-white" : "text-brand")
-            }
-          >
-            {linkLabel(part)}
-          </a>
+          isUser ? (
+            <a
+              key={i}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline [overflow-wrap:anywhere] text-white"
+            >
+              {linkLabel(part)}
+            </a>
+          ) : (
+            <ChatAnswerLink
+              key={i}
+              href={part}
+              messageTurn={messageTurn}
+              className="font-semibold underline [overflow-wrap:anywhere] text-brand"
+            >
+              {linkLabel(part)}
+            </ChatAnswerLink>
+          )
         ) : (
           <span key={i}>{part}</span>
         )
       )}
     </>
+  );
+}
+
+function ChatAnswerLink({
+  href,
+  className,
+  children,
+  messageTurn,
+  house,
+  room,
+  houseName,
+  book = false,
+}: {
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+  messageTurn: number;
+  house?: string | null;
+  room?: string | null;
+  houseName?: string | null;
+  book?: boolean;
+}) {
+  const track = (anchor: HTMLAnchorElement) => {
+    const next = rewritePadsplitAnchor(anchor);
+    const ctx = linkContext(next);
+    const houseId = house ?? ctx.house;
+    const roomId = room ?? ctx.room;
+    trackEvent("chat_link_click", {
+      href: next,
+      referral_code: ctx.referral_code,
+      house: houseId,
+      room: roomId,
+      message_turn: messageTurn,
+    });
+    if (book) {
+      trackEvent("book_click", {
+        href: next,
+        referral_code: ctx.referral_code,
+        house: houseId,
+        room: roomId,
+        houseName: houseName ?? null,
+        section: "chat",
+        source: "chat",
+      });
+    }
+  };
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      data-attr={book ? "chat-book" : "chat-link"}
+      data-ph-tracked="true"
+      data-ph-capture-attribute-section="chat"
+      onClick={(e) => track(e.currentTarget)}
+      onAuxClick={(e) => track(e.currentTarget)}
+    >
+      {children}
+    </a>
   );
 }
 

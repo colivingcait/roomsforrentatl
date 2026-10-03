@@ -196,6 +196,8 @@ function FaqItem({ faq }: { faq: Faq }) {
               href={faq.link.url}
               event="faq_outbound_click"
               properties={{ question: faq.q }}
+              dataAttr="faq-link"
+              capture={{ section: "faq" }}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand underline"

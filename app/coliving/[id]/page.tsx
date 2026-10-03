@@ -129,6 +129,8 @@ function RoomCard({ room, rentUnit }: { room: ColivingRoom; rentUnit: "week" | "
             href={room.applyUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-attr="coliving-apply"
+            data-ph-section="coliving"
             className="btn-book mt-3 block w-full py-2 text-center text-sm"
           >
             Apply for this room →

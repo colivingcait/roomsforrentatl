@@ -174,6 +174,7 @@ export default function ChatLauncher() {
           </button>
           <button
             type="button"
+            data-attr="chat-teaser"
             onClick={() => openChat("teaser")}
             className="relative flex w-full items-start gap-2.5 rounded-2xl bg-white py-3 pl-3 pr-9 text-left text-ink shadow-[0_2px_6px_rgba(15,23,42,.08),0_14px_34px_rgba(15,23,42,.20)] after:absolute after:bottom-[-6px] after:right-10 after:h-3.5 after:w-3.5 after:rotate-45 after:rounded-sm after:bg-white"
           >
@@ -211,6 +212,7 @@ export default function ChatLauncher() {
           )}
           <button
             type="button"
+            data-attr="chat-launcher"
             onClick={() => openChat("button")}
             aria-label="Have a question?"
             className={
