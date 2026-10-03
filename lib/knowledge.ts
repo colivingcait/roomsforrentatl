@@ -21,6 +21,7 @@ import {
   VERIFIED_PADSPLIT_CITY_SLUGS,
 } from "./site";
 import { getMarket } from "./market";
+import type { AutoFeaturedRoom } from "./autoFeatured";
 
 function priceLine(label: string, price: number | null | undefined): string {
   if (price == null || !Number.isFinite(price)) {
@@ -316,14 +317,6 @@ function verifiedCityLines(code: string): string {
   return VERIFIED_PADSPLIT_CITY_SLUGS.map((slug) => `- ${slug}: ${citySearchUrl(slug, {}, code)}`).join("\n");
 }
 
-function dfwStartNote(price: number | null | undefined, label: string): string {
-  if (price == null || !Number.isFinite(price)) {
-    return `Do not quote a dollar starting price for ${label}.`;
-  }
-  const n = Math.round(price);
-  return `${label} currently start at $${n}/wk. That amount is only the starting weekly rate on that search.`;
-}
-
 /**
  * Dallas–Fort Worth has no featured homes, so the assistant leads with the
  * five PadSplit searches. Kept separate so the Atlanta prompt below can change
@@ -334,8 +327,14 @@ function buildDfwPrompt(
   brandDomain: string,
   code: string,
   instantStart?: number | null,
-  noFeeStart?: number | null
+  noFeeStart?: number | null,
+  autoFeatured?: AutoFeaturedRoom[],
+  privateBathStart?: number | null,
+  roomForTwoStart?: number | null,
+  fewerStart?: number | null,
+  lowestStart?: number | null
 ): string {
+  const featured = autoFeatured ?? [];
   const cities = VERIFIED_PADSPLIT_CITY_SLUGS.map(
     (slug) => `- ${slug}: ${citySearchUrl(slug, {}, code)}`
   ).join("\n");
@@ -348,17 +347,28 @@ function buildDfwPrompt(
     )
     .join("\n\n");
 
+  const featuredLines = featured.length
+    ? featured
+        .map((room) => `- Furnished room in ${room.place}, $${room.price}/wk: ${room.href}`)
+        .join("\n")
+    : "The featured section is hidden right now. Do not invent rooms to fill it.";
+
   return `You are the friendly virtual assistant for ${brandName} (${brandDomain}). This site helps people find a furnished room in Dallas–Fort Worth and book it on PadSplit. It does not list its own homes.
 
 # Lead with a PadSplit search
-There are no featured homes on this site. Do not invent a home, a room, a host name, a photo, or a street address. When someone wants a room, lead with the matching link below. Never tell them to open PadSplit on their own. Use these exact links (each one already includes the referral code):
+When someone wants a room, the first line is the matching link below. Never tell them to open PadSplit on their own. Never lead with a featured room. Use these exact links (each one already includes the referral code):
 - Book instantly: ${instantBookingSearchUrl(code)}
+  ${priceLine("Instant-book rooms", instantStart)}
 - Private bathroom: ${privateBathSearchUrl(code)}
+  ${priceLine("Private-bath rooms", privateBathStart)}
 - Room for two: ${doubleOccupancySearchUrl(code)}
+  ${priceLine("Rooms for two", roomForTwoStart)}
 - 5 or fewer housemates: ${fewerHousematesSearchUrl(code)}
+  ${priceLine("Homes with 5 or fewer housemates", fewerStart)}
 - No move-in fee: ${noMoveInFeeSearchUrl(code)}
-${dfwStartNote(instantStart, "Instant-book rooms")}
-${dfwStartNote(noFeeStart, "Rooms in the no-move-in-fee search")}
+  ${priceLine("Rooms in the no-move-in-fee search", noFeeStart)}
+- Lowest price: ${citySearchUrl("metro", {}, code)}
+  ${priceLine("Rooms", lowestStart)}
 
 # No move-in fee
 The no-move-in-fee link shows homes where at least one room has no host move-in fee. Do not say every room in those listings has no fee.
@@ -378,6 +388,10 @@ Weekly or biweekly. No long lease. Utilities, parking, and Wi-Fi are included in
 Use a link below when they name that city. Do not invent a slug. For anywhere else in Dallas–Fort Worth, use the metro search: ${citySearchUrl("metro", {}, code)}
 ${cities}
 Never give a street address. This site is Dallas–Fort Worth only. Do not mention Atlanta or another rental site. There is no phone number and no texting. If they ask to call, say we don't publish a phone number and offer to keep helping here.
+
+# Featured rooms on the homepage
+These are the cheapest rooms PadSplit lists right now. They are not our homes. Mention one only after the search link, and only if its place matches what they asked. The label is "Furnished room". Do not use a host's house name. Do not give a street address or describe the photo.
+${featuredLines}
 
 # How to respond
 - Short replies in plain text. No Markdown.
@@ -399,14 +413,26 @@ export function buildSystemPrompt(
   privateBathStart?: number | null,
   roomForTwoStart?: number | null,
   fewerStart?: number | null,
-  lowestStart?: number | null
+  lowestStart?: number | null,
+  autoFeatured?: AutoFeaturedRoom[]
 ): string {
   const code = referralCode || site.referral.code;
   const brandName = brand?.name ?? site.name;
   const brandDomain = brand?.domain ?? site.domain;
   if (brand?.key === "homes") return buildHomesPrompt(brandName, brandDomain);
   if (getMarket().id === "dfw") {
-    return buildDfwPrompt(brandName, brandDomain, code, instantStart, noFeeStart);
+    return buildDfwPrompt(
+      brandName,
+      brandDomain,
+      code,
+      instantStart,
+      noFeeStart,
+      autoFeatured,
+      privateBathStart,
+      roomForTwoStart,
+      fewerStart,
+      lowestStart
+    );
   }
   // Reaching here means the rooms brand (homes returned early above).
   const brandContext = `# THIS IS THE ROOMS SITE (${brandName})

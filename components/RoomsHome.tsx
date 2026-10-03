@@ -7,6 +7,7 @@ import TrustBand from "@/components/TrustBand";
 import { getHouses } from "@/lib/houses";
 import { buildRoomListings } from "@/lib/browse";
 import { getFilterStartingPrices } from "@/lib/filterPrices";
+import { getAutoFeaturedRooms } from "@/lib/autoFeatured";
 import { getMarket } from "@/lib/market";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
@@ -16,11 +17,18 @@ export default async function RoomsHome() {
   const rooms = buildRoomListings(allHouses);
   const filterPrices = await getFilterStartingPrices();
   const market = getMarket();
+  const autoFeatured = market.featuredSources.length === 0 ? await getAutoFeaturedRooms() : [];
 
   return (
     <main className="min-h-screen bg-white">
       <Header wide />
-      <BrowseRooms rooms={rooms} soldOut={soldOut} houses={allHouses} filterPrices={filterPrices} />
+      <BrowseRooms
+        rooms={rooms}
+        soldOut={soldOut}
+        houses={allHouses}
+        filterPrices={filterPrices}
+        autoFeatured={autoFeatured}
+      />
       {market.showCityList ? <CityList /> : null}
       <TrustBand variant="band" />
 

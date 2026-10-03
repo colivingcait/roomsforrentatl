@@ -6,6 +6,8 @@ import { getBrand } from "@/lib/brand";
 import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
 import { getFilterStartingPrices } from "@/lib/filterPrices";
 import { answerRoomSearch } from "@/lib/searchAnswer";
+import { getAutoFeaturedRooms } from "@/lib/autoFeatured";
+import { getMarket } from "@/lib/market";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
@@ -154,6 +156,7 @@ export async function POST(req: Request) {
 
   const filterPrices = await getFilterStartingPrices();
   const code = referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value);
+  const autoFeatured = getMarket().id === "dfw" ? await getAutoFeaturedRooms() : [];
 
   // Search needs get a PadSplit referral link first. This does not use the model,
   // so a private-bath or budget tap can't fall back to a featured-room pitch.
@@ -192,7 +195,8 @@ export async function POST(req: Request) {
           filterPrices.privateBath,
           filterPrices.roomForTwo,
           filterPrices.fewer,
-          filterPrices.lowest
+          filterPrices.lowest,
+          autoFeatured
         ),
         messages,
       }),

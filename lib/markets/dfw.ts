@@ -34,6 +34,8 @@ export const DFW_MARKET: Market = {
   seoBody:
     "Looking for an affordable room to rent in Dallas–Fort Worth? Furnished private bedrooms in shared homes across the Dallas–Fort Worth metro are booked through PadSplit, with no long lease and weekly or biweekly pay. Every furnished room on this site is booked through PadSplit, with utilities, parking and Wi-Fi included. Once you're approved, you can move in as soon as the next day.",
   footerLine: "Furnished rooms for rent in Dallas–Fort Worth. Move in as soon as tomorrow.",
+  // Empty until a host list is added. The homepage then shows the cheapest
+  // PadSplit rooms on the metro search. A non-empty list replaces that.
   featuredSources: [],
   showPageFaq: true,
   showCityList: true,
