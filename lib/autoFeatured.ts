@@ -40,6 +40,38 @@ function asWeekly(value: unknown): number | null {
   return Math.round(n);
 }
 
+/**
+ * The search card price is an introductory rate, not the ongoing weekly rent.
+ * Listing 31523 is the case this catches: PadSplit shows $73/week, while the
+ * room description says $69 for the first 5 weeks and then $169. A small
+ * commitment discount (about $8 off) is not a teaser.
+ */
+export function isIntroTeaser(room: Record<string, unknown>, displayed: number): boolean {
+  const weekly = asWeekly(room.total_weekly_rate ?? room.base_price);
+  if (weekly == null || Math.abs(weekly - displayed) > 1) return false;
+  const desc = typeof room.description === "string" ? room.description : "";
+  const target = desc.match(/target weekly rate of\s*\$?\s*(\d{2,4})/i);
+  if (target && Number(target[1]) >= displayed + 25) return true;
+  return /introductor/i.test(desc) && /increas/i.test(desc);
+}
+
+async function listingIsIntroTeaser(id: string, displayed: number): Promise<boolean> {
+  try {
+    const res = await fetch(`https://www.padsplit.com/api/inventory/properties/${id}/`, {
+      next: { revalidate: 3600 },
+      headers: { accept: "application/json" },
+    });
+    if (!res.ok) return false;
+    const data = (await res.json()) as { rooms?: unknown };
+    if (!Array.isArray(data.rooms)) return false;
+    return data.rooms.some(
+      (room) => !!room && typeof room === "object" && isIntroTeaser(room as Record<string, unknown>, displayed)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function pictureText(pic: Picture): string {
   const category = typeof pic.category === "string" ? pic.category : "";
   const description = typeof pic.description === "string" ? pic.description : "";
@@ -114,6 +146,9 @@ export async function getAutoFeaturedRooms(): Promise<AutoFeaturedRoom[]> {
       const place = publicPlace(item.address);
       const photo = interiorPhoto(item.ordered_pictures);
       if (!/^\d+$/.test(id) || price == null || !place || !photo) continue;
+      // Skip intro rates. The ongoing rent is only in the host's description,
+      // so the card is omitted instead of showing that figure.
+      if (await listingIsIntroTeaser(id, price)) continue;
       rooms.push({
         id,
         label: "Furnished room",
