@@ -308,6 +308,8 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
           href={generalSearchUrl()}
           event="general_search_click"
           properties={{ source: "house_page_dealbreaker", house: house.id }}
+          dataAttr="padsplit-search"
+          capture={{ section: "house_page", house: house.id }}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-3.5 flex items-center justify-between gap-2.5 rounded-xl bg-brand px-3.5 py-3 text-sm font-bold text-white"
@@ -332,12 +334,15 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
               rel="noopener noreferrer"
               className="btn-book block text-center"
               event="book_click"
+              dataAttr="book-room"
+              capture={{ section: "house_page", house: house.id, room: String(selected.id) }}
               properties={{
                 house: house.id,
                 houseName: house.name,
                 room: String(selected.id),
                 roomTitle: shortRoomName(selected),
                 source: "house_page",
+                section: "house_page",
               }}
             >
               Apply for {shortRoomName(selected)} — ${APPLICATION_FEE} now

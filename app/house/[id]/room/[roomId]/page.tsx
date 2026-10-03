@@ -175,12 +175,15 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             rel="noopener noreferrer"
             className="btn-book flex-1"
             event="book_click"
+            dataAttr="book-room"
+            capture={{ section: "room_page", house: house.id, room: String(room.id) }}
             properties={{
               house: house.id,
               houseName: house.name,
               room: String(room.id),
               roomTitle: roomTitle(room),
               source: "page",
+              section: "room_page",
             }}
           >
             Book this room →
