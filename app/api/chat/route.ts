@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
-import { priceLabel } from "@/lib/format";
+import { listingPlace, priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
 import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
 
@@ -42,7 +42,7 @@ function extractBookCards(text: string): { text: string; cards: BookCard[] } {
     .map((h) => ({
       id: h.id,
       name: h.name,
-      location: [h.neighborhood, h.city].filter(Boolean).join(", "),
+      location: listingPlace(h),
       fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,
       roomsAvailable: h.roomsAvailable,
       rating: h.rating ?? null,

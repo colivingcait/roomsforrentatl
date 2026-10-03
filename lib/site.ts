@@ -178,6 +178,22 @@ export function doubleOccupancySearchUrl(code?: string): string {
   return atlantaSearchUrl({ roomFeatures: "allow_multiple_occupants" }, code);
 }
 
+/** Homes with 5 or fewer housemates. PadSplit's roomsCount=6 is that search. */
+export function fewerHousematesSearchUrl(code?: string): string {
+  return atlantaSearchUrl({ roomsCount: "6" }, code);
+}
+
+/** Instant move-in. This filter works on /rooms-for-rent/atlanta-ga, not /search. */
+export function instantBookingSearchUrl(code?: string): string {
+  return atlantaSearchUrl({ moveInTime: "instant_move_in" }, code);
+}
+
+/** tel: link for site.phone. Calls only. */
+export function phoneTelHref(): string {
+  const digits = site.phone.replace(/\D/g, "");
+  return `tel:+1${digits}`;
+}
+
 /**
  * City search. Verified slugs get /rooms-for-rent/<slug>-ga plus referral params.
  * Anything else, including south-atlanta / buckhead / midtown, uses the Atlanta-wide search.

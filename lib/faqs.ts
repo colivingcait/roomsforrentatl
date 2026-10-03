@@ -1,6 +1,7 @@
 import faqData from "@/data/faq.json";
 import {
   doubleOccupancySearchUrl,
+  instantBookingSearchUrl,
   MAIN_REFERRAL_CODE,
   privateBathSearchUrl,
   site,
@@ -30,6 +31,12 @@ export const MORE_THAN_ONE_ANSWER =
  */
 export function getFaqs(code: string = MAIN_REFERRAL_CODE): SiteFaq[] {
   return (faqData.faqs as SiteFaq[]).map((faq) => {
+    if (faq.q === "Can I book instantly?") {
+      return {
+        ...faq,
+        link: { label: "See instant-book rooms on PadSplit", url: instantBookingSearchUrl(code) },
+      };
+    }
     if (faq.q === "Do rooms have private bathrooms?") {
       return {
         ...faq,

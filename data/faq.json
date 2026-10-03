@@ -3,6 +3,20 @@
   "faqs": [
     {
       "category": "Moving in",
+      "q": "Can I book instantly?",
+      "a": "Yes. Apply and lock in your room today. No waiting on host approval. Instant-book rooms start at $158/wk.",
+      "variants": [
+        "book today",
+        "move in today",
+        "I need a room today",
+        "instant booking",
+        "book instantly",
+        "can I move in today",
+        "no host approval"
+      ]
+    },
+    {
+      "category": "Moving in",
       "q": "How fast can I move in?",
       "a": "Most rooms are next-day move-in once you're approved, and approval is usually quick. If a room is available and you apply early enough in the day, same-day move-in is often possible too."
     },

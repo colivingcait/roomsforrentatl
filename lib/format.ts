@@ -27,6 +27,46 @@ export function photoLabel(p: Pick<Photo, "description" | "category">): string {
 }
 import { availableRooms } from "./houses";
 
+/** Street-type tokens (CT, St, Ave, …) that must never appear as a public place name. */
+const STREET_TYPE =
+  /\b(st|street|ave|avenue|dr|drive|rd|road|ln|lane|blvd|boulevard|ct|court|cir|circle|pl|place|pkwy|parkway|trl|trail|ter|terrace|hwy|highway)\b/i;
+
+export function isStreetishPlace(value: string | null | undefined): boolean {
+  return !!value && STREET_TYPE.test(value);
+}
+
+/**
+ * Public submarket for a home: the city, never a street.
+ * Baker Hills / Adamsville / Willow are labeled West Atlanta.
+ */
+export function submarketLabel(house: {
+  id?: string;
+  neighborhood?: string | null;
+  city?: string | null;
+}): string {
+  const hood = (house.neighborhood ?? "").trim();
+  if (house.id === "39708" || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
+    return "West Atlanta";
+  }
+  const city = (house.city ?? "").replace(/,?\s*ga$/i, "").trim();
+  if (city && !isStreetishPlace(city)) return city;
+  if (hood && !isStreetishPlace(hood)) return hood;
+  return "Atlanta";
+}
+
+/** Neighborhood + submarket for a listing, with street-type names removed. */
+export function listingPlace(house: {
+  id?: string;
+  neighborhood?: string | null;
+  city?: string | null;
+}): string {
+  const sub = submarketLabel(house);
+  const hood = (house.neighborhood ?? "").trim();
+  if (!hood || isStreetishPlace(hood) || sub === "West Atlanta") return sub;
+  if (hood.toLowerCase().includes(sub.toLowerCase())) return hood;
+  return [hood, sub].filter(Boolean).join(", ");
+}
+
 export function priceLabel(price: number, unit: PriceUnit = "week"): string {
   return `$${price.toLocaleString()}/${unit === "week" ? "wk" : "mo"}`;
 }

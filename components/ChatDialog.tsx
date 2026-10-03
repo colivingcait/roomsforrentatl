@@ -51,6 +51,18 @@ export default function ChatDialog({
     if (open && tab === "faq") trackEvent("faq_viewed");
   }, [open, tab]);
 
+  // Opening chat (from the header, the FAB, or the mobile teaser) counts as
+  // engagement so the homepage teaser does not appear again this session.
+  useEffect(() => {
+    if (!open) return;
+    try {
+      sessionStorage.setItem("rfr_chatEngaged", "1");
+    } catch {
+      /* private mode */
+    }
+    window.dispatchEvent(new Event("rfr-chat-engaged"));
+  }, [open]);
+
   // While the dialog is open: lock background scroll and close on Escape.
   useEffect(() => {
     if (!open) return;

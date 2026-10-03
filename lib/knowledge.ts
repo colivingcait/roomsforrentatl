@@ -7,12 +7,13 @@
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
-import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
+import { listingPlace, roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
 import { getFaqs, MORE_THAN_ONE_ANSWER, PETS_ANSWER, PHONE_ANSWER, SCREENING_ANSWER } from "./faqs";
 import {
   site,
   citySearchUrl,
   doubleOccupancySearchUrl,
+  instantBookingSearchUrl,
   privateBathSearchUrl,
   VERIFIED_PADSPLIT_CITY_SLUGS,
 } from "./site";
@@ -28,6 +29,9 @@ function policies(code: string): string {
 - More than one person: ${MORE_THAN_ONE_ANSWER} Link: ${doubleOccupancySearchUrl(code)} Do NOT mention kids, children, or family, even if they asked about them.
 - Safety: every resident is background-checked; each room has its own electronic door lock.
 - Booking: rooms are booked and paid for on PadSplit. On a room's page, tapping "Book this room" opens that home on PadSplit; the resident then selects the room by name to apply and pay.
+- Instant booking: if they want to book today, move in today, book instantly, or skip waiting on host approval, give this exact link: ${instantBookingSearchUrl(code)}
+  Say: "You can book instantly — apply and lock in your room today, with no waiting on host approval. Instant-book rooms start at $158/wk." Then the link.
+  $158/wk is the Atlanta instant-book starting price on that search. It is not a price of our own open rooms. Never attach $158 to a home in the live list.
 - The exact street address of a home is shared after booking, for resident privacy.
 - Tours: most homes can be toured virtually — photos plus a 3D walkthrough on each listing. A few homes also have a full Matterport 3D tour; if a home in the list shows a "3D virtual tour" link, share that link when someone wants to tour it. In-person visits are NOT available until after booking, since the exact address is private until then. Do not offer or imply an in-person showing beforehand.
 - Transfers: if a resident isn't happy with their home at move-in, or simply wants a change later, transferring to another available room or home is simple and FREE.
@@ -53,7 +57,7 @@ function housesSnapshot(): string {
   const houses = getHouses();
   return houses
     .map((h) => {
-      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const loc = listingPlace(h);
       const transit = h.transit ? ` Transit: ${h.transit}` : "";
       const tour = h.tourUrl ? ` 3D virtual tour: ${h.tourUrl}` : "";
       // Real physical capacity (owner-confirmed), for "how many people/bathrooms" questions —
@@ -142,7 +146,7 @@ function privateBathSnapshot(code: string): string {
     if (!h.available) continue;
     for (const r of availableRooms(h)) {
       if (r.bathroomType !== "private") continue;
-      const loc = [h.neighborhood, h.city].filter(Boolean).join(", ");
+      const loc = listingPlace(h);
       const price = r.weeklyRate ? `${priceLabel(r.weeklyRate)} all-in` : "price varies";
       rows.push(`• ${roomTitle(r)} at ${h.name} (${loc}) [id ${h.id}] — ${price}, ${moveInLabel(r.moveInDate)}.`);
     }
@@ -361,7 +365,7 @@ ${trackDirective(track)}
 - BOOKING — show tappable cards, never plain instructions. Whenever you point someone toward booking (they ask how or where to book, or you're recommending specific homes), do NOT tell them to browse PadSplit or pick a room by name. Instead write a short, friendly lead-in (for example: "Here are the homes you can book in Decatur — tap one to get started:") and then, on the LAST line of your reply, output a booking token that the app turns into clickable home cards.
 - Booking token format: <<<BOOK: id, id>>> using the bracketed home IDs from the homes list — include only homes that currently have rooms available and that fit what the person asked (e.g. a specific city). Example for the two Decatur homes: <<<BOOK: 35011, 152>>>. Never mention, quote, explain, or format the token — just put it alone on the final line. Tapping a card takes the person into the booking flow on our own site (they pick a room and book there).
 - ONE TOKEN OF EACH TYPE PER REPLY — if you're covering more than one city/area, put ALL the home IDs into a SINGLE combined <<<BOOK: ...>>> token (e.g. Decatur AND Stone Mountain homes together: <<<BOOK: 35011, 11889>>>), never two separate BOOK tokens. Same for CHIPS — exactly one, ever. Write EXACTLY three "<" and three ">" on each side — never two, never four.
-- NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (pet-friendly / double-occupancy / private bathroom).
+- NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (double-occupancy, private bathroom, fewer housemates, or instant booking).
 - Prices are weekly and "all-in" (utilities + WiFi included). Availability can change quickly; if unsure, suggest they check using a booking card.
 - TWO KINDS OF LISTINGS — never mix them up:
   (1) PadSplit CO-LIVING ROOMS — a private room in a shared home, WEEKLY rent, $19 PadSplit application fee, screened by PadSplit + our host team, our house rules apply, booked on PadSplit (use the BOOK card token).
@@ -391,6 +395,10 @@ ${quickFacts()}
 
 # PadSplit co-living rooms (weekly rent) — current availability${updated ? ` (updated ${updated})` : ""}
 ${housesSnapshot()}
+
+# Instant booking
+If they ask to book today, move in today, book instantly, or avoid waiting on host approval, give this exact PadSplit link (do not build a different URL): ${instantBookingSearchUrl(code)}
+Tell them they can apply and lock in a room today, with no waiting on host approval, and that instant-book rooms start at $158/wk. That $158 is only the starting price on this Atlanta search. Do not say one of our own rooms is $158 unless the live list says that.
 
 # Private-bathroom rooms available right now — use this EXACT list and count
 When someone asks about a private bathroom, say how many we have open from this list (if it's one, say "one room"), name the home, and include each room's weekly price from the list. Then always give this exact PadSplit link: ${privateBathSearchUrl(code)}

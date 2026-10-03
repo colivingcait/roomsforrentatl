@@ -557,6 +557,7 @@ function linkLabel(url: string): string {
     if (u.hostname.endsWith("padsplit.com")) {
       if (u.searchParams.get("bathroomType") === "private_bathroom") return "See private-bath rooms →";
       if (u.searchParams.get("roomFeatures") === "allow_multiple_occupants") return "See rooms for two →";
+      if (u.searchParams.get("moveInTime") === "instant_move_in") return "See instant-book rooms →";
       const city = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-ga$/)?.[1];
       if (city && city !== "atlanta") {
         const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { House, Room } from "@/lib/types";
-import { priceLabel, shortRoomName, moveInLabel } from "@/lib/format";
+import { listingPlace, priceLabel, shortRoomName, moveInLabel } from "@/lib/format";
 import { roomAnchorUrl, generalSearchUrl } from "@/lib/site";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { trackEvent } from "@/lib/analytics";
@@ -140,7 +140,7 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
     {
       key: "where",
       q: "Where is it, and can I see it first?",
-      body: `${house.name} is in ${[house.neighborhood, house.city].filter(Boolean).join(", ")}. The exact street address is released after you're approved, so in-person tours happen after that. ${house.tourUrl ? "The 3D tour is the best way to see it before you apply." : "Photos are the best way to see it before you apply."}`,
+      body: `${house.name} is in ${listingPlace(house)}. The exact street address is released after you're approved, so in-person tours happen after that. ${house.tourUrl ? "The 3D tour is the best way to see it before you apply." : "Photos are the best way to see it before you apply."}`,
     },
   ];
 
