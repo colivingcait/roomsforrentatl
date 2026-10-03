@@ -21,6 +21,8 @@ export type FilterStartingPrices = {
   roomForTwo: number | null;
   fewer: number | null;
   noFee: number | null;
+  /** Unfiltered Atlanta search, price low to high. Used by the chat budget answer. */
+  lowest: number | null;
 };
 
 const EMPTY: FilterStartingPrices = {
@@ -29,6 +31,7 @@ const EMPTY: FilterStartingPrices = {
   roomForTwo: null,
   fewer: null,
   noFee: null,
+  lowest: null,
 };
 
 function asWeekly(value: unknown): number | null {
@@ -57,14 +60,15 @@ async function minPrice(filter: Record<string, string>): Promise<number | null> 
 
 export async function getFilterStartingPrices(): Promise<FilterStartingPrices> {
   try {
-    const [instant, privateBath, roomForTwo, fewer, noFee] = await Promise.all([
+    const [instant, privateBath, roomForTwo, fewer, noFee, lowest] = await Promise.all([
       minPrice({ move_in_time: "instant_move_in" }),
       minPrice({ bathroom_type: "private_bathroom" }),
       minPrice({ room_features: "allow_multiple_occupants" }),
       minPrice({ rooms_count: "6" }),
       minPrice({ no_move_in_fee: "true" }),
+      minPrice({}),
     ]);
-    return { instant, privateBath, roomForTwo, fewer, noFee };
+    return { instant, privateBath, roomForTwo, fewer, noFee, lowest };
   } catch {
     return EMPTY;
   }

@@ -138,9 +138,6 @@ export default function BrowseRooms({
               tomorrow.
             </span>
           </h1>
-          <p className="mt-[18px] max-w-[640px] text-[13px] font-medium leading-snug text-white/85 md:mt-[22px] md:text-sm">
-            Some hosts charge a one-time move-in fee (often around $100), shown on each listing.
-          </p>
         </div>
       </section>
 
@@ -201,10 +198,16 @@ export default function BrowseRooms({
               );
             })}
           </div>
-          <p className="mt-3.5 flex items-center gap-1.5 text-[12.5px] text-muted">
-            <LockIcon />
-            Rooms booked securely through PadSplit
-          </p>
+          <div className="mt-3.5 flex flex-col gap-1 text-[12.5px] leading-snug text-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-1">
+            <p className="flex items-center gap-1.5">
+              <LockIcon />
+              Rooms booked securely through PadSplit
+            </p>
+            <span aria-hidden className="hidden text-slate-300 sm:inline">
+              ·
+            </span>
+            <p>Some hosts charge a one-time move-in fee (often around $100), shown on each listing.</p>
+          </div>
         </div>
       </section>
 
