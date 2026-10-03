@@ -51,13 +51,6 @@ export function listingPlace(house: {
   return submarketLabel(house);
 }
 
-/** Long-term units stay at city/submarket level, e.g. "Snellville area". */
-export function unitArea(unit: { city?: string | null }): string {
-  const city = (unit.city ?? "").replace(/,?\s*ga$/i, "").trim();
-  if (!city) return "Atlanta area";
-  return /area$/i.test(city) ? city : `${city} area`;
-}
-
 export function priceLabel(price: number, unit: PriceUnit = "week"): string {
   return `$${price.toLocaleString()}/${unit === "week" ? "wk" : "mo"}`;
 }

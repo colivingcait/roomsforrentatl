@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Unit } from "@/lib/types";
 import PhotoStrip from "./PhotoStrip";
-import { rentLabel, availDateLabel, unitArea } from "@/lib/format";
+import { rentLabel, availDateLabel } from "@/lib/format";
 
 export default function UnitCard({ unit }: { unit: Unit }) {
   const photos = unit.photos ?? [];
@@ -24,7 +24,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
           <div>
             <h3 className="font-semibold leading-tight text-ink">{unit.name}</h3>
             <p className="mt-0.5 text-sm text-muted">
-              {unit.type} · {unitArea(unit)}
+              {unit.type} · {unit.city}
             </p>
           </div>
           <div className="shrink-0 rounded-full bg-slate-100 px-3 py-1 text-sm font-bold text-slate-600">
@@ -44,14 +44,14 @@ export default function UnitCard({ unit }: { unit: Unit }) {
         {photos.length > 0 ? (
           <PhotoStrip
             images={photos}
-            alt={`Furnished apartment for rent in the ${unitArea(unit)} — ${unit.name}`}
+            alt={`Furnished apartment for rent in ${unit.city}, Atlanta — ${unit.name}`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (
-          <div className="grid h-full w-full place-items-center bg-slate-100 text-center text-slate-500">
+          <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
             <div>
-              <div className="text-sm font-semibold text-slate-600">{unit.type}</div>
-              <div className="mt-1 text-xs font-medium uppercase tracking-wide">Photos coming soon</div>
+              <div className="text-2xl font-extrabold">{unit.type}</div>
+              <div className="mt-1 text-xs font-medium uppercase tracking-wide text-white/80">Photos coming soon</div>
             </div>
           </div>
         )}
@@ -73,7 +73,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
           <div>
             <h3 className="font-semibold leading-tight text-ink">{unit.name}</h3>
             <p className="mt-0.5 text-sm text-muted">
-              {unit.type} · {unitArea(unit)}
+              {unit.type} · {unit.city}
             </p>
           </div>
           <div className="shrink-0 text-right">

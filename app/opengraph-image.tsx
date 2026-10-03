@@ -1,5 +1,4 @@
 import housesData from "@/data/houses.json";
-import unitsData from "@/data/units.json";
 import { getBrand } from "@/lib/brand";
 import { dropPhoto } from "@/lib/listing-privacy.mjs";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
@@ -24,8 +23,6 @@ export default async function OpengraphImage() {
         line2: "Your own private space",
         sub: "Monthly lease · utilities included",
         chips: ["Fully furnished", "Utilities included", "A place that's all yours"],
-        photoPath: (unitsData.units as Array<{ photos?: string[] }>).find((u) => u.photos && u.photos.length)
-          ?.photos?.[0],
       }
     : {
         letter: "R",

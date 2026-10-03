@@ -1,9 +1,9 @@
 {
-  "_README": "Long-term (monthly) private rentals — managed manually here. These are NOT PadSplit co-living rooms and are NOT touched by the scraper. Applications go through each unit's TurboTenant link (applyUrl). Add photos to the photos[] array when ready. Photos must be interiors only — no exterior, aerial, drone, or street-facing shots, and no filenames that identify a community.",
+  "_README": "Long-term (monthly) private rentals — managed manually here. These are NOT PadSplit co-living rooms and are NOT touched by the scraper. Applications go through each unit's TurboTenant link (applyUrl). Add photos to the photos[] array when ready.",
   "units": [
     {
       "id": "2br-snellville",
-      "name": "2 Bedroom in the Snellville area",
+      "name": "Lake House — 2 Bedroom",
       "type": "2 Bed · 1 Bath",
       "beds": 2,
       "baths": 1,
@@ -16,23 +16,45 @@
       "leaseLength": "12 months preferred",
       "pets": "Small pets under 25 lbs considered",
       "sqft": 1000,
-      "summary": "Bright, partially furnished 2 bed / 1 bath upstairs unit in the Snellville area. Laundry is shared with the downstairs unit.",
+      "summary": "Bright, partially furnished 2 bed / 1 bath upstairs unit in a duplex-style house in the Norris Lake community. Laundry is shared with the downstairs unit (in the garage); parking is in the driveway.",
       "furnishedNote": "Want the second bedroom furnished? Just let us know — otherwise bring your own bed and personal belongings.",
       "features": [
         "Queen bed in the primary bedroom",
         "Flexible second room — furnished or unfurnished, your choice",
         "Furnished living room",
         "Full-size, all stainless-steel kitchen appliances",
-        "Private outdoor space",
-        "Own dedicated parking space"
+        "New deck & stairs",
+        "Backyard",
+        "Own dedicated parking space",
+        "Norris Lake community: lake, pool, beach, tennis & parks"
       ],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=e2085ef6-1230-4f26-9c63-1df569145778",
-      "photos": [],
+      "photos": [
+        "/units/lake-house-2br/DJI_20260706154721_0179.JPG",
+        "/units/lake-house-2br/DJI_20260706154755_0180.JPG",
+        "/units/lake-house-2br/DJI_20260706154815_0181.JPG",
+        "/units/lake-house-2br/DJI_20260706154827_0182.JPG",
+        "/units/lake-house-2br/DJI_20260706154848_0183.JPG",
+        "/units/lake-house-2br/DJI_20260706154929_0186.JPG",
+        "/units/lake-house-2br/DJI_20260706154947_0187.JPG",
+        "/units/lake-house-2br/DJI_20260706154954_0188.JPG",
+        "/units/lake-house-2br/DJI_20260706155019_0189.JPG",
+        "/units/lake-house-2br/DJI_20260706155039_0190.JPG",
+        "/units/lake-house-2br/DJI_20260706155101_0191.JPG",
+        "/units/lake-house-2br/DJI_20260706155109_0192.JPG",
+        "/units/lake-house-2br/DJI_20260706155113_0193.JPG",
+        "/units/lake-house-2br/DJI_20260706155131_0194.JPG",
+        "/units/lake-house-2br/DJI_20260706155144_0196.JPG",
+        "/units/lake-house-2br/DJI_20260706155203_0197.JPG",
+        "/units/lake-house-2br/DJI_20260706155213_0198.JPG",
+        "/units/lake-house-2br/DJI_20260706155247_0199.JPG",
+        "/units/lake-house-2br/DJI_20260706155310_0200.JPG"
+      ],
       "tourUrl": "https://youtu.be/C0MoVQS_1n0"
     },
     {
       "id": "studio-snellville",
-      "name": "Studio in the Snellville area",
+      "name": "Lake House — Studio",
       "type": "Studio",
       "beds": 0,
       "baths": 1,
@@ -46,26 +68,27 @@
       "leaseLength": "12 months preferred",
       "pets": "Small pets under 25 lbs considered",
       "sqft": 500,
-      "summary": "Newly renovated, fully furnished studio in the Snellville area — private entry, move-in ready. Laundry is shared with the upstairs unit.",
+      "summary": "Newly renovated, fully furnished studio in a duplex-style house in the Norris Lake community — private entry, move-in ready. Laundry is shared with the upstairs unit (in the connected garage).",
       "furnishedNote": "Just bring your clothes, bed linens, towels, and personal belongings — everything else is provided.",
       "features": [
         "Private entry — separate unit",
         "Queen bed & living room furniture",
         "Fully equipped kitchenette (fridge, microwave/oven combo, hot plate)",
-        "Private outdoor space",
-        "Designated parking space"
+        "Private patio",
+        "Designated parking space",
+        "Norris Lake community: lake, pool, beach, tennis & parks"
       ],
       "applyUrl": "https://renter.turbotenant.com/general-prescreener/T3duZXI6OTQ4OTMw?property=b8cb0774-46e7-44fa-8065-fe71845200b1",
       "photos": [
-        "/units/studio-snellville/DB12D671-6FAE-430C-89D4-8B521F7A1BE9_1_105_c.jpeg",
-        "/units/studio-snellville/0F37FB0B-3D1E-4BBD-A2F0-92B6FDB059C8_1_105_c.jpeg",
-        "/units/studio-snellville/A9718D8D-D3B2-474C-A15F-E2A0E8E73D9F_1_105_c.jpeg",
-        "/units/studio-snellville/B4C711AF-F647-421C-827F-0402FCED7924_1_105_c.jpeg",
-        "/units/studio-snellville/F9C8E8D2-3DD5-4704-A225-636FD9AB0F79_1_105_c.jpeg",
-        "/units/studio-snellville/D9A3BA47-89CB-4142-B9D6-4E1BC1DA184B_1_105_c.jpeg",
-        "/units/studio-snellville/2994BAD5-F9DA-475D-955C-F88E38A34863_1_105_c.jpeg",
-        "/units/studio-snellville/33D4D860-0276-4B0B-B34F-108B19AE4E37_1_105_c.jpeg",
-        "/units/studio-snellville/D6D6A0B6-0214-40E2-B99A-F21CD64AB495_1_105_c.jpeg"
+        "/units/lake-house-studio/DB12D671-6FAE-430C-89D4-8B521F7A1BE9_1_105_c.jpeg",
+        "/units/lake-house-studio/0F37FB0B-3D1E-4BBD-A2F0-92B6FDB059C8_1_105_c.jpeg",
+        "/units/lake-house-studio/A9718D8D-D3B2-474C-A15F-E2A0E8E73D9F_1_105_c.jpeg",
+        "/units/lake-house-studio/B4C711AF-F647-421C-827F-0402FCED7924_1_105_c.jpeg",
+        "/units/lake-house-studio/F9C8E8D2-3DD5-4704-A225-636FD9AB0F79_1_105_c.jpeg",
+        "/units/lake-house-studio/D9A3BA47-89CB-4142-B9D6-4E1BC1DA184B_1_105_c.jpeg",
+        "/units/lake-house-studio/2994BAD5-F9DA-475D-955C-F88E38A34863_1_105_c.jpeg",
+        "/units/lake-house-studio/33D4D860-0276-4B0B-B34F-108B19AE4E37_1_105_c.jpeg",
+        "/units/lake-house-studio/D6D6A0B6-0214-40E2-B99A-F21CD64AB495_1_105_c.jpeg"
       ],
       "tourUrl": null
     },
@@ -84,14 +107,16 @@
       "leaseLength": "12 months preferred",
       "pets": "Considered case by case",
       "sqft": 500,
-      "summary": "Renovated private studio in the Decatur area — private entry, unfurnished, ready to make your own. Laundry is all yours, no sharing.",
+      "summary": "Renovated private studio in Decatur — private entry, unfurnished, ready to make your own. Laundry is all yours, no sharing.",
       "features": [
         "Private entry — separate unit",
         "Kitchenette",
         "Private laundry (not shared)"
       ],
       "applyUrl": null,
-      "photos": [],
+      "photos": [
+        "/units/studio-decatur/IMG_1987.PNG"
+      ],
       "tourUrl": null
     }
   ]

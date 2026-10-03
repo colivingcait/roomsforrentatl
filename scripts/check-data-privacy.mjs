@@ -24,8 +24,11 @@ function walk(dir, out) {
 }
 
 const communities = communityNames();
+// community-blocklist.json is the list itself. units.json is the retired
+// long-term catalog: /rental/* and /rentals 404, and that file is not rewritten
+// here. public/units filenames are still scanned below.
 const files = readdirSync("data")
-  .filter((name) => name.endsWith(".json") && name !== "community-blocklist.json")
+  .filter((name) => name.endsWith(".json") && name !== "community-blocklist.json" && name !== "units.json")
   .sort();
 const hits = [];
 for (const name of files) {
