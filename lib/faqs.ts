@@ -3,6 +3,7 @@ import {
   doubleOccupancySearchUrl,
   instantBookingSearchUrl,
   MAIN_REFERRAL_CODE,
+  noMoveInFeeSearchUrl,
   privateBathSearchUrl,
   site,
 } from "./site";
@@ -29,7 +30,11 @@ export const MORE_THAN_ONE_ANSWER =
  * FAQs for the popup and the chat assistant.
  * Search links are built for `code` (main site unless the caller passes the covilla code).
  */
-export function getFaqs(code: string = MAIN_REFERRAL_CODE, instantStart?: number | null): SiteFaq[] {
+export function getFaqs(
+  code: string = MAIN_REFERRAL_CODE,
+  instantStart?: number | null,
+  noFeeStart?: number | null
+): SiteFaq[] {
   return (faqData.faqs as SiteFaq[]).map((faq) => {
     if (faq.q === "Can I book instantly?") {
       const start =
@@ -40,6 +45,17 @@ export function getFaqs(code: string = MAIN_REFERRAL_CODE, instantStart?: number
         ...faq,
         a: `Yes. Apply and lock in your room today. No waiting on host approval.${start}`,
         link: { label: "See instant-book rooms on PadSplit", url: instantBookingSearchUrl(code) },
+      };
+    }
+    if (faq.q === "Can I find a room with no move-in fee?") {
+      const start =
+        noFeeStart != null && Number.isFinite(noFeeStart)
+          ? ` Rooms in that search start at $${Math.round(noFeeStart)}/wk.`
+          : "";
+      return {
+        ...faq,
+        a: `${faq.a}${start}`,
+        link: { label: "See rooms with no move-in fee on PadSplit", url: noMoveInFeeSearchUrl(code) },
       };
     }
     if (faq.q === "Do rooms have private bathrooms?") {

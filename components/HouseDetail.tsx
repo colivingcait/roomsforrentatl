@@ -95,7 +95,9 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
       bullets: [
         `$${APPLICATION_FEE} to apply, charged when you apply — refunded if you're not approved`,
         "First week's rent charged once you're approved by both PadSplit and the host team, not before",
-        "No security deposit, no last month, no admin or move-in fee",
+        selected?.noMoveInFee
+          ? "No security deposit, no last month, no admin or move-in fee"
+          : "No security deposit and no last month. Some hosts charge a one-time move-in fee, shown on the listing.",
         "Rent recurs weekly, on a weekday you pick — utilities, WiFi, and laundry included",
       ],
     },

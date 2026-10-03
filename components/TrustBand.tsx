@@ -30,8 +30,8 @@ export default function TrustBand({ variant = "cards" }: { variant?: "cards" | "
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-[18px] md:grid-cols-4 md:gap-6">
             <BandItem
               icon={<DollarIcon />}
-              title="$19 and no deposit"
-              body="$19 is refunded if you're not approved."
+              title="$19 to apply"
+              body="No deposit. Some hosts charge a one-time move-in fee, shown on each listing."
             />
             <BandItem
               icon={<CardIcon />}

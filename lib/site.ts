@@ -187,6 +187,14 @@ export function instantBookingSearchUrl(code?: string): string {
   return atlantaSearchUrl({ moveInTime: "instant_move_in" }, code);
 }
 
+/**
+ * Listings where at least one room has a $0 host move-in fee.
+ * PadSplit's flag is not a promise that every room in the home is fee-free.
+ */
+export function noMoveInFeeSearchUrl(code?: string): string {
+  return atlantaSearchUrl({ noMoveInFee: "true" }, code);
+}
+
 /** tel: link for site.phone. Calls only. */
 export function phoneTelHref(): string {
   const digits = site.phone.replace(/\D/g, "");

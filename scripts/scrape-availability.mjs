@@ -104,7 +104,7 @@ async function extractRooms(page) {
         promo: hasPromo
           ? { percentOff: r.activePromo.priceDropPercentage, durationWeeks: r.activePromo.durationInWeeks ?? null }
           : null,
-        noMoveInFee: r.moveInFee === 0 || r.totalMoveInFeeAmount === 0,
+        noMoveInFee: r.moveInFee === 0,
         recommendedPrice: r.recommendedPrice ?? null,
         bathroomType: a.bathroomType ?? null, // "private" | "shared"
         bedSize: a.bedSize ?? null,
