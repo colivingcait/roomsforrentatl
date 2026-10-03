@@ -56,6 +56,8 @@ export interface SeedHouse {
   id: string;
   padsplitUrl: string;
   name: string;
+  /** Added from the host's PadSplit search. Curated houses leave this unset. */
+  host?: boolean;
   neighborhood: string;
   city: string;
   image: string;

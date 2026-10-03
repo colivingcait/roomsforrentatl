@@ -31,8 +31,13 @@ if (SCRAPE_MARKET === "sa") {
   const code = await scrapeSanAntonio({ chromium, UA, CHALLENGE, ART });
   process.exit(code);
 }
+if (SCRAPE_MARKET === "atl-host") {
+  const { scrapeAtlantaHost } = await import("./scrape-atl-host.mjs");
+  const code = await scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART });
+  process.exit(code);
+}
 
-const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses;
+const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses.filter((h) => h.host !== true);
 const prev = existsSync("data/availability.json")
   ? JSON.parse(readFileSync("data/availability.json", "utf8"))
   : { houses: {} };
@@ -350,4 +355,7 @@ for (const house of houses) {
 await browser.close();
 writeFileSync("data/availability.json", JSON.stringify(result, null, 2) + "\n");
 console.log(`\n==== ${okCount}/${houses.length} houses refreshed ====`);
-if (okCount === 0) process.exit(2);
+
+const { scrapeAtlantaHost } = await import("./scrape-atl-host.mjs");
+const hostCode = await scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART });
+if (okCount === 0 || hostCode === 2) process.exit(2);

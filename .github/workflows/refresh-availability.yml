@@ -13,6 +13,7 @@ on:
     paths:
       - "scripts/scrape-availability.mjs"
       - "scripts/scrape-sa.mjs"
+      - "scripts/scrape-atl-host.mjs"
       - "data/houses.json"
       - "data/houses-sa.json"
       - ".github/workflows/refresh-availability.yml"
@@ -63,8 +64,8 @@ jobs:
         if: always()
         run: |
           files=""
-          if [ -n "$(git status --porcelain data/availability.json 2>/dev/null)" ]; then
-            files="$files data/availability.json"
+          if [ -n "$(git status --porcelain data/availability.json data/houses.json 2>/dev/null)" ]; then
+            files="$files data/availability.json data/houses.json"
           fi
           if [ -n "$(git status --porcelain data/availability-sa.json data/houses-sa.json 2>/dev/null)" ]; then
             files="$files data/availability-sa.json data/houses-sa.json"

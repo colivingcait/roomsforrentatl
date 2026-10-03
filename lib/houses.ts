@@ -22,7 +22,7 @@ function featuredSeeds(): SeedHouse[] {
   if (source === "file") return SEED;
   if (source === "search") return [];
   const ids = featuredIdSet();
-  return SEED.filter((house) => ids.has(house.id));
+  return SEED.filter((house) => ids.has(house.id) || house.host === true);
 }
 
 export function getHouses(): House[] {

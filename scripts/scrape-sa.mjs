@@ -85,7 +85,7 @@ function nicknameFor(id) {
   return NICKNAMES[(hash >>> 0) % NICKNAMES.length];
 }
 
-function snap(n) {
+export function snap(n) {
   if (typeof n !== "number" || !Number.isFinite(n)) return undefined;
   return Math.round(n * 100) / 100;
 }
@@ -174,7 +174,7 @@ function loadJson(path, fallback) {
  * Address, title, description, and raw coordinates stay in `secrets` so the
  * caller can confirm they never land in the saved file.
  */
-async function readListing(page) {
+export async function readListing(page) {
   return page.evaluate(() => {
     const data = window.__NEXT_DATA__;
     const queries = data?.props?.pageProps?.dehydratedState?.queries;
@@ -254,7 +254,7 @@ async function readListing(page) {
   });
 }
 
-function toPhoto(raw) {
+export function toPhoto(raw) {
   if (!raw?.url || !/^https:\/\//.test(raw.url)) return null;
   if (photoDropped(raw.category, raw.description)) return { dropped: true };
   return {
@@ -270,7 +270,7 @@ function toPhoto(raw) {
   };
 }
 
-function mapRoom(raw) {
+export function mapRoom(raw) {
   const a = raw.amenities || {};
   const photos = [];
   let dropped = 0;
@@ -330,7 +330,7 @@ function leaks(blob, needle) {
   return new RegExp(`(?:^|[^A-Za-z0-9])${escaped}(?:[^A-Za-z0-9]|$)`).test(blob);
 }
 
-function assertNoSecrets(saved, secrets) {
+export function assertNoSecrets(saved, secrets) {
   const blob = JSON.stringify(saved);
   for (const needle of [secrets.street1, secrets.street2, secrets.zip, secrets.title, secrets.description]) {
     if (leaks(blob, needle)) {
