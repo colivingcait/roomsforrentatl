@@ -1,4 +1,5 @@
 import faqData from "@/data/faq.json";
+import { getMarket } from "./market";
 import {
   doubleOccupancySearchUrl,
   instantBookingSearchUrl,
@@ -74,6 +75,8 @@ export function getFaqs(
       };
     }
     if (faq.q === "Are animals allowed?") {
+      // Dallas–Fort Worth keeps the market FAQ. It must not claim "our homes".
+      if (getMarket().id === "dfw") return faq;
       return { ...faq, a: PETS_ANSWER, link: undefined };
     }
     if (faq.q === "What do I need to get approved?") {

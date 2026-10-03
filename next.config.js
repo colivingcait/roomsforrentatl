@@ -12,7 +12,17 @@ const explicitDfw = process.env.NEXT_PUBLIC_MARKET === "dfw";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  env: {
+    // Stamped onto analytics events. Matches the market this build actually serves.
+    NEXT_PUBLIC_BUILD_MARKET: market,
+  },
   ...(explicitDfw ? { distDir: ".next-dfw" } : {}),
+  async rewrites() {
+    if (market !== "dfw") return [];
+    return {
+      beforeFiles: [{ source: "/icon.svg", destination: "/icon-dfw.svg" }],
+    };
+  },
   ...(market === "dfw"
     ? {
         webpack: (config) => {
