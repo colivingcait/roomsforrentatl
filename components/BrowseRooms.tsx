@@ -154,9 +154,10 @@ export default function BrowseRooms({
           <h2 className="mt-1.5 text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
             What do you need?
           </h2>
-          <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-3 xl:grid-cols-5">
-            {FILTER_CARDS.map((card) => {
+          <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-6 lg:gap-3 xl:grid-cols-5">
+            {FILTER_CARDS.map((card, index) => {
               const price = filterPrices[card.key];
+              const wideSecondRow = index >= 3 ? " lg:col-span-3" : " lg:col-span-2";
               return (
               <TrackedOutboundLink
                 key={card.event}
@@ -167,7 +168,9 @@ export default function BrowseRooms({
                 rel="noopener noreferrer"
                 ariaLabel={price != null ? `${card.aria} from $${price} a week` : card.aria}
                 className={
-                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[168px] lg:flex-col lg:items-start lg:gap-2.5 lg:p-3.5 lg:pr-3.5 xl:min-h-[176px] xl:gap-2 xl:p-3 " +
+                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[168px] lg:flex-col lg:items-start lg:gap-2.5 lg:p-3.5 lg:pr-3.5 xl:col-span-1 xl:min-h-[176px] xl:gap-2 xl:p-3" +
+                  wideSecondRow +
+                  " " +
                   card.tint
                 }
               >
