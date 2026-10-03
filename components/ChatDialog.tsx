@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { trackEvent } from "@/lib/analytics";
 import { getFaqs, type SiteFaq } from "@/lib/faqs";
+import TrackedOutboundLink from "./TrackedOutboundLink";
 import ChatPanel from "./ChatPanel";
 
 type Faq = SiteFaq;
@@ -179,14 +180,16 @@ function FaqItem({ faq }: { faq: Faq }) {
         <div className="pb-3">
           <p className="text-sm leading-relaxed text-muted">{faq.a}</p>
           {faq.link && (
-            <a
+            <TrackedOutboundLink
               href={faq.link.url}
+              event="faq_outbound_click"
+              properties={{ question: faq.q }}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-brand underline"
             >
               {faq.link.label} →
-            </a>
+            </TrackedOutboundLink>
           )}
         </div>
       )}

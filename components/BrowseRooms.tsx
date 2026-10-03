@@ -7,19 +7,19 @@ import type { House } from "@/lib/types";
 import type { RoomListing } from "@/lib/browse";
 import { APPLICATION_FEE } from "@/lib/browse";
 import { priceLabel } from "@/lib/format";
-import { PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "@/lib/site";
-import { trackEvent } from "@/lib/analytics";
+import { doubleOccupancySearchUrl, privateBathSearchUrl } from "@/lib/site";
+import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 
 type FilterKey = "tomorrow" | "priv" | "bus";
 
 const PADSPLIT_SEARCH_LINKS = [
   {
-    href: PADSPLIT_PRIVATE_BATH_SEARCH_URL,
+    href: privateBathSearchUrl(),
     label: "Need a private bathroom? See private-bath rooms on PadSplit",
     event: "private_bath_search_click",
   },
   {
-    href: PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL,
+    href: doubleOccupancySearchUrl(),
     label: "Need a room for two? See double-occupancy rooms on PadSplit",
     event: "double_occupancy_search_click",
   },
@@ -205,17 +205,18 @@ export default function BrowseRooms({
 
         <div className="mt-3 flex flex-col gap-2">
           {PADSPLIT_SEARCH_LINKS.map((item) => (
-            <a
+            <TrackedOutboundLink
               key={item.event}
               href={item.href}
+              event={item.event}
+              properties={{ source: "homepage" }}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent(item.event, { source: "homepage" })}
               className="flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 text-[14px] font-semibold leading-snug text-brand active:scale-[0.99]"
             >
               <span>{item.label}</span>
               <span aria-hidden>→</span>
-            </a>
+            </TrackedOutboundLink>
           ))}
         </div>
       </div>

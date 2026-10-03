@@ -552,10 +552,19 @@ function MessageText({ text, isUser = false }: { text: string; isUser?: boolean 
 }
 
 function linkLabel(url: string): string {
-  if (/sign-up|padsplit\.com\/\?/.test(url)) return "Search on PadSplit →";
-  if (/padsplit\.com/.test(url)) return "View on PadSplit →";
   try {
-    return new URL(url).hostname.replace(/^www\./, "") + " →";
+    const u = new URL(url);
+    if (u.hostname.endsWith("padsplit.com")) {
+      if (u.searchParams.get("bathroomType") === "private_bathroom") return "See private-bath rooms →";
+      if (u.searchParams.get("roomFeatures") === "allow_multiple_occupants") return "See rooms for two →";
+      const city = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-ga$/)?.[1];
+      if (city && city !== "atlanta") {
+        const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        return `See rooms in ${name} →`;
+      }
+      return "View on PadSplit →";
+    }
+    return u.hostname.replace(/^www\./, "") + " →";
   } catch {
     return url;
   }

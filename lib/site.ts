@@ -13,12 +13,20 @@ export const site = {
   // referral credit. PadSplit reads it from the `referralCode` query param (seen
   // on real PadSplit share links), alongside ref_source/ref_role attribution.
   referral: {
-    code: process.env.NEXT_PUBLIC_PADSPLIT_REFERRAL ?? "B2C2060F",
-    param: process.env.NEXT_PUBLIC_PADSPLIT_REFERRAL_PARAM ?? "referralCode",
-    // Extra attribution params PadSplit includes on host share links.
+    // Root roomsforrentatl.com. /covilla switches to COVILLA_REFERRAL_CODE.
+    code: "B2C2060F",
+    param: "referralCode",
+    // Extra attribution params on room "Book" links (not the search CTAs).
     extra: { ref_source: "site", ref_role: "host" } as Record<string, string>,
   },
+  /** Calls only — do not offer this number for texting. */
+  phone: "(678) 490-9917",
 };
+
+/** Main site (root routes). */
+export const MAIN_REFERRAL_CODE = site.referral.code;
+/** roomsforrentatl.com/covilla. */
+export const COVILLA_REFERRAL_CODE = "0DC68BAB";
 
 /**
  * Per-visitor referral override — lets two "versions" of the site run at
@@ -29,21 +37,35 @@ export const site = {
  */
 export const REFERRAL_COOKIE = "ref_override";
 export const REFERRAL_OVERRIDES: Record<string, string> = {
-  lustra: "B2C2060F",
-  covilla: "0DC68BAB",
+  lustra: MAIN_REFERRAL_CODE,
+  covilla: COVILLA_REFERRAL_CODE,
 };
+
+/**
+ * Referral code for a visitor. No cookie (root routes) uses the main code.
+ * /covilla sets the ref_override cookie to "covilla" before redirecting home.
+ * Pass cookieValue on the server; in the browser the cookie is read for you.
+ */
+export function referralCodeFor(cookieValue?: string | null): string {
+  const key = cookieValue ?? readReferralCookie();
+  if (key && REFERRAL_OVERRIDES[key]) return REFERRAL_OVERRIDES[key];
+  return MAIN_REFERRAL_CODE;
+}
+
+function readReferralCookie(): string | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(/(?:^|;\s*)ref_override=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
 
 /** Client-side only: rewrites a PadSplit booking URL's referral code to match the visitor's ref_override cookie, if any. Safe no-op on the server or for non-PadSplit URLs. */
 export function applyReferralOverride(href: string): string {
   if (typeof document === "undefined") return href;
-  const match = document.cookie.match(/(?:^|;\s*)ref_override=([^;]*)/);
-  const key = match ? decodeURIComponent(match[1]) : null;
-  const overrideCode = key ? REFERRAL_OVERRIDES[key] : null;
-  if (!overrideCode) return href;
+  const code = referralCodeFor();
   try {
     const u = new URL(href);
     if (!u.hostname.endsWith("padsplit.com")) return href;
-    u.searchParams.set(site.referral.param, overrideCode);
+    u.searchParams.set(site.referral.param, code);
     return u.toString();
   } catch {
     return href;
@@ -83,21 +105,88 @@ export function roomAnchorUrl(houseUrl: string, roomId?: number | string | null)
   return `${base}#${hash}`;
 }
 
-/**
- * PadSplit's Atlanta search, filtered to private bathrooms, with the host
- * referral params. Swap this one string when the referral link changes.
- * Leave `sign-up` off so a sign-up modal does not cover the search.
- */
-export const PADSPLIT_PRIVATE_BATH_SEARCH_URL =
-  "https://www.padsplit.com/rooms-for-rent/atlanta-ga?latMax=33.9698383740918&lngMax=-84.10153814955288&latMin=33.497148095320355&lngMin=-84.56500806987017&bathroomType=private_bathroom&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link";
+/** Atlanta search the private-bath and double-occupancy CTAs start from. */
+export const PADSPLIT_ATLANTA_SEARCH_BASE = "https://www.padsplit.com/rooms-for-rent/atlanta-ga";
+
+const PADSPLIT_ATLANTA_BOUNDS = {
+  latMax: "33.9698383740918",
+  lngMax: "-84.10153814955288",
+  latMin: "33.497148095320355",
+  lngMin: "-84.56500806987017",
+} as const;
+
+/** Attribution kept on every search link. No `sign-up` param, so no modal. */
+const PADSPLIT_SEARCH_ATTRIBUTION = {
+  ref_device: "desktop",
+  ref_role: "host",
+  ref_source: "link",
+} as const;
 
 /**
- * PadSplit's Atlanta search, filtered to rooms that allow two people, with the
- * same host referral params. Swap this one string when the referral link changes.
- * Leave `sign-up` off so a sign-up modal does not cover the search.
+ * City slugs that load and keep referralCode. The path is `/${slug}-ga`.
+ * south-atlanta, buckhead, and midtown are intentionally absent: those
+ * paths redirect to PadSplit's homepage and drop the referral.
  */
-export const PADSPLIT_DOUBLE_OCCUPANCY_SEARCH_URL =
-  "https://www.padsplit.com/rooms-for-rent/atlanta-ga?latMax=33.9698383740918&lngMax=-84.10153814955288&latMin=33.497148095320355&lngMin=-84.56500806987017&roomFeatures=allow_multiple_occupants&referralCode=0DC68BAB&ref_device=desktop&ref_role=host&ref_source=link";
+export const VERIFIED_PADSPLIT_CITY_SLUGS = [
+  "decatur",
+  "stone-mountain",
+  "atlanta",
+  "east-point",
+  "norcross",
+  "marietta",
+  "riverdale",
+  "avondale-estates",
+  "covington",
+  "college-park",
+  "kennesaw",
+  "canton",
+  "jonesboro",
+  "fairburn",
+  "fayetteville",
+  "newnan",
+  "snellville",
+] as const;
+
+const VERIFIED_CITY_SLUGS = new Set<string>(VERIFIED_PADSPLIT_CITY_SLUGS);
+
+/**
+ * Base search URL + optional filter params + the visitor's referral code.
+ * `code` defaults to the main site. Pass referralCodeFor(cookie) for /covilla.
+ */
+export function padsplitSearchUrl(
+  base: string,
+  filter: Record<string, string> = {},
+  code: string = MAIN_REFERRAL_CODE
+): string {
+  const u = new URL(base);
+  for (const [k, v] of Object.entries(filter)) u.searchParams.set(k, v);
+  if (code) u.searchParams.set(site.referral.param, code);
+  for (const [k, v] of Object.entries(PADSPLIT_SEARCH_ATTRIBUTION)) u.searchParams.set(k, v);
+  return u.toString();
+}
+
+/** Atlanta-wide search, including the metro bounds. Use this when a city slug would drop the referral. */
+export function atlantaSearchUrl(filter: Record<string, string> = {}, code?: string): string {
+  return padsplitSearchUrl(PADSPLIT_ATLANTA_SEARCH_BASE, { ...PADSPLIT_ATLANTA_BOUNDS, ...filter }, code);
+}
+
+export function privateBathSearchUrl(code?: string): string {
+  return atlantaSearchUrl({ bathroomType: "private_bathroom" }, code);
+}
+
+export function doubleOccupancySearchUrl(code?: string): string {
+  return atlantaSearchUrl({ roomFeatures: "allow_multiple_occupants" }, code);
+}
+
+/**
+ * City search. Verified slugs get /rooms-for-rent/<slug>-ga plus referral params.
+ * Anything else, including south-atlanta / buckhead / midtown, uses the Atlanta-wide search.
+ */
+export function citySearchUrl(slug: string, filter: Record<string, string> = {}, code?: string): string {
+  const city = slug.toLowerCase().trim();
+  if (!VERIFIED_CITY_SLUGS.has(city)) return atlantaSearchUrl(filter, code);
+  return padsplitSearchUrl(`https://www.padsplit.com/rooms-for-rent/${city}-ga`, filter, code);
+}
 
 /**
  * PadSplit's general site-wide search page (not tied to any one house) —

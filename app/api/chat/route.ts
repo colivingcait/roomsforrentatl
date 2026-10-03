@@ -1,7 +1,9 @@
+import { cookies } from "next/headers";
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
 import { priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
+import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
@@ -165,7 +167,11 @@ export async function POST(req: Request) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 600,
-        system: buildSystemPrompt(track, { key: brand.key, name: brand.name, domain: brand.domain }),
+        system: buildSystemPrompt(
+          track,
+          { key: brand.key, name: brand.name, domain: brand.domain },
+          referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value)
+        ),
         messages,
       }),
     });
