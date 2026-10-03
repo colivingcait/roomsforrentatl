@@ -1,0 +1,23 @@
+name: Privacy
+
+# Blocks a pull request when committed data or the production build contains
+# a street address, a PadSplit title/description, or a too-precise coordinate.
+on:
+  pull_request:
+  push:
+    branches:
+      - claude/roomsforentatl-booking-site-hsgsu0
+
+jobs:
+  privacy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
