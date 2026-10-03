@@ -3,7 +3,7 @@
   "units": [
     {
       "id": "2br-snellville",
-      "title": "Lake House — 2 Bedroom",
+      "name": "Lake House — 2 Bedroom",
       "type": "2 Bed · 1 Bath",
       "beds": 2,
       "baths": 1,
@@ -16,7 +16,7 @@
       "leaseLength": "12 months preferred",
       "pets": "Small pets under 25 lbs considered",
       "sqft": 1000,
-      "description": "Bright, partially furnished 2 bed / 1 bath upstairs unit in a duplex-style house in the Norris Lake community. Laundry is shared with the downstairs unit (in the garage); parking is in the driveway.",
+      "summary": "Bright, partially furnished 2 bed / 1 bath upstairs unit in a duplex-style house in the Norris Lake community. Laundry is shared with the downstairs unit (in the garage); parking is in the driveway.",
       "furnishedNote": "Want the second bedroom furnished? Just let us know — otherwise bring your own bed and personal belongings.",
       "features": [
         "Queen bed in the primary bedroom",
@@ -54,7 +54,7 @@
     },
     {
       "id": "studio-snellville",
-      "title": "Lake House — Studio",
+      "name": "Lake House — Studio",
       "type": "Studio",
       "beds": 0,
       "baths": 1,
@@ -68,7 +68,7 @@
       "leaseLength": "12 months preferred",
       "pets": "Small pets under 25 lbs considered",
       "sqft": 500,
-      "description": "Newly renovated, fully furnished studio in a duplex-style house in the Norris Lake community — private entry, move-in ready. Laundry is shared with the upstairs unit (in the connected garage).",
+      "summary": "Newly renovated, fully furnished studio in a duplex-style house in the Norris Lake community — private entry, move-in ready. Laundry is shared with the upstairs unit (in the connected garage).",
       "furnishedNote": "Just bring your clothes, bed linens, towels, and personal belongings — everything else is provided.",
       "features": [
         "Private entry — separate unit",
@@ -94,7 +94,7 @@
     },
     {
       "id": "studio-decatur",
-      "title": "Renovated Private Studio",
+      "name": "Renovated Private Studio",
       "type": "Studio",
       "beds": 0,
       "baths": 1,
@@ -107,14 +107,16 @@
       "leaseLength": "12 months preferred",
       "pets": "Considered case by case",
       "sqft": 500,
-      "description": "Renovated private studio in Decatur — private entry, unfurnished, ready to make your own. Laundry is all yours, no sharing.",
+      "summary": "Renovated private studio in Decatur — private entry, unfurnished, ready to make your own. Laundry is all yours, no sharing.",
       "features": [
         "Private entry — separate unit",
         "Kitchenette",
         "Private laundry (not shared)"
       ],
       "applyUrl": null,
-      "photos": ["/units/studio-decatur/IMG_1987.PNG"],
+      "photos": [
+        "/units/studio-decatur/IMG_1987.PNG"
+      ],
       "tourUrl": null
     }
   ]

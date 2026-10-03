@@ -1,19 +1,10 @@
 /**
- * Cheapest weekly rate on each Atlanta PadSplit search, from the search API's
- * extras.min_price (the same number as the page's "starting at" line after
- * sorting price low to high). Cached for an hour. A failed fetch returns null
- * for that card so the homepage can hide the price instead of showing a stale one.
- * Address fields are never read or stored.
+ * "From" price on each metro PadSplit search. Listings are sorted by weekly
+ * price and the cheapest 10% are dropped (see lib/priceCutoff.ts) so an intro
+ * rate does not become the number on the card. Cached for an hour. A failed
+ * fetch returns null and the card hides its price.
  */
-
-const SEARCH = "https://www.padsplit.com/api/property_search/";
-
-const BOUNDS = {
-  lat_max: "33.9698383740918",
-  lng_max: "-84.10153814955288",
-  lat_min: "33.497148095320355",
-  lng_min: "-84.56500806987017",
-} as const;
+import { startingPrice } from "./priceCutoff";
 
 export type FilterStartingPrices = {
   instant: number | null;
@@ -21,7 +12,7 @@ export type FilterStartingPrices = {
   roomForTwo: number | null;
   fewer: number | null;
   noFee: number | null;
-  /** Unfiltered Atlanta search, price low to high. Used by the chat budget answer. */
+  /** Unfiltered metro search, after the same cutoff. Used by the chat budget answer. */
   lowest: number | null;
 };
 
@@ -34,39 +25,15 @@ const EMPTY: FilterStartingPrices = {
   lowest: null,
 };
 
-function asWeekly(value: unknown): number | null {
-  const n = typeof value === "number" ? value : Number(value);
-  if (!Number.isFinite(n) || n <= 0) return null;
-  return Math.round(n);
-}
-
-async function minPrice(filter: Record<string, string>): Promise<number | null> {
-  const u = new URL(SEARCH);
-  for (const [k, v] of Object.entries({ ...BOUNDS, sort_by: "price", page_size: "1", ...filter })) {
-    u.searchParams.set(k, v);
-  }
-  try {
-    const res = await fetch(u.toString(), {
-      next: { revalidate: 3600 },
-      headers: { accept: "application/json" },
-    });
-    if (!res.ok) return null;
-    const data = (await res.json()) as { extras?: { min_price?: unknown } };
-    return asWeekly(data.extras?.min_price);
-  } catch {
-    return null;
-  }
-}
-
 export async function getFilterStartingPrices(): Promise<FilterStartingPrices> {
   try {
     const [instant, privateBath, roomForTwo, fewer, noFee, lowest] = await Promise.all([
-      minPrice({ move_in_time: "instant_move_in" }),
-      minPrice({ bathroom_type: "private_bathroom" }),
-      minPrice({ room_features: "allow_multiple_occupants" }),
-      minPrice({ rooms_count: "6" }),
-      minPrice({ no_move_in_fee: "true" }),
-      minPrice({}),
+      startingPrice({ move_in_time: "instant_move_in" }),
+      startingPrice({ bathroom_type: "private_bathroom" }),
+      startingPrice({ room_features: "allow_multiple_occupants" }),
+      startingPrice({ rooms_count: "6" }),
+      startingPrice({ no_move_in_fee: "true" }),
+      startingPrice({}),
     ]);
     return { instant, privateBath, roomForTwo, fewer, noFee, lowest };
   } catch {

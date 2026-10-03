@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const unit = getUnit(params.id);
   if (!unit) return { title: "Rental not found" };
   return {
-    title: `${unit.title} — Furnished Rental in ${unit.city}, GA`,
+    title: `${unit.name} — Furnished Rental in ${unit.city}, GA`,
     description: `Furnished ${unit.type} for rent in ${unit.city}, Atlanta — ${rentLabel(unit.rent)}, monthly lease.${
       unit.utilitiesIncluded ? " Utilities included." : ""
     } ${availDateLabel(unit.availableDate)}.`,
@@ -51,7 +51,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
       {/* Gallery */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
         {photos.length > 0 ? (
-          <PhotoStrip images={photos} alt={unit.title} sizes="100vw" priority />
+          <PhotoStrip images={photos} alt={unit.name} sizes="100vw" priority />
         ) : (
           <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
             <div>
@@ -74,7 +74,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
             <span className="rounded-full bg-ink px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-white">
               Long-term lease
             </span>
-            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-ink">{unit.title}</h1>
+            <h1 className="mt-2 text-2xl font-extrabold leading-tight text-ink">{unit.name}</h1>
             <p className="mt-1 text-muted">
               {unit.type} · {unit.city}
             </p>
@@ -100,7 +100,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
           </a>
         )}
 
-        {unit.description && <p className="mt-4 whitespace-pre-line text-slate-600">{unit.description}</p>}
+        {unit.summary && <p className="mt-4 whitespace-pre-line text-slate-600">{unit.summary}</p>}
 
         <h2 className="mt-7 text-lg font-bold text-ink">Details</h2>
         <dl className="mt-3 grid grid-cols-2 gap-3">
@@ -201,7 +201,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
               event="apply_click"
               dataAttr="apply-rental"
               capture={{ section: "rental_page", unit: unit.id }}
-              properties={{ unit: unit.id, unitName: unit.title }}
+              properties={{ unit: unit.id, unitName: unit.name }}
             >
               Apply now →
             </TrackedOutboundLink>

@@ -1,13 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 
 export function generateMetadata(): Metadata {
   const brand = getBrand();
+  const market = getMarket();
   const isHomes = brand.key === "homes";
+  const isDfw = market.id === "dfw";
   const headline = isHomes
     ? `${brand.name} — Furnished Private Rentals in Atlanta, GA`
-    : `${brand.name} — Furnished Rooms for Rent in Atlanta, Next-Day Move In`;
+    : isDfw
+      ? market.seoTitle
+      : `${brand.name} — Furnished Rooms for Rent in Atlanta, Next-Day Move In`;
   // Short, punchy title just for link-share previews (Messenger/iMessage/Twitter)
   // — the full SEO headline above is too long and gets truncated there.
   const socialTitle = isHomes ? headline : "Apply Today, Move in Tomorrow";
@@ -31,7 +36,9 @@ export function generateMetadata(): Metadata {
           "furnished apartment Snellville",
           "furnished apartment Decatur",
         ]
-      : [
+      : isDfw
+        ? market.keywords
+        : [
           "rooms for rent Atlanta",
           "furnished rooms Atlanta",
           "furnished room for rent Atlanta weekly",

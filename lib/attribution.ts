@@ -14,8 +14,12 @@ import { MAIN_REFERRAL_CODE, REFERRAL_OVERRIDES, referralCodeFor, site } from ".
 export const ENTRY_LANDING_COOKIE = "ref_landing";
 
 export function analyticsMarket(): string {
-  const raw = process.env.NEXT_PUBLIC_MARKET?.trim().toLowerCase();
-  return raw || "atl";
+  const configured = process.env.NEXT_PUBLIC_MARKET?.trim().toLowerCase();
+  if (configured === "dfw") return "dfw";
+  // next.config inlines this from the same decision as the page build, so a
+  // preview of this branch reports dfw even when NEXT_PUBLIC_MARKET is unset.
+  if (process.env.NEXT_PUBLIC_BUILD_MARKET === "dfw") return "dfw";
+  return "atl";
 }
 
 export function readCookie(name: string): string | null {
@@ -45,7 +49,7 @@ export function isPadsplitHost(hostname: string): boolean {
 
 export function isPadsplitHref(href: string): boolean {
   try {
-    return isPadsplitHost(new URL(href, "https://roomsforrentatl.com").hostname);
+    return isPadsplitHost(new URL(href, site.url).hostname);
   } catch {
     return false;
   }
@@ -58,7 +62,7 @@ export function linkContext(href: string): {
 } {
   const fallback = referralCodeFor();
   try {
-    const u = new URL(href, "https://roomsforrentatl.com");
+    const u = new URL(href, site.url);
     if (isPadsplitHost(u.hostname)) {
       const details = u.pathname.match(/\/room-details\/(\d+)\/(\d+)/);
       const listing = u.pathname.match(/\/listing\/(\d+)/);

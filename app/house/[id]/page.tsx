@@ -34,13 +34,8 @@ function houseJsonLd(house: ReturnType<typeof getHouse>) {
     "@type": "LodgingBusiness",
     name: house.name,
     description: `Furnished room for rent in ${listingPlace(house)}, weekly, utilities included.`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: submarketLabel(house),
-      addressRegion: "GA",
-      addressCountry: "US",
-    },
-    image: house.image.startsWith("http") ? house.image : undefined,
+    areaServed: submarketLabel(house),
+    image: house.image.startsWith("http") && !house.image.toLowerCase().includes(".png") ? house.image : undefined,
     ...(house.rating
       ? {
           aggregateRating: {

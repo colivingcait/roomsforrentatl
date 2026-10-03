@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import vm from "node:vm";
-import { entryVariantFromCookie, linkContext, referralRewriteScript } from "./attribution";
+import { analyticsMarket, entryVariantFromCookie, linkContext, referralRewriteScript } from "./attribution";
 
 function fireRewrite(cookie: string, href: string): string {
   const listeners: Record<string, Array<(event: { target: { closest: () => { href: string } } }) => void>> = {};
@@ -18,6 +18,23 @@ function fireRewrite(cookie: string, href: string): string {
   }
   return anchor.href;
 }
+
+test("analytics market is atl unless this build is dallas-fort worth", () => {
+  const previousMarket = process.env.NEXT_PUBLIC_MARKET;
+  const previousBuild = process.env.NEXT_PUBLIC_BUILD_MARKET;
+  delete process.env.NEXT_PUBLIC_MARKET;
+  delete process.env.NEXT_PUBLIC_BUILD_MARKET;
+  assert.equal(analyticsMarket(), "atl");
+  process.env.NEXT_PUBLIC_BUILD_MARKET = "dfw";
+  assert.equal(analyticsMarket(), "dfw");
+  process.env.NEXT_PUBLIC_MARKET = "dfw";
+  process.env.NEXT_PUBLIC_BUILD_MARKET = "atl";
+  assert.equal(analyticsMarket(), "dfw");
+  if (previousMarket === undefined) delete process.env.NEXT_PUBLIC_MARKET;
+  else process.env.NEXT_PUBLIC_MARKET = previousMarket;
+  if (previousBuild === undefined) delete process.env.NEXT_PUBLIC_BUILD_MARKET;
+  else process.env.NEXT_PUBLIC_BUILD_MARKET = previousBuild;
+});
 
 test("entry variant follows the ref_override cookie", () => {
   assert.equal(entryVariantFromCookie(null), "main");

@@ -6,6 +6,7 @@
 import { availableRooms, getHouses } from "./houses";
 import { listingPlace, priceLabel, shortRoomName } from "./format";
 import { atlantaSearchUrl, citySearchUrl } from "./site";
+import { getMarket } from "./market";
 import type { FilterStartingPrices } from "./filterPrices";
 
 export type SearchRoomCard = {
@@ -46,6 +47,30 @@ const AREAS: { slug: string; label: string; pattern: RegExp; wide?: boolean }[] 
 
 const AREA_CHIPS = ["Decatur", "Stone Mountain", "South Atlanta", "Snellville", "Atlanta"];
 
+const DFW_AREAS: { slug: string; label: string; pattern: RegExp; wide?: boolean }[] = [
+  { slug: "dallas", label: "Dallas–Fort Worth", pattern: /dallas\s*[–-]\s*fort\s+worth|\bdfw\b/i, wide: true },
+  { slug: "fort-worth", label: "Fort Worth", pattern: /\bfort\s+worth\b/i },
+  { slug: "grand-prairie", label: "Grand Prairie", pattern: /\bgrand\s+prairie\b/i },
+  { slug: "arlington", label: "Arlington", pattern: /\barlington\b/i },
+  { slug: "dallas", label: "Dallas", pattern: /\bdallas\b/i },
+  { slug: "irving", label: "Irving", pattern: /\birving\b/i },
+  { slug: "mesquite", label: "Mesquite", pattern: /\bmesquite\b/i },
+  { slug: "garland", label: "Garland", pattern: /\bgarland\b/i },
+];
+
+function areaList() {
+  return getMarket().id === "dfw" ? DFW_AREAS : AREAS;
+}
+
+function areaChips(): string[] {
+  if (getMarket().id !== "dfw") return AREA_CHIPS;
+  return getMarket().cities.slice(0, 5).map((city) => city.name);
+}
+
+function acrossMetro(): string {
+  return getMarket().id === "dfw" ? `across ${getMarket().metro}` : "across Atlanta";
+}
+
 type Featured = {
   id: string;
   roomId: number;
@@ -84,7 +109,7 @@ function featuredRooms(): Featured[] {
 }
 
 function matchArea(text: string): Area | null {
-  for (const area of AREAS) {
+  for (const area of areaList()) {
     if (area.pattern.test(text)) return { slug: area.slug, label: area.label, wide: area.wide === true };
   }
   return null;
@@ -152,7 +177,7 @@ function filterFor(need: Need): Record<string, string> {
 }
 
 function placePhrase(area: Area | null): string {
-  if (!area || area.wide) return "across Atlanta";
+  if (!area || area.wide) return acrossMetro();
   return `in ${area.label}`;
 }
 
@@ -172,7 +197,7 @@ function lead(need: Need, area: Area | null): string {
     case "budget":
       return `Here are the lowest-priced rooms ${place}`;
     case "area":
-      return area && !area.wide ? `Here are rooms in ${area.label}` : "Here are rooms across Atlanta";
+      return area && !area.wide ? `Here are rooms in ${area.label}` : `Here are rooms ${acrossMetro()}`;
     default:
       return `Here are rooms ${place}`;
   }
@@ -263,7 +288,7 @@ export function answerRoomSearch(
     return {
       reply: "Which area works for you?",
       rooms: [],
-      chips: AREA_CHIPS,
+      chips: areaChips(),
     };
   }
 

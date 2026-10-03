@@ -1,26 +1,29 @@
 /**
- * Site-wide settings. Edit these in one place — phone number, domain, etc.
- * (Or override with environment variables in Vercel without touching code.)
+ * Site-wide settings. Values come from the active market so a Dallas–Fort Worth
+ * build can swap them. With NEXT_PUBLIC_MARKET unset, these are the Atlanta strings.
  */
+import { getMarket } from "./market";
+
+const market = getMarket();
+
 export const site = {
-  name: "RoomsForRentATL",
-  domain: "RoomsForRentATL.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com",
-  tagline: "Furnished rooms for rent in Atlanta — next day move in.",
-  description:
-    "Browse available furnished rooms for rent across Atlanta. All-in pricing, utilities & WiFi included, next day move in. Book your room today.",
+  name: market.name,
+  domain: market.domain,
+  url: market.url,
+  tagline: market.tagline,
+  description: market.browseDescription,
   // Your PadSplit referral. The code is appended to every "Book" link so you get
   // referral credit. PadSplit reads it from the `referralCode` query param (seen
   // on real PadSplit share links), alongside ref_source/ref_role attribution.
   referral: {
-    // Root roomsforrentatl.com. /covilla switches to COVILLA_REFERRAL_CODE.
-    code: "B2C2060F",
+    // Root site. /covilla switches to COVILLA_REFERRAL_CODE when that override exists.
+    code: market.referral.code,
     param: "referralCode",
     // Extra attribution params on room "Book" links (not the search CTAs).
     extra: { ref_source: "site", ref_role: "host" } as Record<string, string>,
   },
-  /** Calls only — do not offer this number for texting. */
-  phone: "(678) 490-9917",
+  /** Calls only — do not offer this number for texting. Empty when the market has no phone. */
+  phone: market.phone ?? "",
 };
 
 /** Main site (root routes). */
@@ -34,9 +37,7 @@ export const COVILLA_REFERRAL_CODE = "0DC68BAB";
  * the main code.
  */
 export const REFERRAL_COOKIE = "ref_override";
-export const REFERRAL_OVERRIDES: Record<string, string> = {
-  covilla: COVILLA_REFERRAL_CODE,
-};
+export const REFERRAL_OVERRIDES: Record<string, string> = market.referral.overrides;
 
 /**
  * Referral code for a visitor. No cookie (root routes) uses the main code.
@@ -102,15 +103,10 @@ export function roomAnchorUrl(houseUrl: string, roomId?: number | string | null)
   return `${base}#${hash}`;
 }
 
-/** Atlanta search the private-bath and double-occupancy CTAs start from. */
-export const PADSPLIT_ATLANTA_SEARCH_BASE = "https://www.padsplit.com/rooms-for-rent/atlanta-ga";
+/** Metro search the filter tiles start from. */
+export const PADSPLIT_ATLANTA_SEARCH_BASE = `https://www.padsplit.com/rooms-for-rent/${market.padsplit.searchPath}`;
 
-const PADSPLIT_ATLANTA_BOUNDS = {
-  latMax: "33.9698383740918",
-  lngMax: "-84.10153814955288",
-  latMin: "33.497148095320355",
-  lngMin: "-84.56500806987017",
-} as const;
+const PADSPLIT_ATLANTA_BOUNDS = market.padsplit.bounds;
 
 /** Attribution kept on every search link. No `sign-up` param, so no modal. */
 const PADSPLIT_SEARCH_ATTRIBUTION = {
@@ -120,29 +116,11 @@ const PADSPLIT_SEARCH_ATTRIBUTION = {
 } as const;
 
 /**
- * City slugs that load and keep referralCode. The path is `/${slug}-ga`.
- * south-atlanta, buckhead, and midtown are intentionally absent: those
- * paths redirect to PadSplit's homepage and drop the referral.
+ * City slugs that load and keep referralCode. The path is `/${slug}-<state>`.
+ * On Atlanta, south-atlanta, buckhead, and midtown are intentionally absent:
+ * those paths redirect to PadSplit's homepage and drop the referral.
  */
-export const VERIFIED_PADSPLIT_CITY_SLUGS = [
-  "decatur",
-  "stone-mountain",
-  "atlanta",
-  "east-point",
-  "norcross",
-  "marietta",
-  "riverdale",
-  "avondale-estates",
-  "covington",
-  "college-park",
-  "kennesaw",
-  "canton",
-  "jonesboro",
-  "fairburn",
-  "fayetteville",
-  "newnan",
-  "snellville",
-] as const;
+export const VERIFIED_PADSPLIT_CITY_SLUGS: readonly string[] = market.cities.map((city) => city.slug);
 
 const VERIFIED_CITY_SLUGS = new Set<string>(VERIFIED_PADSPLIT_CITY_SLUGS);
 
@@ -195,10 +173,10 @@ export function noMoveInFeeSearchUrl(code?: string): string {
   return atlantaSearchUrl({ noMoveInFee: "true" }, code);
 }
 
-/** tel: link for site.phone. Calls only. */
+/** tel: link for site.phone. Calls only. Empty when this market has no phone. */
 export function phoneTelHref(): string {
   const digits = site.phone.replace(/\D/g, "");
-  return `tel:+1${digits}`;
+  return digits ? `tel:+1${digits}` : "";
 }
 
 /**
@@ -208,7 +186,11 @@ export function phoneTelHref(): string {
 export function citySearchUrl(slug: string, filter: Record<string, string> = {}, code?: string): string {
   const city = slug.toLowerCase().trim();
   if (!VERIFIED_CITY_SLUGS.has(city)) return atlantaSearchUrl(filter, code);
-  return padsplitSearchUrl(`https://www.padsplit.com/rooms-for-rent/${city}-ga`, filter, code);
+  return padsplitSearchUrl(
+    `https://www.padsplit.com/rooms-for-rent/${city}-${market.padsplit.state}`,
+    filter,
+    code
+  );
 }
 
 /**

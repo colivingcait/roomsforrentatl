@@ -1,8 +1,9 @@
 import { getHouse, orderedPhotos } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt = "Furnished room for rent in Atlanta";
+export const alt = `Furnished room for rent in ${getMarket().metro}`;
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -15,7 +16,7 @@ export default async function HouseOpengraphImage({ params }: { params: { id: st
     return renderOgCard({
       letter: "R",
       word: "Rooms",
-      line1: "Furnished rooms in Atlanta.",
+      line1: `Furnished rooms in ${getMarket().metro}.`,
       line2: "Next Day Move In",
       sub: "All-in weekly pricing · utilities & WiFi included",
       chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],
@@ -29,10 +30,7 @@ export default async function HouseOpengraphImage({ params }: { params: { id: st
     line2: fromPriceLabel(house),
     sub: `${house.city} — book on PadSplit today`,
     chips: ["Utilities + WiFi included", availabilityLabel(house), "Next-day move-in"],
-    // A manual heroPhoto wins if set; otherwise use the same smart lead-photo
-    // pick as the site's own gallery (kitchen/living bias, never a bath/street
-    // shot) — PadSplit's raw scraped `image` can be an arbitrary photo (e.g. a
-    // bathroom), which made a bad link-preview thumbnail.
-    photoPath: house.heroPhoto || orderedPhotos(house)[0],
+    // Same lead as the gallery: a safe hero, otherwise kitchen, never an exterior.
+    photoPath: orderedPhotos(house)[0],
   });
 }

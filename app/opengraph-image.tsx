@@ -1,9 +1,12 @@
 import housesData from "@/data/houses.json";
 import unitsData from "@/data/units.json";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
+import { dropPhoto } from "@/lib/listing-privacy.mjs";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt = "Furnished rentals in Atlanta";
+export const alt =
+  getMarket().id === "dfw" ? "Furnished rooms in Dallas–Fort Worth" : "Furnished rentals in Atlanta";
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -12,6 +15,16 @@ export const contentType = ogContentType;
 // and unit pages have their own listing-specific preview (see their
 // opengraph-image.tsx) — this one is only the site-wide/homepage card.
 export default async function OpengraphImage() {
+  if (getMarket().id === "dfw") {
+    return renderOgCard({
+      letter: "R",
+      word: "Rooms",
+      line1: "Furnished rooms in Dallas–Fort Worth.",
+      line2: "Next Day Move In",
+      sub: "All-in weekly pricing · utilities and Wi-Fi included",
+      chips: ["Fully furnished", "Utilities + Wi-Fi included", "Stay as long as you need"],
+    });
+  }
   const brand = getBrand();
   const isHomes = brand.key === "homes";
 
@@ -33,7 +46,9 @@ export default async function OpengraphImage() {
         line2: "Next Day Move In",
         sub: "All-in weekly pricing · utilities & WiFi included",
         chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],
-        photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto,
+        photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find(
+          (h) => h.heroPhoto && !dropPhoto({ url: h.heroPhoto, category: "interior" })
+        )?.heroPhoto,
       };
 
   return renderOgCard(copy);
