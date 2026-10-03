@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import type { House } from "@/lib/types";
 import type { RoomListing } from "@/lib/browse";
-import { APPLICATION_FEE } from "@/lib/browse";
 import { priceLabel, submarketLabel } from "@/lib/format";
 import {
   doubleOccupancySearchUrl,
@@ -139,9 +138,8 @@ export default function BrowseRooms({
               tomorrow.
             </span>
           </h1>
-          <p className="mt-[18px] max-w-[640px] text-[15px] font-semibold leading-snug text-white md:mt-[26px] md:text-[17px]">
-            ${APPLICATION_FEE} to apply. No deposit. Some hosts charge a one-time move-in fee (often around $100), shown
-            on each listing.
+          <p className="mt-[18px] max-w-[640px] text-[13px] font-medium leading-snug text-white/85 md:mt-[22px] md:text-sm">
+            Some hosts charge a one-time move-in fee (often around $100), shown on each listing.
           </p>
         </div>
       </section>
@@ -215,7 +213,7 @@ export default function BrowseRooms({
           <div className="md:flex md:items-end md:justify-between md:gap-6">
             <div>
               <h2 className="text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
-                Featured rooms
+                Featured Rooms
               </h2>
               <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>
             </div>

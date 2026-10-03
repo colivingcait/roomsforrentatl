@@ -30,23 +30,23 @@ export default function TrustBand({ variant = "cards" }: { variant?: "cards" | "
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-[18px] md:grid-cols-4 md:gap-6">
             <BandItem
               icon={<DollarIcon />}
-              title="$19 to apply"
-              body="No deposit. Some hosts charge a one-time move-in fee, shown on each listing."
+              title="$19 Application; No Deposit"
+              body="Fully refunded if you're not approved."
             />
             <BandItem
               icon={<CardIcon />}
               title="Income 2× the rent"
-              body="No credit score. Pay stub, bank statement or offer letter."
+              body="No credit check. Submit pay stubs, bank statements or offer letter."
             />
             <BandItem
               icon={<LockIcon />}
-              title="Your own locked room"
-              body="Every resident is background-screened."
+              title="Safe & Secure"
+              body="Every housemate is background checked. No felony convictions within 7 years"
             />
             <BandItem
               icon={<CalendarIcon />}
               title="Pay weekly or biweekly"
-              body="No long lease. Pet-free (service animals welcome)."
+              body="No long lease, just flexibility when you need it."
             />
           </ul>
         </div>

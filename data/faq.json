@@ -71,12 +71,12 @@
     {
       "category": "Getting approved",
       "q": "Do you check credit?",
-      "a": "There's no minimum credit score. Approval is based on a background screening and proof you earn at least 2x the rent — not a traditional credit check."
+      "a": "No credit check. Approval is based on a background screening and income of at least 2x the rent."
     },
     {
       "category": "Getting approved",
       "q": "How do I show proof of income?",
-      "a": "During your application you can upload recent pay stubs, a bank statement, or an offer letter. We generally look for income of about 2x the rent, and the application walks you through exactly what to provide."
+      "a": "Submit pay stubs, bank statements or an offer letter. We look for income of at least 2x the rent."
     },
     {
       "category": "Getting approved",

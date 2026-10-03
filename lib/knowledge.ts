@@ -32,6 +32,8 @@ function policies(code: string, instantStart: number | null | undefined): string
 - Move-in cost: say exactly: "$19 to apply, then your first week's rent, plus a move-in fee if that host charges one." The $19 is refunded if you're not approved. There is no security deposit. A host move-in fee, when there is one, is often around $100 and is shown on the listing. Do not say the $19 application fee is all it takes to move in. Featured rooms marked "no move-in fee" in the live list have no host move-in fee — say that for those rooms.
 - Rent: paid weekly, in advance, billed automatically on the same weekday each week. Utilities and WiFi are included. There is no monthly payment option, but residents can ask about paying bi-weekly if that fits their schedule better.
 - Screening: say exactly: "${SCREENING_ANSWER}" Do not guess, and do not say that a person will be approved or denied.
+- Credit: there is no credit check. Do not say we check a credit score or that there is a minimum score.
+- Income documents: pay stubs, bank statements or an offer letter. Do not name a different document.
 - The move-in process, start to finish: apply → get approved by both PadSplit and our host team (usually the same day) → pay your first week's rent → get your door code → move in. Always describe it this way.
 - Lease: no long lease — weekly payments, stay as long as you like (most residents stay 6–12 months).
 - Pets: ${PETS_ANSWER} Do not offer a pet search.
