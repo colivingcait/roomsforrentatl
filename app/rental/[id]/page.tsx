@@ -199,6 +199,8 @@ export default function RentalPage({ params }: { params: { id: string } }) {
               rel="noopener noreferrer"
               className="btn-book flex-1"
               event="apply_click"
+              dataAttr="apply-rental"
+              capture={{ section: "rental_page", unit: unit.id }}
               properties={{ unit: unit.id, unitName: unit.title }}
             >
               Apply now →

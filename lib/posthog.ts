@@ -17,7 +17,14 @@ export function initPosthog() {
   posthog.init(KEY, {
     api_host: HOST,
     defaults: "2026-05-30",
-    person_profiles: "identified_only",
+    // identified_only never created a person here (nobody calls identify),
+    // so first-touch $initial_utm_* was stored in the browser and never sent.
+    // always lets the SDK attach those on the first event.
+    person_profiles: "always",
+    // This default's history_change capture duplicated the manual $pageview
+    // in PostHogInit. Keep a single pageview per navigation.
+    capture_pageview: false,
+    capture_pageleave: true,
   });
 }
 
