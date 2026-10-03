@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T19:30:02.888Z",
+  "updatedAt": "2026-10-03T23:18:45.659Z",
   "houses": {
     "152": {
       "rooms": [],
@@ -131,6 +131,20 @@
           "label": "Common area",
           "width": 3000,
           "height": 4000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 899,
+          "height": 600
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/psproperty_152_1_1581956605.1992066.jpg",
+          "category": "common_space",
+          "label": "Den",
+          "width": 899,
+          "height": 600
         }
       ],
       "roomsAvailable": 0,
@@ -138,10 +152,10 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "McAfee",
-      "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
+      "city": "Decatur, GA",
+      "image": "https://www.padsplit.com/img/psproperty/152/img_36708f2f-0015-493a-8b0a-b7412cf4755b.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152",
       "utilitiesIncluded": false
     },
@@ -362,9 +376,10 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "South Gresham",
       "city": "Atlanta, GA",
+      "image": "https://www.padsplit.com/img/psproperty/8299/83a27979-e88d-4ea1-8aee-11832c289a37.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299",
       "utilitiesIncluded": true
     },
@@ -491,6 +506,13 @@
           "label": "Bathroom",
           "width": 1600,
           "height": 1067
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11889/7972baf1-99d2-4441-bdd8-665b89169aa8.jpg",
+          "category": "common_space",
+          "label": "Bathroom",
+          "width": 1600,
+          "height": 1066
         }
       ],
       "roomsAvailable": 0,
@@ -498,9 +520,9 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "Off Stephenson",
-      "city": "Mountain, GA",
+      "city": "Atlanta, GA",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
       "utilitiesIncluded": false
     },
@@ -648,10 +670,10 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "Atlanta",
       "city": "Snellville, GA",
-      "image": "https://www.padsplit.com/img/psproperty/30251/img_59616cb1-08c3-4b00-a014-05e4cc6fb895.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/30251/img_7bcdb892-0ddb-4c7e-808f-d9fe46961936.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251",
       "utilitiesIncluded": false
     },
@@ -793,6 +815,13 @@
           "label": "Bathroom",
           "width": 1500,
           "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 1500,
+          "height": 1000
         }
       ],
       "roomsAvailable": 1,
@@ -800,9 +829,9 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "McAfee",
-      "city": "Decatur, GA",
+      "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011",
       "utilitiesIncluded": true
@@ -869,6 +898,34 @@
           "label": "Kitchen",
           "width": 1500,
           "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_0ad7c864-bc5f-4edc-8e2b-b1640c29f782.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_4850275e-e475-40df-8e91-0105a1d3bad1.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_85bd5502-33f0-40bb-8ada-f17a73bfbd95.jpg",
+          "category": "bedroom",
+          "label": "Bathroom",
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_48ff12c8-662d-4f44-92fa-98a3192eb543.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 1500,
+          "height": 1000
         }
       ],
       "roomsAvailable": 0,
@@ -876,10 +933,10 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T23:18:45.659Z",
       "neighborhood": "Baker Hills",
       "city": "Atlanta, GA",
-      "image": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/39708/bathrooms/img_3558baaf-cc73-4f55-a246-24bd21f47217.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708",
       "utilitiesIncluded": false
     }
