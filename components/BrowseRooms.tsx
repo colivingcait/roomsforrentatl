@@ -23,6 +23,18 @@ import TrackedOutboundLink from "@/components/TrackedOutboundLink";
  */
 const FILTER_CARDS = [
   {
+    href: instantBookingSearchUrl(),
+    event: "instant_booking_search_click",
+    label: "Book instantly",
+    price: 158,
+    aria: "Instant booking rooms from $158 a week",
+    tint: "bg-[#EEF0FF]",
+    tone: "bg-[#3730A3]",
+    priceColor: "text-[#3730A3]",
+    icon: "bolt" as const,
+    note: "Apply and lock in your room today. No waiting on host approval.",
+  },
+  {
     href: privateBathSearchUrl(),
     event: "private_bath_search_click",
     label: "Private bathroom",
@@ -57,18 +69,6 @@ const FILTER_CARDS = [
     priceColor: "text-ink",
     icon: "home" as const,
     note: null,
-  },
-  {
-    href: instantBookingSearchUrl(),
-    event: "instant_booking_search_click",
-    label: "Book instantly",
-    price: 158,
-    aria: "Instant booking rooms from $158 a week",
-    tint: "bg-[#EEF0FF]",
-    tone: "bg-[#3730A3]",
-    priceColor: "text-[#3730A3]",
-    icon: "bolt" as const,
-    note: "Apply and lock in your room today. No waiting on host approval.",
   },
 ] as const;
 
@@ -144,7 +144,7 @@ export default function BrowseRooms({
           <h2 className="mt-1.5 text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
             What do you need?
           </h2>
-          <div className="mt-3.5 grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4">
+          <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-4 lg:gap-3">
             {FILTER_CARDS.map((card) => (
               <TrackedOutboundLink
                 key={card.event}
@@ -155,7 +155,7 @@ export default function BrowseRooms({
                 rel="noopener noreferrer"
                 ariaLabel={card.aria}
                 className={
-                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] md:min-h-[190px] md:flex-col md:items-start md:gap-3.5 md:p-5 md:pb-[22px] " +
+                  "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[176px] lg:flex-col lg:items-start lg:gap-3 lg:p-4 lg:pr-4 " +
                   card.tint
                 }
               >
@@ -163,23 +163,23 @@ export default function BrowseRooms({
                   aria-hidden
                   className={"pointer-events-none absolute -bottom-10 -right-[30px] h-[110px] w-[110px] rounded-full opacity-[0.07] " + card.tone}
                 />
-                <span className={"relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] " + card.tone}>
+                <span className={"relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white shadow-[0_6px_14px_rgba(15,23,42,.14)] lg:h-12 lg:w-12 " + card.tone}>
                   <FilterIcon name={card.icon} />
                 </span>
                 <span className="relative flex min-w-0 flex-col">
-                  <span className="text-[16.5px] font-extrabold leading-tight text-ink">{card.label}</span>
-                  <span className="mt-[3px] flex items-baseline gap-1.5 leading-none">
-                    <span className="text-[13px] font-semibold text-muted">from</span>
-                    <b className={"text-[28px] font-black tracking-[-0.03em] md:text-[34px] " + card.priceColor}>
+                  <span className="text-[16.5px] font-extrabold leading-tight text-ink lg:text-[15px]">{card.label}</span>
+                  <span className="mt-[3px] flex items-baseline gap-1.5 whitespace-nowrap leading-none">
+                    <span className="text-[13px] font-semibold text-muted lg:text-xs">from</span>
+                    <b className={"text-[28px] font-black tracking-[-0.03em] lg:text-[26px] " + card.priceColor}>
                       ${card.price}
                     </b>
-                    <span className="-ml-1 text-[15px] font-bold text-slate-700">/wk</span>
+                    <span className="-ml-1 text-[15px] font-bold text-slate-700 lg:text-sm">/wk</span>
                   </span>
                   {card.note && (
-                    <span className="mt-1.5 text-[12.5px] font-semibold leading-snug text-slate-600">{card.note}</span>
+                    <span className="mt-1.5 text-[12.5px] font-semibold leading-snug text-slate-600 lg:text-xs lg:leading-[1.35]">{card.note}</span>
                   )}
                 </span>
-                <span className="absolute right-3.5 top-1/2 z-[1] grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_3px_rgba(15,23,42,.12)] transition group-hover:bg-accent group-hover:text-white md:right-5 md:top-5 md:translate-y-0">
+                <span className="absolute right-3.5 top-1/2 z-[1] grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-[0_1px_3px_rgba(15,23,42,.12)] transition group-hover:bg-accent group-hover:text-white lg:right-3 lg:top-3 lg:translate-y-0">
                   <ExternalIcon />
                 </span>
               </TrackedOutboundLink>
