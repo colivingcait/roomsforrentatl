@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-03T19:30:02.888Z",
+  "updatedAt": "2026-10-03T20:12:26.698Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
-      "city": "Atlanta, GA",
+      "city": "Decatur, GA",
       "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -442,7 +442,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -621,7 +621,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "30251": {
@@ -800,13 +800,13 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
-      "city": "Decatur, GA",
+      "city": "Atlanta, GA",
       "image": "https://www.padsplit.com/img/psproperty/35011/6afcdaa5-6614-4221-bb46-1d1366590ad5.jpg",
       "utilitiesIncluded": true,
       "rooms": [
@@ -982,7 +982,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -1121,7 +1121,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-10-03T19:30:02.888Z",
+      "checkedAt": "2026-10-03T20:12:26.698Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
