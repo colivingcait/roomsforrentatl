@@ -7,7 +7,7 @@
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
-import { listingPlace, roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
+import { listingPlace, submarketLabel, roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel, unitArea } from "./format";
 import { getFaqs, MORE_THAN_ONE_ANSWER, PETS_ANSWER, PHONE_ANSWER, SCREENING_ANSWER } from "./faqs";
 import {
   site,
@@ -130,7 +130,7 @@ function quickFacts(): string {
   if (priced.length) {
     const cheapest = priced.reduce((a, b) => ((b.r.weeklyRate as number) < (a.r.weeklyRate as number) ? b : a));
     lines.push(
-      `Cheapest available room: ${roomTitle(cheapest.r)} at ${cheapest.h.name} (${cheapest.h.city}) [id ${cheapest.h.id}] — ${priceLabel(
+      `Cheapest available room: ${roomTitle(cheapest.r)} at ${cheapest.h.name} (${submarketLabel(cheapest.h)}) [id ${cheapest.h.id}] — ${priceLabel(
         cheapest.r.weeklyRate as number
       )} all-in.`
     );
@@ -138,10 +138,11 @@ function quickFacts(): string {
 
   const byCity = new Map<string, { count: number; min: number }>();
   for (const { r, h } of all) {
-    const cur = byCity.get(h.city) ?? { count: 0, min: Infinity };
+    const area = submarketLabel(h);
+    const cur = byCity.get(area) ?? { count: 0, min: Infinity };
     cur.count += 1;
     if (typeof r.weeklyRate === "number") cur.min = Math.min(cur.min, r.weeklyRate);
-    byCity.set(h.city, cur);
+    byCity.set(area, cur);
   }
   const cityLines = Array.from(byCity.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
@@ -211,7 +212,7 @@ function unitsSnapshot(): string {
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
       const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
       const desc = u.summary ? ` Details: ${u.summary.replace(/\s+/g, " ")}` : "";
-      return `• ${status}${u.name} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
+      return `• ${status}${u.name} — ${u.type} in the ${unitArea(u)}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
     })
     .join("\n");
   return `${header}\n${lines}`;

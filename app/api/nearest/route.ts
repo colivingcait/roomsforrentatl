@@ -1,6 +1,6 @@
 import { getHouses } from "@/lib/houses";
 import { getColivingHouses, availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
-import { priceLabel } from "@/lib/format";
+import { priceLabel, listingPlace } from "@/lib/format";
 
 type NearHome = {
   id: string;
@@ -23,8 +23,8 @@ function allNearHomes(): NearHome[] {
     .map((h) => ({
       id: h.id,
       name: h.name,
-      neighborhood: h.neighborhood,
-      city: h.city,
+      neighborhood: listingPlace(h),
+      city: listingPlace(h),
       lat: h.lat as number,
       lng: h.lng as number,
       fromPrice: h.fromPrice != null ? priceLabel(h.fromPrice, h.priceUnit) : null,

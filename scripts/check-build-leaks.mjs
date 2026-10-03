@@ -4,7 +4,7 @@
  */
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { STREET_BLOCKLIST, leaksInText } from "../lib/listing-privacy.mjs";
+import { STREET_BLOCKLIST, COMMUNITY_BLOCKLIST, leaksInText } from "../lib/listing-privacy.mjs";
 
 const ROOT = ".next";
 const EXTENSIONS = new Set([".html", ".rsc", ".json"]);
@@ -36,12 +36,20 @@ const blocklist = existsSync(STREET_BLOCKLIST)
       .filter((line) => line && !line.startsWith("#"))
   : [];
 
+const communities = existsSync(COMMUNITY_BLOCKLIST)
+  ? (() => {
+      const parsed = JSON.parse(readFileSync(COMMUNITY_BLOCKLIST, "utf8"));
+      const names = Array.isArray(parsed) ? parsed : parsed.names;
+      return (names || []).map((name) => String(name).trim()).filter((name) => name && !name.startsWith("#"));
+    })()
+  : [];
+
 const files = [];
 walk(ROOT, files);
 const hits = [];
 for (const file of files) {
   const text = readFileSync(file, "utf8");
-  const reasons = leaksInText(text, blocklist);
+  const reasons = leaksInText(text, blocklist, communities);
   if (reasons.length) hits.push(`${file}: ${[...new Set(reasons)].join(", ")}`);
 }
 

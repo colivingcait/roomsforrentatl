@@ -1,5 +1,5 @@
 import { getUnit } from "@/lib/units";
-import { rentLabel, availDateLabel } from "@/lib/format";
+import { rentLabel, availDateLabel, unitArea } from "@/lib/format";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
 export const alt = "Furnished rental in Atlanta";
@@ -34,8 +34,8 @@ export default async function UnitOpengraphImage({ params }: { params: { id: str
     word: "Homes",
     line1: unit.name,
     line2: rentLabel(unit.rent),
-    sub: `${unit.type} · ${unit.city} — apply online today`,
+    sub: `${unit.type} · ${unitArea(unit)} — apply online today`,
     chips,
-    photoPath: unit.photos?.[0] ?? null,
+    photoPath: unit.photos?.[0] || null,
   });
 }

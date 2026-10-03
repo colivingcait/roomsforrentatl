@@ -7,7 +7,7 @@ import PhotoStrip from "@/components/PhotoStrip";
 import FaqButton from "@/components/FaqButton";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getUnit, getAllUnitIds } from "@/lib/units";
-import { rentLabel, availDateLabel } from "@/lib/format";
+import { rentLabel, availDateLabel, unitArea } from "@/lib/format";
 import { RENTAL_QUALIFICATIONS, MOVE_IN_STEPS } from "@/lib/rentalQualifications";
 
 export const revalidate = 3600;
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const unit = getUnit(params.id);
   if (!unit) return { title: "Rental not found" };
   return {
-    title: `${unit.name} — Furnished Rental in ${unit.city}, GA`,
-    description: `Furnished ${unit.type} for rent in ${unit.city}, Atlanta — ${rentLabel(unit.rent)}, monthly lease.${
+    title: `${unit.name} — Furnished Rental in the ${unitArea(unit)}`,
+    description: `Furnished ${unit.type} for rent in the ${unitArea(unit)} — ${rentLabel(unit.rent)}, monthly lease.${
       unit.utilitiesIncluded ? " Utilities included." : ""
     } ${availDateLabel(unit.availableDate)}.`,
   };
@@ -51,12 +51,12 @@ export default function RentalPage({ params }: { params: { id: string } }) {
       {/* Gallery */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
         {photos.length > 0 ? (
-          <PhotoStrip images={photos} alt={unit.name} sizes="100vw" priority />
+          <PhotoStrip images={photos} alt={`${unit.name} in the ${unitArea(unit)}`} sizes="100vw" priority />
         ) : (
-          <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand to-brand-dark text-center text-white">
+          <div className="grid h-full w-full place-items-center bg-slate-100 text-center text-slate-500">
             <div>
-              <div className="text-3xl font-extrabold">{unit.type}</div>
-              <div className="mt-1 text-sm font-medium uppercase tracking-wide text-white/80">Photos coming soon</div>
+              <div className="text-lg font-semibold text-slate-600">{unit.type}</div>
+              <div className="mt-1 text-sm font-medium uppercase tracking-wide">Photos coming soon</div>
             </div>
           </div>
         )}
@@ -76,7 +76,7 @@ export default function RentalPage({ params }: { params: { id: string } }) {
             </span>
             <h1 className="mt-2 text-2xl font-extrabold leading-tight text-ink">{unit.name}</h1>
             <p className="mt-1 text-muted">
-              {unit.type} · {unit.city}
+              {unit.type} · {unitArea(unit)}
             </p>
           </div>
           <div className="shrink-0 text-right">

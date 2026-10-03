@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
     description: `Furnished room for rent in ${listingPlace(house)} — ${fromPriceLabel(
       house
     )} all-in, utilities included, next-day move-in via PadSplit. ${availabilityLabel(house)}.`,
-    openGraph: { images: house.image.startsWith("http") ? [house.image] : [] },
+    // A local SVG is not an og:image. Leave images unset so opengraph-image.tsx
+    // supplies the first interior photo, or the site card when none remain.
+    ...(house.image.startsWith("http") ? { openGraph: { images: [house.image] } } : {}),
   };
 }
 

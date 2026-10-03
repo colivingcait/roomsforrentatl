@@ -58,7 +58,7 @@ export default function HouseCard({ house }: { house: House }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <h3 className="font-semibold leading-tight text-ink">{house.name}</h3>
-            <p className="mt-0.5 text-sm text-muted">{house.city}</p>
+            <p className="mt-0.5 text-sm text-muted">{listingPlace(house)}</p>
           </div>
           <div className="shrink-0 text-right">
             <div className="text-lg font-extrabold text-ink">{fromPriceLabel(house)}</div>

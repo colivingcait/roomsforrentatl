@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  communityLeak,
   dropPhoto,
   isStreetishPlace,
   leakReason,
@@ -9,6 +10,7 @@ import {
   publicNeighborhood,
   roundCoord,
   sanitizeLiveHouse,
+  unitFilenameLeak,
 } from "../lib/listing-privacy.mjs";
 
 test("drops other, png, and outdoor common-space photos; keeps interiors", () => {
@@ -128,6 +130,7 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
     "Atlanta"
   );
   assert.equal(house.neighborhood, "Atlanta");
+  assert.equal(house.city, undefined);
   assert.equal(house.title, undefined);
   assert.equal(house.description, undefined);
   assert.equal(house.image, undefined);
@@ -142,4 +145,27 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
   assert.deepEqual(house.rooms[0].photos, ["https://cdn.example/room.jpg"]);
   assert.ok(removedUrls.includes("https://cdn.example/patio.jpg"));
   assert.equal(leaksInData(house).length, 0);
+});
+
+test("named communities and drone or exterior filenames fail the data scan", () => {
+  assert.equal(communityLeak("in the Norris Lake community", ["Norris"]), "named community");
+  assert.equal(communityLeak("Snellville area", ["Norris"]), null);
+  assert.equal(unitFilenameLeak("/units/lake-house-2br/DJI_20260706154721_0179.JPG"), "drone filename");
+  assert.equal(unitFilenameLeak("/units/foo/aerial-lake.jpg"), "exterior or aerial filename");
+  assert.equal(unitFilenameLeak("/units/studio-snellville/DB12D671-6FAE-430C-89D4-8B521F7A1BE9_1_105_c.jpeg"), null);
+  assert.equal(unitFilenameLeak("no exterior, aerial, or drone shots in the copy"), null);
+  const hits = leaksInData(
+    {
+      summary: "Bright unit in the Norris Lake community",
+      photos: ["/units/x/DJI_0001.JPG", "/units/x/exterior-front.jpg"],
+    },
+    "$",
+    ["Norris"]
+  );
+  assert.ok(hits.some((h) => h.includes("named community")));
+  assert.ok(hits.some((h) => h.includes("drone filename")));
+  assert.ok(hits.some((h) => h.includes("exterior or aerial filename")));
+  assert.ok(leaksInText("Welcome to Norris Lake", [], ["Norris"]).includes("named community"));
+  assert.ok(leaksInText('<img src="/units/x/DJI_0001.JPG">', [], ["Norris"]).includes("drone filename"));
+  assert.deepEqual(leaksInText("Studio in the Snellville area", [], ["Norris"]), []);
 });

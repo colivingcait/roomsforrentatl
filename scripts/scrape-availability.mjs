@@ -32,13 +32,15 @@ const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required/i;
 
-/** House-level bits from the rendered text/html (neighborhood + lead photo). */
+/**
+ * House-level bits from the rendered text/html (neighborhood + lead photo).
+ * City is not stored: the public area is the hand-entered neighborhood in
+ * houses.json, and a one-word match of "Stone Mountain, GA" became "Mountain, GA".
+ */
 function parseHouseMeta(text, html) {
   const out = {};
   const nb = text.match(/Neighborhood:\s*([A-Za-z][A-Za-z .'-]{1,30})/);
   if (nb) out.neighborhood = nb[1].trim();
-  const city = text.match(/\b([A-Z][a-zA-Z]+),\s*GA\b/);
-  if (city) out.city = `${city[1]}, GA`;
   const og = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
   if (og) out.image = og[1];
   out.utilitiesIncluded = /all utilities (and fees )?included/i.test(text);

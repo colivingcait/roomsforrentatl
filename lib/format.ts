@@ -23,8 +23,9 @@ export function photoLabel(p: Pick<Photo, "label" | "category">): string {
 import { availableRooms } from "./houses";
 
 /**
- * Public submarket for a home: the city, never a street.
- * Baker Hills / Adamsville / Willow are labeled West Atlanta.
+ * The one public area label for a home. houses.json neighborhood/submarket
+ * wins; a different city is not appended. Baker Hills / Adamsville / Willow
+ * are labeled West Atlanta.
  */
 export function submarketLabel(house: {
   id?: string;
@@ -35,23 +36,26 @@ export function submarketLabel(house: {
   if (house.id === "39708" || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
     return "West Atlanta";
   }
+  if (hood && !isStreetishPlace(hood)) return hood;
   const city = (house.city ?? "").replace(/,?\s*ga$/i, "").trim();
   if (city && !isStreetishPlace(city)) return city;
-  if (hood && !isStreetishPlace(hood)) return hood;
   return "Atlanta";
 }
 
-/** Neighborhood + submarket for a listing, with street-type names removed. */
+/** Same single area label as submarketLabel. City is not joined on. */
 export function listingPlace(house: {
   id?: string;
   neighborhood?: string | null;
   city?: string | null;
 }): string {
-  const sub = submarketLabel(house);
-  const hood = (house.neighborhood ?? "").trim();
-  if (!hood || isStreetishPlace(hood) || sub === "West Atlanta") return sub;
-  if (hood.toLowerCase().includes(sub.toLowerCase())) return hood;
-  return [hood, sub].filter(Boolean).join(", ");
+  return submarketLabel(house);
+}
+
+/** Long-term units stay at city/submarket level, e.g. "Snellville area". */
+export function unitArea(unit: { city?: string | null }): string {
+  const city = (unit.city ?? "").replace(/,?\s*ga$/i, "").trim();
+  if (!city) return "Atlanta area";
+  return /area$/i.test(city) ? city : `${city} area`;
 }
 
 export function priceLabel(price: number, unit: PriceUnit = "week"): string {

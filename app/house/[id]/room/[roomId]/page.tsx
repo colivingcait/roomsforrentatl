@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
 import { dropPhoto } from "@/lib/listing-privacy.mjs";
-import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
+import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights, listingPlace } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -27,7 +27,7 @@ export async function generateMetadata({
     title: `${roomTitle(room)} — ${house.name}`,
     description: `${prettyBath(room.bathroomType)}${
       room.weeklyRate ? `, ${priceLabel(room.weeklyRate)} all-in` : ""
-    } in ${house.city}. ${moveInLabel(room.moveInDate)}.`,
+    } in ${listingPlace(house)}. ${moveInLabel(room.moveInDate)}.`,
     openGraph: {
       images:
         room.image && room.image.startsWith("http") && !dropPhoto({ url: room.image, category: "bedroom" })
@@ -87,7 +87,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             <p className="text-sm font-semibold text-brand">{house.name}</p>
             <h1 className="text-2xl font-extrabold leading-tight text-ink">{roomTitle(room)}</h1>
             <p className="mt-1 text-muted">
-              {house.city}
+              {listingPlace(house)}
             </p>
           </div>
           <div className="shrink-0 text-right">
