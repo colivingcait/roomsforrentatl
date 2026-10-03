@@ -31,5 +31,8 @@ yarn-error.log*
 # scraper output (uploaded as CI artifacts, never committed)
 /artifacts
 
+# raw street1/street2/zip values seen while scraping — never commit
+/data/.street1-blocklist
+
 # typescript
 *.tsbuildinfo

@@ -5,7 +5,8 @@
   "description": "RoomsForRentATL.com — fast, mobile-first booking for Atlanta rooms for rent.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node --test scripts/listing-privacy.test.mjs && node scripts/check-data-privacy.mjs && next build && node scripts/check-build-leaks.mjs",
+    "check:privacy": "node --test scripts/listing-privacy.test.mjs && node scripts/check-data-privacy.mjs",
     "start": "next start",
     "lint": "next lint"
   },

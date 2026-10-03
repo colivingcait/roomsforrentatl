@@ -2,6 +2,7 @@ import housesData from "@/data/houses.json";
 import unitsData from "@/data/units.json";
 import { getBrand } from "@/lib/brand";
 import { getMarket } from "@/lib/market";
+import { dropPhoto } from "@/lib/listing-privacy.mjs";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
 export const alt =
@@ -45,7 +46,9 @@ export default async function OpengraphImage() {
         line2: "Next Day Move In",
         sub: "All-in weekly pricing · utilities & WiFi included",
         chips: ["Fully furnished", "Utilities + WiFi included", "Stay as long as you need"],
-        photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find((h) => h.heroPhoto)?.heroPhoto,
+        photoPath: (housesData.houses as Array<{ heroPhoto?: string }>).find(
+          (h) => h.heroPhoto && !dropPhoto({ url: h.heroPhoto, category: "interior" })
+        )?.heroPhoto,
       };
 
   return renderOgCard(copy);

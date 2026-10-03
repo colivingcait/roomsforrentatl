@@ -1,8 +1,15 @@
 import housesData from "@/data/houses.json";
 import availability from "@/data/availability.json";
 import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./types";
-import { isStreetishPlace } from "./format";
 import { getMarket } from "./market";
+import {
+  dropPhoto,
+  publicImage,
+  publicNeighborhood,
+  publicPhoto,
+  publicRoom,
+  roundCoord,
+} from "./listing-privacy.mjs";
 
 const SEED = (housesData.houses as SeedHouse[]) ?? [];
 const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {};
@@ -77,37 +84,39 @@ export function availableRooms(house: House): Room[] {
  *   1. the biggest kitchen photo
  *   2. the first 6 room photos
  *   3. bathrooms
- *   4. other common areas (dining, living, patio, laundry, …)
+ *   4. other indoor common areas (dining, living, laundry, …)
  *   5. any remaining room photos
  */
 export function orderedPhotos(house: House): string[] {
   const roomPics = availableRooms(house).flatMap((r) =>
-    r.photos?.length ? r.photos : r.image ? [r.image] : []
+    (r.photos?.length ? r.photos : r.image ? [r.image] : []).filter(
+      (url) => !dropPhoto({ url, category: "bedroom" })
+    )
   );
 
-  const matches = (c: Photo, re: RegExp) => re.test(`${c.description ?? ""} ${c.category}`);
+  const commons = house.commonAreas.filter((c) => !dropPhoto(c));
+  const matches = (c: Photo, re: RegExp) => re.test(`${c.label ?? ""} ${c.category}`);
   const area = (c: Photo) => (c.width ?? 0) * (c.height ?? 0);
-  // Street/exterior/outdoor shots should never be the lead photo.
-  const isExterior = (c: Photo) =>
-    c.category === "other" || matches(c, /exterior|street|front\b|neighborhood|outside|patio|backyard|\byard\b/i);
+  const heroOk =
+    house.heroPhoto && !dropPhoto({ url: house.heroPhoto, category: "interior" })
+      ? house.heroPhoto
+      : undefined;
 
-  // Lead photo: a manual override wins; otherwise biggest kitchen, then a living
-  // area, then PadSplit's primary, then a room photo — never a street shot.
-  const kitchens = house.commonAreas.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
+  // Lead photo: a safe manual override wins; otherwise biggest kitchen, then a
+  // living area, then PadSplit's primary, then a room photo.
+  const kitchens = commons.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
   const leadUrl =
-    house.heroPhoto ||
+    heroOk ||
     kitchens[0]?.url ||
-    house.commonAreas.find((c) => matches(c, /living|den|family/i))?.url ||
-    house.commonAreas.find((c) => matches(c, /dining/i))?.url ||
-    house.commonAreas.find((c) => c.primary && !isExterior(c))?.url ||
+    commons.find((c) => matches(c, /living|den|family/i))?.url ||
+    commons.find((c) => matches(c, /dining/i))?.url ||
+    commons.find((c) => c.primary)?.url ||
     roomPics[0] ||
-    house.commonAreas.find((c) => !isExterior(c) && !matches(c, /bath|shower|restroom/i))?.url ||
-    house.commonAreas[0]?.url;
+    commons.find((c) => !matches(c, /bath|shower|restroom/i))?.url ||
+    commons[0]?.url;
 
-  const baths = house.commonAreas
-    .filter((c) => c.url !== leadUrl && matches(c, /bath|shower|restroom/i))
-    .map((c) => c.url);
-  const others = house.commonAreas
+  const baths = commons.filter((c) => c.url !== leadUrl && matches(c, /bath|shower|restroom/i)).map((c) => c.url);
+  const others = commons
     .filter((c) => c.url !== leadUrl && !matches(c, /bath|shower|restroom|kitchen/i))
     .map((c) => c.url);
 
@@ -127,34 +136,50 @@ export function orderedPhotos(house: House): string[] {
       out.push(u);
     }
   }
-  return out.length ? out.slice(0, 20) : [house.image];
+  const fallback =
+    house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
+  return out.length ? out.slice(0, 20) : fallback ? [fallback] : [];
 }
 
-/** Drop scraped names that are really a street (e.g. "Lake Commons CT"). */
-function publicNeighborhood(live?: string | null, seed?: string | null): string {
-  const liveTrim = (live ?? "").trim();
-  if (liveTrim && !isStreetishPlace(liveTrim)) return liveTrim;
-  const seedTrim = (seed ?? "").trim();
-  if (seedTrim && !isStreetishPlace(seedTrim)) return seedTrim;
-  return "";
+function keptPhotos(photos: Photo[] | undefined): Photo[] {
+  const out: Photo[] = [];
+  for (const photo of photos ?? []) {
+    const kept = publicPhoto(photo);
+    if (kept) out.push(kept);
+  }
+  return out;
 }
 
 function merge(seed: SeedHouse): House {
   const live = LIVE[seed.id] ?? {};
-  const rooms: Room[] = (live.rooms ?? []).map((r) => ({ ...r, available: r.status === 1 }));
+  const dropped = new Set<string>();
+  for (const photo of live.commonAreas ?? []) {
+    if (photo.url && !publicPhoto(photo)) dropped.add(photo.url);
+  }
+  for (const photo of live.carousel ?? []) {
+    if (photo.url && !publicPhoto(photo)) dropped.add(photo.url);
+  }
+  const rooms: Room[] = (live.rooms ?? []).map((r) => publicRoom(r as unknown as Record<string, unknown>, dropped));
   const avail = rooms.filter((r) => r.available);
   const fromPrice =
     avail.length > 0
       ? Math.min(...avail.map((r) => r.weeklyRate ?? Infinity).filter((n) => Number.isFinite(n)))
       : live.fromPrice ?? null;
 
+  const hero =
+    seed.heroPhoto && !dropped.has(seed.heroPhoto) && !dropPhoto({ url: seed.heroPhoto, category: "interior" })
+      ? seed.heroPhoto
+      : undefined;
   return {
     ...seed,
     neighborhood: publicNeighborhood(live.neighborhood, seed.neighborhood),
-    image: live.image || seed.image,
+    image: publicImage(live.image, dropped) || seed.image,
+    heroPhoto: hero,
+    lat: roundCoord(seed.lat),
+    lng: roundCoord(seed.lng),
     rooms,
-    commonAreas: live.commonAreas ?? [],
-    carousel: live.carousel ?? [],
+    commonAreas: keptPhotos(live.commonAreas),
+    carousel: keptPhotos(live.carousel),
     roomsAvailable: avail.length || live.roomsAvailable || 0,
     fromPrice: Number.isFinite(fromPrice as number) ? (fromPrice as number) : null,
     priceUnit: (live.priceUnit as PriceUnit) ?? "week",

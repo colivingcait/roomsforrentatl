@@ -33,7 +33,7 @@ export default async function UnitOpengraphImage({ params }: { params: { id: str
   return renderOgCard({
     letter: "H",
     word: "Homes",
-    line1: unit.title,
+    line1: unit.name,
     line2: rentLabel(unit.rent),
     sub: `${unit.type} · ${unit.city} — apply online today`,
     chips,

@@ -4,7 +4,8 @@ export type BathroomType = "private" | "shared";
 export interface Photo {
   url: string;
   category: string;
-  description: string | null;
+  /** Short public label (Kitchen, Bathroom). Never a raw PadSplit description. */
+  label?: string | null;
   primary?: boolean;
   width?: number | null;
   height?: number | null;
@@ -21,7 +22,6 @@ export interface Room {
   applyIndex?: number | null;
   name: string | null;
   roomNumber: number | null;
-  description: string | null;
   /** The current EFFECTIVE rate — reflects an active promo discount if one applies. */
   weeklyRate: number | null;
   /** The list rate before any active promo discount. Only meaningfully different from weeklyRate when promo is set. */
@@ -88,7 +88,6 @@ export interface SeedHouse {
 
 /** Live values written by the daily scraper into data/availability.json. */
 export interface LiveHouse {
-  title?: string;
   rooms?: Room[];
   commonAreas?: Photo[];
   carousel?: Photo[];
@@ -108,7 +107,8 @@ export interface LiveHouse {
 /** A long-term (monthly) private rental unit — managed manually, not PadSplit. */
 export interface Unit {
   id: string;
-  title: string;
+  /** Public listing name. Not a PadSplit title. */
+  name: string;
   type: string; // e.g. "Studio" or "2 Bed · 1 Bath"
   beds: number;
   baths: number;
@@ -122,7 +122,8 @@ export interface Unit {
   leaseLength?: string | null;
   pets?: string | null;
   sqft?: number | null;
-  description?: string; // longer write-up shown on the unit page
+  /** Longer write-up shown on the unit page. Not a PadSplit description. */
+  summary?: string;
   furnishedNote?: string; // what's included vs. what the tenant brings
   features?: string[];
   applyUrl?: string | null; // TurboTenant link; absent if not ready yet
@@ -165,7 +166,8 @@ export interface ColivingHouse {
   utilitiesIncluded?: boolean;
   wifi?: boolean;
   furnished?: boolean;
-  description?: string;
+  /** Public write-up. Not a PadSplit description. */
+  summary?: string;
   notOnPadsplit?: boolean; // shows a "Not on PadSplit" tag on the card
   deposit?: number | null; // 0/null = no traditional cash deposit
   depositAlternative?: string | null; // any truthy value → shows "Deposit-free options"

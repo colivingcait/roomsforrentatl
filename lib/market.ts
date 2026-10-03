@@ -1,10 +1,9 @@
 /**
  * One codebase, two room sites. Dallas–Fort Worth production sets
- * NEXT_PUBLIC_MARKET=dfw. Unset keeps Atlanta, including Atlanta production.
- * This pull request's Vercel preview also builds as Dallas–Fort Worth
- * (see lib/market-env.js). That build swaps ./markets/atl for ./markets/dfw
- * in next.config.js, so the Atlanta copy is what this module loads unless
- * that swap runs.
+ * NEXT_PUBLIC_MARKET=dfw. Unset keeps Atlanta, including Atlanta production
+ * after this branch is merged. The branch name is not a switch. The dfw
+ * build swaps ./markets/atl for ./markets/dfw in next.config.js, so the
+ * Atlanta copy is what this module loads unless that swap runs.
  *
  * Renters on one market must never see the other market's name, homes,
  * phone, or links.

@@ -212,8 +212,8 @@ function unitsSnapshot(): string {
       const tour = u.tourUrl ? ` Virtual tour: ${u.tourUrl}` : "";
       const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
       const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
-      const desc = u.description ? ` Details: ${u.description.replace(/\s+/g, " ")}` : "";
-      return `• ${status}${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
+      const desc = u.summary ? ` Details: ${u.summary.replace(/\s+/g, " ")}` : "";
+      return `• ${status}${u.name} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
     })
     .join("\n");
   return `${header}\n${lines}`;

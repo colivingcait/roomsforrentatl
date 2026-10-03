@@ -2,7 +2,10 @@
  * Featured rooms for a market that has no host list yet.
  * Same cutoff as the "from" prices: sort the metro search by weekly price,
  * drop the cheapest 10%, then take the next four that have a public place and
- * an interior photo. An explicit featuredSources list replaces this entirely.
+ * an interior photo. Outdoor, uncategorized, PNG, and marketing photos are
+ * dropped first. The card stores a listing id, place, price, and photo URL —
+ * never a street, a photo description, or a coordinate.
+ * An explicit featuredSources list replaces this entirely.
  */
 import { bookingUrl } from "./site";
 import { getMarket } from "./market";

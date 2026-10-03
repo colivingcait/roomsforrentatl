@@ -7,13 +7,11 @@
  */
 import { getMarket } from "./market";
 import { isStreetishPlace } from "./format";
+import { dropPhoto, leakReason } from "./listing-privacy.mjs";
 
 const SEARCH = "https://www.padsplit.com/api/property_search/";
 const PAGE_SIZE = 100;
 const MAX_PAGES = 40;
-
-const EXTERIOR =
-  /exterior|frontage|\bfront\b|street|outside|neighborhood|patio|backyard|\byard\b|garage|parking|driveway/i;
 
 export type RankedListing = {
   id: string;
@@ -47,42 +45,53 @@ function asWeekly(value: unknown): number | null {
   return Math.round(n);
 }
 
-function pictureText(pic: Picture): string {
-  const category = typeof pic.category === "string" ? pic.category : "";
-  const description = typeof pic.description === "string" ? pic.description : "";
-  return `${category} ${description}`;
-}
+const INTERIOR = /bedroom|bed\s*room|bath|kitchen|living|dining|common_space|hallway|laundry|interior/i;
 
+/**
+ * One public photo URL. Drops uncategorized, PNG, marketing, and outdoor
+ * pictures with the same rule as the Atlanta scraper. The picture's
+ * description is not returned.
+ */
 function interiorPhoto(pictures: unknown): string | null {
   if (!Array.isArray(pictures)) return null;
-  const interiors = pictures.filter((pic): pic is Picture => {
-    if (!pic || typeof pic !== "object") return false;
+  const interiors: { url: string; text: string }[] = [];
+  for (const pic of pictures) {
+    if (!pic || typeof pic !== "object") continue;
     const photo = pic as Picture;
     const url = typeof photo.location === "string" ? photo.location : "";
-    if (!/^https:\/\//.test(url)) return false;
-    const text = pictureText(photo);
-    if (EXTERIOR.test(text)) return false;
-    return /bedroom|bed\s*room|bath|kitchen|living|dining|common_space|hallway|laundry|interior/i.test(text);
-  });
-  const bedroom = interiors.find((pic) => /bed/i.test(pictureText(pic)));
-  const chosen = bedroom ?? interiors[0];
-  return chosen && typeof chosen.location === "string" ? chosen.location : null;
+    const category = typeof photo.category === "string" ? photo.category : "";
+    const description = typeof photo.description === "string" ? photo.description : "";
+    if (!/^https:\/\//.test(url)) continue;
+    if (dropPhoto({ url, location: url, category, description })) continue;
+    const text = `${category} ${description}`;
+    if (!INTERIOR.test(text)) continue;
+    interiors.push({ url, text });
+  }
+  const bedroom = interiors.find((pic) => /bed/i.test(pic.text));
+  return (bedroom ?? interiors[0])?.url ?? null;
 }
 
-/** Neighborhood when it is not a street, otherwise the city. */
+function publicText(value: unknown): string {
+  if (typeof value !== "string") return "";
+  const text = value.replace(/,?\s*(tx|ga)$/i, "").trim();
+  if (!text || isStreetishPlace(text) || leakReason(text)) return "";
+  return text;
+}
+
+/**
+ * Neighborhood when it is not a street, otherwise the city.
+ * Only those two fields are read. street1, zip, lat, and lng are ignored.
+ */
 function publicPlace(address: unknown): string | null {
   if (!address || typeof address !== "object") return null;
   const record = address as Record<string, unknown>;
-  const neighborhood = typeof record.neighborhood === "string" ? record.neighborhood.trim() : "";
-  const city = (typeof record.city === "string" ? record.city : "").replace(/,?\s*(tx|ga)$/i, "").trim();
-  if (neighborhood && !isStreetishPlace(neighborhood)) {
-    if (city && !isStreetishPlace(city) && !neighborhood.toLowerCase().includes(city.toLowerCase())) {
-      return `${neighborhood}, ${city}`;
-    }
+  const neighborhood = publicText(record.neighborhood);
+  const city = publicText(record.city);
+  if (neighborhood) {
+    if (city && !neighborhood.toLowerCase().includes(city.toLowerCase())) return `${neighborhood}, ${city}`;
     return neighborhood;
   }
-  if (city && !isStreetishPlace(city)) return city;
-  return null;
+  return city || null;
 }
 
 function pageUrl(filter: Record<string, string>, page: number): string {
@@ -121,6 +130,11 @@ async function fetchPage(filter: Record<string, string>, page: number): Promise<
   }
 }
 
+/**
+ * Whitelist for a search row. The returned record has no address object,
+ * no photo description, and no coordinates. Listing lat/lng are not copied,
+ * even rounded: a featured card does not need a point on a map.
+ */
 function toRanked(row: unknown, order: number): RankedListing | null {
   if (!row || typeof row !== "object") return null;
   const item = row as Record<string, unknown>;
