@@ -4,17 +4,19 @@ import Footer from "@/components/Footer";
 import TrustBand from "@/components/TrustBand";
 import { getHouses } from "@/lib/houses";
 import { buildRoomListings } from "@/lib/browse";
+import { getFilterStartingPrices } from "@/lib/filterPrices";
 
 /** The rooms-first homepage (roomsforrentatl.com). */
-export default function RoomsHome() {
+export default async function RoomsHome() {
   const allHouses = getHouses();
   const soldOut = allHouses.filter((h) => !h.available);
   const rooms = buildRoomListings(allHouses);
+  const filterPrices = await getFilterStartingPrices();
 
   return (
     <main className="min-h-screen bg-white">
       <Header wide />
-      <BrowseRooms rooms={rooms} soldOut={soldOut} houses={allHouses} />
+      <BrowseRooms rooms={rooms} soldOut={soldOut} houses={allHouses} filterPrices={filterPrices} />
       <TrustBand variant="band" />
 
       <section className="bg-white">

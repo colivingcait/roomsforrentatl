@@ -29,15 +29,12 @@ export const MAIN_REFERRAL_CODE = site.referral.code;
 export const COVILLA_REFERRAL_CODE = "0DC68BAB";
 
 /**
- * Per-visitor referral override — lets two "versions" of the site run at
- * once, each crediting a different PadSplit host profile, chosen by which
- * short link (/lustra or /covilla) a visitor came in on. Set as a cookie by
- * that route, read back here on every "Book" link. Falls back to the
- * default `site.referral.code` above when no override cookie is set.
+ * Per-visitor referral override. /covilla sets this cookie so that visitor's
+ * Book links credit the Covilla profile. Root routes have no cookie and use
+ * the main code.
  */
 export const REFERRAL_COOKIE = "ref_override";
 export const REFERRAL_OVERRIDES: Record<string, string> = {
-  lustra: MAIN_REFERRAL_CODE,
   covilla: COVILLA_REFERRAL_CODE,
 };
 
@@ -160,6 +157,8 @@ export function padsplitSearchUrl(
 ): string {
   const u = new URL(base);
   for (const [k, v] of Object.entries(filter)) u.searchParams.set(k, v);
+  // Price low to high, so the first rooms match the "from $X/wk" line.
+  u.searchParams.set("sortBy", "price");
   if (code) u.searchParams.set(site.referral.param, code);
   for (const [k, v] of Object.entries(PADSPLIT_SEARCH_ATTRIBUTION)) u.searchParams.set(k, v);
   return u.toString();

@@ -29,11 +29,16 @@ export const MORE_THAN_ONE_ANSWER =
  * FAQs for the popup and the chat assistant.
  * Search links are built for `code` (main site unless the caller passes the covilla code).
  */
-export function getFaqs(code: string = MAIN_REFERRAL_CODE): SiteFaq[] {
+export function getFaqs(code: string = MAIN_REFERRAL_CODE, instantStart?: number | null): SiteFaq[] {
   return (faqData.faqs as SiteFaq[]).map((faq) => {
     if (faq.q === "Can I book instantly?") {
+      const start =
+        instantStart != null && Number.isFinite(instantStart)
+          ? ` Instant-book rooms start at $${Math.round(instantStart)}/wk.`
+          : "";
       return {
         ...faq,
+        a: `Yes. Apply and lock in your room today. No waiting on host approval.${start}`,
         link: { label: "See instant-book rooms on PadSplit", url: instantBookingSearchUrl(code) },
       };
     }

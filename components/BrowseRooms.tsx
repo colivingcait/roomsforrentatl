@@ -16,18 +16,16 @@ import {
   site,
 } from "@/lib/site";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import type { FilterStartingPrices } from "@/lib/filterPrices";
 
-/**
- * "From" prices on the PadSplit filter cards. Confirmed by Theo, Oct 3 2026.
- * These are Atlanta-wide search starting prices, not our open-room rates.
- */
+/** Card order is fixed. The dollar comes from the live PadSplit search, or is omitted. */
 const FILTER_CARDS = [
   {
+    key: "instant" as const,
     href: instantBookingSearchUrl(),
     event: "instant_booking_search_click",
     label: "Book instantly",
-    price: 158,
-    aria: "Instant booking rooms from $158 a week",
+    aria: "Instant booking rooms",
     tint: "bg-[#EEF0FF]",
     tone: "bg-[#3730A3]",
     priceColor: "text-[#3730A3]",
@@ -35,11 +33,11 @@ const FILTER_CARDS = [
     note: "Apply and lock in your room today. No waiting on host approval.",
   },
   {
+    key: "privateBath" as const,
     href: privateBathSearchUrl(),
     event: "private_bath_search_click",
     label: "Private bathroom",
-    price: 147,
-    aria: "Private bathroom rooms from $147 a week",
+    aria: "Private bathroom rooms",
     tint: "bg-[#EAF5F1]",
     tone: "bg-brand",
     priceColor: "text-brand",
@@ -47,11 +45,11 @@ const FILTER_CARDS = [
     note: null,
   },
   {
+    key: "roomForTwo" as const,
     href: doubleOccupancySearchUrl(),
     event: "double_occupancy_search_click",
     label: "Room for two",
-    price: 152,
-    aria: "Rooms for two from $152 a week",
+    aria: "Rooms for two",
     tint: "bg-[#FFF1EA]",
     tone: "bg-accent",
     priceColor: "text-accent",
@@ -59,11 +57,11 @@ const FILTER_CARDS = [
     note: null,
   },
   {
+    key: "fewer" as const,
     href: fewerHousematesSearchUrl(),
     event: "fewer_housemates_search_click",
     label: "5 or fewer housemates",
-    price: 129,
-    aria: "Rooms with 5 or fewer housemates from $129 a week",
+    aria: "Rooms with 5 or fewer housemates",
     tint: "bg-[#EEF2F7]",
     tone: "bg-ink",
     priceColor: "text-ink",
@@ -88,10 +86,12 @@ export default function BrowseRooms({
   rooms,
   soldOut,
   houses,
+  filterPrices,
 }: {
   rooms: RoomListing[];
   soldOut: House[];
   houses: House[];
+  filterPrices: FilterStartingPrices;
 }) {
   const houseById = useMemo(() => new Map(houses.map((h) => [h.id, h])), [houses]);
   const rates = rooms.map((r) => r.rate).filter((n): n is number => n != null);
@@ -145,7 +145,9 @@ export default function BrowseRooms({
             What do you need?
           </h2>
           <div className="mt-3.5 grid grid-cols-1 gap-3 lg:grid-cols-4 lg:gap-3">
-            {FILTER_CARDS.map((card) => (
+            {FILTER_CARDS.map((card) => {
+              const price = filterPrices[card.key];
+              return (
               <TrackedOutboundLink
                 key={card.event}
                 href={card.href}
@@ -153,7 +155,7 @@ export default function BrowseRooms({
                 properties={{ source: "homepage" }}
                 target="_blank"
                 rel="noopener noreferrer"
-                ariaLabel={card.aria}
+                ariaLabel={price != null ? `${card.aria} from $${price} a week` : card.aria}
                 className={
                   "group relative flex items-center gap-3.5 overflow-hidden rounded-[20px] border border-transparent p-3.5 pr-[52px] transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)] lg:min-h-[176px] lg:flex-col lg:items-start lg:gap-3 lg:p-4 lg:pr-4 " +
                   card.tint
@@ -168,13 +170,15 @@ export default function BrowseRooms({
                 </span>
                 <span className="relative flex min-w-0 flex-col">
                   <span className="text-[16.5px] font-extrabold leading-tight text-ink lg:text-[15px]">{card.label}</span>
-                  <span className="mt-[3px] flex items-baseline gap-1.5 whitespace-nowrap leading-none">
-                    <span className="text-[13px] font-semibold text-muted lg:text-xs">from</span>
-                    <b className={"text-[28px] font-black tracking-[-0.03em] lg:text-[26px] " + card.priceColor}>
-                      ${card.price}
-                    </b>
-                    <span className="-ml-1 text-[15px] font-bold text-slate-700 lg:text-sm">/wk</span>
-                  </span>
+                  {price != null && (
+                    <span className="mt-[3px] flex items-baseline gap-1.5 whitespace-nowrap leading-none">
+                      <span className="text-[13px] font-semibold text-muted lg:text-xs">from</span>
+                      <b className={"text-[28px] font-black tracking-[-0.03em] lg:text-[26px] " + card.priceColor}>
+                        ${price}
+                      </b>
+                      <span className="-ml-1 text-[15px] font-bold text-slate-700 lg:text-sm">/wk</span>
+                    </span>
+                  )}
                   {card.note && (
                     <span className="mt-1.5 text-[12.5px] font-semibold leading-snug text-slate-600 lg:text-xs lg:leading-[1.35]">{card.note}</span>
                   )}
@@ -183,7 +187,8 @@ export default function BrowseRooms({
                   <ExternalIcon />
                 </span>
               </TrackedOutboundLink>
-            ))}
+              );
+            })}
           </div>
           <p className="mt-3.5 flex items-center gap-1.5 text-[12.5px] text-muted">
             <LockIcon />
