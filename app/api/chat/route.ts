@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { buildSystemPrompt } from "@/lib/knowledge";
 import { getHouses } from "@/lib/houses";
 import { listingPlace, priceLabel } from "@/lib/format";
-import { brandFromHost, BRANDS } from "@/lib/brand";
+import { getBrand } from "@/lib/brand";
 import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
 import { getFilterStartingPrices } from "@/lib/filterPrices";
 import { answerRoomSearch } from "@/lib/searchAnswer";
@@ -150,7 +150,7 @@ export async function POST(req: Request) {
   const rawTrack = (payload as { track?: unknown }).track;
   const track =
     rawTrack === "room" || rawTrack === "unit" || rawTrack === "both" ? rawTrack : null;
-  const brand = BRANDS[brandFromHost(req.headers.get("host"))];
+  const brand = getBrand();
 
   const filterPrices = await getFilterStartingPrices();
   const code = referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value);

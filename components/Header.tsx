@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FaqButton from "./FaqButton";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 
 export default function Header({ wide = false }: { wide?: boolean }) {
   const brand = getBrand();
@@ -18,7 +19,7 @@ export default function Header({ wide = false }: { wide?: boolean }) {
           </span>
           <span className="text-lg font-extrabold tracking-[-0.01em] text-ink">
             {brand.word}
-            <span className="text-brand">For</span>Rent<span className="text-accent">ATL</span>
+            <span className="text-brand">For</span>Rent<span className="text-accent">{getMarket().mark}</span>
           </span>
         </Link>
         <FaqButton className="text-sm font-semibold text-brand" startTab={wide ? "chat" : "faq"} />

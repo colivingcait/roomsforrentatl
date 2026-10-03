@@ -2,12 +2,28 @@ import housesData from "@/data/houses.json";
 import availability from "@/data/availability.json";
 import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./types";
 import { isStreetishPlace } from "./format";
+import { getMarket } from "./market";
 
 const SEED = (housesData.houses as SeedHouse[]) ?? [];
 const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {};
 
+function featuredIdSet(): Set<string> {
+  const ids = new Set<string>();
+  for (const url of getMarket().featuredSources) {
+    const match = /\/listing\/(\d+)/.exec(url);
+    if (match) ids.add(match[1]);
+  }
+  return ids;
+}
+
+/** Seeds this market lists, in houses.json order. */
+function featuredSeeds(): SeedHouse[] {
+  const ids = featuredIdSet();
+  return SEED.filter((house) => ids.has(house.id));
+}
+
 export function getHouses(): House[] {
-  return SEED.map(merge).sort((a, b) => {
+  return featuredSeeds().map(merge).sort((a, b) => {
     if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1; // pinned first
     if (a.available !== b.available) return a.available ? -1 : 1;
     return (a.fromPrice ?? 1e9) - (b.fromPrice ?? 1e9);
@@ -15,7 +31,7 @@ export function getHouses(): House[] {
 }
 
 export function getHouse(id: string): House | null {
-  const seed = SEED.find((h) => h.id === id);
+  const seed = featuredSeeds().find((h) => h.id === id);
   return seed ? merge(seed) : null;
 }
 
@@ -27,13 +43,13 @@ export function getRoom(houseId: string, roomId: string): { house: House; room: 
 }
 
 export function getAllHouseIds(): string[] {
-  return SEED.map((h) => h.id);
+  return featuredSeeds().map((h) => h.id);
 }
 
 /** [houseId, roomId] pairs for static generation of room pages. */
 export function getAllRoomParams(): { id: string; roomId: string }[] {
   const out: { id: string; roomId: string }[] = [];
-  for (const seed of SEED) {
+  for (const seed of featuredSeeds()) {
     const rooms = (LIVE[seed.id]?.rooms ?? []).filter((r) => r.status === 1);
     for (const r of rooms) out.push({ id: seed.id, roomId: String(r.id) });
   }

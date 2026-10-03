@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 import { getAllHouseIds } from "@/lib/houses";
 import { getAllColivingHouseIds } from "@/lib/coliving";
 import { getUnits } from "@/lib/units";
@@ -8,6 +9,10 @@ import { getUnits } from "@/lib/units";
 export default function sitemap(): MetadataRoute.Sitemap {
   const brand = getBrand();
   const base = brand.url;
+
+  if (getMarket().id === "dfw") {
+    return [{ url: base, changeFrequency: "daily" as const, priority: 1 }];
+  }
 
   if (brand.key === "homes") {
     const units = getUnits()

@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { getMarket } from "./market";
 
 /**
  * Two brands, one codebase. The same app serves both domains; we pick the
@@ -54,6 +55,18 @@ export function brandFromHost(host?: string | null): BrandKey {
  * try/catch: that would swallow Next's dynamic signal and freeze the brand.
  */
 export function getBrand(): Brand {
+  const market = getMarket();
+  if (market.id === "dfw") {
+    return {
+      key: "rooms",
+      word: "Rooms",
+      name: market.name,
+      domain: market.domain,
+      url: market.url,
+      tagline: market.tagline,
+      description: market.description,
+    };
+  }
   const host = headers().get("host") ?? "";
   return BRANDS[brandFromHost(host)];
 }

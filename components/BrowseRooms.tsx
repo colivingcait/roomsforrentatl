@@ -17,6 +17,7 @@ import {
 } from "@/lib/site";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import type { FilterStartingPrices } from "@/lib/filterPrices";
+import { getMarket } from "@/lib/market";
 
 /** Card order is fixed. The dollar comes from the live PadSplit search, or is omitted. */
 const FILTER_CARDS = [
@@ -115,22 +116,31 @@ export default function BrowseRooms({
 
   const visible = rooms.filter((r) => r.rate == null || sliderMax == null || r.rate <= budget);
   const openLabel = `${rooms.length} open now, cheapest first`;
+  const market = getMarket();
 
   return (
     <>
       <section className="relative overflow-hidden bg-[#042C25] text-white">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]"
-        />
+        {market.heroPhoto ? (
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]"
+          />
+        ) : null}
         <div
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,63,53,.08)_0%,rgba(6,63,53,.30)_100px,rgba(5,52,44,.80)_180px,#042C25_232px,#042C25_100%)] md:bg-[linear-gradient(90deg,rgba(4,44,37,.94)_0%,rgba(6,63,53,.82)_42%,rgba(6,63,53,.35)_75%,rgba(6,63,53,.2)_100%)]"
         />
-        <div className="relative mx-auto max-w-[1080px] px-[18px] pb-[26px] pt-[168px] md:px-6 md:pb-[84px] md:pt-24">
+        <div
+          className={
+            market.heroPhoto
+              ? "relative mx-auto max-w-[1080px] px-[18px] pb-[26px] pt-[168px] md:px-6 md:pb-[84px] md:pt-24"
+              : "relative mx-auto max-w-[1080px] px-[18px] pb-10 pt-12 md:px-6 md:pb-16 md:pt-16"
+          }
+        >
           <span className="inline-flex items-center gap-[7px] rounded-full border border-white/20 bg-ink/35 py-1 pl-2 pr-[11px] text-[12.5px] font-bold text-white backdrop-blur-sm">
             <i className="h-2 w-2 rounded-full bg-[#4ADE80] shadow-[0_0_0_3px_rgba(74,222,128,.25)]" />
-            Furnished rooms across Atlanta
+            {market.heroKicker}
           </span>
           <h1 className="mt-3 text-[33px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,.25)] md:max-w-[880px] md:text-[54px]">
             Open rooms at every price. Move in as soon as{" "}
@@ -218,7 +228,7 @@ export default function BrowseRooms({
               <h2 className="text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
                 Featured Rooms
               </h2>
-              <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>
+              {rooms.length > 0 && <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>}
             </div>
             {sliderMin != null && sliderMax != null && (
               <div className="mt-4 rounded-2xl bg-white px-3.5 pb-2.5 pt-3 shadow-card md:mt-0 md:w-[360px] md:shrink-0">
@@ -336,7 +346,9 @@ export default function BrowseRooms({
             >
               <span>
                 <b className="block text-base font-extrabold text-ink">Don&apos;t see your fit?</b>
-                <span className="text-[13.5px] font-semibold text-brand">Try a filter above for more Atlanta rooms</span>
+                <span className="text-[13.5px] font-semibold text-brand">
+                  Try a filter above for more {market.metro} rooms
+                </span>
               </span>
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-lg font-extrabold text-white">
                 ↑

@@ -1,0 +1,289 @@
+{
+  "_README": "Edit these answers anytime — they power the 'Have a question?' popup (grouped by 'category') and the chat assistant's knowledge base. Optional 'link' renders a clickable link under the answer. Keep everything accurate; some answers reflect typical PadSplit norms — adjust as needed.",
+  "faqs": [
+    {
+      "category": "Moving in",
+      "q": "Can I book instantly?",
+      "a": "Yes. Apply and lock in your room today. No waiting on host approval.",
+      "variants": [
+        "book today",
+        "move in today",
+        "I need a room today",
+        "instant booking",
+        "book instantly",
+        "can I move in today",
+        "no host approval"
+      ]
+    },
+    {
+      "category": "Moving in",
+      "q": "How fast can I move in?",
+      "a": "Most rooms are next-day move-in once you're approved, and approval is usually quick. If a room is available and you apply early enough in the day, same-day move-in is often possible too."
+    },
+    {
+      "category": "Moving in",
+      "q": "How does the process work?",
+      "a": "It's simple: apply, get approved by both PadSplit and our host team (usually the same day), pay your first week's rent, get your door code, and move in!"
+    },
+    {
+      "category": "Moving in",
+      "q": "What happens after I'm approved?",
+      "a": "You pay your first week's rent to lock in the room, then get your move-in details and door code. From there you can move in right away — most homes are ready immediately."
+    },
+    {
+      "category": "Cost & payment",
+      "q": "What does it cost to move in?",
+      "a": "$19 to apply, then your first week's rent, plus a move-in fee if that host charges one. The $19 is refunded if you're not approved. There's no security deposit. When a host charges a move-in fee, it's often around $100 and it's shown on the listing."
+    },
+    {
+      "category": "Cost & payment",
+      "q": "How does payment work and when is rent due?",
+      "a": "Rent is paid weekly, in advance. Your first week is due when you move in, and after that it's charged automatically on the same weekday each week through PadSplit, using a linked bank account or card. Utilities and WiFi are included, so there are no separate bills."
+    },
+    {
+      "category": "Cost & payment",
+      "q": "Can I pay monthly?",
+      "a": "Rent is billed weekly, in advance — that's how our billing works, so there isn't a monthly option. Your first week is due when you move in, and after that you're charged automatically on the same weekday each week. If weekly doesn't fit your schedule, you can ask us about paying bi-weekly instead."
+    },
+    {
+      "category": "Cost & payment",
+      "q": "Can I find a room with no move-in fee?",
+      "a": "Some hosts charge a one-time move-in fee and some don't. This search lists homes where at least one room has no move-in fee. That does not mean every room in the home is fee-free. A featured room with a No move-in fee badge has no host move-in fee.",
+      "variants": [
+        "no move-in fee",
+        "no move in fee",
+        "skip the move-in fee",
+        "skip the host fee",
+        "without a move-in fee",
+        "rooms with no move-in fee"
+      ]
+    },
+    {
+      "category": "Cost & payment",
+      "q": "Are there any other fees or hidden costs?",
+      "a": "Your weekly rent covers the room, all utilities, and WiFi. Up front you pay the $19 application fee and your first week's rent, plus a one-time move-in fee if that host charges one. Some hosts don't. Optional extras like double occupancy cost a little more."
+    },
+    {
+      "category": "Getting approved",
+      "q": "What do I need to get approved?",
+      "a": "You'll need income of at least 2x the rent, no felony convictions in the last 7 years, and no more than 1 eviction in the last 7 years. I can't say how a specific application will turn out, but if you apply and are declined, your application fee is refunded."
+    },
+    {
+      "category": "Getting approved",
+      "q": "Do you check credit?",
+      "a": "No credit check. Approval is based on a background screening and income of at least 2x the rent."
+    },
+    {
+      "category": "Getting approved",
+      "q": "How do I show proof of income?",
+      "a": "Submit pay stubs, bank statements or an offer letter. We look for income of at least 2x the rent."
+    },
+    {
+      "category": "Getting approved",
+      "q": "How long does approval take?",
+      "a": "Usually quick — often the same day. You're approved by both PadSplit's background screening (which runs automatically with your application) and our host team."
+    },
+    {
+      "category": "Getting approved",
+      "q": "What if I'm not approved?",
+      "a": "If you're not approved, your $19 application fee is refunded. You're welcome to apply to another home that might be a better fit."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Is the room furnished? What's in it?",
+      "a": "Yes — every room comes fully furnished, typically with a bed, mattress, and storage, and the shared spaces like the kitchen and living room are furnished too. You just bring your personal belongings."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Is it a private room?",
+      "a": "Yes, you get your own private bedroom with its own lock. Spaces like the kitchen, living room, and most bathrooms are shared with your housemates."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Do rooms have private bathrooms?",
+      "a": "Some rooms have a private bathroom and others share — it's listed on each room. Private-bath rooms cost a bit more and tend to go quickly. For more private-bath rooms, see the Dallas–Fort Worth search."
+    },
+    {
+      "category": "The home & your room",
+      "q": "What's included in the price?",
+      "a": "Your furnished room, all utilities, WiFi, and shared common areas — one weekly payment, no separate bills."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Can I use the kitchen and cook?",
+      "a": "Absolutely. Every home has a shared, fully-equipped kitchen you're free to use, along with shared living spaces."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Is there laundry?",
+      "a": "Yes — every home has a washer and dryer on site, included at no extra cost."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Is there parking?",
+      "variants": [
+        "Where do I park?",
+        "Do you have parking?",
+        "What's the parking situation?"
+      ],
+      "a": "Yes — there's a carport and street parking right in front of the house, so you'll always have a spot."
+    },
+    {
+      "category": "The home & your room",
+      "q": "How many people share a bathroom?",
+      "variants": [
+        "How many people am I sharing the bathroom with?",
+        "What's the bathroom situation?",
+        "How many share a bath?"
+      ],
+      "a": "It varies by home — typically 2 to 4 people share a bath. Willow's rooms are all private baths, no sharing at all, and Meadow has the lightest sharing of our shared-bath homes. Everyone's on different schedules and cleans up after themselves, so we really don't get complaints about the shared bathrooms. Ask about a specific home and I can give you its exact bathroom count."
+    },
+    {
+      "category": "The home & your room",
+      "q": "How many people live in each home?",
+      "variants": [
+        "How many bedrooms?",
+        "How many roommates?",
+        "How many people does the house fit?",
+        "How big is the house?"
+      ],
+      "a": "Our homes are over 2,500 sq ft across multiple floors, with standard-size bedrooms (10x12 and larger). Most fit up to 8 residents, each in their own private room — a couple of our homes are smaller (5 or 6 residents). Ask about a specific home and I'll give you its exact room count."
+    },
+    {
+      "category": "The home & your room",
+      "q": "Can I tour a home before booking?",
+      "a": "You can take a full virtual tour of most homes — every room and common area is shown through photos and a 3D walkthrough on each listing, so you can explore it all online before booking. In-person visits aren't available until after you book, since the exact address stays private until then. And if you move in and aren't happy with your home, transferring to another one is simple and free."
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "What are the house rules?",
+      "a": "Our homes run on a simple idea: be respectful. Here's what keeps everyone comfortable — residents in the house only (no guests), smoke-free indoors (step outside to smoke or vape), pet-free. Quiet hours are 9 PM to 9 AM. Keep shared spaces tidy, wash your dishes right after using them, bring your own basics like toilet paper and soap, treat the home with care, and be a good neighbor — sort things out kindly and report anything that needs fixing.\n\nReady to apply?"
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "Can I have guests or overnight visitors?",
+      "a": "No — guests aren't allowed in the homes at any time, day or night. Everyone living there is vetted and background-checked, which keeps the community safe and comfortable for residents."
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "Is smoking allowed?",
+      "a": "No smoking or vaping inside the homes. If you smoke, it needs to be outdoors — preferably in the backyard."
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "Are animals allowed?",
+      "variants": [
+        "Can I bring a pet?",
+        "Are pets allowed?",
+        "Do you allow dogs?",
+        "Service animal"
+      ],
+      "a": "Our homes don't allow pets. Service animals are allowed."
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "Can two people share a room?",
+      "variants": [
+        "Can my partner stay with me?",
+        "Do you allow couples?",
+        "Room for two people",
+        "Can my family stay?",
+        "I have kids"
+      ],
+      "a": "If you're looking for a room for more than one person, here's the link for that. Some hosts charge an additional fee for a second person."
+    },
+    {
+      "category": "House rules & sharing",
+      "q": "Are the homes men, women, or mixed?",
+      "a": "Most are mixed-gender co-living homes. You can browse what's available across our homes right on the site."
+    },
+    {
+      "category": "Your stay",
+      "q": "Is there a minimum stay or long-term commitment?",
+      "variants": [
+        "Do I have to commit to 3 months?",
+        "What's the minimum stay?",
+        "Is this month-to-month?",
+        "Is there a lease?"
+      ],
+      "a": "We look for people who want to stick around long-term, but there's no lock-in — if something changes, you're free to transfer or move out whenever you need to."
+    },
+    {
+      "category": "Your stay",
+      "q": "What if I don't like it?",
+      "variants": [
+        "What if it's not a good fit?",
+        "Can I leave if I want to?",
+        "What if I want to move out?",
+        "How do I move out?"
+      ],
+      "a": "We want you somewhere you actually like living. If it's not working out, you can easily book a move-out — no hard feelings."
+    },
+    {
+      "category": "Your stay",
+      "q": "Can I switch rooms or homes later?",
+      "a": "Yes — and it's simple and free. If you move in and aren't happy with your home, or you just want a change later, you can transfer to another available room or home at no cost. Just let us know when you're ready."
+    },
+    {
+      "category": "Location",
+      "q": "Where are rooms listed?",
+      "a": "Rooms on this site are across the Dallas–Fort Worth area, including Dallas, Fort Worth, Arlington, Grand Prairie, Irving, Mesquite, and Garland. The exact address is on the PadSplit listing after you book."
+    },
+    {
+      "category": "Location",
+      "q": "How close is public transit?",
+      "a": "It depends on the home — some are a short 5–10 minute walk to the bus, while others are better for residents who drive or rideshare. Ask our assistant about a specific home and we'll tell you."
+    },
+    {
+      "category": "Good to know",
+      "q": "Can I get mail and packages delivered?",
+      "variants": [
+        "Can I use it as my mailing address?",
+        "Do you accept packages?",
+        "Can I get mail there?"
+      ],
+      "a": "Absolutely — it's your home. Use the address for mail, packages, whatever you need."
+    },
+    {
+      "category": "Good to know",
+      "q": "Is it safe?",
+      "a": "Every resident is background-checked, and each room has its own electronic door lock for privacy and security."
+    },
+    {
+      "category": "Good to know",
+      "q": "Who handles maintenance or repairs?",
+      "a": "If something needs fixing, submit a request through PadSplit and we'll take care of it. You're never on the hook for normal repairs."
+    },
+    {
+      "category": "Good to know",
+      "q": "Are the homes cleaned?",
+      "a": "Shared common areas are cleaned regularly, and several homes include monthly cleaning of those spaces. You keep your own room tidy."
+    },
+    {
+      "category": "Good to know",
+      "q": "Do I need renters insurance?",
+      "a": "It's not required, though you're welcome to insure your personal belongings if you'd like."
+    },
+    {
+      "category": "Good to know",
+      "q": "Can I call you?",
+      "variants": [
+        "What's your phone number?",
+        "Can I text you?",
+        "Do you have a number?",
+        "Can I call?"
+      ],
+      "a": "We don't publish a phone number. Ask in this chat and I'll help."
+    },
+    {
+      "category": "Good to know",
+      "q": "What is PadSplit and why do I book there?",
+      "a": "PadSplit is the trusted platform we use to handle applications, screening, and secure weekly payments. When you tap “Book this room,” it takes you there to apply and pay for that exact room."
+    },
+    {
+      "category": "Good to know",
+      "q": "How do I get the exact address?",
+      "a": "For residents' privacy, the exact street address is shared after you book. Each listing shows the neighborhood and a map area so you know where it is."
+    }
+  ]
+}

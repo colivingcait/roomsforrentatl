@@ -1,9 +1,11 @@
 import housesData from "@/data/houses.json";
 import unitsData from "@/data/units.json";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 import { renderOgCard, ogSize, ogContentType } from "@/lib/og";
 
-export const alt = "Furnished rentals in Atlanta";
+export const alt =
+  getMarket().id === "dfw" ? "Furnished rooms in Dallas–Fort Worth" : "Furnished rentals in Atlanta";
 export const size = ogSize;
 export const contentType = ogContentType;
 
@@ -12,6 +14,16 @@ export const contentType = ogContentType;
 // and unit pages have their own listing-specific preview (see their
 // opengraph-image.tsx) — this one is only the site-wide/homepage card.
 export default async function OpengraphImage() {
+  if (getMarket().id === "dfw") {
+    return renderOgCard({
+      letter: "R",
+      word: "Rooms",
+      line1: "Furnished rooms in Dallas–Fort Worth.",
+      line2: "Next Day Move In",
+      sub: "All-in weekly pricing · utilities and Wi-Fi included",
+      chips: ["Fully furnished", "Utilities + Wi-Fi included", "Stay as long as you need"],
+    });
+  }
   const brand = getBrand();
   const isHomes = brand.key === "homes";
 

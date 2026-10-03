@@ -1,19 +1,23 @@
 /**
- * Cheapest weekly rate on each Atlanta PadSplit search, from the search API's
+ * Cheapest weekly rate on each metro PadSplit search, from the search API's
  * extras.min_price (the same number as the page's "starting at" line after
  * sorting price low to high). Cached for an hour. A failed fetch returns null
  * for that card so the homepage can hide the price instead of showing a stale one.
  * Address fields are never read or stored.
  */
+import { getMarket } from "./market";
 
 const SEARCH = "https://www.padsplit.com/api/property_search/";
 
-const BOUNDS = {
-  lat_max: "33.9698383740918",
-  lng_max: "-84.10153814955288",
-  lat_min: "33.497148095320355",
-  lng_min: "-84.56500806987017",
-} as const;
+function searchBounds(): Record<string, string> {
+  const bounds = getMarket().padsplit.bounds;
+  return {
+    lat_max: bounds.latMax,
+    lng_max: bounds.lngMax,
+    lat_min: bounds.latMin,
+    lng_min: bounds.lngMin,
+  };
+}
 
 export type FilterStartingPrices = {
   instant: number | null;
@@ -42,7 +46,7 @@ function asWeekly(value: unknown): number | null {
 
 async function minPrice(filter: Record<string, string>): Promise<number | null> {
   const u = new URL(SEARCH);
-  for (const [k, v] of Object.entries({ ...BOUNDS, sort_by: "price", page_size: "1", ...filter })) {
+  for (const [k, v] of Object.entries({ ...searchBounds(), sort_by: "price", page_size: "1", ...filter })) {
     u.searchParams.set(k, v);
   }
   try {
