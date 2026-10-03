@@ -8,15 +8,10 @@
 import { getHouses, availableRooms, lastUpdated } from "./houses";
 import { getUnits } from "./units";
 import { roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
-import faqData from "@/data/faq.json";
-import { site, generalSearchUrl } from "./site";
+import { getFaqs } from "./faqs";
+import { site, generalSearchUrl, PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "./site";
 
-const FAQS = faqData.faqs as {
-  q: string;
-  a: string;
-  variants?: string[];
-  link?: { label: string; url: string };
-}[];
+const FAQS = getFaqs();
 
 const POLICIES = `
 - Move-in cost: a $19 application fee, charged when you apply (refunded if you're not approved). The first week's rent is charged once you're approved by both PadSplit and the host team — not at application. No large security deposit.
@@ -87,7 +82,7 @@ function housesSnapshot(): string {
             )
             .join("\n")
         : "    - rooms available; see the listing for details.";
-      const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}/week` : "";
+      const from = h.fromPrice ? ` from ${priceLabel(h.fromPrice)}` : "";
       return `• ${h.name} (${loc}) [id ${h.id}] — ${h.roomsAvailable} room(s) available${from}.${transit}${tour}${capacity}\n${roomLines}`;
     })
     .join("\n\n");
@@ -120,7 +115,7 @@ function quickFacts(): string {
   }
   const cityLines = Array.from(byCity.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([city, v]) => `- ${city}: ${v.count} room(s)${isFinite(v.min) ? `, from ${priceLabel(v.min)}/wk` : ""}`);
+    .map(([city, v]) => `- ${city}: ${v.count} room(s)${isFinite(v.min) ? `, from ${priceLabel(v.min)}` : ""}`);
   if (cityLines.length) {
     lines.push(
       `By city — this is the COMPLETE and EXACT list of areas with rooms available right now:\n${cityLines.join("\n")}`
@@ -146,7 +141,7 @@ function privateBathSnapshot(): string {
     }
   }
   if (!rows.length) {
-    return `0 private-bathroom rooms are available right now. Say EXACTLY: "Our private baths are usually the first to go, so we keep a waitlist. In the meantime, we have shared baths available. We'll let you know when a private bath opens up - transferring is free and easy." Then offer shared-bath rooms with chips — keep them in the flow, don't just apologize and stop.`;
+    return `0 private-bathroom rooms are available right now. Say EXACTLY: "Our private baths are usually the first to go, so we keep a waitlist. In the meantime, we have shared baths available. We'll let you know when a private bath opens up - transferring is free and easy." Then offer shared-bath rooms with chips — keep them in the flow, don't just apologize and stop. Also offer more private-bath rooms with this exact link: ${PADSPLIT_PRIVATE_BATH_SEARCH_URL}`;
   }
   const n = rows.length;
   return `${n} private-bathroom room${n === 1 ? "" : "s"} available right now (this is the EXACT count — do not say more):\n${rows.join("\n")}`;
@@ -354,7 +349,7 @@ ${trackDirective(track)}
 - BOOKING — show tappable cards, never plain instructions. Whenever you point someone toward booking (they ask how or where to book, or you're recommending specific homes), do NOT tell them to browse PadSplit or pick a room by name. Instead write a short, friendly lead-in (for example: "Here are the homes you can book in Decatur — tap one to get started:") and then, on the LAST line of your reply, output a booking token that the app turns into clickable home cards.
 - Booking token format: <<<BOOK: id, id>>> using the bracketed home IDs from the homes list — include only homes that currently have rooms available and that fit what the person asked (e.g. a specific city). Example for the two Decatur homes: <<<BOOK: 35011, 152>>>. Never mention, quote, explain, or format the token — just put it alone on the final line. Tapping a card takes the person into the booking flow on our own site (they pick a room and book there).
 - ONE TOKEN OF EACH TYPE PER REPLY — if you're covering more than one city/area, put ALL the home IDs into a SINGLE combined <<<BOOK: ...>>> token (e.g. Decatur AND Stone Mountain homes together: <<<BOOK: 35011, 11889>>>), never two separate BOOK tokens. Same for CHIPS — exactly one, ever. Write EXACTLY three "<" and three ">" on each side — never two, never four.
-- NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (pet-friendly / double-occupancy).
+- NEVER send someone to PadSplit without a link or a card. Do not say "go to PadSplit," "search PadSplit," or "browse PadSplit" on its own — if they did that themselves we'd lose the referral. Every action on PadSplit must come through a booking card (the BOOK token) or one of the provided search links (pet-friendly / double-occupancy / private bathroom).
 - Prices are weekly and "all-in" (utilities + WiFi included). Availability can change quickly; if unsure, suggest they check using a booking card.
 - TWO KINDS OF LISTINGS — never mix them up:
   (1) PadSplit CO-LIVING ROOMS — a private room in a shared home, WEEKLY rent, $19 PadSplit application fee, screened by PadSplit + our host team, our house rules apply, booked on PadSplit (use the BOOK card token).
@@ -385,7 +380,7 @@ ${quickFacts()}
 ${housesSnapshot()}
 
 # Private-bathroom rooms available right now — use this EXACT list and count
-When someone asks about private bathrooms, answer ONLY from this list. State the exact number (if it's one, say "one room" — never "two"), name the home, and ALWAYS include each room's weekly price. Then show its booking card.
+When someone asks about private bathrooms, answer ONLY from this list. State the exact number (if it's one, say "one room" — never "two"), name the home, and ALWAYS include each room's weekly price. Then show its booking card. We have very few private baths, so also offer more private-bath rooms with this exact link: ${PADSPLIT_PRIVATE_BATH_SEARCH_URL}
 ${privateBathSnapshot()}
 
 # Long-term private rentals (monthly lease via TurboTenant)

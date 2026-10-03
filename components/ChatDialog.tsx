@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import faqData from "@/data/faq.json";
 import { trackEvent } from "@/lib/analytics";
+import { getFaqs, type SiteFaq } from "@/lib/faqs";
 import ChatPanel from "./ChatPanel";
 
-type Faq = { q: string; a: string; category?: string; link?: { label: string; url: string } };
-const FAQS = faqData.faqs as Faq[];
+type Faq = SiteFaq;
+const FAQS = getFaqs();
 
 // Group FAQs by category, preserving the order they first appear.
 const FAQ_GROUPS: { category: string; items: Faq[] }[] = [];

@@ -7,6 +7,8 @@ import type { House } from "@/lib/types";
 import type { RoomListing } from "@/lib/browse";
 import { APPLICATION_FEE } from "@/lib/browse";
 import { priceLabel } from "@/lib/format";
+import { PADSPLIT_PRIVATE_BATH_SEARCH_URL } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 
 type FilterKey = "tomorrow" | "priv" | "bus";
 
@@ -25,9 +27,13 @@ export default function BrowseRooms({
   soldOut: House[];
   updated: string | null;
 }) {
-  const priced = rooms.filter((r) => r.rate != null);
-  const dataMin = priced.length ? Math.floor(Math.min(...priced.map((r) => r.rate as number)) / 10) * 10 : 150;
-  const dataMax = priced.length ? Math.ceil(Math.max(...priced.map((r) => r.rate as number)) / 10) * 10 : 260;
+  const rates = rooms.map((r) => r.rate).filter((n): n is number => n != null);
+  const rateMin = rates.length ? Math.min(...rates) : null;
+  const rateMax = rates.length ? Math.max(...rates) : null;
+  // Slider bounds stay on $10 steps so the control has a little room past the
+  // cheapest and priciest open rooms. The hero uses the exact rates.
+  const dataMin = rateMin != null ? Math.floor(rateMin / 10) * 10 : 150;
+  const dataMax = rateMax != null ? Math.ceil(rateMax / 10) * 10 : 260;
 
   const [active, setActive] = useState<Record<FilterKey, boolean>>({ tomorrow: false, priv: false, bus: false });
   const [budget, setBudget] = useState(dataMax);
@@ -63,11 +69,11 @@ export default function BrowseRooms({
               : "Furnished rooms for rent in Atlanta."}
           </h1>
           <p className="mt-2 text-[14.5px] leading-relaxed text-white/80">
-            {priced.length > 0
-              ? `${priceLabel(dataMin)}–${priceLabel(dataMax)} a week, all in. $${APPLICATION_FEE} to apply, no deposit, keys tomorrow.`
+            {rateMin != null && rateMax != null
+              ? `${weekRange(rateMin, rateMax)} $${APPLICATION_FEE} to apply, no deposit, keys tomorrow.`
               : `$${APPLICATION_FEE} to apply, no deposit, keys tomorrow.`}
           </p>
-          {updated && <p className="mt-1 text-xs text-white/60">Updated {updated.toLowerCase()}</p>}
+          {updated && <p className="mt-1 text-xs text-white/60">{updated}</p>}
         </div>
       </div>
 
@@ -183,6 +189,17 @@ export default function BrowseRooms({
             )}
           </div>
         )}
+
+        <a
+          href={PADSPLIT_PRIVATE_BATH_SEARCH_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackEvent("private_bath_search_click", { source: "homepage" })}
+          className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-brand/30 bg-brand/5 px-4 py-3 text-[14px] font-semibold leading-snug text-brand active:scale-[0.99]"
+        >
+          <span>Need a private bathroom? See private-bath rooms on PadSplit</span>
+          <span aria-hidden>→</span>
+        </a>
       </div>
 
       {soldOut.length > 0 && (
@@ -229,6 +246,13 @@ export default function BrowseRooms({
       </div>
     </section>
   );
+}
+
+/** "$171–$180 a week, all in." — exact open-room rates, no "/wk" suffix. */
+function weekRange(min: number, max: number): string {
+  const lo = `$${min.toLocaleString()}`;
+  const hi = `$${max.toLocaleString()}`;
+  return `${min === max ? lo : `${lo}–${hi}`} a week, all in.`;
 }
 
 function ReassuranceCard({ title, body }: { title: string; body: string }) {
