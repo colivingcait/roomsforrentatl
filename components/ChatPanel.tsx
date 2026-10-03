@@ -13,10 +13,19 @@ type BookHouse = {
   reviewCount?: number | null;
   url: string;
 };
+type SearchRoom = {
+  id: string;
+  name: string;
+  houseName: string;
+  location: string;
+  price: string | null;
+  url: string;
+};
 type Message = {
   role: "user" | "assistant";
   content: string;
   houses?: BookHouse[];
+  rooms?: SearchRoom[];
   chips?: string[];
 };
 type Track = "room" | "unit" | "both";
@@ -281,6 +290,7 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
             role: "assistant",
             content: data.reply,
             houses: data.houses,
+            rooms: data.rooms,
             chips: data.chips,
           },
         ]);
@@ -350,6 +360,13 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
               <div className="space-y-2">
                 {m.houses.map((h) => (
                   <BookCard key={h.id} house={h} />
+                ))}
+              </div>
+            )}
+            {m.rooms && m.rooms.length > 0 && (
+              <div className="space-y-2">
+                {m.rooms.map((r) => (
+                  <SearchRoomCard key={r.id} room={r} />
                 ))}
               </div>
             )}
@@ -480,6 +497,28 @@ export default function ChatPanel({ initialTrack = null }: { initialTrack?: Trac
   );
 }
 
+function SearchRoomCard({ room }: { room: SearchRoom }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="flex items-baseline justify-between gap-2">
+        <div className="font-extrabold text-ink">{room.houseName}</div>
+        {room.price && <div className="text-sm font-bold text-ink">{room.price}</div>}
+      </div>
+      <div className="text-sm text-muted">{room.location}</div>
+      <div className="mt-0.5 text-xs font-semibold text-brand">{room.name} · Private bath</div>
+      <a
+        href={room.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-book mt-2 block w-full py-2 text-center text-sm"
+        onClick={() => trackEvent("book_click", { house: room.id, houseName: room.houseName, source: "chat" })}
+      >
+        View this room →
+      </a>
+    </div>
+  );
+}
+
 function BookCard({ house }: { house: BookHouse }) {
   const rooms = `${house.roomsAvailable} room${house.roomsAvailable === 1 ? "" : "s"} available`;
   return (
@@ -563,11 +602,14 @@ function linkLabel(url: string): string {
       if (u.searchParams.get("bathroomType") === "private_bathroom") return "See private-bath rooms →";
       if (u.searchParams.get("roomFeatures") === "allow_multiple_occupants") return "See rooms for two →";
       if (u.searchParams.get("moveInTime") === "instant_move_in") return "See instant-book rooms →";
+      if (u.searchParams.get("noMoveInFee") === "true") return "See rooms with no move-in fee →";
+      if (u.searchParams.get("roomsCount") === "6") return "See homes with fewer housemates →";
       const city = u.pathname.match(/\/rooms-for-rent\/([a-z0-9-]+)-ga$/)?.[1];
       if (city && city !== "atlanta") {
         const name = city.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
         return `See rooms in ${name} →`;
       }
+      if (u.searchParams.get("sortBy") === "price") return "See lowest-priced rooms →";
       return "View on PadSplit →";
     }
     return u.hostname.replace(/^www\./, "") + " →";

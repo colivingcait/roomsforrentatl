@@ -5,6 +5,7 @@ import { listingPlace, priceLabel } from "@/lib/format";
 import { brandFromHost, BRANDS } from "@/lib/brand";
 import { REFERRAL_COOKIE, referralCodeFor } from "@/lib/site";
 import { getFilterStartingPrices } from "@/lib/filterPrices";
+import { answerRoomSearch } from "@/lib/searchAnswer";
 
 // Runs on the server only — the Anthropic API key never reaches the browser.
 export const runtime = "nodejs";
@@ -129,12 +130,6 @@ function logChat(question: string, answer: string, source: string) {
 
 export async function POST(req: Request) {
   const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) {
-    return Response.json(
-      { error: "The chat assistant isn't configured yet. Please check back shortly." },
-      { status: 503 }
-    );
-  }
 
   let payload: unknown;
   try {
@@ -158,6 +153,24 @@ export async function POST(req: Request) {
   const brand = BRANDS[brandFromHost(req.headers.get("host"))];
 
   const filterPrices = await getFilterStartingPrices();
+  const code = referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value);
+
+  // Search needs get a PadSplit referral link first. This does not use the model,
+  // so a private-bath or budget tap can't fall back to a featured-room pitch.
+  if (brand.key !== "homes" && track !== "unit") {
+    const search = answerRoomSearch(question, code, filterPrices);
+    if (search) {
+      logChat(question, search.reply, source);
+      return Response.json({ reply: search.reply, houses: [], rooms: search.rooms, chips: search.chips });
+    }
+  }
+
+  if (!key) {
+    return Response.json(
+      { error: "The chat assistant isn't configured yet. Please check back shortly." },
+      { status: 503 }
+    );
+  }
 
   try {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
@@ -173,9 +186,13 @@ export async function POST(req: Request) {
         system: buildSystemPrompt(
           track,
           { key: brand.key, name: brand.name, domain: brand.domain },
-          referralCodeFor(cookies().get(REFERRAL_COOKIE)?.value),
+          code,
           filterPrices.instant,
-          filterPrices.noFee
+          filterPrices.noFee,
+          filterPrices.privateBath,
+          filterPrices.roomForTwo,
+          filterPrices.fewer,
+          filterPrices.lowest
         ),
         messages,
       }),
