@@ -1,14 +1,18 @@
 const path = require("path");
+const { resolveMarketId } = require("./lib/market-env");
 
 // One build serves one market. Swap Atlanta modules for Dallas–Fort Worth so
 // the other market's copy is not in the bundle renters download. Unset keeps
-// Atlanta and the default .next directory.
-const market = process.env.NEXT_PUBLIC_MARKET === "dfw" ? "dfw" : "atl";
+// Atlanta, including Atlanta production. The separate .next directory is only
+// for a local NEXT_PUBLIC_MARKET=dfw server, so it does not share a cache
+// with the Atlanta dev server. Vercel keeps the default .next output.
+const market = resolveMarketId();
+const explicitDfw = process.env.NEXT_PUBLIC_MARKET === "dfw";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  ...(market === "dfw" ? { distDir: ".next-dfw" } : {}),
+  ...(explicitDfw ? { distDir: ".next-dfw" } : {}),
   ...(market === "dfw"
     ? {
         webpack: (config) => {

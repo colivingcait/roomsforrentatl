@@ -136,7 +136,7 @@
         "What's the bathroom situation?",
         "How many share a bath?"
       ],
-      "a": "It varies by home — typically 2 to 4 people share a bath. Willow's rooms are all private baths, no sharing at all, and Meadow has the lightest sharing of our shared-bath homes. Everyone's on different schedules and cleans up after themselves, so we really don't get complaints about the shared bathrooms. Ask about a specific home and I can give you its exact bathroom count."
+      "a": "It varies by home — typically 2 to 4 people share a bath. The listing says whether a room has a private bathroom. Everyone's on different schedules and cleans up after themselves, so shared baths are usually easy to live with."
     },
     {
       "category": "The home & your room",
@@ -147,7 +147,7 @@
         "How many people does the house fit?",
         "How big is the house?"
       ],
-      "a": "Our homes are over 2,500 sq ft across multiple floors, with standard-size bedrooms (10x12 and larger). Most fit up to 8 residents, each in their own private room — a couple of our homes are smaller (5 or 6 residents). Ask about a specific home and I'll give you its exact room count."
+      "a": "It depends on the home. Each listing shows how many rooms it has. Some homes are larger, and some have 5 or 6 residents, each in their own private room."
     },
     {
       "category": "The home & your room",
@@ -157,7 +157,7 @@
     {
       "category": "House rules & sharing",
       "q": "What are the house rules?",
-      "a": "Our homes run on a simple idea: be respectful. Here's what keeps everyone comfortable — residents in the house only (no guests), smoke-free indoors (step outside to smoke or vape), pet-free. Quiet hours are 9 PM to 9 AM. Keep shared spaces tidy, wash your dishes right after using them, bring your own basics like toilet paper and soap, treat the home with care, and be a good neighbor — sort things out kindly and report anything that needs fixing.\n\nReady to apply?"
+      "a": "House rules are on each listing. Typical rules: residents in the house only (no guests), smoke-free indoors (step outside to smoke or vape), and quiet hours from 9 PM to 9 AM. Keep shared spaces tidy, wash your dishes right after using them, bring your own basics like toilet paper and soap, treat the home with care, and be a good neighbor — sort things out kindly and report anything that needs fixing.\n\nReady to apply?"
     },
     {
       "category": "House rules & sharing",
@@ -178,7 +178,7 @@
         "Do you allow dogs?",
         "Service animal"
       ],
-      "a": "Our homes don't allow pets. Service animals are allowed."
+      "a": "Pet rules are on that host's listing. Service animals are allowed."
     },
     {
       "category": "House rules & sharing",
@@ -195,7 +195,7 @@
     {
       "category": "House rules & sharing",
       "q": "Are the homes men, women, or mixed?",
-      "a": "Most are mixed-gender co-living homes. You can browse what's available across our homes right on the site."
+      "a": "Most are mixed-gender co-living homes. You can browse what's available on the Dallas–Fort Worth search."
     },
     {
       "category": "Your stay",
