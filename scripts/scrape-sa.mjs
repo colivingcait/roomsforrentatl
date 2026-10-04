@@ -417,6 +417,7 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
 
       let dropped = 0;
       const commonAreas = [];
+      const bedroomPics = [];
       const seen = new Set();
       const pushCommon = (raw) => {
         const mapped = toPhoto(raw);
@@ -428,7 +429,10 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         if (seen.has(mapped.photo.url)) return;
         seen.add(mapped.photo.url);
         const cat = (raw.category || "").toLowerCase();
-        if (cat === "bedroom" || /bed/.test(cat)) return;
+        if (cat === "bedroom" || /bed/.test(cat)) {
+          bedroomPics.push(mapped.photo);
+          return;
+        }
         commonAreas.push(mapped.photo);
       };
       for (const pic of listing.public.pictures) pushCommon(pic);
@@ -439,6 +443,10 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         const mapped = mapRoom(raw);
         dropped += mapped.dropped;
         rooms.push(mapped.room);
+      }
+      const roomUrls = new Set(rooms.flatMap((r) => r.photos || []));
+      for (const photo of bedroomPics) {
+        if (!roomUrls.has(photo.url)) commonAreas.push(photo);
       }
       droppedTotal += dropped;
 
@@ -455,7 +463,6 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
       const previous = prevById.get(id)?.image || prevAvail.houses?.[id]?.image;
       const lead =
         (await pickBedCover(bedroomUrls, previous)) ||
-        bedroomUrls[0] ||
         commonAreas.find((p) => photoSlot(p) === 0)?.url ||
         commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||

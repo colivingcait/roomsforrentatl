@@ -261,7 +261,7 @@
         {
           "url": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
           "category": "common_space",
-          "label": "Bedroom",
+          "label": "Common area",
           "width": 5196,
           "height": 3464
         },
@@ -341,6 +341,20 @@
           "label": "Common area",
           "width": 5196,
           "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/img_4650f51d-747d-454e-b583-64a5a066d6b8.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 5196,
+          "height": 3464
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/11202/img_5df235dc-ff7d-4607-aff9-f39c4249f8b0.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 5196,
+          "height": 3464
         }
       ],
       "carousel": [],
@@ -351,7 +365,7 @@
       "rating": null,
       "checkedAt": "2026-10-04T02:32:06.002Z",
       "neighborhood": "Northeast Side",
-      "image": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/11202/img_4650f51d-747d-454e-b583-64a5a066d6b8.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11202",
       "exteriorPhotosDropped": 0
     },
