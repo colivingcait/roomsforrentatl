@@ -1,0 +1,31 @@
+name: San Antonio build isolation
+
+on:
+  pull_request:
+  push:
+    paths:
+      - "lib/**"
+      - "app/**"
+      - "components/**"
+      - "data/**"
+      - "scripts/check-sa-isolation.mjs"
+      - "scripts/assert-atl-project.cjs"
+      - "scripts/market-env.test.mjs"
+      - "next.config.js"
+      - "middleware.ts"
+      - ".github/workflows/check-sa-build.yml"
+
+jobs:
+  sa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Build San Antonio
+        run: NEXT_PUBLIC_MARKET=sa NEXT_PUBLIC_SITE_URL=https://roomsforrentsa.com npm run build
+      - name: Fail if another market leaked
+        run: node scripts/check-sa-isolation.mjs .next

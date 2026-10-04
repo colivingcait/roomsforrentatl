@@ -17,20 +17,34 @@
 import { chromium } from "playwright";
 import { appendFileSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { applyBedCover, pickBedCover } from "../lib/bed-cover.mjs";
 
 const ART = "artifacts";
 const STREET_BLOCKLIST = "data/.street1-blocklist";
 mkdirSync(ART, { recursive: true });
 // re-run trigger: pick up newly-listed rooms (Chestnut Hill)
 
-const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses;
-const prev = existsSync("data/availability.json")
-  ? JSON.parse(readFileSync("data/availability.json", "utf8"))
-  : { houses: {} };
-
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const CHALLENGE = /just a moment|verify you are human|captcha|access denied|attention required/i;
+
+const marketArg = process.argv.indexOf("--market");
+const SCRAPE_MARKET = marketArg === -1 ? "atl" : process.argv[marketArg + 1];
+if (SCRAPE_MARKET === "sa") {
+  const { scrapeSanAntonio } = await import("./scrape-sa.mjs");
+  const code = await scrapeSanAntonio({ chromium, UA, CHALLENGE, ART });
+  process.exit(code);
+}
+if (SCRAPE_MARKET === "atl-host") {
+  const { scrapeAtlantaHost } = await import("./scrape-atl-host.mjs");
+  const code = await scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART });
+  process.exit(code);
+}
+
+const houses = JSON.parse(readFileSync("data/houses.json", "utf8")).houses.filter((h) => h.host !== true);
+const prev = existsSync("data/availability.json")
+  ? JSON.parse(readFileSync("data/availability.json", "utf8"))
+  : { houses: {} };
 
 /**
  * House-level bits from the rendered text/html (neighborhood + lead photo).
@@ -162,16 +176,27 @@ async function extractPhotos(page) {
         return;
       }
       if (typeof node.location === "string" && /^https?:\/\//.test(node.location) && "category" in node) {
+        const aiCaption = (ai) => {
+          if (typeof ai !== "string") return "";
+          const token = ai.trim().toLowerCase();
+          if (!token || token === "other") return "";
+          return token.replace(/_/g, " ");
+        };
+        const human = typeof node.description === "string" ? node.description.trim() : "";
+        const caption = human || aiCaption(node.aiCategory);
         if (!seen.has(node.location)) {
           seen.add(node.location);
           pics.push({
             url: node.location,
             category: (node.category || "other").toString(),
-            description: node.description || null,
+            description: caption || null,
             primary: !!node.primary,
             width: node.imageWidth ?? null,
             height: node.imageHeight ?? null,
           });
+        } else if (caption) {
+          const row = pics.find((p) => p.url === node.location);
+          if (row && !row.description) row.description = caption;
         }
       }
       for (const k of Object.keys(node)) visit(node[k], depth + 1);
@@ -362,6 +387,17 @@ for (const house of houses) {
       r.pagePosition = located ? i + 1 : r.padIndex;
     });
 
+    const bedroomUrls = [];
+    for (const room of rooms) {
+      for (const pic of room.pictures || []) {
+        const cat = String(pic?.category || "").toLowerCase();
+        if (pic?.url && (!cat || cat.includes("bed"))) bedroomUrls.push(pic.url);
+      }
+    }
+    const bedCover = await pickBedCover(bedroomUrls);
+    applyBedCover(rooms, bedCover);
+    if (bedCover) meta.image = bedCover;
+
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);
     const fromPrice = available.reduce(
@@ -418,4 +454,7 @@ for (const house of houses) {
 await browser.close();
 writeFileSync("data/availability.json", JSON.stringify(result, null, 2) + "\n");
 console.log(`\n==== ${okCount}/${houses.length} houses refreshed ====`);
-if (okCount === 0) process.exit(2);
+
+const { scrapeAtlantaHost } = await import("./scrape-atl-host.mjs");
+const hostCode = await scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART });
+if (okCount === 0 || hostCode === 2) process.exit(2);

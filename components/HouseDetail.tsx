@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { House, Room } from "@/lib/types";
 import { listingPlace, priceLabel, shortRoomName, moveInLabel } from "@/lib/format";
 import { roomAnchorUrl, generalSearchUrl } from "@/lib/site";
+import { getMarket } from "@/lib/market";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { trackEvent } from "@/lib/analytics";
 
@@ -132,7 +133,11 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
     {
       key: "who",
       q: "Who lives here, and what's shared",
-      body: `${bathCapacityLine(house)} ${house.name === "Willow" ? "Two kitchens (upstairs and downstairs)" : "One kitchen"}, free laundry (one washer/dryer), driveway plus street parking. Bed linens aren't provided — bring sheets, a pillow, and towels. Central air is host-controlled.`,
+      body: `${bathCapacityLine(house)} ${
+        process.env.NEXT_PUBLIC_MARKET === "atl" && house.name === "Willow"
+          ? "Two kitchens (upstairs and downstairs)"
+          : "One kitchen"
+      }, free laundry (one washer/dryer), driveway plus street parking. Bed linens aren't provided — bring sheets, a pillow, and towels. Central air is host-controlled.`,
     },
     {
       key: "rules",
@@ -291,7 +296,7 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
       <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
         <h2 className="text-[15px] font-extrabold text-ink">Bringing someone — or something — with you?</h2>
         <p className="mt-1.5 text-[13px] leading-relaxed text-slate-600">
-          Our houses are pet-free, one person per room, adults only. Plenty of Atlanta homes on PadSplit aren&apos;t.
+          Our houses are pet-free, one person per room, adults only. Plenty of {getMarket().metro} homes on PadSplit aren&apos;t.
           Same application, same ${APPLICATION_FEE}, and you can filter for it in two taps:
         </p>
         <ul className="mt-3 flex flex-col gap-2.5">
@@ -314,7 +319,7 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
           rel="noopener noreferrer"
           className="mt-3.5 flex items-center justify-between gap-2.5 rounded-xl bg-brand px-3.5 py-3 text-sm font-bold text-white"
         >
-          <span>Search all Atlanta rooms</span>
+          <span>Search all {getMarket().metro} rooms</span>
           <span aria-hidden>→</span>
         </TrackedOutboundLink>
         <p className="mt-2 text-xs leading-relaxed text-slate-400">

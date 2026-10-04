@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { ATL_ONLY_PATH } from "@/lib/market";
+import { resolveMarketId } from "@/lib/market-env";
 
 /**
  * Makes our short share-links (roomsforrentatl.com/willow, /m, /covilla, etc.)
@@ -23,6 +25,11 @@ const SHORT_LINKS = new Set([
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  if (resolveMarketId() !== "atl" && ATL_ONLY_PATH.test(pathname)) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/market-unavailable";
+    return NextResponse.rewrite(url);
+  }
   const seg = pathname.slice(1);
   if (seg && !seg.includes("/") && seg !== seg.toLowerCase() && SHORT_LINKS.has(seg.toLowerCase())) {
     const url = req.nextUrl.clone();

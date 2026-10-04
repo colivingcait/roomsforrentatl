@@ -6,7 +6,8 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { STREET_BLOCKLIST, COMMUNITY_BLOCKLIST, leaksInText } from "../lib/listing-privacy.mjs";
 
-const ROOT = ".next";
+// Dallas builds write .next-dfw. San Antonio and Atlanta write .next.
+const ROOT = process.env.NEXT_PUBLIC_MARKET === "dfw" ? ".next-dfw" : ".next";
 const EXTENSIONS = new Set([".html", ".rsc", ".json"]);
 
 if (!existsSync(ROOT)) {

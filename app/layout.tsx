@@ -1,55 +1,21 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { getBrand } from "@/lib/brand";
+import { getMarket } from "@/lib/market";
 
 export function generateMetadata(): Metadata {
   const brand = getBrand();
+  const market = getMarket();
   const isHomes = brand.key === "homes";
-  const headline = isHomes
-    ? `${brand.name} — Furnished Private Rentals in Atlanta, GA`
-    : `${brand.name} — Furnished Rooms for Rent in Atlanta, Next-Day Move In`;
+  const headline = isHomes && market.homesSeoTitle ? market.homesSeoTitle : market.seoTitle;
   // Short, punchy title just for link-share previews (Messenger/iMessage/Twitter)
   // — the full SEO headline above is too long and gets truncated there.
-  const socialTitle = isHomes ? headline : "Apply Today, Move in Tomorrow";
+  const socialTitle = isHomes ? headline : market.socialTitle;
   return {
     metadataBase: new URL(brand.url),
     title: { default: headline, template: `%s · ${brand.name}` },
     description: brand.description,
-    keywords: isHomes
-      ? [
-          "private rentals Atlanta",
-          "furnished rentals Atlanta",
-          "furnished apartments for rent Atlanta",
-          "homes for rent Atlanta",
-          "monthly rentals Atlanta",
-          "furnished monthly rental Atlanta",
-          "no lease apartment Atlanta",
-          "short term furnished rental Atlanta",
-          "studio for rent Atlanta",
-          "furnished studio Atlanta",
-          "utilities included apartment Atlanta",
-          "furnished apartment Snellville",
-          "furnished apartment Decatur",
-        ]
-      : [
-          "rooms for rent Atlanta",
-          "furnished rooms Atlanta",
-          "furnished room for rent Atlanta weekly",
-          "next day move in Atlanta",
-          "weekly rooms Atlanta",
-          "PadSplit Atlanta",
-          "PadSplit rooms Atlanta",
-          "no lease room rental Atlanta",
-          "co-living Atlanta",
-          "shared house Atlanta",
-          "flexible lease room Atlanta",
-          "affordable room for rent Atlanta",
-          "private bedroom for rent Atlanta",
-          "weekly rent room Atlanta",
-          "room for rent Decatur",
-          "room for rent Stone Mountain",
-          "room for rent Snellville",
-        ],
+    keywords: isHomes && market.homesKeywords ? market.homesKeywords : market.keywords,
     openGraph: {
       title: socialTitle,
       description: brand.tagline,
@@ -59,6 +25,11 @@ export function generateMetadata(): Metadata {
     },
     twitter: { card: "summary_large_image", title: socialTitle, description: brand.tagline },
     robots: { index: true, follow: true },
+    alternates: { canonical: "./" },
+    icons: {
+      icon: market.id === "sa" ? ["/favicon.ico", "/favicon-sa.svg"] : "/favicon.ico",
+      shortcut: "/favicon.ico",
+    },
   };
 }
 

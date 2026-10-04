@@ -6,6 +6,7 @@
 import { availableRooms, getHouses } from "./houses";
 import { listingPlace, priceLabel, shortRoomName } from "./format";
 import { atlantaSearchUrl, citySearchUrl } from "./site";
+import { getMarket, type MarketArea } from "./market";
 import type { FilterStartingPrices } from "./filterPrices";
 
 export type SearchRoomCard = {
@@ -25,26 +26,19 @@ export type SearchAnswer = {
 
 type Need = "privateBath" | "roomForTwo" | "fewer" | "instant" | "noFee" | "budget" | "area" | "pickArea";
 
-type Area = { slug: string; label: string; wide: boolean };
+type Area = MarketArea & { compiled: RegExp };
 
-const AREAS: { slug: string; label: string; pattern: RegExp; wide?: boolean }[] = [
-  { slug: "decatur", label: "Decatur", pattern: /\bdecatur\b/i },
-  { slug: "stone-mountain", label: "Stone Mountain", pattern: /\bstone\s+mountain\b/i },
-  { slug: "snellville", label: "Snellville", pattern: /\bsnellville\b/i },
-  { slug: "marietta", label: "Marietta", pattern: /\bmarietta\b/i },
-  { slug: "east-point", label: "East Point", pattern: /\beast\s+point\b/i },
-  { slug: "norcross", label: "Norcross", pattern: /\bnorcross\b/i },
-  { slug: "college-park", label: "College Park", pattern: /\bcollege\s+park\b/i },
-  { slug: "avondale-estates", label: "Avondale Estates", pattern: /\bavondale(?:\s+estates)?\b/i },
-  { slug: "kennesaw", label: "Kennesaw", pattern: /\bkennesaw\b/i },
-  // These slugs drop the referral. The Atlanta-wide search keeps it.
-  { slug: "atlanta", label: "South Atlanta", pattern: /\bsouth\s+atlanta\b/i, wide: true },
-  { slug: "atlanta", label: "Buckhead", pattern: /\bbuckhead\b/i, wide: true },
-  { slug: "atlanta", label: "Midtown", pattern: /\bmidtown\b/i, wide: true },
-  { slug: "atlanta", label: "Atlanta", pattern: /\batlanta\b/i },
-];
+function areaList(): Area[] {
+  return getMarket().areas.map((area) => ({ ...area, compiled: new RegExp(area.pattern, "i") }));
+}
 
-const AREA_CHIPS = ["Decatur", "Stone Mountain", "South Atlanta", "Snellville", "Atlanta"];
+function areaChips(): string[] {
+  return getMarket().areaChips;
+}
+
+function acrossMetro(): string {
+  return `across ${getMarket().metro}`;
+}
 
 type Featured = {
   id: string;
@@ -84,8 +78,8 @@ function featuredRooms(): Featured[] {
 }
 
 function matchArea(text: string): Area | null {
-  for (const area of AREAS) {
-    if (area.pattern.test(text)) return { slug: area.slug, label: area.label, wide: area.wide === true };
+  for (const area of areaList()) {
+    if (area.compiled.test(text)) return area;
   }
   return null;
 }
@@ -152,7 +146,7 @@ function filterFor(need: Need): Record<string, string> {
 }
 
 function placePhrase(area: Area | null): string {
-  if (!area || area.wide) return "across Atlanta";
+  if (!area || area.wide) return acrossMetro();
   return `in ${area.label}`;
 }
 
@@ -172,16 +166,15 @@ function lead(need: Need, area: Area | null): string {
     case "budget":
       return `Here are the lowest-priced rooms ${place}`;
     case "area":
-      return area && !area.wide ? `Here are rooms in ${area.label}` : "Here are rooms across Atlanta";
+      return area && !area.wide ? `Here are rooms in ${area.label}` : `Here are rooms ${acrossMetro()}`;
     default:
       return `Here are rooms ${place}`;
   }
 }
 
 function livePrice(need: Need, area: Area | null, prices: FilterStartingPrices): number | null {
-  // A narrower city search doesn't share the Atlanta-wide starting price.
-  // /rooms-for-rent/atlanta-ga does — it's the same search the tiles use.
-  if (area && !area.wide && area.slug !== "atlanta") return null;
+  // A narrower city search does not share the metro-wide starting price.
+  if (area && !area.wide) return null;
   switch (need) {
     case "privateBath":
       return prices.privateBath;
@@ -210,8 +203,11 @@ function withPrice(sentence: string, price: number | null): string {
 
 function inArea(room: Featured, area: Area): boolean {
   const city = room.city.toLowerCase();
-  if (area.label === "South Atlanta") return city.includes("south atlanta");
-  if (area.label === "Atlanta") return /\batlanta\b/.test(city) && !city.includes("south atlanta");
+  if (area.cityIncludes) {
+    if (!city.includes(area.cityIncludes)) return false;
+    if (area.cityExcludes && city.includes(area.cityExcludes)) return false;
+    return true;
+  }
   if (area.wide) return true;
   return city.includes(area.label.toLowerCase());
 }
@@ -263,7 +259,7 @@ export function answerRoomSearch(
     return {
       reply: "Which area works for you?",
       rooms: [],
-      chips: AREA_CHIPS,
+      chips: areaChips(),
     };
   }
 

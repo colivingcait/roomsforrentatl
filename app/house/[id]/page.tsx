@@ -7,6 +7,7 @@ import TrustBand from "@/components/TrustBand";
 import HouseDetail from "@/components/HouseDetail";
 import { getHouse, getAllHouseIds, availableRooms, orderedPhotos } from "@/lib/houses";
 import { fromPriceLabel, availabilityLabel, priceLabel, listingPlace, submarketLabel } from "@/lib/format";
+import { getMarket } from "@/lib/market";
 
 export const revalidate = 3600;
 
@@ -17,14 +18,24 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const house = getHouse(params.id);
   if (!house) return { title: "Home not found" };
+  const title = `${house.name} — Furnished Room for Rent in ${listingPlace(house)}`;
+  const description = `Furnished room for rent in ${listingPlace(house)} — ${fromPriceLabel(
+    house
+  )} all-in, utilities included, next-day move-in via PadSplit. ${availabilityLabel(house)}.`;
+  const path = `/house/${house.id}`;
   return {
-    title: `${house.name} — Furnished Room for Rent in ${listingPlace(house)}`,
-    description: `Furnished room for rent in ${listingPlace(house)} — ${fromPriceLabel(
-      house
-    )} all-in, utilities included, next-day move-in via PadSplit. ${availabilityLabel(house)}.`,
-    // A local SVG is not an og:image. Leave images unset so opengraph-image.tsx
-    // supplies the first interior photo, or the site card when none remain.
-    ...(house.image.startsWith("http") ? { openGraph: { images: [house.image] } } : {}),
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      title,
+      description,
+      url: `${getMarket().url}${path}`,
+      // A local SVG is not an og:image. Leave images unset so opengraph-image.tsx
+      // supplies the branded card, or the site card when none remain.
+      ...(house.image.startsWith("http") ? { images: [house.image] } : {}),
+    },
+    twitter: { card: "summary_large_image" as const, title, description },
   };
 }
 

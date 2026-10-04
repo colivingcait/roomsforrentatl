@@ -1,4 +1,5 @@
 import type { House, Room, Photo, PriceUnit, BathroomType } from "./types";
+import { getMarket } from "./market";
 import { isStreetishPlace } from "./listing-privacy.mjs";
 
 export { isStreetishPlace };
@@ -22,24 +23,45 @@ export function photoLabel(p: Pick<Photo, "label" | "category">): string {
 }
 import { availableRooms } from "./houses";
 
+/** A neighborhood or city that can be shown. Streets and digits are rejected. */
+export function isPublicPlaceName(value: string | null | undefined): boolean {
+  const text = (value ?? "").trim();
+  return !!text && !isStreetishPlace(text);
+}
+
 /**
- * The one public area label for a home. houses.json neighborhood/submarket
- * wins; a different city is not appended. Baker Hills / Adamsville / Willow
- * are labeled West Atlanta.
+ * The one public area label for a home. A street-like name is dropped.
+ * Neighborhood wins over city so the two are not stacked. Atlanta's west
+ * houses use that market's west label. Each branch is gated on the build-time
+ * market so the other markets' names are not in the client bundle.
  */
 export function submarketLabel(house: {
   id?: string;
   neighborhood?: string | null;
   city?: string | null;
 }): string {
+  const market = getMarket();
   const hood = (house.neighborhood ?? "").trim();
-  if (house.id === "39708" || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
-    return "West Atlanta";
+  const city = (house.city ?? "").replace(/,?\s*(ga|tx)$/i, "").trim();
+  if (process.env.NEXT_PUBLIC_MARKET === "sa") {
+    if (isPublicPlaceName(hood)) return hood;
+    if (isPublicPlaceName(city)) return city;
+    return market.metro;
+  }
+  if (process.env.NEXT_PUBLIC_MARKET === "dfw") {
+    if (city && !isStreetishPlace(city)) return city;
+    if (hood && !isStreetishPlace(hood)) return hood;
+    return market.metro;
+  }
+  if (
+    process.env.NEXT_PUBLIC_MARKET === "atl" &&
+    (house.id === market.shortHouses?.willow || /baker hills/i.test(hood) || /^adamsville$/i.test(hood))
+  ) {
+    return market.westLabel ?? market.metro;
   }
   if (hood && !isStreetishPlace(hood)) return hood;
-  const city = (house.city ?? "").replace(/,?\s*ga$/i, "").trim();
   if (city && !isStreetishPlace(city)) return city;
-  return "Atlanta";
+  return market.metro;
 }
 
 /** Same single area label as submarketLabel. City is not joined on. */

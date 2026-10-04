@@ -5,6 +5,9 @@
 
 # next.js
 /.next/
+/.next-dfw/
+/.next-sa/
+/public/favicon.ico
 /out/
 next-env.d.ts
 

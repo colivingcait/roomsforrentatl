@@ -1,6 +1,87 @@
+const path = require("path");
+const { resolveMarketId } = require("./lib/market-env");
+const { assertAtlProject } = require("./scripts/assert-atl-project.cjs");
+const { writeFavicon } = require("./scripts/write-favicon.cjs");
+
+// One build serves one market. Swap Atlanta modules so the other market's
+// copy is not in the bundle renters download. Unset keeps Atlanta, including
+// Atlanta production.
+//
+// The Dallas Vercel project collects `.next-dfw`. That is the directory every
+// NEXT_PUBLIC_MARKET=dfw build has always written, including production, so
+// those builds keep it. San Antonio and Atlanta projects collect the default
+// `.next`. A local `next dev` for San Antonio uses `.next-sa` so it does not
+// share a cache with the Atlanta dev server. `next build` for San Antonio
+// stays on `.next`, which is where Vercel looks for routes-manifest.json.
+const market = resolveMarketId();
+assertAtlProject(market);
+writeFavicon(market);
+const explicit = process.env.NEXT_PUBLIC_MARKET;
+const building =
+  process.env.VERCEL === "1" ||
+  process.env.npm_lifecycle_event === "build" ||
+  process.argv.includes("build");
+const localDevDist =
+  explicit === "dfw" ? ".next-dfw" : !building && explicit === "sa" ? ".next-sa" : null;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Inline the resolved id so preview builds (no NEXT_PUBLIC_MARKET) and
+  // local builds agree, and so unused market branches can be dropped.
+  env: { NEXT_PUBLIC_MARKET: market },
+  ...(localDevDist ? { distDir: localDevDist } : {}),
+  ...(market === "atl"
+    ? {}
+    : {
+        webpack: (config) => {
+          const marketFile = path.join(__dirname, `lib/markets/${market}.ts`);
+          const faqFile = path.join(__dirname, `data/faq-${market}.json`);
+          const swaps = [
+            [(request) => request.includes("markets/atl"), marketFile],
+            [(request) => /\/faq\.json$/.test(request) || request.endsWith("/faq.json"), faqFile],
+          ];
+          swaps.push(
+            [(request) => request.includes("brand-homes") && !request.includes("brand-homes-stub"), path.join(__dirname, "lib/brand-homes-stub.ts")],
+            [(request) => request.includes("RentalsView"), path.join(__dirname, "components/RentalsUnavailable.tsx")]
+          );
+          if (market === "sa") {
+            swaps.push(
+              [(request) => request.endsWith("/houses.json") || request.endsWith("data/houses.json"), path.join(__dirname, "data/houses-sa.json")],
+              [(request) => request.endsWith("/availability.json"), path.join(__dirname, "data/availability-sa.json")],
+              [(request) => request.endsWith("/units.json"), path.join(__dirname, "data/units-empty.json")],
+              [(request) => request.endsWith("/outreach.json"), path.join(__dirname, "data/outreach-empty.json")],
+              [(request) => request === "@/lib/knowledge" || /\/knowledge$/.test(request) || request.endsWith("/knowledge.ts"), path.join(__dirname, "lib/knowledge-sa.ts")]
+            );
+          }
+          config.resolve = config.resolve || {};
+          config.resolve.alias = {
+            ...(config.resolve.alias || {}),
+            "@/components/covilla-landing": path.join(__dirname, "components/covilla-landing-stub.ts"),
+            [path.join(__dirname, "components/covilla-landing.ts")]: path.join(
+              __dirname,
+              "components/covilla-landing-stub.ts"
+            ),
+          };
+          config.plugins.push({
+            apply(compiler) {
+              compiler.hooks.normalModuleFactory.tap("MarketSwap", (nmf) => {
+                nmf.hooks.beforeResolve.tap("MarketSwap", (data) => {
+                  if (!data) return;
+                  const request = `${data.request || ""}`;
+                  for (const [match, target] of swaps) {
+                    if (match(request) && request !== target) {
+                      data.request = target;
+                      return;
+                    }
+                  }
+                });
+              });
+            },
+          });
+          return config;
+        },
+      }),
   images: {
     // PadSplit listing photos come from CDNs we can't fully enumerate, and the
     // seed/fallback photos are local SVGs. Serving images un-optimized lets the

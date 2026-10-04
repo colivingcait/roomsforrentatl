@@ -1,10 +1,9 @@
 import { headers } from "next/headers";
+import { getMarket } from "./market";
 
 /**
- * Two brands, one codebase. The same app serves both domains; we pick the
- * brand from the request host. Add the domain in Vercel and it just works.
- *   roomsforrentatl.com → "rooms" (co-living rooms, currently all PadSplit)
- *   homesforrentatl.com → "homes" (whole apartments, long-term)
+ * Two brands, one codebase, on the Atlanta build. Other markets are rooms-only
+ * and take their name from the active market module.
  */
 export type BrandKey = "rooms" | "homes";
 
@@ -12,39 +11,24 @@ export interface Brand {
   key: BrandKey;
   /** First word of the wordmark: "Rooms" or "Homes". */
   word: string;
-  name: string; // "RoomsForRentATL"
-  domain: string; // "RoomsForRentATL.com"
+  name: string;
+  domain: string;
   url: string;
   tagline: string;
   description: string;
 }
 
-export const BRANDS: Record<BrandKey, Brand> = {
-  rooms: {
+function marketBrand(): Brand {
+  const market = getMarket();
+  return {
     key: "rooms",
     word: "Rooms",
-    name: "RoomsForRentATL",
-    domain: "RoomsForRentATL.com",
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com",
-    tagline: "Furnished rooms for rent in Atlanta — next day move in.",
-    description:
-      "Furnished rooms for rent in Atlanta — weekly, no lease, next-day move-in. All-in pricing with utilities & WiFi included. Book a PadSplit room today.",
-  },
-  homes: {
-    key: "homes",
-    word: "Homes",
-    name: "HomesForRentATL",
-    domain: "HomesForRentATL.com",
-    url: "https://homesforrentatl.com",
-    tagline: "Furnished private rentals in Atlanta.",
-    description:
-      "Furnished private rentals for rent in Atlanta — your own studio or apartment, monthly lease, utilities included. Apply online today.",
-  },
-};
-
-/** Which brand a hostname maps to. */
-export function brandFromHost(host?: string | null): BrandKey {
-  return (host ?? "").toLowerCase().includes("homesforrent") ? "homes" : "rooms";
+    name: market.name,
+    domain: market.domain,
+    url: market.url,
+    tagline: market.tagline,
+    description: market.description,
+  };
 }
 
 /**
@@ -54,6 +38,10 @@ export function brandFromHost(host?: string | null): BrandKey {
  * try/catch: that would swallow Next's dynamic signal and freeze the brand.
  */
 export function getBrand(): Brand {
+  if (process.env.NEXT_PUBLIC_MARKET === "sa" || process.env.NEXT_PUBLIC_MARKET === "dfw") {
+    return marketBrand();
+  }
+  const { BRANDS, brandFromHost } = require("./brand-homes") as typeof import("./brand-homes");
   const host = headers().get("host") ?? "";
   return BRANDS[brandFromHost(host)];
 }

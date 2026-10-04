@@ -114,6 +114,108 @@
       "totalRooms": 6,
       "totalBaths": 6,
       "privateBaths": 6
+    },
+    {
+      "id": "29710",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/29710",
+      "name": "Redbud",
+      "neighborhood": "",
+      "city": "Decatur",
+      "image": "https://www.padsplit.com/img/psproperty/29710/img_d367eacb-317d-4979-b62b-9f7b9b435d30.jpg",
+      "lat": 33.74,
+      "lng": -84.27,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 5
+    },
+    {
+      "id": "29100",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/29100",
+      "name": "Indigo",
+      "neighborhood": "",
+      "city": "Decatur",
+      "image": "https://www.padsplit.com/img/psproperty/29100/img_98cb9997-2071-41e4-a73e-3cb498155680.png",
+      "lat": 33.75,
+      "lng": -84.27,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 5
+    },
+    {
+      "id": "14657",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/14657",
+      "name": "Copper",
+      "neighborhood": "",
+      "city": "Decatur",
+      "image": "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
+      "lat": 33.69,
+      "lng": -84.29,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "14650",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/14650",
+      "name": "Maple",
+      "neighborhood": "",
+      "city": "Decatur",
+      "image": "https://www.padsplit.com/img/psproperty/14650/img_802fc686-d0b5-48d6-b61d-7c0cdadfa658.jpg",
+      "lat": 33.72,
+      "lng": -84.22,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "13036",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/13036",
+      "name": "Clover",
+      "neighborhood": "",
+      "city": "Stone Mountain",
+      "image": "https://www.padsplit.com/img/psproperty/13036/img_d333d3b1-b193-43a6-b0e1-cd9ee9145f21.jpg",
+      "lat": 33.79,
+      "lng": -84.18,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "12011",
+      "host": true,
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/12011",
+      "name": "Cedar",
+      "neighborhood": "",
+      "city": "Decatur",
+      "image": "https://www.padsplit.com/img/psproperty/12011/img_93370956-f08b-4a01-8788-fb05d1d83b8a.jpg",
+      "lat": 33.73,
+      "lng": -84.23,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 4
     }
   ]
 }

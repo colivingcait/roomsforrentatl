@@ -1,8 +1,10 @@
 import housesData from "@/data/houses.json";
 import availability from "@/data/availability.json";
 import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./types";
+import { getMarket } from "./market";
 import {
   dropPhoto,
+  galleryOrder,
   publicImage,
   publicNeighborhood,
   publicPhoto,
@@ -13,8 +15,26 @@ import {
 const SEED = (housesData.houses as SeedHouse[]) ?? [];
 const LIVE = (availability.houses as unknown as Record<string, LiveHouse>) ?? {};
 
+function featuredIdSet(): Set<string> {
+  const ids = new Set<string>();
+  for (const url of getMarket().featuredSources) {
+    const match = /\/listing\/(\d+)/.exec(url);
+    if (match) ids.add(match[1]);
+  }
+  return ids;
+}
+
+/** Seeds this market lists, in houses.json order. */
+function featuredSeeds(): SeedHouse[] {
+  const source = getMarket().listingSource;
+  if (source === "file") return SEED;
+  if (source === "search") return [];
+  const ids = featuredIdSet();
+  return SEED.filter((house) => ids.has(house.id) || house.host === true);
+}
+
 export function getHouses(): House[] {
-  return SEED.map(merge).sort((a, b) => {
+  return featuredSeeds().map(merge).sort((a, b) => {
     if (!!a.pinned !== !!b.pinned) return a.pinned ? -1 : 1; // pinned first
     if (a.available !== b.available) return a.available ? -1 : 1;
     return (a.fromPrice ?? 1e9) - (b.fromPrice ?? 1e9);
@@ -22,7 +42,7 @@ export function getHouses(): House[] {
 }
 
 export function getHouse(id: string): House | null {
-  const seed = SEED.find((h) => h.id === id);
+  const seed = featuredSeeds().find((h) => h.id === id);
   return seed ? merge(seed) : null;
 }
 
@@ -34,13 +54,13 @@ export function getRoom(houseId: string, roomId: string): { house: House; room: 
 }
 
 export function getAllHouseIds(): string[] {
-  return SEED.map((h) => h.id);
+  return featuredSeeds().map((h) => h.id);
 }
 
 /** [houseId, roomId] pairs for static generation of room pages. */
 export function getAllRoomParams(): { id: string; roomId: string }[] {
   const out: { id: string; roomId: string }[] = [];
-  for (const seed of SEED) {
+  for (const seed of featuredSeeds()) {
     const rooms = (LIVE[seed.id]?.rooms ?? []).filter((r) => r.status === 1);
     for (const r of rooms) out.push({ id: seed.id, roomId: String(r.id) });
   }
@@ -64,72 +84,22 @@ export function availableRooms(house: House): Room[] {
 }
 
 /**
- * Photos for the card/hero gallery, in this order:
- *   1. the biggest kitchen photo
- *   2. the first 6 room photos
- *   3. bathrooms
- *   4. other indoor common areas (dining, living, laundry, …)
- *   5. any remaining room photos
+ * Gallery order for every market: the bed cover, then the kitchen, then the
+ * other bedrooms (open rooms first), then baths, then other commons.
  */
 export function orderedPhotos(house: House): string[] {
-  const roomPics = availableRooms(house).flatMap((r) =>
-    (r.photos?.length ? r.photos : r.image ? [r.image] : []).filter(
-      (url) => !dropPhoto({ url, category: "bedroom" })
-    )
-  );
-
-  const commons = house.commonAreas.filter((c) => !dropPhoto(c));
-  const matches = (c: Photo, re: RegExp) => re.test(`${c.label ?? ""} ${c.category}`);
-  const area = (c: Photo) => (c.width ?? 0) * (c.height ?? 0);
-  const heroOk =
-    house.heroPhoto && !dropPhoto({ url: house.heroPhoto, category: "interior" })
-      ? house.heroPhoto
-      : undefined;
-
-  // Lead photo: a safe manual override wins; otherwise biggest kitchen, then a
-  // living area, then PadSplit's primary, then a room photo.
-  const kitchens = commons.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
-  const leadUrl =
-    heroOk ||
-    kitchens[0]?.url ||
-    commons.find((c) => matches(c, /living|den|family/i))?.url ||
-    commons.find((c) => matches(c, /dining/i))?.url ||
-    commons.find((c) => c.primary)?.url ||
-    roomPics[0] ||
-    commons.find((c) => !matches(c, /bath|shower|restroom/i))?.url ||
-    commons[0]?.url;
-
-  const baths = commons.filter((c) => c.url !== leadUrl && matches(c, /bath|shower|restroom/i)).map((c) => c.url);
-  const others = commons
-    .filter((c) => c.url !== leadUrl && !matches(c, /bath|shower|restroom|kitchen/i))
-    .map((c) => c.url);
-
-  const sequence = [
-    leadUrl,
-    ...roomPics.slice(0, 6),
-    ...baths,
-    ...others,
-    ...roomPics.slice(6),
-  ];
-
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const u of sequence) {
-    if (u && !seen.has(u)) {
-      seen.add(u);
-      out.push(u);
-    }
-  }
+  const out = galleryOrder(house);
+  if (out.length) return out;
   const fallback =
     house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
-  return out.length ? out.slice(0, 20) : fallback ? [fallback] : [];
+  return fallback ? [fallback] : [];
 }
 
 function keptPhotos(photos: Photo[] | undefined): Photo[] {
   const out: Photo[] = [];
   for (const photo of photos ?? []) {
     const kept = publicPhoto(photo);
-    if (kept) out.push(kept);
+    if (kept) out.push(kept as Photo);
   }
   return out;
 }

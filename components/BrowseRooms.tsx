@@ -18,6 +18,8 @@ import {
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { trackEvent } from "@/lib/analytics";
 import type { FilterStartingPrices } from "@/lib/filterPrices";
+import type { AutoFeaturedRoom } from "@/lib/autoFeatured";
+import { getMarket } from "@/lib/market";
 
 /** Card order is fixed. The dollar comes from the live PadSplit search, or is omitted. */
 const FILTER_CARDS = [
@@ -83,28 +85,18 @@ const FILTER_CARDS = [
   },
 ] as const;
 
-/** Interior photos from the approved mockup. Never an exterior or a street shot. */
-const CARD_PHOTO: Record<string, { src: string; alt: string }> = {
-  "35011": {
-    src: "/photos/mora-room-2.jpg",
-    alt: "Furnished bedroom with a bed and shelving, kitchen through the door, at The Mora House",
-  },
-  "8299": {
-    src: "/photos/candace-room-3.jpg",
-    alt: "Furnished bedroom with a bed, desk, and window at The Candace House",
-  },
-};
-
 export default function BrowseRooms({
   rooms,
   soldOut,
   houses,
   filterPrices,
+  autoFeatured = [],
 }: {
   rooms: RoomListing[];
   soldOut: House[];
   houses: House[];
   filterPrices: FilterStartingPrices;
+  autoFeatured?: AutoFeaturedRoom[];
 }) {
   const houseById = useMemo(() => new Map(houses.map((h) => [h.id, h])), [houses]);
   const rates = rooms.map((r) => r.rate).filter((n): n is number => n != null);
@@ -116,22 +108,42 @@ export default function BrowseRooms({
 
   const visible = rooms.filter((r) => r.rate == null || sliderMax == null || r.rate <= budget);
   const openLabel = `${rooms.length} open now, cheapest first`;
+  const market = getMarket();
+  const showOwnedFeatured = rooms.length > 0 || soldOut.length > 0;
+  const autoRooms = showOwnedFeatured ? [] : autoFeatured;
+  const showFeatured = showOwnedFeatured || autoRooms.length > 0;
 
   return (
     <>
       <section className="relative overflow-hidden bg-[#042C25] text-white">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[url('/photos/candace-room-1-wide.jpg')] bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:bg-[url('/photos/mora-room-1-lg.jpg')] md:bg-cover md:bg-[center_72%]"
-        />
+        {market.heroPhoto ? (
+          <>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[length:100%_auto] bg-[center_top] bg-no-repeat md:hidden"
+              style={{ backgroundImage: `url("${market.heroPhoto.mobile}")` }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 hidden bg-cover bg-[center_72%] bg-no-repeat md:block"
+              style={{ backgroundImage: `url("${market.heroPhoto.desktop}")` }}
+            />
+          </>
+        ) : null}
         <div
           aria-hidden
           className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,63,53,.08)_0%,rgba(6,63,53,.30)_100px,rgba(5,52,44,.80)_180px,#042C25_232px,#042C25_100%)] md:bg-[linear-gradient(90deg,rgba(4,44,37,.94)_0%,rgba(6,63,53,.82)_42%,rgba(6,63,53,.35)_75%,rgba(6,63,53,.2)_100%)]"
         />
-        <div className="relative mx-auto max-w-[1080px] px-[18px] pb-[26px] pt-[168px] md:px-6 md:pb-[84px] md:pt-24">
+        <div
+          className={
+            market.heroPhoto
+              ? "relative mx-auto max-w-[1080px] px-[18px] pb-[26px] pt-[168px] md:px-6 md:pb-[84px] md:pt-24"
+              : "relative mx-auto max-w-[1080px] px-[18px] pb-10 pt-12 md:px-6 md:pb-16 md:pt-16"
+          }
+        >
           <span className="inline-flex items-center gap-[7px] rounded-full border border-white/20 bg-ink/35 py-1 pl-2 pr-[11px] text-[12.5px] font-bold text-white backdrop-blur-sm">
             <i className="h-2 w-2 rounded-full bg-[#4ADE80] shadow-[0_0_0_3px_rgba(74,222,128,.25)]" />
-            Furnished rooms across Atlanta
+            {market.heroKicker}
           </span>
           <h1 className="mt-3 text-[33px] font-extrabold leading-[1.08] tracking-[-0.025em] text-white [text-shadow:0_2px_18px_rgba(0,0,0,.25)] md:max-w-[880px] md:text-[54px]">
             Open rooms at every price. Move in as soon as{" "}
@@ -214,14 +226,19 @@ export default function BrowseRooms({
         </div>
       </section>
 
+      {showFeatured && (
       <section id="featured" className="bg-[linear-gradient(180deg,#EAF5F1,#F4FAF8)]">
         <div className="mx-auto max-w-[1080px] px-[18px] pb-[30px] pt-[34px] md:px-6 md:pb-11 md:pt-12">
+          {autoRooms.length > 0 ? (
+            <AutoFeatured rooms={autoRooms} metro={market.metro} />
+          ) : (
+          <>
           <div className="md:flex md:items-end md:justify-between md:gap-6">
             <div>
               <h2 className="text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
                 Featured Rooms
               </h2>
-              <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>
+              {rooms.length > 0 && <p className="mt-1 text-[14.5px] text-muted">{openLabel}</p>}
             </div>
             {sliderMin != null && sliderMax != null && (
               <div className="mt-4 rounded-2xl bg-white px-3.5 pb-2.5 pt-3 shadow-card md:mt-0 md:w-[360px] md:shrink-0">
@@ -250,7 +267,7 @@ export default function BrowseRooms({
           <div className="mt-4 grid gap-4 md:mt-[22px] md:grid-cols-2 md:gap-5">
             {visible.map((r, index) => {
               const house = houseById.get(r.houseId);
-              const photo = CARD_PHOTO[r.houseId];
+              const photo = market.cardPhotos?.[r.houseId];
               const tags = featureTags(r, house);
               return (
                 <Link
@@ -353,7 +370,9 @@ export default function BrowseRooms({
             >
               <span>
                 <b className="block text-base font-extrabold text-ink">Don&apos;t see your fit?</b>
-                <span className="text-[13.5px] font-semibold text-brand">Try a filter above for more Atlanta rooms</span>
+                <span className="text-[13.5px] font-semibold text-brand">
+                  Try a filter above for more {market.metro} rooms
+                </span>
               </span>
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-lg font-extrabold text-white">
                 ↑
@@ -366,9 +385,11 @@ export default function BrowseRooms({
               <summary className="flex cursor-pointer list-none items-center gap-2 py-2.5 text-[13.5px] font-bold text-slate-700 [&::-webkit-details-marker]:hidden">
                 {soldOut.length} more home{soldOut.length === 1 ? " is" : "s are"} full right now
                 <span className="text-accent transition group-open:rotate-90">▸</span>
-                <span className="hidden text-xs font-medium text-muted md:inline">
-                  Call {site.phone} to ask about openings
-                </span>
+                {site.phone ? (
+                  <span className="hidden text-xs font-medium text-muted md:inline">
+                    Call {site.phone} to ask about openings
+                  </span>
+                ) : null}
               </summary>
               <ul className="overflow-hidden rounded-[14px] bg-white shadow-card">
                 {soldOut.map((h) => (
@@ -377,20 +398,95 @@ export default function BrowseRooms({
                       {h.name}
                       <small className="block text-[12.5px] font-normal text-muted">{submarketLabel(h)}</small>
                     </div>
-                    <a
-                      href={phoneTelHref()}
-                      data-attr="call"
-                      className="rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-1.5 text-[12.5px] font-bold text-brand"
-                    >
-                      Call
-                    </a>
+                    {site.phone ? (
+                      <a
+                        href={phoneTelHref()}
+                        data-attr="call"
+                        className="rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-1.5 text-[12.5px] font-bold text-brand"
+                      >
+                        Call
+                      </a>
+                    ) : null}
                   </li>
                 ))}
               </ul>
             </details>
           )}
+          </>
+          )}
         </div>
       </section>
+      )}
+    </>
+  );
+}
+
+function AutoFeatured({ rooms, metro }: { rooms: AutoFeaturedRoom[]; metro: string }) {
+  return (
+    <>
+      <div>
+        <h2 className="text-[26px] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink md:text-[32px]">
+          Featured Rooms
+        </h2>
+        <p className="mt-1 text-[14.5px] text-muted">{rooms.length} open now, cheapest first</p>
+      </div>
+      <div className="mt-4 grid gap-4 md:mt-[22px] md:grid-cols-2 md:gap-5">
+        {rooms.map((room) => (
+          <TrackedOutboundLink
+            key={room.id}
+            href={room.href}
+            event="featured_room_click"
+            properties={{ source: "homepage", listing: room.id, price: room.price }}
+            target="_blank"
+            rel="noopener noreferrer"
+            ariaLabel={`${room.label} in ${room.place}, $${room.price} a week`}
+            className="block overflow-hidden rounded-[20px] bg-white shadow-card transition hover:-translate-y-0.5 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)]"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden bg-[#dfe6ec]">
+              <Image
+                src={room.photo}
+                alt="Furnished bedroom"
+                fill
+                sizes="(min-width: 768px) 500px, 100vw"
+                className="object-cover"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink/55 to-transparent" />
+              <span className="absolute left-3 top-3 z-[1] flex items-center gap-1.5 rounded-full bg-white py-1 pl-2 pr-2.5 text-xs font-extrabold text-brand">
+                <i className="h-2 w-2 rounded-full bg-[#22C55E] shadow-[0_0_0_3px_rgba(34,197,94,.2)]" />
+                Open now
+              </span>
+              <span className="absolute bottom-3 right-3 z-[1] text-2xl font-black leading-none tracking-[-0.02em] text-white">
+                ${room.price}
+                <small className="text-sm font-bold opacity-90">/wk</small>
+              </span>
+            </div>
+            <div className="px-4 pb-1 pt-3.5">
+              <h3 className="text-lg font-extrabold leading-tight tracking-[-0.01em] text-ink">{room.label}</h3>
+              <p className="mt-px flex items-center gap-1 text-[13.5px] text-muted">
+                <PinIcon />
+                {room.place}
+              </p>
+            </div>
+            <div className="flex items-center justify-end px-4 pb-3.5 pt-3">
+              <span className="rounded-[10px] bg-accent px-[18px] py-[9px] text-sm font-extrabold text-white shadow-[0_6px_14px_rgba(255,107,53,.3)]">
+                Apply
+              </span>
+            </div>
+          </TrackedOutboundLink>
+        ))}
+        <a
+          href="#filters"
+          className="flex items-center justify-between gap-3 rounded-[20px] border-2 border-dashed border-brand/30 bg-white/60 p-[18px] md:col-span-2"
+        >
+          <span>
+            <b className="block text-base font-extrabold text-ink">Don&apos;t see your fit?</b>
+            <span className="text-[13.5px] font-semibold text-brand">{`Try a filter above for more ${metro} rooms`}</span>
+          </span>
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-lg font-extrabold text-white">
+            ↑
+          </span>
+        </a>
+      </div>
     </>
   );
 }

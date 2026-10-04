@@ -1,0 +1,133 @@
+{
+  "_README": "San Antonio homes from the host PadSplit search. The scraper rewrites this file. Names are nicknames, not PadSplit titles. lat/lng are neighborhood centers rounded to 2 decimals.",
+  "houses": [
+    {
+      "id": "28119",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/28119",
+      "name": "Acequia",
+      "neighborhood": "Northeast Side",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/28119/img_a8c4daae-7365-4dcd-a0ad-10a7cb7ad0aa.jpg",
+      "lat": 29.53,
+      "lng": -98.37,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 4
+    },
+    {
+      "id": "18970",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/18970",
+      "name": "Alamo",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/18970/img_be583dbf-c336-4b83-8a43-e0820924bb0e.jpg",
+      "lat": 29.55,
+      "lng": -98.34,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "10761",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/10761",
+      "name": "Mercado",
+      "neighborhood": "Valencia",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/10761/img_a0c9d6cb-104b-40d8-8bec-69dd3ef7e95a.jpg",
+      "lat": 29.56,
+      "lng": -98.39,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 2
+    },
+    {
+      "id": "11842",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11842",
+      "name": "Bluebonnet",
+      "neighborhood": "Northeast Side",
+      "city": "Converse",
+      "image": "https://www.padsplit.com/img/psproperty/11842/img_dc6c7625-2d08-4900-813a-b60b73b9d804.jpg",
+      "lat": 29.51,
+      "lng": -98.3,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "13051",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/13051",
+      "name": "Mission",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/13051/img_729ea391-c8a0-4933-86f0-b5923fb71de6.jpg",
+      "lat": 29.56,
+      "lng": -98.33,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "33710",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/33710",
+      "name": "Lantana",
+      "neighborhood": "Lone Star",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/33710/img_16b4f8ec-6e1f-4ab8-8e50-425dafe32959.jpg",
+      "lat": 29.4,
+      "lng": -98.5,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 2
+    },
+    {
+      "id": "23243",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/23243",
+      "name": "Cypress",
+      "neighborhood": "Valencia",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/23243/img_3eb36ddd-6e93-4107-9373-6025f9b87d3f.jpg",
+      "lat": 29.55,
+      "lng": -98.39,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3
+    },
+    {
+      "id": "11202",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11202",
+      "name": "Noche",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/11202/img_449b6b53-02a6-4fb0-9bba-13e0ced3606d.jpg",
+      "lat": 29.54,
+      "lng": -98.35,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 4
+    }
+  ]
+}
