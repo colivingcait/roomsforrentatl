@@ -1,12 +1,12 @@
 /**
  * Featured rooms for a market that has no host list yet.
- * Same cutoff as the "from" prices: sort the metro search by weekly price,
- * drop the cheapest 10%, then take the next four that have a public place and
- * an interior photo. An explicit featuredSources list replaces this entirely.
+ * These are real listing prices: each card is that home's cheapest open room.
+ * The 10% intro cutoff is only for search-tile "from" prices, not this list.
+ * An explicit featuredSources list replaces this entirely.
  */
 import { bookingUrl } from "./site";
 import { getMarket } from "./market";
-import { applyPriceCutoff, rankedListings } from "./priceCutoff";
+import { rankedListings } from "./priceCutoff";
 
 /** Show 4 when we can. Fewer than 3 hides the section. */
 const TARGET = 4;
@@ -28,7 +28,7 @@ export async function getAutoFeaturedRooms(): Promise<AutoFeaturedRoom[]> {
   if (!ranked) return [];
 
   const rooms: AutoFeaturedRoom[] = [];
-  for (const row of applyPriceCutoff(ranked)) {
+  for (const row of ranked) {
     if (!row.place || !row.photo) continue;
     rooms.push({
       id: row.id,

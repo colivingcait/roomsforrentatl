@@ -1,5 +1,5 @@
 const path = require("path");
-const { resolveMarketId } = require("./lib/market-env");
+const { assertAtlProject, resolveMarketId } = require("./lib/market-env");
 const { writeFavicon } = require("./scripts/write-favicon.cjs");
 
 // One build serves one market. Swap Atlanta modules so the other market's
@@ -13,6 +13,7 @@ const { writeFavicon } = require("./scripts/write-favicon.cjs");
 // share a cache with the Atlanta dev server. `next build` for San Antonio
 // stays on `.next`, which is where Vercel looks for routes-manifest.json.
 const market = resolveMarketId();
+assertAtlProject(market);
 writeFavicon(market);
 const explicit = process.env.NEXT_PUBLIC_MARKET;
 const building =

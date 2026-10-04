@@ -1,7 +1,7 @@
 /**
  * One codebase, one market per build. Dallas–Fort Worth production sets
  * NEXT_PUBLIC_MARKET=dfw. San Antonio production sets NEXT_PUBLIC_MARKET=sa.
- * Unset keeps Atlanta, including Atlanta production.
+ * Unset is always Atlanta, including previews of any branch.
  * next.config.js swaps ./markets/atl for the active market, so the Atlanta
  * copy is what this module loads unless that swap runs.
  *

@@ -1,8 +1,9 @@
 /**
  * Intro discounts (half off the first few weeks) make the cheapest PadSplit
  * cards a poor "from" price. Sort that search's listings by weekly price, drop
- * the cheapest 10% (round up, at least one), and price from what remains.
- * Featured rooms are the next listings after that same cutoff.
+ * the cheapest 10% (round up, at least one), and price the search tiles from
+ * what remains. Featured house cards and auto-featured rooms do not use this
+ * cutoff; they show each home's actual cheapest open room.
  * Address street fields are never read or stored.
  */
 import { getMarket } from "./market";

@@ -7,7 +7,7 @@
  * redirect, so PostHog can record the /covilla landing once.
  *
  * NEXT_PUBLIC_MARKET is unset on Atlanta and "dfw" on the Dallas–Fort Worth
- * deployment. Referral codes themselves stay in lib/site.ts.
+ * deployment. Unset is Atlanta on every branch. Referral codes stay in lib/site.ts.
  */
 import { MAIN_REFERRAL_CODE, REFERRAL_OVERRIDES, referralCodeFor, site } from "./site";
 
