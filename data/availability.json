@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-10-03T23:41:02.759Z",
+  "updatedAt": "2026-10-03T23:55:44.237Z",
   "houses": {
     "152": {
       "title": "🏆 Top-Tier Home w/ a Responsive Host 🏆 Clean, High Quality, Drama Free, Safe Community",
       "neighborhood": "McAfee",
-      "city": "Atlanta, GA",
+      "city": "Decatur, GA",
       "image": "https://www.padsplit.com/img/rooms/room_932_0_1581965866.1010015.jpg",
       "utilitiesIncluded": false,
       "rooms": [],
@@ -193,7 +193,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152"
     },
     "8299": {
@@ -442,7 +442,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299"
     },
     "11889": {
@@ -621,7 +621,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889"
     },
     "12011": {
@@ -780,7 +780,7 @@
       "city": "Decatur",
       "image": "https://www.padsplit.com/img/psproperty/12011/1bfb6eb4-7039-4eb0-898c-365861939c44.jpg",
       "available": false,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/12011",
       "exteriorPhotosDropped": 0
     },
@@ -808,7 +808,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-04",
+          "moveInDate": "2026-10-05",
           "image": "https://www.padsplit.com/img/psproperty/13036/img_c4b39838-3fee-4a6a-b523-92b7e461bbde.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/13036/img_c4b39838-3fee-4a6a-b523-92b7e461bbde.jpg",
@@ -914,7 +914,7 @@
       "city": "Stone Mountain",
       "image": "https://www.padsplit.com/img/psproperty/13036/img_c4b39838-3fee-4a6a-b523-92b7e461bbde.jpg",
       "available": true,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13036",
       "exteriorPhotosDropped": 2
     },
@@ -945,7 +945,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-04",
+          "moveInDate": "2026-10-05",
           "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
@@ -1059,7 +1059,7 @@
       "city": "Decatur",
       "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
       "available": true,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14650",
       "exteriorPhotosDropped": 0
     },
@@ -1210,7 +1210,7 @@
       "city": "Decatur",
       "image": "https://www.padsplit.com/img/psproperty/14657/img_34ac598d-0ed6-41b8-9ef2-dca24f12eda0.jpg",
       "available": true,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14657",
       "exteriorPhotosDropped": 0
     },
@@ -1437,7 +1437,7 @@
       "city": "Decatur",
       "image": "https://www.padsplit.com/img/psproperty/29100/img_d0b4b63d-cfc1-46c7-8492-b5c6f479c2e3.png",
       "available": true,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29100",
       "exteriorPhotosDropped": 0
     },
@@ -1591,7 +1591,7 @@
       "city": "Decatur",
       "image": "https://www.padsplit.com/img/psproperty/29710/img_efae0a86-c3ae-43a5-aa5b-bca35f1bb9ec.png",
       "available": true,
-      "checkedAt": "2026-10-03T23:47:10.453Z",
+      "checkedAt": "2026-10-03T23:59:03.909Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29710",
       "exteriorPhotosDropped": 4
     },
@@ -1771,7 +1771,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 5,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/30251"
     },
     "35011": {
@@ -1953,7 +1953,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011"
     },
     "39708": {
@@ -2092,7 +2092,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-10-03T23:41:02.759Z",
+      "checkedAt": "2026-10-03T23:55:44.237Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708"
     }
   }
