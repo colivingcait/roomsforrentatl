@@ -17,6 +17,7 @@
 import { chromium } from "playwright";
 import { appendFileSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
 import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { applyBedCover, pickBedCover } from "../lib/bed-cover.mjs";
 
 const ART = "artifacts";
 const STREET_BLOCKLIST = "data/.street1-blocklist";
@@ -385,6 +386,17 @@ for (const house of houses) {
     ordered.forEach((r, i) => {
       r.pagePosition = located ? i + 1 : r.padIndex;
     });
+
+    const bedroomUrls = [];
+    for (const room of rooms) {
+      for (const pic of room.pictures || []) {
+        const cat = String(pic?.category || "").toLowerCase();
+        if (pic?.url && (!cat || cat.includes("bed"))) bedroomUrls.push(pic.url);
+      }
+    }
+    const bedCover = await pickBedCover(bedroomUrls);
+    applyBedCover(rooms, bedCover);
+    if (bedCover) meta.image = bedCover;
 
     // A room counts as available when PadSplit marks status === 1 (vacant/listed).
     const available = rooms.filter((r) => r.status === 1);

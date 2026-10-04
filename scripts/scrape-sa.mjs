@@ -9,6 +9,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { photoSlot, publicPhoto, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { applyBedCover, pickBedCover } from "../lib/bed-cover.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
 const SEARCH_CODE = "935a685108fc43c";
@@ -306,7 +307,7 @@ export function mapRoom(raw) {
       detailedStatus: raw.detailedStatus ?? null,
       moveInDate: raw.startMoveInDate ?? null,
       image: primary?.url ?? null,
-      photos: photos.map((p) => p.url).slice(0, 6),
+      photos: photos.map((p) => p.url),
     },
   };
 }
@@ -447,12 +448,15 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         (min, r) => (r.weeklyRate != null && r.weeklyRate < min ? r.weeklyRate : min),
         Infinity
       );
+      const bedroomUrls = rooms.flatMap((r) => r.photos || []);
       const lead =
+        (await pickBedCover(bedroomUrls)) ||
+        bedroomUrls[0] ||
         commonAreas.find((p) => photoSlot(p) === 0)?.url ||
-        rooms.find((r) => r.image)?.image ||
         commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||
         "";
+      applyBedCover(rooms, lead);
 
       const seed = {
         id,

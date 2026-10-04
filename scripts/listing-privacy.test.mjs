@@ -7,6 +7,7 @@ import {
   leakReason,
   leaksInData,
   leaksInText,
+  galleryOrder,
   publicNeighborhood,
   publicPhoto,
   roundCoord,
@@ -134,7 +135,7 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
   assert.equal(house.city, undefined);
   assert.equal(house.title, undefined);
   assert.equal(house.description, undefined);
-  assert.equal(house.image, "https://cdn.example/kitchen.jpg");
+  assert.equal(house.image, "https://cdn.example/room.jpg");
   assert.equal(house.street1, undefined);
   assert.deepEqual(
     house.commonAreas.map((p) => p.url),
@@ -143,7 +144,10 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
   assert.equal(house.commonAreas[0].label, "Kitchen");
   assert.equal(house.commonAreas[0].description, undefined);
   assert.equal(house.rooms[0].description, undefined);
-  assert.deepEqual(house.rooms[0].photos, ["https://cdn.example/room.jpg"]);
+  assert.deepEqual(house.rooms[0].photos, [
+    "https://cdn.example/room.png",
+    "https://cdn.example/room.jpg",
+  ]);
   assert.ok(removedUrls.includes("https://cdn.example/patio.jpg"));
   assert.equal(leaksInData(house).length, 0);
 });
@@ -175,8 +179,34 @@ test("a generic Common area label takes the caption, and photos sort kitchen, be
     house.commonAreas.map((p) => p.label),
     ["Kitchen", "Bedroom", "Bathroom", "Dining room", "Living room"]
   );
-  assert.equal(house.image, "https://cdn.example/kitchen.jpg");
+  assert.equal(house.image, "https://cdn.example/bed.jpg");
   assert.equal(house.commonAreas.some((p) => "description" in p), false);
+});
+
+test("the gallery leads with the bed cover, then kitchen, other bedrooms, bath, and commons", () => {
+  const urls = galleryOrder({
+    image: "https://cdn.example/bed-cover.jpg",
+    rooms: [
+      { available: true, photos: ["https://cdn.example/bed-open.jpg"] },
+      { available: false, photos: ["https://cdn.example/bed-taken.jpg"] },
+    ],
+    commonAreas: [
+      { url: "https://cdn.example/dining.jpg", label: "Dining room" },
+      { url: "https://cdn.example/bath.jpg", label: "Bathroom" },
+      { url: "https://cdn.example/bed-cover.jpg", label: "Bedroom" },
+      { url: "https://cdn.example/kitchen.jpg", label: "Kitchen" },
+      { url: "https://cdn.example/living.jpg", label: "Living room" },
+    ],
+  });
+  assert.deepEqual(urls, [
+    "https://cdn.example/bed-cover.jpg",
+    "https://cdn.example/kitchen.jpg",
+    "https://cdn.example/bed-open.jpg",
+    "https://cdn.example/bed-taken.jpg",
+    "https://cdn.example/bath.jpg",
+    "https://cdn.example/dining.jpg",
+    "https://cdn.example/living.jpg",
+  ]);
 });
 
 test("named communities and drone or exterior filenames fail the data scan", () => {

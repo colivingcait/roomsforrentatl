@@ -4,9 +4,9 @@ import type { House, SeedHouse, LiveHouse, Room, Photo, PriceUnit } from "./type
 import { getMarket } from "./market";
 import {
   dropPhoto,
+  galleryOrder,
   publicImage,
   publicNeighborhood,
-  photoSlot,
   publicPhoto,
   publicRoom,
   roundCoord,
@@ -84,40 +84,15 @@ export function availableRooms(house: House): Room[] {
 }
 
 /**
- * Gallery order for every market: kitchen, then bedrooms (open rooms first),
- * then baths, then dining, living, laundry, and other interiors. A hero or
- * dining photo does not jump ahead of the kitchen.
+ * Gallery order for every market: the bed cover, then the kitchen, then the
+ * other bedrooms (open rooms first), then baths, then other commons.
  */
 export function orderedPhotos(house: House): string[] {
-  const commons = house.commonAreas.filter((c) => !dropPhoto(c));
-  const roomPics = (rooms: House["rooms"]) =>
-    rooms.flatMap((r) =>
-      (r.photos?.length ? r.photos : r.image ? [r.image] : []).filter(
-        (url) => !dropPhoto({ url, category: "bedroom" })
-      )
-    );
-  const buckets: string[][] = [[], [], [], []];
-  for (const photo of commons) buckets[photoSlot(photo)].push(photo.url);
-  const sequence = [
-    ...buckets[0],
-    ...roomPics(availableRooms(house)),
-    ...roomPics(house.rooms.filter((r) => !r.available)),
-    ...buckets[1],
-    ...buckets[2],
-    ...buckets[3],
-  ];
-
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const url of sequence) {
-    if (url && !seen.has(url)) {
-      seen.add(url);
-      out.push(url);
-    }
-  }
+  const out = galleryOrder(house);
+  if (out.length) return out;
   const fallback =
     house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
-  return out.length ? out.slice(0, 24) : fallback ? [fallback] : [];
+  return fallback ? [fallback] : [];
 }
 
 function keptPhotos(photos: Photo[] | undefined): Photo[] {

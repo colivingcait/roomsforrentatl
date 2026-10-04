@@ -12,6 +12,7 @@
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { photoSlot, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { applyBedCover, pickBedCover } from "../lib/bed-cover.mjs";
 import { assertNoSecrets, mapRoom, readListing, snap, toPhoto } from "./scrape-sa.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
@@ -308,12 +309,15 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         (min, r) => (r.weeklyRate != null && r.weeklyRate < min ? r.weeklyRate : min),
         Infinity
       );
+      const bedroomUrls = rooms.flatMap((r) => r.photos || []);
       const lead =
+        (await pickBedCover(bedroomUrls)) ||
+        bedroomUrls[0] ||
         commonAreas.find((p) => photoSlot(p) === 0)?.url ||
-        rooms.find((r) => r.image)?.image ||
         commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||
         "";
+      applyBedCover(rooms, lead);
 
       const seed = {
         id,

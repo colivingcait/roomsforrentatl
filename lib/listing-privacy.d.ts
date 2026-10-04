@@ -14,6 +14,11 @@ declare module "./listing-privacy.mjs" {
     description?: string | null;
   }): number;
   export function orderPublicPhotos<T>(photos: T[]): T[];
+  export function galleryOrder(house: {
+    image?: string | null;
+    rooms?: Array<{ available?: boolean; image?: string | null; photos?: string[] | null }>;
+    commonAreas?: Array<{ url?: string; label?: string | null; category?: string | null; description?: string | null }>;
+  }): string[];
   export function publicPhoto(photo: {
     url?: string;
     location?: string;
@@ -55,6 +60,11 @@ declare module "@/lib/listing-privacy.mjs" {
     description?: string | null;
   }): number;
   export function orderPublicPhotos<T>(photos: T[]): T[];
+  export function galleryOrder(house: {
+    image?: string | null;
+    rooms?: Array<{ available?: boolean; image?: string | null; photos?: string[] | null }>;
+    commonAreas?: Array<{ url?: string; label?: string | null; category?: string | null; description?: string | null }>;
+  }): string[];
   export function publicPhoto(photo: {
     url?: string;
     location?: string;
