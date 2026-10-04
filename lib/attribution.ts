@@ -14,8 +14,9 @@ import { MAIN_REFERRAL_CODE, REFERRAL_OVERRIDES, referralCodeFor, site } from ".
 export const ENTRY_LANDING_COOKIE = "ref_landing";
 
 export function analyticsMarket(): string {
-  const raw = process.env.NEXT_PUBLIC_MARKET?.trim().toLowerCase();
-  return raw || "atl";
+  if (process.env.NEXT_PUBLIC_MARKET === "sa") return "sa";
+  if (process.env.NEXT_PUBLIC_MARKET === "dfw") return "dfw";
+  return "atl";
 }
 
 export function readCookie(name: string): string | null {

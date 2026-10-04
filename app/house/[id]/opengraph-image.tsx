@@ -14,7 +14,7 @@ export default async function HouseOpengraphImage({ params }: { params: { id: st
   const market = getMarket();
 
   if (!house) {
-    return renderOgCard(market.og);
+    return renderOgCard({ ...market.og, mark: market.mark });
   }
 
   const photo = orderedPhotos(house).find((url) => /^https?:\/\//i.test(url));
@@ -22,6 +22,7 @@ export default async function HouseOpengraphImage({ params }: { params: { id: st
   return renderOgCard({
     letter: market.og.letter,
     word: market.og.word,
+    mark: market.mark,
     line1: house.name,
     line2: fromPriceLabel(house),
     sub: `${submarketLabel(house)} — book on PadSplit today`,

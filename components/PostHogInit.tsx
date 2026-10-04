@@ -4,28 +4,17 @@ import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { initPosthog, posthog } from "@/lib/posthog";
 import { getVariant } from "@/lib/ab";
-import {
-  analyticsMarket,
-  clearCookie,
-  ENTRY_LANDING_COOKIE,
-  entryVariant,
-  isPadsplitHref,
-  linkContext,
-  readCookie,
-} from "@/lib/attribution";
+import { analyticsMarket, entryVariant, isPadsplitHref, linkContext } from "@/lib/attribution";
 import { referralCodeFor } from "@/lib/site";
 import { trackEvent } from "@/lib/analytics";
-
-const LANDING_SENT = "rfr_covilla_pv";
 
 /**
  * Initializes PostHog once, then fires a $pageview on every route change.
  * App Router doesn't emit full page loads on client-side navigation, so
  * PostHog's own autocapture won't see those — we capture them manually.
  *
- * /covilla is a server redirect, so the browser only ever loads `/`.
- * ref_landing is set on that redirect and consumed here as one $pageview
- * whose path is /covilla.
+ * Atlanta's /covilla redirect is recorded from covilla-landing, which other
+ * market builds do not include.
  */
 export default function PostHogInit() {
   const pathname = usePathname();
@@ -44,7 +33,9 @@ export default function PostHogInit() {
       entry_variant: entryVariant(),
       referral_code: referralCodeFor(),
     });
-    captureEntryLanding();
+    if (process.env.NEXT_PUBLIC_MARKET === "atl") {
+      require("@/components/covilla-landing").captureEntryLanding();
+    }
   }, []);
 
   useEffect(() => {
@@ -85,32 +76,4 @@ function anchorFrom(event: Event): HTMLAnchorElement | null {
   const target = event.target;
   if (!(target instanceof Element)) return null;
   return target.closest("a");
-}
-
-function captureEntryLanding() {
-  if (readCookie(ENTRY_LANDING_COOKIE) !== "covilla") return;
-  try {
-    if (sessionStorage.getItem(LANDING_SENT)) {
-      clearCookie(ENTRY_LANDING_COOKIE);
-      return;
-    }
-    sessionStorage.setItem(LANDING_SENT, "1");
-  } catch {
-    // Private mode can block sessionStorage. The short-lived cookie still
-    // limits a repeat to the next couple of minutes.
-  }
-  const url = `${window.location.origin}/covilla${window.location.search}`;
-  const code = referralCodeFor();
-  posthog.capture(
-    "$pageview",
-    {
-      $current_url: url,
-      $pathname: "/covilla",
-      entry_variant: "covilla",
-      referral_code: code,
-      market: analyticsMarket(),
-    },
-    { $set_once: { $initial_pathname: "/covilla" } }
-  );
-  clearCookie(ENTRY_LANDING_COOKIE);
 }

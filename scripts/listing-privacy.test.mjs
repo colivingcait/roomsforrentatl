@@ -8,6 +8,7 @@ import {
   leaksInData,
   leaksInText,
   publicNeighborhood,
+  publicPhoto,
   roundCoord,
   sanitizeLiveHouse,
   unitFilenameLeak,
@@ -133,7 +134,7 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
   assert.equal(house.city, undefined);
   assert.equal(house.title, undefined);
   assert.equal(house.description, undefined);
-  assert.equal(house.image, undefined);
+  assert.equal(house.image, "https://cdn.example/kitchen.jpg");
   assert.equal(house.street1, undefined);
   assert.deepEqual(
     house.commonAreas.map((p) => p.url),
@@ -145,6 +146,37 @@ test("sanitize drops exteriors, titles, descriptions, and street neighborhoods",
   assert.deepEqual(house.rooms[0].photos, ["https://cdn.example/room.jpg"]);
   assert.ok(removedUrls.includes("https://cdn.example/patio.jpg"));
   assert.equal(leaksInData(house).length, 0);
+});
+
+test("a generic Common area label takes the caption, and photos sort kitchen, bedroom, bath, then other commons", () => {
+  const relabeled = publicPhoto({
+    url: "https://cdn.example/k.jpg",
+    category: "common_space",
+    label: "Common area",
+    description: "kitchen",
+  });
+  assert.equal(relabeled.label, "Kitchen");
+  assert.equal(relabeled.description, undefined);
+
+  const { house } = sanitizeLiveHouse(
+    {
+      rooms: [{ id: 1, status: 1, photos: ["https://cdn.example/bed.jpg"], weeklyRate: 100 }],
+      commonAreas: [
+        { url: "https://cdn.example/dining.jpg", category: "common_space", description: "Dining room" },
+        { url: "https://cdn.example/bath.jpg", category: "bathroom", description: "Shared bath" },
+        { url: "https://cdn.example/bed-common.jpg", category: "bedroom", description: "Bedroom" },
+        { url: "https://cdn.example/kitchen.jpg", category: "common_space", label: "Common area", description: "Open kitchen" },
+        { url: "https://cdn.example/living.jpg", category: "common_space", description: "Living room" },
+      ],
+    },
+    "San Antonio"
+  );
+  assert.deepEqual(
+    house.commonAreas.map((p) => p.label),
+    ["Kitchen", "Bedroom", "Bathroom", "Dining room", "Living room"]
+  );
+  assert.equal(house.image, "https://cdn.example/kitchen.jpg");
+  assert.equal(house.commonAreas.some((p) => "description" in p), false);
 });
 
 test("named communities and drone or exterior filenames fail the data scan", () => {

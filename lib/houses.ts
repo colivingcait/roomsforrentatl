@@ -6,6 +6,7 @@ import {
   dropPhoto,
   publicImage,
   publicNeighborhood,
+  photoSlot,
   publicPhoto,
   publicRoom,
   roundCoord,
@@ -83,89 +84,39 @@ export function availableRooms(house: House): Room[] {
 }
 
 /**
- * Photos for the card/hero gallery. Outdoor, PNG, and "other" photos are
- * already removed by dropPhoto. San Antonio leads with kitchen and dining,
- * then bedrooms (open rooms first), baths, and other commons. Other markets
- * lead with the kitchen, then the first rooms, baths, and remaining commons.
+ * Gallery order for every market: kitchen, then bedrooms (open rooms first),
+ * then baths, then dining, living, laundry, and other interiors. A hero or
+ * dining photo does not jump ahead of the kitchen.
  */
 export function orderedPhotos(house: House): string[] {
-  if (getMarket().id === "sa") return orderedSanAntonioPhotos(house);
-  const roomPics = availableRooms(house).flatMap((r) =>
-    (r.photos?.length ? r.photos : r.image ? [r.image] : []).filter(
-      (url) => !dropPhoto({ url, category: "bedroom" })
-    )
-  );
-
   const commons = house.commonAreas.filter((c) => !dropPhoto(c));
-  const matches = (c: Photo, re: RegExp) => re.test(`${c.label ?? ""} ${c.category}`);
-  const area = (c: Photo) => (c.width ?? 0) * (c.height ?? 0);
-  const heroOk =
-    house.heroPhoto && !dropPhoto({ url: house.heroPhoto, category: "interior" })
-      ? house.heroPhoto
-      : undefined;
-
-  // Lead photo: a safe manual override wins; otherwise biggest kitchen, then a
-  // living area, then PadSplit's primary, then a room photo.
-  const kitchens = commons.filter((c) => matches(c, /kitchen/i)).sort((a, b) => area(b) - area(a));
-  const leadUrl =
-    heroOk ||
-    kitchens[0]?.url ||
-    commons.find((c) => matches(c, /living|den|family/i))?.url ||
-    commons.find((c) => matches(c, /dining/i))?.url ||
-    commons.find((c) => c.primary)?.url ||
-    roomPics[0] ||
-    commons.find((c) => !matches(c, /bath|shower|restroom/i))?.url ||
-    commons[0]?.url;
-
-  const baths = commons.filter((c) => c.url !== leadUrl && matches(c, /bath|shower|restroom/i)).map((c) => c.url);
-  const others = commons
-    .filter((c) => c.url !== leadUrl && !matches(c, /bath|shower|restroom|kitchen/i))
-    .map((c) => c.url);
-
+  const roomPics = (rooms: House["rooms"]) =>
+    rooms.flatMap((r) =>
+      (r.photos?.length ? r.photos : r.image ? [r.image] : []).filter(
+        (url) => !dropPhoto({ url, category: "bedroom" })
+      )
+    );
+  const buckets: string[][] = [[], [], [], []];
+  for (const photo of commons) buckets[photoSlot(photo)].push(photo.url);
   const sequence = [
-    leadUrl,
-    ...roomPics.slice(0, 6),
-    ...baths,
-    ...others,
-    ...roomPics.slice(6),
+    ...buckets[0],
+    ...roomPics(availableRooms(house)),
+    ...roomPics(house.rooms.filter((r) => !r.available)),
+    ...buckets[1],
+    ...buckets[2],
+    ...buckets[3],
   ];
 
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const u of sequence) {
-    if (u && !seen.has(u)) {
-      seen.add(u);
-      out.push(u);
-    }
-  }
-  const fallback =
-    house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
-  return out.length ? out.slice(0, 20) : fallback ? [fallback] : [];
-}
-
-function orderedSanAntonioPhotos(house: House): string[] {
-  const commons = house.commonAreas.filter((c) => !dropPhoto(c));
-  const text = (c: Photo) => `${c.label ?? ""} ${c.category}`;
-  const kitchen = commons.filter((c) => /kitchen|dining/i.test(text(c)) && !/bath|shower/i.test(text(c)));
-  const baths = commons.filter((c) => /bath|shower|restroom/i.test(text(c)) || c.category === "bathroom");
-  const kitchenUrls = new Set(kitchen.map((c) => c.url));
-  const bathUrls = new Set(baths.map((c) => c.url));
-  const other = commons.filter((c) => !kitchenUrls.has(c.url) && !bathUrls.has(c.url));
-
-  const roomPics = (rooms: House["rooms"]) =>
-    rooms.flatMap((r) => (r.photos?.length ? r.photos : r.image ? [r.image] : []));
-  const open = roomPics(availableRooms(house));
-  const taken = roomPics(house.rooms.filter((r) => !r.available));
-
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const url of [...kitchen.map((c) => c.url), ...open, ...taken, ...baths.map((c) => c.url), ...other.map((c) => c.url)]) {
+  for (const url of sequence) {
     if (url && !seen.has(url)) {
       seen.add(url);
       out.push(url);
     }
   }
-  const fallback = house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
+  const fallback =
+    house.image && !dropPhoto({ url: house.image, category: "interior" }) ? house.image : "";
   return out.length ? out.slice(0, 24) : fallback ? [fallback] : [];
 }
 

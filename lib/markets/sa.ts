@@ -1,11 +1,12 @@
 import type { Market } from "../market";
+import { canonicalSiteUrl } from "../site-url";
 
 export const SA_MARKET: Market = {
   id: "sa",
   mark: "SA",
   name: "RoomsForRentSA",
   domain: "RoomsForRentSA.com",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentsa.com",
+  url: canonicalSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, "https://www.roomsforrentsa.com"),
   metro: "San Antonio",
   phone: null,
   listingSource: "file",

@@ -21,5 +21,5 @@ export default async function OpengraphImage() {
         (h) => h.heroPhoto && !dropPhoto({ url: h.heroPhoto, category: "interior" })
       )?.heroPhoto;
 
-  return renderOgCard({ ...copy, photoPath });
+  return renderOgCard({ ...copy, mark: market.mark, photoPath });
 }

@@ -1,4 +1,5 @@
 import type { Brand, BrandKey } from "./brand";
+import { canonicalSiteUrl } from "./site-url";
 
 export const BRANDS: Record<BrandKey, Brand> = {
   rooms: {
@@ -6,7 +7,7 @@ export const BRANDS: Record<BrandKey, Brand> = {
     word: "Rooms",
     name: "RoomsForRentATL",
     domain: "RoomsForRentATL.com",
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com",
+    url: canonicalSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, "https://www.roomsforrentatl.com"),
     tagline: "Furnished rooms for rent in Atlanta — next day move in.",
     description:
       "Furnished rooms for rent in Atlanta — weekly, no lease, next-day move-in. All-in pricing with utilities & WiFi included. Book a PadSplit room today.",

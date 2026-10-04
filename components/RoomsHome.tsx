@@ -10,7 +10,7 @@ import { getFilterStartingPrices } from "@/lib/filterPrices";
 import { getAutoFeaturedRooms } from "@/lib/autoFeatured";
 import { getMarket } from "@/lib/market";
 
-/** The rooms-first homepage (roomsforrentatl.com). */
+/** The rooms homepage for the market this build serves. */
 export default async function RoomsHome() {
   const allHouses = getHouses();
   const soldOut = allHouses.filter((h) => !h.available);
@@ -18,9 +18,17 @@ export default async function RoomsHome() {
   const filterPrices = await getFilterStartingPrices();
   const market = getMarket();
   const autoFeatured = market.listingSource === "search" ? await getAutoFeaturedRooms() : [];
+  const homeJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: market.name,
+    url: market.url,
+    description: market.description,
+  };
 
   return (
     <main className="min-h-screen bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
       <Header wide />
       <BrowseRooms
         rooms={rooms}

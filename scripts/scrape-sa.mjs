@@ -8,7 +8,7 @@
  * keeps its last-known row instead of being blanked.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
-import { publicPhoto, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { photoSlot, publicPhoto, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
 const SEARCH_CODE = "935a685108fc43c";
@@ -170,6 +170,32 @@ export async function readListing(page) {
     const rooms = Array.isArray(prop.rooms) ? prop.rooms : [];
     const pictures = Array.isArray(prop.pictures) ? prop.pictures : [];
     const baths = Array.isArray(prop.bathroomList) ? prop.bathroomList : [];
+    const ordered = Array.isArray(prop.orderedPictures) ? prop.orderedPictures : [];
+    const aiCaption = (ai) => {
+      if (typeof ai !== "string") return "";
+      const token = ai.trim().toLowerCase();
+      if (!token || token === "other") return "";
+      return token.replace(/_/g, " ");
+    };
+    const hints = new Map();
+    for (const picture of ordered) {
+      const url = picture.location || "";
+      if (!url) continue;
+      const human = typeof picture.description === "string" ? picture.description.trim() : "";
+      hints.set(url, human || aiCaption(picture.aiCategory));
+    }
+    const mapPic = (picture, category) => {
+      const url = picture.location || "";
+      const human = typeof picture.description === "string" ? picture.description.trim() : "";
+      return {
+        url,
+        category: picture.category || category,
+        description: human || hints.get(url) || aiCaption(picture.aiCategory) || "",
+        width: picture.imageWidth ?? null,
+        height: picture.imageHeight ?? null,
+        primary: !!picture.primary,
+      };
+    };
     return {
       secrets: {
         street1: addr.street1 || "",
@@ -188,22 +214,13 @@ export async function readListing(page) {
         lng: prop.lng ?? null,
         bedrooms: prop.bedrooms ?? null,
         bathrooms: prop.bathrooms ?? null,
-        pictures: pictures.map((p) => ({
-          url: p.location || "",
-          category: p.category || "common_space",
-          description: p.description || "",
-          width: p.imageWidth ?? null,
-          height: p.imageHeight ?? null,
-          primary: !!p.primary,
-        })),
+        pictures: pictures.map((p) => mapPic(p, "common_space")),
         bathroomsPics: baths.flatMap((b) =>
-          (b.pictures || []).map((p) => ({
-            url: p.location || "",
-            category: "bathroom",
-            description: p.description || "Bathroom",
-            width: p.imageWidth ?? null,
-            height: p.imageHeight ?? null,
-          }))
+          (b.pictures || []).map((p) => {
+            const mapped = mapPic(p, "bathroom");
+            if (!mapped.description) mapped.description = "Bathroom";
+            return mapped;
+          })
         ),
         rooms: rooms.map((r, i) => ({
           id: r.id,
@@ -431,8 +448,9 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         Infinity
       );
       const lead =
-        commonAreas.find((p) => /kitchen|dining/i.test(`${p.label || ""} ${p.category}`))?.url ||
+        commonAreas.find((p) => photoSlot(p) === 0)?.url ||
         rooms.find((r) => r.image)?.image ||
+        commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||
         "";
 
@@ -465,6 +483,7 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         exteriorPhotosDropped: dropped,
       };
       const { house } = sanitizeLiveHouse(row, seed.neighborhood);
+      if (house.image) seed.image = house.image;
       house.exteriorPhotosDropped = dropped;
       assertNoSecrets({ seed, row: house }, listing.secrets);
       houses.push(seed);

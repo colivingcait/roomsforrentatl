@@ -175,16 +175,27 @@ async function extractPhotos(page) {
         return;
       }
       if (typeof node.location === "string" && /^https?:\/\//.test(node.location) && "category" in node) {
+        const aiCaption = (ai) => {
+          if (typeof ai !== "string") return "";
+          const token = ai.trim().toLowerCase();
+          if (!token || token === "other") return "";
+          return token.replace(/_/g, " ");
+        };
+        const human = typeof node.description === "string" ? node.description.trim() : "";
+        const caption = human || aiCaption(node.aiCategory);
         if (!seen.has(node.location)) {
           seen.add(node.location);
           pics.push({
             url: node.location,
             category: (node.category || "other").toString(),
-            description: node.description || null,
+            description: caption || null,
             primary: !!node.primary,
             width: node.imageWidth ?? null,
             height: node.imageHeight ?? null,
           });
+        } else if (caption) {
+          const row = pics.find((p) => p.url === node.location);
+          if (row && !row.description) row.description = caption;
         }
       }
       for (const k of Object.keys(node)) visit(node[k], depth + 1);

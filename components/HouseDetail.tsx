@@ -133,7 +133,11 @@ export default function HouseDetail({ house, rooms }: { house: House; rooms: Roo
     {
       key: "who",
       q: "Who lives here, and what's shared",
-      body: `${bathCapacityLine(house)} ${house.name === "Willow" ? "Two kitchens (upstairs and downstairs)" : "One kitchen"}, free laundry (one washer/dryer), driveway plus street parking. Bed linens aren't provided — bring sheets, a pillow, and towels. Central air is host-controlled.`,
+      body: `${bathCapacityLine(house)} ${
+        process.env.NEXT_PUBLIC_MARKET === "atl" && house.name === "Willow"
+          ? "Two kitchens (upstairs and downstairs)"
+          : "One kitchen"
+      }, free laundry (one washer/dryer), driveway plus street parking. Bed linens aren't provided — bring sheets, a pillow, and towels. Central air is host-controlled.`,
     },
     {
       key: "rules",

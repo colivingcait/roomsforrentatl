@@ -1,5 +1,6 @@
 const path = require("path");
 const { resolveMarketId } = require("./lib/market-env");
+const { writeFavicon } = require("./scripts/write-favicon.cjs");
 
 // One build serves one market. Swap Atlanta modules so the other market's
 // copy is not in the bundle renters download. Unset keeps Atlanta, including
@@ -12,6 +13,7 @@ const { resolveMarketId } = require("./lib/market-env");
 // share a cache with the Atlanta dev server. `next build` for San Antonio
 // stays on `.next`, which is where Vercel looks for routes-manifest.json.
 const market = resolveMarketId();
+writeFavicon(market);
 const explicit = process.env.NEXT_PUBLIC_MARKET;
 const building =
   process.env.VERCEL === "1" ||
@@ -50,6 +52,15 @@ const nextConfig = {
               [(request) => request === "@/lib/knowledge" || /\/knowledge$/.test(request) || request.endsWith("/knowledge.ts"), path.join(__dirname, "lib/knowledge-sa.ts")]
             );
           }
+          config.resolve = config.resolve || {};
+          config.resolve.alias = {
+            ...(config.resolve.alias || {}),
+            "@/components/covilla-landing": path.join(__dirname, "components/covilla-landing-stub.ts"),
+            [path.join(__dirname, "components/covilla-landing.ts")]: path.join(
+              __dirname,
+              "components/covilla-landing-stub.ts"
+            ),
+          };
           config.plugins.push({
             apply(compiler) {
               compiler.hooks.normalModuleFactory.tap("MarketSwap", (nmf) => {

@@ -25,9 +25,11 @@ export function generateMetadata(): Metadata {
     },
     twitter: { card: "summary_large_image", title: socialTitle, description: brand.tagline },
     robots: { index: true, follow: true },
-    ...(market.id === "sa"
-      ? { icons: { icon: "/favicon-sa.svg", shortcut: "/favicon-sa.svg", apple: "/favicon-sa.svg" } }
-      : {}),
+    alternates: { canonical: "./" },
+    icons: {
+      icon: market.id === "sa" ? ["/favicon.ico", "/favicon-sa.svg"] : "/favicon.ico",
+      shortcut: "/favicon.ico",
+    },
   };
 }
 

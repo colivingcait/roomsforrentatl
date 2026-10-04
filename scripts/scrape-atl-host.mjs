@@ -11,7 +11,7 @@
  * About 4 seconds between requests. A failed house keeps its last-known row.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
-import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { photoSlot, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 import { assertNoSecrets, mapRoom, readListing, snap, toPhoto } from "./scrape-sa.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
@@ -309,8 +309,9 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         Infinity
       );
       const lead =
-        commonAreas.find((p) => /kitchen|dining/i.test(`${p.label || ""} ${p.category}`))?.url ||
+        commonAreas.find((p) => photoSlot(p) === 0)?.url ||
         rooms.find((r) => r.image)?.image ||
+        commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||
         "";
 
@@ -344,6 +345,7 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         exteriorPhotosDropped: dropped,
       };
       const { house } = sanitizeLiveHouse(row, "");
+      if (house.image) seed.image = house.image;
       house.exteriorPhotosDropped = dropped;
       assertNoSecrets({ seed, row: house }, listing.secrets);
       seeds.push(seed);

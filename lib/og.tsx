@@ -13,6 +13,8 @@ export interface OgCardCopy {
   line2: string;
   sub: string;
   chips: string[];
+  /** Market suffix on the wordmark: SA, ATL, or DFW. */
+  mark: string;
   /** A photo URL (absolute) or a same-site relative path (e.g. /units/foo/bar.jpg). */
   photoPath?: string | null;
 }
@@ -113,7 +115,7 @@ export async function renderOgCard(copy: OgCardCopy): Promise<ImageResponse> {
               <span>{copy.word}</span>
               <span style={{ color: "#bff0e3" }}>For</span>
               <span>Rent</span>
-              <span style={{ color: "#FF6B35" }}>ATL</span>
+              <span style={{ color: "#FF6B35" }}>{copy.mark}</span>
             </div>
           </div>
 

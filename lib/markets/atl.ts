@@ -1,6 +1,7 @@
 import type { Market } from "../market";
+import { canonicalSiteUrl } from "../site-url";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://roomsforrentatl.com";
+const SITE_URL = canonicalSiteUrl(process.env.NEXT_PUBLIC_SITE_URL, "https://www.roomsforrentatl.com");
 
 export const ATL_MARKET: Market = {
   id: "atl",
@@ -160,7 +161,7 @@ export const ATL_MARKET: Market = {
   homesSister: {
     label: "Looking for a single room?",
     name: "RoomsForRentATL.com",
-    url: "https://roomsforrentatl.com",
+    url: "https://www.roomsforrentatl.com",
   },
   homesRentalsTitle: "Furnished Private Rentals & Apartments for Rent in Atlanta, GA",
   homesRentalsDescription:
