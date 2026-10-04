@@ -26,4 +26,4 @@ jobs:
       - name: Build San Antonio
         run: NEXT_PUBLIC_MARKET=sa NEXT_PUBLIC_SITE_URL=https://roomsforrentsa.com npx next build
       - name: Fail if another market leaked
-        run: node scripts/check-sa-isolation.mjs .next-sa
+        run: node scripts/check-sa-isolation.mjs .next

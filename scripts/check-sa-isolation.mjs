@@ -1,13 +1,13 @@
 /**
  * Fails if the San Antonio production build still contains another market.
- * Run after `NEXT_PUBLIC_MARKET=sa npx next build` (output in .next-sa).
+ * Run after `NEXT_PUBLIC_MARKET=sa npx next build` (output in .next).
  *
  * Skips source maps. Checks compiled JS, HTML, and JSON only.
  */
 import { readdirSync, readFileSync, statSync } from "fs";
 import { join, extname } from "path";
 
-const root = process.argv[2] || ".next-sa";
+const root = process.argv[2] || ".next";
 const TEXT = new Set([".js", ".html", ".json", ".txt", ".css", ".rsc"]);
 
 const FORBIDDEN = [
