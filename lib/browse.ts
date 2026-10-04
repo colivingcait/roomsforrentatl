@@ -26,32 +26,37 @@ export interface RoomListing {
   noMoveInFee: boolean;
 }
 
-/** Every currently-bookable room across all houses, cheapest first. */
+/** One homepage card per house: its cheapest open room, cheapest houses first. */
 export function buildRoomListings(houses: House[]): RoomListing[] {
   const out: RoomListing[] = [];
   for (const h of houses) {
     if (!h.available) continue;
+    const open = availableRooms(h);
+    if (!open.length) continue;
+    // Same PadSplit listing, one card. Two open rooms were rendering as two
+    // copies of the house name (Indigo at $203 and $206).
+    const r = open.reduce((best, room) =>
+      (room.weeklyRate ?? 1e9) < (best.weeklyRate ?? 1e9) ? room : best
+    );
     const area = listingPlace(h);
     const walkToBus = /walk/i.test(h.transit ?? "");
-    for (const r of availableRooms(h)) {
-      out.push({
-        key: `${h.id}-${r.id}`,
-        houseId: h.id,
-        roomId: r.id,
-        name: roomTitle(r),
-        houseName: h.name,
-        area,
-        rate: r.weeklyRate,
-        originalRate: r.promo && r.originalWeeklyRate != null ? r.originalWeeklyRate : null,
-        bath: r.bathroomType === "private" ? "private" : "shared",
-        walkToBus,
-        transitChip: walkToBus ? "Walk to bus" : "Drive or rideshare",
-        movesInSoon: moveInLabel(r.moveInDate) === "Available now",
-        photo: r.image || h.image,
-        total: r.weeklyRate != null ? r.weeklyRate + APPLICATION_FEE : null,
-        noMoveInFee: r.noMoveInFee === true,
-      });
-    }
+    out.push({
+      key: `${h.id}-${r.id}`,
+      houseId: h.id,
+      roomId: r.id,
+      name: roomTitle(r),
+      houseName: h.name,
+      area,
+      rate: r.weeklyRate,
+      originalRate: r.promo && r.originalWeeklyRate != null ? r.originalWeeklyRate : null,
+      bath: r.bathroomType === "private" ? "private" : "shared",
+      walkToBus,
+      transitChip: walkToBus ? "Walk to bus" : "Drive or rideshare",
+      movesInSoon: moveInLabel(r.moveInDate) === "Available now",
+      photo: r.image || h.image,
+      total: r.weeklyRate != null ? r.weeklyRate + APPLICATION_FEE : null,
+      noMoveInFee: r.noMoveInFee === true,
+    });
   }
   return out.sort((a, b) => (a.rate ?? 1e9) - (b.rate ?? 1e9));
 }

@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
-import { getRoom, getAllRoomParams } from "@/lib/houses";
+import { getRoom, getAllRoomParams, orderedPhotos } from "@/lib/houses";
 import { dropPhoto } from "@/lib/listing-privacy.mjs";
-import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights, listingPlace } from "@/lib/format";
+import { priceLabel, prettyBath, prettyBed, shortRoomName, roomTagline, moveInLabel, roomHighlights, listingPlace } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
+import { getMarket } from "@/lib/market";
 
 export const revalidate = 3600;
 
@@ -23,16 +24,32 @@ export async function generateMetadata({
   const data = getRoom(params.id, params.roomId);
   if (!data) return { title: "Room not found" };
   const { house, room } = data;
+  const title = `${shortRoomName(room)} — ${house.name}`;
+  const bed = prettyBed(room.bedSize);
+  const description = `${prettyBath(room.bathroomType)}${bed ? `, ${bed}` : ""}${
+    room.weeklyRate ? `, ${priceLabel(room.weeklyRate)} all-in` : ""
+  } in ${listingPlace(house)}. ${moveInLabel(room.moveInDate)}.`;
+  const path = `/house/${house.id}/room/${room.id}`;
+  const cover = orderedPhotos(house).find((url) => url.startsWith("http"));
+  const roomPhoto =
+    room.image && room.image.startsWith("http") && !dropPhoto({ url: room.image, category: "bedroom" })
+      ? room.image
+      : cover;
   return {
-    title: `${roomTitle(room)} — ${house.name}`,
-    description: `${prettyBath(room.bathroomType)}${
-      room.weeklyRate ? `, ${priceLabel(room.weeklyRate)} all-in` : ""
-    } in ${listingPlace(house)}. ${moveInLabel(room.moveInDate)}.`,
+    title,
+    description,
+    alternates: { canonical: path },
     openGraph: {
-      images:
-        room.image && room.image.startsWith("http") && !dropPhoto({ url: room.image, category: "bedroom" })
-          ? [room.image]
-          : [],
+      title,
+      description,
+      url: `${getMarket().url}${path}`,
+      ...(roomPhoto ? { images: [roomPhoto] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title,
+      description,
+      ...(roomPhoto ? { images: [roomPhoto] } : {}),
     },
   };
 }
@@ -63,7 +80,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
 
       {/* Photo gallery */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
-        <Image src={gallery[0]} alt={roomTitle(room)} fill priority sizes="100vw" className="object-cover" />
+        <Image src={gallery[0]} alt={shortRoomName(room)} fill priority sizes="100vw" className="object-cover" />
         <Link
           href={`/house/${house.id}`}
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-2 text-sm font-bold text-ink shadow active:scale-95"
@@ -75,7 +92,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
         <div className="flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {gallery.slice(1, 6).map((p, i) => (
             <div key={i} className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg bg-slate-100">
-              <Image src={p} alt={`${roomTitle(room)} photo ${i + 2}`} fill sizes="120px" className="object-cover" />
+              <Image src={p} alt={`${shortRoomName(room)} photo ${i + 2}`} fill sizes="120px" className="object-cover" />
             </div>
           ))}
         </div>
@@ -85,7 +102,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
         <div className="mt-4 flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-brand">{house.name}</p>
-            <h1 className="text-2xl font-extrabold leading-tight text-ink">{roomTitle(room)}</h1>
+            <h1 className="text-2xl font-extrabold leading-tight text-ink">{shortRoomName(room)}</h1>
             <p className="mt-1 text-muted">
               {listingPlace(house)}
             </p>
@@ -154,7 +171,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
           <p className="font-semibold text-ink">Booking this room</p>
           <p className="mt-1">
             Tap <span className="font-semibold">“Book this room”</span> to open this home on PadSplit, then choose{" "}
-            <span className="font-semibold text-ink">“{roomTitle(room)}”</span> to apply &amp; pay. (PadSplit shows the
+            <span className="font-semibold text-ink">“{shortRoomName(room)}”</span> to apply &amp; pay. (PadSplit shows the
             rooms in a random order, so pick it by name.)
           </p>
         </div>
@@ -189,7 +206,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
               house: house.id,
               houseName: house.name,
               room: String(room.id),
-              roomTitle: roomTitle(room),
+              roomTitle: shortRoomName(room),
               source: "page",
               section: "room_page",
             }}

@@ -123,10 +123,16 @@ export function prettyBed(size: string | null): string | null {
   return `${size.charAt(0).toUpperCase()}${size.slice(1)} bed`;
 }
 
-/** Use PadSplit's exact room name so listings match across both sites. */
+/**
+ * A room's own name. PadSplit sometimes stores a sentence ("Nice size room,
+ * full bed, desk…") in the name field. That is a description, not a title.
+ * A real room name starts with "Room" and a number.
+ */
 export function roomTitle(room: Room): string {
-  if (room.name && room.name.trim()) return room.name.trim();
+  const name = room.name?.trim() ?? "";
+  if (name && /^room\s+\d+\b/i.test(name)) return name;
   if (room.roomNumber != null) return `Room ${room.roomNumber}`;
+  if (name) return name;
   return "Room";
 }
 

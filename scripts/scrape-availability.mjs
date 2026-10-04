@@ -16,7 +16,7 @@
  */
 import { chromium } from "playwright";
 import { appendFileSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
-import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
+import { photoSlot, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 import { applyBedCover, pickBedCover } from "../lib/bed-cover.mjs";
 
 const ART = "artifacts";
@@ -394,7 +394,11 @@ for (const house of houses) {
         if (pic?.url && (!cat || cat.includes("bed"))) bedroomUrls.push(pic.url);
       }
     }
-    const bedCover = await pickBedCover(bedroomUrls);
+    for (const photo of commonAreas || []) {
+      if (photo?.url && photoSlot(photo) === 1) bedroomUrls.push(photo.url);
+    }
+    const previous = prev.houses?.[id]?.image || house.image;
+    const bedCover = await pickBedCover(bedroomUrls, previous);
     applyBedCover(rooms, bedCover);
     if (bedCover) meta.image = bedCover;
 

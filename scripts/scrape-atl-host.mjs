@@ -278,6 +278,7 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
 
       let dropped = 0;
       const commonAreas = [];
+      const bedroomPics = [];
       const seen = new Set();
       const pushCommon = (raw) => {
         const mapped = toPhoto(raw);
@@ -289,7 +290,10 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         if (seen.has(mapped.photo.url)) return;
         seen.add(mapped.photo.url);
         const cat = (raw.category || "").toLowerCase();
-        if (cat === "bedroom" || /bed/.test(cat)) return;
+        if (cat === "bedroom" || /bed/.test(cat)) {
+          bedroomPics.push(mapped.photo);
+          return;
+        }
         commonAreas.push(mapped.photo);
       };
       for (const pic of listing.public.pictures) pushCommon(pic);
@@ -301,6 +305,10 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         dropped += mapped.dropped;
         rooms.push(mapped.room);
       }
+      const roomUrls = new Set(rooms.flatMap((r) => r.photos || []));
+      for (const photo of bedroomPics) {
+        if (!roomUrls.has(photo.url)) commonAreas.push(photo);
+      }
       droppedTotal += dropped;
 
       const city = submarket(listing.public.city);
@@ -309,10 +317,13 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         (min, r) => (r.weeklyRate != null && r.weeklyRate < min ? r.weeklyRate : min),
         Infinity
       );
-      const bedroomUrls = rooms.flatMap((r) => r.photos || []);
+      const bedroomUrls = [
+        ...rooms.flatMap((r) => r.photos || []),
+        ...commonAreas.filter((p) => photoSlot(p) === 1).map((p) => p.url),
+      ];
+      const previous = prevById.get(id)?.image || prevAvail.houses?.[id]?.image;
       const lead =
-        (await pickBedCover(bedroomUrls)) ||
-        bedroomUrls[0] ||
+        (await pickBedCover(bedroomUrls, previous)) ||
         commonAreas.find((p) => photoSlot(p) === 0)?.url ||
         commonAreas.find((p) => photoSlot(p) === 3)?.url ||
         commonAreas[0]?.url ||
