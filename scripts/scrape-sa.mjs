@@ -448,9 +448,13 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         (min, r) => (r.weeklyRate != null && r.weeklyRate < min ? r.weeklyRate : min),
         Infinity
       );
-      const bedroomUrls = rooms.flatMap((r) => r.photos || []);
+      const bedroomUrls = [
+        ...rooms.flatMap((r) => r.photos || []),
+        ...commonAreas.filter((p) => photoSlot(p) === 1).map((p) => p.url),
+      ];
+      const previous = prevById.get(id)?.image || prevAvail.houses?.[id]?.image;
       const lead =
-        (await pickBedCover(bedroomUrls)) ||
+        (await pickBedCover(bedroomUrls, previous)) ||
         bedroomUrls[0] ||
         commonAreas.find((p) => photoSlot(p) === 0)?.url ||
         commonAreas.find((p) => photoSlot(p) === 3)?.url ||

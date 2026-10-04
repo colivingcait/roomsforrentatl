@@ -21,7 +21,21 @@ function solid(w, h, paint) {
 test("a bed that fills the frame outranks a bed cut off at the bottom", () => {
   const filled = solid(96, 64, (_x, y) => (y < 14 ? [236, 232, 224] : [214, 122, 48]));
   const cutoff = solid(96, 64, (_x, y) => (y < 56 ? [214, 210, 202] : [214, 122, 48]));
+  assert.ok(scoreBedJpeg(filled) > 0);
   assert.ok(scoreBedJpeg(filled) > scoreBedJpeg(cutoff));
+});
+
+test("a desk with no bed cannot be a cover", () => {
+  // Wall, a monitor, and a chair. No broad cloth region.
+  const desk = solid(96, 64, (x, y) => {
+    if (x > 40 && x < 70 && y > 16 && y < 34) return [36, 40, 44];
+    if (x > 18 && x < 34 && y > 28 && y < 58) return [48, 50, 54];
+    return [234, 232, 228];
+  });
+  const bed = solid(96, 64, (_x, y) => (y < 14 ? [236, 232, 224] : [214, 122, 48]));
+  assert.ok(scoreBedJpeg(desk) <= 0);
+  assert.ok(scoreBedJpeg(bed) > 0);
+  assert.ok(scoreBedJpeg(bed) > scoreBedJpeg(desk));
 });
 
 test("applyBedCover moves the chosen photo to the front and keeps six", () => {
