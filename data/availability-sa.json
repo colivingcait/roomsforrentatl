@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T00:42:45.738Z",
+  "updatedAt": "2026-10-04T01:14:15.064Z",
   "exteriorPhotosDropped": 0,
   "houses": {
     "10761": {
@@ -221,7 +221,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/10761/8e2d6dd4-ca3b-4348-8f73-023b50a7e54a.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/10761",
@@ -349,7 +349,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11202/94b63309-5699-4a10-893d-4887a695f6e4.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11202",
@@ -460,6 +460,13 @@
           "height": 3464
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/11842/bathrooms/img_65f8be01-7a36-4470-b3bc-74d1f3ddafe0.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 5196,
+          "height": 3464
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/11842/56591365-3456-4538-864b-5b5a3fa59eac.jpg",
           "category": "common_space",
           "label": "Living room",
@@ -494,13 +501,6 @@
           "label": "Common area",
           "width": 5196,
           "height": 3464
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/11842/9a5f4fb7-745a-407f-90ee-073815b7c5bf.jpg",
-          "category": "common_space",
-          "label": "Common area",
-          "width": 5196,
-          "height": 3464
         }
       ],
       "carousel": [],
@@ -509,7 +509,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11842/b8ea9f79-83aa-48bf-8e0d-d49097d293e9.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11842",
@@ -633,7 +633,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/13051/e26a6c29-4d21-4f7a-b2b6-6fa83c301d9c.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13051",
@@ -765,7 +765,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/18970/c7074c2c-dbb8-4ed0-90d8-18cecc9db341.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/18970",
@@ -873,7 +873,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/23243/ce04ce4b-55f2-44e1-acae-7c690a6d8cad.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/23243",
@@ -1008,7 +1008,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/28119/68e0200a-34c6-4633-a8ae-7ca821e40fae.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/28119",
@@ -1081,7 +1081,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-04T00:42:45.738Z",
+      "checkedAt": "2026-10-04T01:14:15.064Z",
       "neighborhood": "Lone Star",
       "image": "https://www.padsplit.com/img/psproperty/33710/ec0c6dae-9b92-4375-b50b-edcff67616d7.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/33710",
