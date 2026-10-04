@@ -3,10 +3,14 @@ const { resolveMarketId } = require("./lib/market-env");
 
 // One build serves one market. Swap Atlanta modules so the other market's
 // copy is not in the bundle renters download. Unset keeps Atlanta, including
-// Atlanta production. A local `next dev` for dfw or sa uses its own directory
-// so it does not share a cache with the Atlanta dev server. `next build`,
-// including every Vercel build, always writes the default .next output.
-// Vercel looks for .next/routes-manifest.json and fails if distDir moves it.
+// Atlanta production.
+//
+// The Dallas Vercel project collects `.next-dfw`. That is the directory every
+// NEXT_PUBLIC_MARKET=dfw build has always written, including production, so
+// those builds keep it. San Antonio and Atlanta projects collect the default
+// `.next`. A local `next dev` for San Antonio uses `.next-sa` so it does not
+// share a cache with the Atlanta dev server. `next build` for San Antonio
+// stays on `.next`, which is where Vercel looks for routes-manifest.json.
 const market = resolveMarketId();
 const explicit = process.env.NEXT_PUBLIC_MARKET;
 const building =
@@ -14,7 +18,7 @@ const building =
   process.env.npm_lifecycle_event === "build" ||
   process.argv.includes("build");
 const localDevDist =
-  !building && (explicit === "dfw" || explicit === "sa") ? `.next-${explicit}` : null;
+  explicit === "dfw" ? ".next-dfw" : !building && explicit === "sa" ? ".next-sa" : null;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
