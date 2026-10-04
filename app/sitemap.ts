@@ -3,9 +3,9 @@ import { getBrand } from "@/lib/brand";
 import { getMarket } from "@/lib/market";
 import { getAllHouseIds } from "@/lib/houses";
 import { getAllColivingHouseIds } from "@/lib/coliving";
-import { getUnits } from "@/lib/units";
 
 // Brand-aware: each domain lists only its own pages.
+// /rentals and /rental/* are unpublished and are not listed.
 export default function sitemap(): MetadataRoute.Sitemap {
   const brand = getBrand();
   const base = brand.url;
@@ -24,18 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   if (brand.key === "homes") {
-    const units = getUnits()
-      .filter((u) => !u.comingSoon)
-      .map((u) => ({
-        url: `${base}/rental/${u.id}`,
-        changeFrequency: "weekly" as const,
-        priority: 0.8,
-      }));
-    return [
-      { url: base, changeFrequency: "daily", priority: 1 },
-      { url: `${base}/rentals`, changeFrequency: "daily", priority: 0.9 },
-      ...units,
-    ];
+    return [];
   }
 
   const houses = getAllHouseIds().map((id) => ({

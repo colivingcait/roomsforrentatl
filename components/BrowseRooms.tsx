@@ -16,6 +16,7 @@ import {
   site,
 } from "@/lib/site";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
+import { trackEvent } from "@/lib/analytics";
 import type { FilterStartingPrices } from "@/lib/filterPrices";
 import type { AutoFeaturedRoom } from "@/lib/autoFeatured";
 import { getMarket } from "@/lib/market";
@@ -171,6 +172,8 @@ export default function BrowseRooms({
                 href={card.href}
                 event={card.event}
                 properties={{ source: "homepage" }}
+                dataAttr={`filter-${card.key}`}
+                capture={{ section: "filters", filter: card.key }}
                 target="_blank"
                 rel="noopener noreferrer"
                 ariaLabel={price != null ? `${card.aria} from $${price} a week` : card.aria}
@@ -262,7 +265,7 @@ export default function BrowseRooms({
           </div>
 
           <div className="mt-4 grid gap-4 md:mt-[22px] md:grid-cols-2 md:gap-5">
-            {visible.map((r) => {
+            {visible.map((r, index) => {
               const house = houseById.get(r.houseId);
               const photo = market.cardPhotos?.[r.houseId];
               const tags = featureTags(r, house);
@@ -270,6 +273,18 @@ export default function BrowseRooms({
                 <Link
                   key={r.key}
                   href={`/house/${r.houseId}/room/${r.roomId}`}
+                  data-attr="featured-room"
+                  data-ph-capture-attribute-section="featured_rooms"
+                  data-ph-capture-attribute-house={r.houseId}
+                  data-ph-capture-attribute-room={String(r.roomId)}
+                  onClick={() =>
+                    trackEvent("featured_room_click", {
+                      house: r.houseId,
+                      room: String(r.roomId),
+                      position: index + 1,
+                      price: r.rate,
+                    })
+                  }
                   className="block overflow-hidden rounded-[20px] bg-white shadow-card transition hover:-translate-y-0.5 hover:shadow-[0_2px_6px_rgba(15,23,42,.06),0_18px_40px_rgba(15,23,42,.10)]"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-[#dfe6ec]">
@@ -349,6 +364,8 @@ export default function BrowseRooms({
 
             <a
               href="#filters"
+              data-attr="more-filters"
+              data-ph-capture-attribute-section="featured_rooms"
               className="flex items-center justify-between gap-3 rounded-[20px] border-2 border-dashed border-brand/30 bg-white/60 p-[18px] md:col-span-2"
             >
               <span>
@@ -384,6 +401,7 @@ export default function BrowseRooms({
                     {site.phone ? (
                       <a
                         href={phoneTelHref()}
+                        data-attr="call"
                         className="rounded-[9px] border border-brand/35 bg-brand/[0.06] px-3 py-1.5 text-[12.5px] font-bold text-brand"
                       >
                         Call

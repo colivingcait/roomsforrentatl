@@ -5,7 +5,8 @@
  * structured per-room data PadSplit embeds in __NEXT_DATA__ — each room's price,
  * bathroom type, bed size, features, move-in date, status, and photos. From that
  * we derive the rooms list, the available-rooms count, and the from-price, and
- * write data/availability.json.
+ * write data/availability.json. Street addresses, PadSplit titles, and photo
+ * descriptions are never written. Outdoor and "other" photos are dropped first.
  *
  * Runs on a GitHub Actions schedule (.github/workflows/refresh-availability.yml)
  * which commits the result so Vercel redeploys with fresh numbers. PadSplit
@@ -14,9 +15,11 @@
  * street address — only the neighborhood.
  */
 import { chromium } from "playwright";
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { appendFileSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "fs";
+import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 
 const ART = "artifacts";
+const STREET_BLOCKLIST = "data/.street1-blocklist";
 mkdirSync(ART, { recursive: true });
 // re-run trigger: pick up newly-listed rooms (Chestnut Hill)
 
@@ -42,13 +45,15 @@ const prev = existsSync("data/availability.json")
   ? JSON.parse(readFileSync("data/availability.json", "utf8"))
   : { houses: {} };
 
-/** House-level bits from the rendered text/html (neighborhood + lead photo). */
+/**
+ * House-level bits from the rendered text/html (neighborhood + lead photo).
+ * City is not stored: the public area is the hand-entered neighborhood in
+ * houses.json, and a one-word match of "Stone Mountain, GA" became "Mountain, GA".
+ */
 function parseHouseMeta(text, html) {
   const out = {};
   const nb = text.match(/Neighborhood:\s*([A-Za-z][A-Za-z .'-]{1,30})/);
   if (nb) out.neighborhood = nb[1].trim();
-  const city = text.match(/\b([A-Z][a-zA-Z]+),\s*GA\b/);
-  if (city) out.city = `${city[1]}, GA`;
   const og = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
   if (og) out.image = og[1];
   out.utilitiesIncluded = /all utilities (and fees )?included/i.test(text);
@@ -111,7 +116,6 @@ async function extractRooms(page) {
         applyIndex: null,
         name: typeof r.name === "string" ? r.name : null,
         roomNumber: r.roomNumber ?? null,
-        description: r.description ?? null,
         weeklyRate: effectiveRate,
         originalWeeklyRate: hasPromo ? listRate : null,
         promo: hasPromo
@@ -131,8 +135,15 @@ async function extractRooms(page) {
         detailedStatus: r.detailedStatus ?? null,
         moveInDate: r.startMoveInDate ?? null,
         image: pic?.location ?? null,
-        // photos for the room detail gallery (cap to keep JSON lean)
-        photos: (r.pictures || []).map((p) => p.location).filter(Boolean).slice(0, 6),
+        // Kept as picture records so the privacy filter can drop exteriors
+        // before any URL is written. Descriptions are not stored.
+        pictures: (r.pictures || [])
+          .map((p) => ({
+            url: p.location,
+            category: (p.category || "").toString(),
+            description: typeof p.description === "string" ? p.description : null,
+          }))
+          .filter((p) => p.url),
       };
     });
   });
@@ -181,15 +192,15 @@ async function extractPhotos(page) {
     visit(data, 0);
 
     const isBedroom = (c) => /bed\s*room|bedroom/i.test(c);
-    const commonAreas = pics.filter((p) => !isBedroom(p.category)).slice(0, 16);
+    const commonAreas = pics.filter((p) => !isBedroom(p.category));
 
-    // Carousel: lead with exterior/common areas, then a couple bedrooms.
-    const prio = ["exterior", "frontage", "front", "living", "common", "kitchen", "dining", "bathroom"];
+    // Indoor rooms first. Exteriors are removed later and never lead.
+    const prio = ["kitchen", "living", "dining", "bathroom", "laundry", "common"];
     const rank = (c) => {
       const i = prio.findIndex((p) => c.toLowerCase().includes(p));
       return i === -1 ? prio.length + (isBedroom(c) ? 1 : 0) : i;
     };
-    const carousel = [...pics].sort((a, b) => rank(a.category) - rank(b.category)).slice(0, 8);
+    const carousel = [...pics].sort((a, b) => rank(a.category) - rank(b.category));
 
     return { commonAreas, carousel };
   });
@@ -228,6 +239,57 @@ async function extractRating(page) {
     visit(data, 0);
     return rating;
   });
+}
+
+/** Street fields from PadSplit's payload. Written only to a gitignored blocklist. */
+async function extractStreetSecrets(page) {
+  return page.evaluate(() => {
+    const out = [];
+    const push = (value) => {
+      if (typeof value === "string" && value.trim()) out.push(value.trim());
+    };
+    let data;
+    try {
+      data = window.__NEXT_DATA__;
+    } catch {}
+    if (!data) {
+      const el = document.getElementById("__NEXT_DATA__");
+      if (el) try { data = JSON.parse(el.textContent || "{}"); } catch {}
+    }
+    const visit = (node, depth) => {
+      if (!node || typeof node !== "object" || depth > 18) return;
+      if (Array.isArray(node)) {
+        for (const item of node) visit(item, depth + 1);
+        return;
+      }
+      for (const key of Object.keys(node)) {
+        const value = node[key];
+        if (/^(street1|street2|zip)$/i.test(key)) push(value);
+        if (/^address$/i.test(key)) {
+          if (typeof value === "string") push(value);
+          else if (value && typeof value === "object") {
+            push(value.street1);
+            push(value.street2);
+            push(value.zip);
+          }
+        }
+        visit(value, depth + 1);
+      }
+    };
+    visit(data, 0);
+    return out;
+  });
+}
+
+function rememberStreets(values) {
+  const lines = [];
+  for (const value of values || []) {
+    if (typeof value !== "string") continue;
+    const text = value.replace(/\s+/g, " ").trim();
+    if (text) lines.push(text);
+  }
+  if (!lines.length) return;
+  appendFileSync(STREET_BLOCKLIST, `${lines.join("\n")}\n`);
 }
 
 const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-blink-features=AutomationControlled"] });
@@ -288,6 +350,7 @@ for (const house of houses) {
     const rooms = await extractRooms(page);
     const { commonAreas, carousel } = await extractPhotos(page);
     const rating = await extractRating(page);
+    rememberStreets(await extractStreetSecrets(page));
 
     // PadSplit's /room-details/{house}/{N} uses N = the room's position in the
     // order rooms appear ON THE PAGE. Derive that from where each room's name
@@ -319,33 +382,46 @@ for (const house of houses) {
       Infinity
     );
 
-    result.houses[id] = {
-      title,
-      ...meta,
-      rooms,
-      commonAreas,
-      carousel,
-      roomsAvailable: available.length,
-      fromPrice: Number.isFinite(fromPrice) ? fromPrice : null,
-      priceUnit: "week",
-      available: available.length > 0,
-      rating,
-      checkedAt: result.updatedAt,
-      url: house.padsplitUrl,
-    };
+    result.houses[id] = sanitizeLiveHouse(
+      {
+        ...meta,
+        rooms,
+        commonAreas,
+        carousel,
+        roomsAvailable: available.length,
+        fromPrice: Number.isFinite(fromPrice) ? fromPrice : null,
+        priceUnit: "week",
+        available: available.length > 0,
+        rating,
+        checkedAt: result.updatedAt,
+        url: house.padsplitUrl,
+      },
+      house.neighborhood
+    ).house;
     okCount++;
 
     const byBath = available.reduce((m, r) => ((m[r.bathroomType || "?"] = (m[r.bathroomType || "?"] || 0) + 1), m), {});
     console.log(
       `✓ ${id}: ${rooms.length} rooms (${available.length} available ${JSON.stringify(byBath)}), from $${
         Number.isFinite(fromPrice) ? fromPrice : "?"
-      }/wk — ${title}`
+      }/wk`
     );
   } catch (err) {
     const carried = prev.houses?.[id];
     result.houses[id] = carried
-      ? { ...carried, stale: true, lastError: String(err), checkedAt: result.updatedAt }
-      : { url: house.padsplitUrl, available: false, rooms: [], roomsAvailable: 0, error: String(err), checkedAt: result.updatedAt };
+      ? sanitizeLiveHouse(
+          { ...carried, stale: true, lastError: String(err).slice(0, 180), checkedAt: result.updatedAt },
+          house.neighborhood
+        ).house
+      : {
+          url: house.padsplitUrl,
+          available: false,
+          rooms: [],
+          commonAreas: [],
+          carousel: [],
+          roomsAvailable: 0,
+          checkedAt: result.updatedAt,
+        };
     console.log(`✗ ${id}: ${err}`);
   } finally {
     await page.close();

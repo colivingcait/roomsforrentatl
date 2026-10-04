@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import type { House, ColivingHouse } from "@/lib/types";
 import HouseCard from "./HouseCard";
 import { ColivingHouseCard } from "./ColivingSection";
+import { submarketLabel } from "@/lib/format";
 
 // Leaflet touches `window`, so load the map client-side only.
 const HousesMap = dynamic(() => import("./HousesMap"), {
@@ -31,13 +32,13 @@ export default function HouseList({
   const cities = useMemo(
     () =>
       Array.from(
-        new Set([...houses.map((h) => h.city), ...colivingHouses.map((h) => h.city)])
+        new Set([...houses.map((h) => submarketLabel(h)), ...colivingHouses.map((h) => h.city)])
       ).sort(),
     [houses, colivingHouses]
   );
 
   const shown = useMemo(
-    () => houses.filter((h) => city === "all" || h.city === city),
+    () => houses.filter((h) => city === "all" || submarketLabel(h) === city),
     [houses, city]
   );
 

@@ -1,6 +1,6 @@
 import type { House } from "./types";
 import { availableRooms } from "./houses";
-import { roomTitle, moveInLabel } from "./format";
+import { roomTitle, moveInLabel, listingPlace } from "./format";
 
 const APPLICATION_FEE = 19;
 
@@ -31,7 +31,7 @@ export function buildRoomListings(houses: House[]): RoomListing[] {
   const out: RoomListing[] = [];
   for (const h of houses) {
     if (!h.available) continue;
-    const area = [h.neighborhood, h.city].filter(Boolean).join(", ");
+    const area = listingPlace(h);
     const walkToBus = /walk/i.test(h.transit ?? "");
     for (const r of availableRooms(h)) {
       out.push({

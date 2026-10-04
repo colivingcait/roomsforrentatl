@@ -20,6 +20,7 @@ export default function FaqButton({
     <>
       <button
         type="button"
+        data-attr={startTab === "chat" ? "open-chat" : "open-faq"}
         onClick={() => {
           setOpen(true);
           if (startTab === "chat") trackEvent("chat_opened", { trigger: "button" });

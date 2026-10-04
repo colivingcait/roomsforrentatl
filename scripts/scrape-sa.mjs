@@ -8,6 +8,7 @@
  * keeps its last-known row instead of being blanked.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
+import { publicPhoto, sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
 const SEARCH_CODE = "935a685108fc43c";
@@ -69,10 +70,6 @@ const NICKNAMES = [
 const STREET_TYPE =
   /\b(st|street|ave|avenue|dr|drive|rd|road|ln|lane|blvd|boulevard|ct|court|cir|circle|pl|place|pkwy|parkway|trl|trail|ter|terrace|hwy|highway)\b/i;
 
-/** Drop PadSplit category `other`, and common-space shots that read as outside. */
-const EXTERIOR_DESC =
-  /outside|\byard\b|patio|porch|\bstreet\b|facade|façade|\bmap\b|\blogo\b|marketing|exterior|frontage/i;
-
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function nicknameFor(id) {
@@ -109,28 +106,12 @@ function publicPlace(neighborhood, city) {
   };
 }
 
-function publicPhotoDescription(desc) {
-  if (typeof desc !== "string") return null;
-  const text = desc.trim();
-  if (!text || text.length > 80) return null;
-  if (/\d/.test(text) || STREET_TYPE.test(text)) return null;
-  return text;
-}
-
 function publicRoomName(name) {
   if (typeof name !== "string") return null;
   const text = name.trim();
   if (!text || text.length > 80) return null;
   if (STREET_TYPE.test(text) || /\d{2,}/.test(text)) return null;
   return text;
-}
-
-function photoDropped(category, description) {
-  const cat = (category || "").toLowerCase();
-  if (cat === "other") return true;
-  if (cat === "common_space" && EXTERIOR_DESC.test(description || "")) return true;
-  if (/exterior|frontage|outside/.test(cat)) return true;
-  return false;
 }
 
 async function fetchHostIds() {
@@ -256,18 +237,9 @@ export async function readListing(page) {
 
 export function toPhoto(raw) {
   if (!raw?.url || !/^https:\/\//.test(raw.url)) return null;
-  if (photoDropped(raw.category, raw.description)) return { dropped: true };
-  return {
-    dropped: false,
-    photo: {
-      url: raw.url,
-      category: raw.category || "other",
-      description: publicPhotoDescription(raw.description),
-      primary: !!raw.primary,
-      width: raw.width ?? null,
-      height: raw.height ?? null,
-    },
-  };
+  const photo = publicPhoto(raw);
+  if (!photo) return { dropped: true };
+  return { dropped: false, photo };
 }
 
 export function mapRoom(raw) {
@@ -459,7 +431,7 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         Infinity
       );
       const lead =
-        commonAreas.find((p) => /kitchen|dining/i.test(`${p.description || ""} ${p.category}`))?.url ||
+        commonAreas.find((p) => /kitchen|dining/i.test(`${p.label || ""} ${p.category}`))?.url ||
         rooms.find((r) => r.image)?.image ||
         commonAreas[0]?.url ||
         "";
@@ -492,9 +464,11 @@ export async function scrapeSanAntonio({ chromium, UA, CHALLENGE, ART }) {
         url: padsplitUrl,
         exteriorPhotosDropped: dropped,
       };
-      assertNoSecrets({ seed, row }, listing.secrets);
+      const { house } = sanitizeLiveHouse(row, seed.neighborhood);
+      house.exteriorPhotosDropped = dropped;
+      assertNoSecrets({ seed, row: house }, listing.secrets);
       houses.push(seed);
-      live[id] = row;
+      live[id] = house;
       okCount += 1;
       console.log(
         `✓ ${id} ${seed.name} (${place.neighborhood || place.city}): ${rooms.length} rooms, ${commonAreas.length + rooms.reduce((n, r) => n + r.photos.length, 0)} photos, dropped ${dropped} exterior`

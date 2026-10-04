@@ -35,7 +35,7 @@ export default function Footer({ clearance = false }: { clearance?: boolean }) {
         {rooms && site.phone && (
           <p className="mt-3">
             Questions? Call{" "}
-            <a href={phoneTelHref()} className="font-semibold text-brand underline">
+            <a href={phoneTelHref()} data-attr="call" className="font-semibold text-brand underline">
               {site.phone}
             </a>{" "}
             <span className="text-[12.5px] text-slate-400">(calls only, no texts)</span>

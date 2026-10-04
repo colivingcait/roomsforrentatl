@@ -1,12 +1,12 @@
+import { notFound } from "next/navigation";
 import RoomsHome from "@/components/RoomsHome";
-import RentalsView from "@/components/RentalsView";
 import { getBrand } from "@/lib/brand";
 
 // Refreshed by the scraper; revalidate hourly as a backstop.
 export const revalidate = 3600;
 
-// One codebase, two brands: the homes domain serves the whole-apartment view,
-// the rooms domain serves the co-living homepage.
+// The homes brand was the long-term rental catalog. Those pages are unpublished.
 export default function HomePage() {
-  return getBrand().key === "homes" ? <RentalsView /> : <RoomsHome />;
+  if (getBrand().key === "homes") notFound();
+  return <RoomsHome />;
 }

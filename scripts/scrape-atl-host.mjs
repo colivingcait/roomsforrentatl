@@ -6,11 +6,12 @@
  *   GET /api/property_search/?search_code=935a685108fc43c&city_slug=atlanta-ga&page_size=50
  * paginated. That search center also returns Decatur and Stone Mountain.
  * A row is kept only when address.city_slug is an Atlanta-metro Georgia slug.
- * The referral code on that page link is ignored. Curated houses (Mora,
- * Candace, Raven, Meadow, Chestnut, Willow) are never rewritten.
+ * The referral code on that page link is ignored. Curated houses are never
+ * rewritten. Meadow stays removed and is skipped if the search returns it.
  * About 4 seconds between requests. A failed house keeps its last-known row.
  */
 import { readFileSync, writeFileSync, existsSync } from "fs";
+import { sanitizeLiveHouse } from "../lib/listing-privacy.mjs";
 import { assertNoSecrets, mapRoom, readListing, snap, toPhoto } from "./scrape-sa.mjs";
 
 const SEARCH = "https://api.padsplit.com/api/property_search/";
@@ -308,7 +309,7 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         Infinity
       );
       const lead =
-        commonAreas.find((p) => /kitchen|dining/i.test(`${p.description || ""} ${p.category}`))?.url ||
+        commonAreas.find((p) => /kitchen|dining/i.test(`${p.label || ""} ${p.category}`))?.url ||
         rooms.find((r) => r.image)?.image ||
         commonAreas[0]?.url ||
         "";
@@ -342,9 +343,11 @@ export async function scrapeAtlantaHost({ chromium, UA, CHALLENGE, ART }) {
         url: padsplitUrl,
         exteriorPhotosDropped: dropped,
       };
-      assertNoSecrets({ seed, row }, listing.secrets);
+      const { house } = sanitizeLiveHouse(row, "");
+      house.exteriorPhotosDropped = dropped;
+      assertNoSecrets({ seed, row: house }, listing.secrets);
       seeds.push(seed);
-      live[id] = row;
+      live[id] = house;
       okCount += 1;
       const photoCount = commonAreas.length + rooms.reduce((n, r) => n + (r.photos?.length || 0), 0);
       console.log(

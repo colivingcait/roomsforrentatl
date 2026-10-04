@@ -1,10 +1,13 @@
 import type { House, Room, Photo, PriceUnit, BathroomType } from "./types";
 import { getMarket } from "./market";
+import { isStreetishPlace } from "./listing-privacy.mjs";
 
-/** A clean space label (Kitchen, Bathroom, Living room…) from PadSplit's photo data. */
-export function photoLabel(p: Pick<Photo, "description" | "category">): string {
-  const desc = (p.description || "").trim();
-  const text = `${desc} ${p.category}`.toLowerCase();
+export { isStreetishPlace };
+
+/** A clean space label (Kitchen, Bathroom, Living room…) from the public photo label. */
+export function photoLabel(p: Pick<Photo, "label" | "category">): string {
+  if (p.label && p.label.trim()) return p.label.trim();
+  const text = (p.category || "").toLowerCase();
   const map: [RegExp, string][] = [
     [/kitchen/, "Kitchen"],
     [/bath|shower|restroom/, "Bathroom"],
@@ -12,43 +15,24 @@ export function photoLabel(p: Pick<Photo, "description" | "category">): string {
     [/living|family\s*room/, "Living room"],
     [/\bden\b/, "Den"],
     [/laundry|washer|dryer/, "Laundry"],
-    [/patio|deck/, "Patio"],
-    [/backyard|\byard\b|garden/, "Backyard"],
     [/storage|closet|pantry/, "Storage"],
-    [/garage/, "Garage"],
     [/bed\s*room/, "Bedroom"],
-    [/exterior|front|street|outside|neighborhood/, "Exterior"],
   ];
   for (const [re, label] of map) if (re.test(text)) return label;
-  // A short, clean PadSplit description (no "detected:" noise) — use it as-is.
-  if (desc && !/detected:/i.test(desc) && desc.length <= 28) {
-    return desc.charAt(0).toUpperCase() + desc.slice(1);
-  }
   return "Common area";
 }
 import { availableRooms } from "./houses";
 
-/** Street-type tokens (CT, St, Ave, …) that must never appear as a public place name. */
-const STREET_TYPE =
-  /\b(st|street|ave|avenue|dr|drive|rd|road|ln|lane|blvd|boulevard|ct|court|cir|circle|pl|place|pkwy|parkway|trl|trail|ter|terrace|hwy|highway)\b/i;
-
-export function isStreetishPlace(value: string | null | undefined): boolean {
-  return !!value && STREET_TYPE.test(value);
-}
-
-/** A neighborhood or city that can be shown. San Antonio also rejects digits. */
+/** A neighborhood or city that can be shown. Streets and digits are rejected. */
 export function isPublicPlaceName(value: string | null | undefined): boolean {
   const text = (value ?? "").trim();
-  if (!text || isStreetishPlace(text)) return false;
-  if (process.env.NEXT_PUBLIC_MARKET === "sa" && /\d/.test(text)) return false;
-  return true;
+  return !!text && !isStreetishPlace(text);
 }
 
 /**
- * Public submarket for a home: the city, never a street.
- * Baker Hills / Adamsville / Willow use the market's west label.
- * San Antonio uses the neighborhood when it is not a street and has no digits,
- * then the city, then the metro name.
+ * The one public area label for a home. A street-like name is dropped.
+ * Neighborhood wins over city so the two are not stacked. Baker Hills,
+ * Adamsville, and Willow use the market's west label.
  */
 export function submarketLabel(house: {
   id?: string;
@@ -71,35 +55,18 @@ export function submarketLabel(house: {
   if (house.id === market.shortHouses?.willow || /baker hills/i.test(hood) || /^adamsville$/i.test(hood)) {
     return market.westLabel ?? market.metro;
   }
-  if (city && !isStreetishPlace(city)) return city;
   if (hood && !isStreetishPlace(hood)) return hood;
+  if (city && !isStreetishPlace(city)) return city;
   return market.metro;
 }
 
-/** Neighborhood + submarket for a listing, with street-type names removed. */
+/** Same single area label as submarketLabel. City is not joined on. */
 export function listingPlace(house: {
   id?: string;
   neighborhood?: string | null;
   city?: string | null;
 }): string {
-  const sub = submarketLabel(house);
-  const hood = (house.neighborhood ?? "").trim();
-  const market = getMarket();
-  if (market.id === "sa") {
-    const city = (house.city ?? "").replace(/,?\s*tx$/i, "").trim();
-    if (
-      isPublicPlaceName(hood) &&
-      isPublicPlaceName(city) &&
-      hood.toLowerCase() !== city.toLowerCase() &&
-      !hood.toLowerCase().includes(city.toLowerCase())
-    ) {
-      return `${hood}, ${city}`;
-    }
-    return sub;
-  }
-  if (!hood || isStreetishPlace(hood) || (market.id !== "dfw" && market.westLabel != null && sub === market.westLabel)) return sub;
-  if (hood.toLowerCase().includes(sub.toLowerCase())) return hood;
-  return [hood, sub].filter(Boolean).join(", ");
+  return submarketLabel(house);
 }
 
 export function priceLabel(price: number, unit: PriceUnit = "week"): string {
@@ -159,9 +126,9 @@ export function roomTitle(room: Room): string {
   return "Room";
 }
 
-/** Optional extra description (kept separate from the name to avoid repetition). */
-export function roomTagline(room: Room): string | null {
-  return room.description && room.description.trim() ? room.description.trim() : null;
+/** PadSplit room descriptions are never stored or shown. */
+export function roomTagline(_room: Room): string | null {
+  return null;
 }
 
 /**

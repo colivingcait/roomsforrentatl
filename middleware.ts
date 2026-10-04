@@ -20,7 +20,6 @@ const SHORT_LINKS = new Set([
   "mora",
   "candace",
   "raven",
-  "meadow",
   "chestnut",
 ]);
 

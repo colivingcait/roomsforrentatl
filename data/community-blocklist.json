@@ -1,0 +1,4 @@
+{
+  "_README": "Named communities and subdivisions that must never appear in listing copy, page data, or built pages. Matching is case-insensitive and whole-word. Add a name here to extend the leak scan; this file is not itself scanned.",
+  "names": ["Norris"]
+}

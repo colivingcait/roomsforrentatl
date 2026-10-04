@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import type { House, ColivingHouse } from "@/lib/types";
-import { fromPriceLabel, availabilityLabel, priceLabel } from "@/lib/format";
+import { fromPriceLabel, availabilityLabel, priceLabel, listingPlace } from "@/lib/format";
 import { availableColivingRooms, colivingFromPrice } from "@/lib/coliving";
 
 /**
@@ -57,7 +57,7 @@ export default function HousesMap({
           .bindPopup(
             `<div style="min-width:160px">
                <strong>${escapeHtml(h.name)}</strong><br/>
-               <span style="color:#64748B">${escapeHtml(h.city)}</span><br/>
+               <span style="color:#64748B">${escapeHtml(listingPlace(h))}</span><br/>
                ${h.available ? availabilityLabel(h) : "Fully booked"} · ${fromPriceLabel(h)}<br/>
                <a href="/house/${h.id}" style="color:#0E7C66;font-weight:600">View home →</a>
              </div>`
