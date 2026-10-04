@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { assertAtlProject, resolveMarketId, ATL_PROJECT_ID } from "../lib/market-env.js";
+import { resolveMarketId } from "../lib/market-env.js";
+import { assertAtlProject, ATL_PROJECT_ID } from "../scripts/assert-atl-project.cjs";
 
 function withEnv(values, fn) {
   const previous = new Map();

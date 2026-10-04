@@ -1,5 +1,6 @@
 const path = require("path");
-const { assertAtlProject, resolveMarketId } = require("./lib/market-env");
+const { resolveMarketId } = require("./lib/market-env");
+const { assertAtlProject } = require("./scripts/assert-atl-project.cjs");
 const { writeFavicon } = require("./scripts/write-favicon.cjs");
 
 // One build serves one market. Swap Atlanta modules so the other market's

@@ -9,6 +9,8 @@ on:
       - "components/**"
       - "data/**"
       - "scripts/check-sa-isolation.mjs"
+      - "scripts/assert-atl-project.cjs"
+      - "scripts/market-env.test.mjs"
       - "next.config.js"
       - "middleware.ts"
       - ".github/workflows/check-sa-build.yml"
