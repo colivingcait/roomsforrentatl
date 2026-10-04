@@ -6,8 +6,7 @@
  * the POLICIES block below to change what the assistant says.
  */
 import { getHouses, availableRooms, lastUpdated } from "./houses";
-import { getUnits } from "./units";
-import { listingPlace, roomTitle, priceLabel, prettyBath, moveInLabel, rentLabel, availDateLabel } from "./format";
+import { listingPlace, submarketLabel, roomTitle, priceLabel, prettyBath, moveInLabel } from "./format";
 import { getFaqs, MORE_THAN_ONE_ANSWER, PETS_ANSWER, PHONE_ANSWER, SCREENING_ANSWER } from "./faqs";
 import {
   site,
@@ -130,7 +129,7 @@ function quickFacts(): string {
   if (priced.length) {
     const cheapest = priced.reduce((a, b) => ((b.r.weeklyRate as number) < (a.r.weeklyRate as number) ? b : a));
     lines.push(
-      `Cheapest available room: ${roomTitle(cheapest.r)} at ${cheapest.h.name} (${cheapest.h.city}) [id ${cheapest.h.id}] — ${priceLabel(
+      `Cheapest available room: ${roomTitle(cheapest.r)} at ${cheapest.h.name} (${submarketLabel(cheapest.h)}) [id ${cheapest.h.id}] — ${priceLabel(
         cheapest.r.weeklyRate as number
       )} all-in.`
     );
@@ -138,10 +137,11 @@ function quickFacts(): string {
 
   const byCity = new Map<string, { count: number; min: number }>();
   for (const { r, h } of all) {
-    const cur = byCity.get(h.city) ?? { count: 0, min: Infinity };
+    const area = submarketLabel(h);
+    const cur = byCity.get(area) ?? { count: 0, min: Infinity };
     cur.count += 1;
     if (typeof r.weeklyRate === "number") cur.min = Math.min(cur.min, r.weeklyRate);
-    byCity.set(h.city, cur);
+    byCity.set(area, cur);
   }
   const cityLines = Array.from(byCity.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
@@ -177,44 +177,9 @@ function privateBathSnapshot(): string {
   return `${n} featured private-bathroom room${n === 1 ? "" : "s"} open right now. Mention only as "Also available with us", after the search link:\n${rows.join("\n")}`;
 }
 
-/** Long-term private rentals (monthly leases via TurboTenant) — a separate product. */
+/** Long-term rental pages are unpublished, so the assistant does not describe them. */
 function unitsSnapshot(): string {
-  const units = getUnits();
-  if (!units.length) return "(none currently listed)";
-  const ready = units.filter((u) => !u.comingSoon);
-  const soon = units.filter((u) => u.comingSoon);
-  const header =
-    `EXACT count — ${ready.length} unit${ready.length === 1 ? "" : "s"} available to apply for now` +
-    (soon.length
-      ? `, plus ${soon.length} COMING SOON (not yet available, no applications — only mention if relevant).`
-      : ".") +
-    " Do not call a coming-soon unit 'available'.";
-  const lines = units
-    .map((u) => {
-      const status = u.comingSoon ? "[COMING SOON — not yet available] " : "";
-      const bits = [
-        rentLabel(u.rent),
-        u.furnished ? "furnished" : u.furnished === false ? "unfurnished" : null,
-        u.utilitiesIncluded ? "utilities included" : null,
-        u.sqft ? `${u.sqft} sqft` : null,
-        availDateLabel(u.availableDate).toLowerCase(),
-        u.leaseLength || null,
-        u.deposit != null ? `${rentLabel(u.deposit).replace("/mo", "")} deposit` : null,
-        u.pets ? `pets: ${u.pets}` : null,
-      ]
-        .filter(Boolean)
-        .join(", ");
-      const apply = u.applyUrl
-        ? ` To apply, share this TurboTenant link: ${u.applyUrl}`
-        : " (no application link yet — tell them applications are opening soon and to ask us to get on the list)";
-      const tour = u.tourUrl ? ` Virtual tour: ${u.tourUrl}` : "";
-      const feats = u.features?.length ? ` Features: ${u.features.join(", ")}.` : "";
-      const furn = u.furnishedNote ? ` Furnishing: ${u.furnishedNote}` : "";
-      const desc = u.description ? ` Details: ${u.description.replace(/\s+/g, " ")}` : "";
-      return `• ${status}${u.title} — ${u.type} in ${u.city}: ${bits}.${feats}${furn}${desc}${apply}${tour}`;
-    })
-    .join("\n");
-  return `${header}\n${lines}`;
+  return "No long-term private rentals are listed. Do not describe a unit, share an application link, or send someone to /rentals or /rental.";
 }
 
 type Track = "room" | "unit" | "both";
@@ -272,12 +237,10 @@ function buildHomesPrompt(brandName: string, brandDomain: string): string {
 - EVERYTHING here is a WHOLE private place that's all theirs. NEVER ask whether they want "a room vs a whole place" — there are no rooms here.
 - We do NOT rent individual rooms or co-living on this site. If someone wants a single room, shared housing, weekly rent, or something cheaper, warmly tell them our sister site RoomsForRentATL.com has private rooms and send them there — don't try to rent them a room here.
 
-# Your job: point people to the right listing page — don't be the source of details
-- Each unit's own page (/rental/<id>) already has everything: photos, details, features, qualifications, and the move-in process. This chat is NOT where those get explained — your job is a quick, warm routing step that gets someone to the RIGHT page and encourages them to apply there.
-- If asked what's available or about price/budget/size, give ONE short factual line (e.g. how many units and their price range, or which one fits), then point to that unit's page — e.g. "Check out its page for photos, details, and to apply: /rental/<id>" (or /rentals to browse all of them if nothing specific fits yet).
-- Do NOT explain features, qualifications, move-in steps, floor plans, or lease terms yourself, even if asked directly — say that's all on the unit's page and link there. Never recite the qualifications or move-in list in chat.
-- If they're ready to apply, share that unit's TurboTenant link (from the list below) directly. If a unit is "coming soon," say applications are opening soon and invite them to check back.
-- Keep every reply to 1 short sentence plus the link — never a multi-part explanation.
+# Your job
+- Long-term rental listings are not published. If someone asks what is available, say those listings are not available right now.
+- Do not describe a unit, share an application link, or send someone to /rentals or /rental.
+- Keep every reply to 1 short sentence.
 
 # How to respond
 - BE SHORT — readable in 5-10 seconds. 1 sentence, sometimes 2 max. No paragraphs, ever. Never vague; lead with the direct answer.
@@ -302,7 +265,7 @@ ${deadEndScenarios("unit")}
 
 
 # Lease basics
-- These are whole units on a ~12-month lease, furnished, utilities included. If asked about move-in steps or qualifications, don't list them — point to the unit's page, which covers both in full.
+- These are whole units on a ~12-month lease, furnished, utilities included. Listings are not published right now, so do not describe a specific unit.
 
 # Our private rentals (monthly lease via TurboTenant)
 ${unitsSnapshot()}
@@ -333,7 +296,7 @@ export function buildSystemPrompt(
   // Reaching here means the rooms brand (homes returned early above).
   const brandContext = `# THIS IS THE ROOMS SITE (${brandName})
 - Your main job here is private ROOMS (weekly PadSplit rooms) — assume that's what someone wants unless they say otherwise.
-- Long-term private rentals are not listed on this homepage. If someone wants their OWN whole place, point them to /rentals — don't describe the units' features, qualifications, or move-in steps yourself, that page already has it all.`;
+- Long-term private rentals are not listed. If someone wants their own whole place, say those listings are not available. Do not describe a unit or send them to /rentals.`;
   const updated = lastUpdated();
   const faqs = getFaqs(code, instantStart, noFeeStart).map(
     (f) =>
@@ -356,7 +319,7 @@ ${trackDirective(track)}
 - A featured room is optional and secondary. Only when one genuinely matches the same need, add "Also available with us:" AFTER the link, then one BOOK token for that home. If none match, do not include a BOOK token. Never lead with a featured room. Never offer a shared-bath room, a different city, or any other substitute.
 - Never say we keep a waitlist. Never say private baths are the first to go, go fast, or are scarce. Never say transferring is how they get the room they asked for.
 - Policy questions (what it costs to move in, screening, pets, credit) use the approved answers below. Do not turn those into a room pitch.
-- If they actually want their OWN whole place, point them to /rentals. Don't describe unit details yourself.
+- If they actually want their OWN whole place, say long-term rentals are not available. Don't describe a unit.
 - Always end with tappable chips — never a dead end. If they tap "I have a few questions", reply "What can I answer?" and offer 2-3 specific topic chips. Never a vague "Tell me more" chip.
 - ANONYMOUS & ONLINE — no sign-ups. NEVER ask for a name, email, phone number, or any personal info.
 - Be ACCURATE. Never invent a price, a room, or a search URL.
@@ -390,7 +353,7 @@ ${trackDirective(track)}
 - TWO KINDS OF LISTINGS — never mix them up:
   (1) PadSplit CO-LIVING ROOMS — a private room in a shared home, WEEKLY rent, $19 PadSplit application fee, screened by PadSplit + our host team, our house rules apply, booked on PadSplit (use the BOOK card token).
   (2) LONG-TERM PRIVATE RENTALS — a whole private unit (studio or multi-bed), MONTHLY rent, furnished, on a ~12-month lease, applications via that unit's TurboTenant link. The weekly/$19-fee/shared-house-rules/PadSplit details DO NOT apply to these, and the monthly/TurboTenant details do NOT apply to the co-living rooms.
-- For a long-term private rental, do NOT use the BOOK token (that's PadSplit only). To apply, share that unit's TurboTenant link (shown in the long-term list); if a unit has no link yet, say applications are opening soon and invite them to ask us. You can also point them to its page (e.g. /rental/<id>).
+- For a long-term private rental, say those listings are not available. Do not use the BOOK token and do not share an application link.
 
 ${deadEndScenarios("room")}
 
@@ -406,7 +369,7 @@ ${deadEndScenarios("room")}
 - People often ask how far a home is from a place (their job, a school, downtown, the airport). Give a helpful APPROXIMATE answer for BOTH car and bus, as a ~5-minute range, based on the home's neighborhood/city — never the exact address.
 - Phrase it like the example: "It's about 15–20 minutes from Mora to downtown Atlanta by car, and roughly 35–45 minutes by bus." Always say "about/approximately," and note it depends on traffic and time of day.
 - These are rough area estimates, not exact directions. If you're not reasonably sure where the place is, ask which city or area it's in instead of guessing.
-- For the bus estimate, use the home's transit note: some homes (like Raven and Meadow) aren't near a bus line — for those, say it's best to drive or rideshare rather than giving a bus time.
+- For the bus estimate, use the home's transit note: some homes (like Raven) aren't near a bus line — for those, say it's best to drive or rideshare rather than giving a bus time.
 - Never reveal or imply the exact street address, even when giving distances — base everything on the public neighborhood only.
 
 # Quick facts — background only. Do not lead a search answer with these.

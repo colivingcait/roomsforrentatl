@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import TrackedOutboundLink from "@/components/TrackedOutboundLink";
 import { getRoom, getAllRoomParams } from "@/lib/houses";
-import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights } from "@/lib/format";
+import { dropPhoto } from "@/lib/listing-privacy.mjs";
+import { priceLabel, prettyBath, prettyBed, roomTitle, roomTagline, moveInLabel, roomHighlights, listingPlace } from "@/lib/format";
 import { site, bookingUrl } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -26,8 +27,13 @@ export async function generateMetadata({
     title: `${roomTitle(room)} — ${house.name}`,
     description: `${prettyBath(room.bathroomType)}${
       room.weeklyRate ? `, ${priceLabel(room.weeklyRate)} all-in` : ""
-    } in ${house.city}. ${moveInLabel(room.moveInDate)}.`,
-    openGraph: { images: room.image && room.image.startsWith("http") ? [room.image] : [] },
+    } in ${listingPlace(house)}. ${moveInLabel(room.moveInDate)}.`,
+    openGraph: {
+      images:
+        room.image && room.image.startsWith("http") && !dropPhoto({ url: room.image, category: "bedroom" })
+          ? [room.image]
+          : [],
+    },
   };
 }
 
@@ -36,7 +42,9 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
   if (!data) notFound();
   const { house, room } = data;
 
-  const photos = room.photos.length ? room.photos : room.image ? [room.image] : [house.image];
+  const rawPhotos = room.photos.length ? room.photos : room.image ? [room.image] : [house.image];
+  const photos = rawPhotos.filter((url) => !dropPhoto({ url, category: "bedroom" }));
+  const gallery = photos.length ? photos : [house.image];
   const tagline = roomTagline(room);
 
   const features: { label: string; value: string }[] = [];
@@ -55,7 +63,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
 
       {/* Photo gallery */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100 sm:mx-auto sm:mt-4 sm:max-w-3xl sm:aspect-[16/9] sm:rounded-2xl">
-        <Image src={photos[0]} alt={roomTitle(room)} fill priority sizes="100vw" className="object-cover" />
+        <Image src={gallery[0]} alt={roomTitle(room)} fill priority sizes="100vw" className="object-cover" />
         <Link
           href={`/house/${house.id}`}
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-2 text-sm font-bold text-ink shadow active:scale-95"
@@ -63,9 +71,9 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
           ← See more rooms
         </Link>
       </div>
-      {photos.length > 1 && (
+      {gallery.length > 1 && (
         <div className="flex gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {photos.slice(1, 6).map((p, i) => (
+          {gallery.slice(1, 6).map((p, i) => (
             <div key={i} className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg bg-slate-100">
               <Image src={p} alt={`${roomTitle(room)} photo ${i + 2}`} fill sizes="120px" className="object-cover" />
             </div>
@@ -79,7 +87,7 @@ export default function RoomPage({ params }: { params: { id: string; roomId: str
             <p className="text-sm font-semibold text-brand">{house.name}</p>
             <h1 className="text-2xl font-extrabold leading-tight text-ink">{roomTitle(room)}</h1>
             <p className="mt-1 text-muted">
-              {house.city}
+              {listingPlace(house)}
             </p>
           </div>
           <div className="shrink-0 text-right">

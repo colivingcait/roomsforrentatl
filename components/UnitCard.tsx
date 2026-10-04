@@ -22,7 +22,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
         </div>
         <div className="flex items-center justify-between gap-3 p-4">
           <div>
-            <h3 className="font-semibold leading-tight text-ink">{unit.title}</h3>
+            <h3 className="font-semibold leading-tight text-ink">{unit.name}</h3>
             <p className="mt-0.5 text-sm text-muted">
               {unit.type} · {unit.city}
             </p>
@@ -44,7 +44,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
         {photos.length > 0 ? (
           <PhotoStrip
             images={photos}
-            alt={`Furnished apartment for rent in ${unit.city}, Atlanta — ${unit.title}`}
+            alt={`Furnished apartment for rent in ${unit.city}, Atlanta — ${unit.name}`}
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         ) : (
@@ -71,7 +71,7 @@ export default function UnitCard({ unit }: { unit: Unit }) {
       <div className="p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-semibold leading-tight text-ink">{unit.title}</h3>
+            <h3 className="font-semibold leading-tight text-ink">{unit.name}</h3>
             <p className="mt-0.5 text-sm text-muted">
               {unit.type} · {unit.city}
             </p>

@@ -47,7 +47,7 @@ export default function ColivingHousePage({ params }: { params: { id: string } }
         </h1>
         {loc && <p className="mt-1 text-muted">{loc}</p>}
 
-        {house.description && <p className="mt-3 text-[15px] leading-relaxed text-ink/80">{house.description}</p>}
+        {house.summary && <p className="mt-3 text-[15px] leading-relaxed text-ink/80">{house.summary}</p>}
 
         <div className="mt-3 flex flex-wrap gap-1.5">
           {house.furnished && <span className="chip">Furnished</span>}
