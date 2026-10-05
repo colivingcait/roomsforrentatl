@@ -98,6 +98,22 @@
       "totalBaths": 2
     },
     {
+      "id": "19902",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/19902",
+      "name": "Alamo",
+      "neighborhood": "",
+      "city": "San Antonio",
+      "image": "https://www.padsplit.com/img/psproperty/19902/60b8787e-477e-49fa-9e56-c5ab4f944d15_improved.jpg",
+      "lat": 29.42,
+      "lng": -98.47,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 3.5
+    },
+    {
       "id": "23243",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/23243",
       "name": "Cypress",

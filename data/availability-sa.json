@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T01:39:48.187Z",
+  "updatedAt": "2026-10-05T19:40:36.177Z",
   "exteriorPhotosDropped": 0,
   "houses": {
     "10761": {
@@ -221,7 +221,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/10761/img_f9fbbe03-ab2c-4b84-ae57-91493b5097c0.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/10761",
@@ -349,7 +349,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11202",
@@ -509,7 +509,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11842/img_458c0268-012a-4921-9ae8-ba9c3a51edd4.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11842",
@@ -633,7 +633,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/13051/img_a5ddbac9-35b9-45c0-8889-b5c69586317d.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13051",
@@ -765,10 +765,123 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/18970/img_68432b4e-9b63-447b-94a2-da5c9e9f20ea.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/18970",
+      "exteriorPhotosDropped": 0
+    },
+    "19902": {
+      "rooms": [],
+      "commonAreas": [
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/60b8787e-477e-49fa-9e56-c5ab4f944d15_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/7947c6b0-13be-4bba-94a5-60e3ba8bf4cf_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/5502fbd8-8d73-469b-a598-f2243fc22fec_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/67f1f801-591a-4da1-86f3-43189e582ef7_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/2edba78d-cb33-4ed8-b20f-31a328ac49ae_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/2923ec6c-328d-43a4-8ffb-b6098d98674a_improved.jpg",
+          "category": "common_space",
+          "label": "Kitchen",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/bathrooms/img_aa8b911b-6baa-407c-bdd3-d84658ceab9a.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/bathrooms/img_0208d19d-96a4-4112-912f-bfaf96d269d9.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/bathrooms/img_b1633f83-fed0-43db-94a0-15d6f922bc1e.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/bathrooms/img_9f7c5ff2-4b82-41a0-8192-8fe799830f76.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/bathrooms/img_3be19179-17d8-4db2-9bce-3ce7b7f0e663.jpg",
+          "category": "bathroom",
+          "label": "Bathroom",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/7673c65c-67de-40f2-bffe-c0dc8e464215_improved.jpg",
+          "category": "common_space",
+          "label": "Living room",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/4f7a10f9-a3a6-46fa-993b-efe15c5c8840_improved.jpg",
+          "category": "common_space",
+          "label": "Living room",
+          "width": 1920,
+          "height": 1280
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/19902/4775cd0c-bba4-4c4c-b93e-fd688617225d_improved.jpg",
+          "category": "common_space",
+          "label": "Living room",
+          "width": 1920,
+          "height": 1280
+        }
+      ],
+      "carousel": [],
+      "roomsAvailable": 0,
+      "fromPrice": null,
+      "priceUnit": "week",
+      "available": false,
+      "rating": null,
+      "checkedAt": "2026-10-05T19:40:36.177Z",
+      "image": "https://www.padsplit.com/img/psproperty/19902/60b8787e-477e-49fa-9e56-c5ab4f944d15_improved.jpg",
+      "url": "https://www.padsplit.com/rooms-for-rent/listing/19902",
       "exteriorPhotosDropped": 0
     },
     "23243": {
@@ -873,7 +986,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/23243/ce04ce4b-55f2-44e1-acae-7c690a6d8cad.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/23243",
@@ -1008,7 +1121,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/28119",
@@ -1081,7 +1194,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-05T01:39:48.187Z",
+      "checkedAt": "2026-10-05T19:40:36.177Z",
       "neighborhood": "Lone Star",
       "image": "https://www.padsplit.com/img/psproperty/33710/ec0c6dae-9b92-4375-b50b-edcff67616d7.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/33710",
