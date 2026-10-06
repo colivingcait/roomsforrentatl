@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T02:45:50.797Z",
+  "updatedAt": "2026-10-06T17:12:00.141Z",
   "exteriorPhotosDropped": 0,
   "houses": {
     "10761": {
@@ -221,14 +221,45 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/10761/img_f9fbbe03-ab2c-4b84-ae57-91493b5097c0.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/10761",
       "exteriorPhotosDropped": 0
     },
     "11202": {
-      "rooms": [],
+      "rooms": [
+        {
+          "id": 38701,
+          "padIndex": 1,
+          "pagePosition": 1,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 8,
+          "weeklyRate": 226,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": false,
+          "recommendedPrice": 220,
+          "bathroomType": "private",
+          "bedSize": "queen",
+          "roomSize": "large",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": null,
+          "windows": null,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-07",
+          "image": "https://www.padsplit.com/img/psproperty/11202/img_5c9053e1-59d5-4712-9e14-871929a81113.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/11202/img_5c9053e1-59d5-4712-9e14-871929a81113.jpg",
+            "https://www.padsplit.com/img/psproperty/11202/img_5df235dc-ff7d-4607-aff9-f39c4249f8b0.jpg"
+          ],
+          "available": true
+        }
+      ],
       "commonAreas": [
         {
           "url": "https://www.padsplit.com/img/psproperty/11202/94b63309-5699-4a10-893d-4887a695f6e4.jpg",
@@ -344,12 +375,12 @@
         }
       ],
       "carousel": [],
-      "roomsAvailable": 0,
-      "fromPrice": null,
+      "roomsAvailable": 1,
+      "fromPrice": 226,
       "priceUnit": "week",
-      "available": false,
+      "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11202",
@@ -509,7 +540,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/11842/img_458c0268-012a-4921-9ae8-ba9c3a51edd4.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11842",
@@ -633,7 +664,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/13051/img_a5ddbac9-35b9-45c0-8889-b5c69586317d.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13051",
@@ -765,7 +796,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/18970/img_68432b4e-9b63-447b-94a2-da5c9e9f20ea.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/18970",
@@ -879,7 +910,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "image": "https://www.padsplit.com/img/psproperty/19902/60b8787e-477e-49fa-9e56-c5ab4f944d15_improved.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/19902",
       "exteriorPhotosDropped": 0
@@ -986,7 +1017,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Valencia",
       "image": "https://www.padsplit.com/img/psproperty/23243/ce04ce4b-55f2-44e1-acae-7c690a6d8cad.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/23243",
@@ -1024,6 +1055,37 @@
           "photos": [
             "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
             "https://www.padsplit.com/img/psproperty/28119/img_17ddeff5-d49b-41d1-a585-f56740070c35.jpg"
+          ],
+          "available": true
+        },
+        {
+          "id": 87970,
+          "padIndex": 2,
+          "pagePosition": 2,
+          "applyIndex": null,
+          "name": null,
+          "roomNumber": 1,
+          "weeklyRate": 168,
+          "originalWeeklyRate": null,
+          "promo": null,
+          "noMoveInFee": false,
+          "recommendedPrice": 175,
+          "bathroomType": "shared",
+          "bedSize": "queen",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-08",
+          "image": "https://www.padsplit.com/img/psproperty/28119/img_de97ed69-975f-49dd-8d40-73152c1983db.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/28119/img_de97ed69-975f-49dd-8d40-73152c1983db.jpg",
+            "https://www.padsplit.com/img/psproperty/28119/img_baf1fb28-2824-4c3e-839d-be6ae04fa45b.jpg",
+            "https://www.padsplit.com/img/psproperty/28119/img_61e9349c-8e45-48c6-9c78-8218207a051f.jpg"
           ],
           "available": true
         }
@@ -1116,12 +1178,12 @@
         }
       ],
       "carousel": [],
-      "roomsAvailable": 1,
+      "roomsAvailable": 2,
       "fromPrice": 165,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Northeast Side",
       "image": "https://www.padsplit.com/img/psproperty/28119/img_48b3e63b-ee4d-4134-8371-eb67039ebcdd.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/28119",
@@ -1194,7 +1256,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-06T02:45:50.797Z",
+      "checkedAt": "2026-10-06T17:12:00.141Z",
       "neighborhood": "Lone Star",
       "image": "https://www.padsplit.com/img/psproperty/33710/ec0c6dae-9b92-4375-b50b-edcff67616d7.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/33710",

@@ -82,6 +82,22 @@
       "totalBaths": 3
     },
     {
+      "id": "11202",
+      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11202",
+      "name": "Noche",
+      "neighborhood": "Northeast Side",
+      "city": "Live Oak",
+      "image": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
+      "lat": 29.54,
+      "lng": -98.35,
+      "amenities": [
+        "Fully furnished",
+        "All utilities + WiFi included",
+        "Washer & dryer"
+      ],
+      "totalBaths": 4
+    },
+    {
       "id": "33710",
       "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/33710",
       "name": "Lantana",
@@ -128,22 +144,6 @@
         "Washer & dryer"
       ],
       "totalBaths": 3
-    },
-    {
-      "id": "11202",
-      "padsplitUrl": "https://www.padsplit.com/rooms-for-rent/listing/11202",
-      "name": "Noche",
-      "neighborhood": "Northeast Side",
-      "city": "Live Oak",
-      "image": "https://www.padsplit.com/img/psproperty/11202/7150e789-a4e0-4a31-ab14-56f91643a158.jpg",
-      "lat": 29.54,
-      "lng": -98.35,
-      "amenities": [
-        "Fully furnished",
-        "All utilities + WiFi included",
-        "Washer & dryer"
-      ],
-      "totalBaths": 4
     }
   ]
 }
