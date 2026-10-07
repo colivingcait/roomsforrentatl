@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T17:06:56.310Z",
+  "updatedAt": "2026-10-07T02:03:17.145Z",
   "houses": {
     "152": {
       "rooms": [],
@@ -152,7 +152,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-10-06T17:06:56.310Z",
+      "checkedAt": "2026-10-07T02:03:17.145Z",
       "neighborhood": "McAfee",
       "image": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152",
@@ -185,7 +185,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
@@ -221,7 +221,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_e9f940d9-7631-4392-8ea0-089c8769fadd.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_e9f940d9-7631-4392-8ea0-089c8769fadd.png",
@@ -414,7 +414,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-10-06T17:06:56.310Z",
+      "checkedAt": "2026-10-07T02:03:17.145Z",
       "neighborhood": "South Gresham",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299",
       "utilitiesIncluded": true
@@ -556,7 +556,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-10-06T17:06:56.310Z",
+      "checkedAt": "2026-10-07T02:03:17.145Z",
       "neighborhood": "Off Stephenson",
       "image": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
@@ -684,7 +684,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "image": "https://www.padsplit.com/img/psproperty/12011/10dcbf7e-1f88-4242-9727-0822b9d78e94.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/12011",
       "exteriorPhotosDropped": 0
@@ -713,7 +713,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
@@ -808,7 +808,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "image": "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13036",
       "exteriorPhotosDropped": 2
@@ -840,7 +840,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
@@ -942,7 +942,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14650",
       "exteriorPhotosDropped": 0
@@ -971,7 +971,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
@@ -1081,7 +1081,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "image": "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14657",
       "exteriorPhotosDropped": 0
@@ -1110,7 +1110,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-08",
+          "moveInDate": "2026-10-09",
           "image": "https://www.padsplit.com/img/psproperty/29100/img_d0b4b63d-cfc1-46c7-8492-b5c6f479c2e3.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29100/img_d0b4b63d-cfc1-46c7-8492-b5c6f479c2e3.png",
@@ -1140,7 +1140,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-08",
+          "moveInDate": "2026-10-09",
           "image": "https://www.padsplit.com/img/psproperty/29100/img_26c2b0be-54b6-4e33-a319-652471fca426.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29100/img_26c2b0be-54b6-4e33-a319-652471fca426.png",
@@ -1270,7 +1270,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29100",
       "exteriorPhotosDropped": 0
     },
@@ -1301,7 +1301,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-08",
+          "moveInDate": "2026-10-09",
           "image": "https://www.padsplit.com/img/psproperty/29710/img_efae0a86-c3ae-43a5-aa5b-bca35f1bb9ec.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29710/img_efae0a86-c3ae-43a5-aa5b-bca35f1bb9ec.png",
@@ -1411,7 +1411,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-06T17:09:53.577Z",
+      "checkedAt": "2026-10-07T02:06:38.067Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29710",
       "exteriorPhotosDropped": 4
     },
@@ -1442,7 +1442,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-07",
+          "moveInDate": "2026-10-08",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -1568,7 +1568,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-10-06T17:06:56.310Z",
+      "checkedAt": "2026-10-07T02:03:17.145Z",
       "neighborhood": "McAfee",
       "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011",
@@ -1671,7 +1671,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-10-06T17:06:56.310Z",
+      "checkedAt": "2026-10-07T02:03:17.145Z",
       "neighborhood": "Baker Hills",
       "image": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708",
