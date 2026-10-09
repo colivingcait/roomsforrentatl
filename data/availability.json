@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T17:48:10.867Z",
+  "updatedAt": "2026-10-09T02:44:47.491Z",
   "houses": {
     "152": {
       "rooms": [],
@@ -152,7 +152,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4,
-      "checkedAt": "2026-10-08T17:48:10.867Z",
+      "checkedAt": "2026-10-09T02:44:47.491Z",
       "neighborhood": "McAfee",
       "image": "https://www.padsplit.com/img/psproperty/psproperty_152_0_1581956605.1992066_improved.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/152",
@@ -185,7 +185,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_afdab0af-cdc8-4e9a-9135-5f4c5b87467a.png",
@@ -221,7 +221,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/8299/img_e9f940d9-7631-4392-8ea0-089c8769fadd.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/8299/img_e9f940d9-7631-4392-8ea0-089c8769fadd.png",
@@ -336,7 +336,7 @@
           "height": 3024
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/8299/640ccfd4-6135-4baf-8dfe-df8b6241d652.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/8299/4572796d-504b-4a3d-adf3-591f56744b0a.jpg",
           "category": "common_space",
           "label": "Bathroom",
           "width": 4032,
@@ -414,7 +414,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": 4.7,
-      "checkedAt": "2026-10-08T17:48:10.867Z",
+      "checkedAt": "2026-10-09T02:44:47.491Z",
       "neighborhood": "South Gresham",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/8299",
       "utilitiesIncluded": true
@@ -556,7 +556,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.6,
-      "checkedAt": "2026-10-08T17:48:10.867Z",
+      "checkedAt": "2026-10-09T02:44:47.491Z",
       "neighborhood": "Off Stephenson",
       "image": "https://www.padsplit.com/img/psproperty/11889/73caa517-a7fb-43e2-b3e6-de9ead240534.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/11889",
@@ -684,7 +684,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "image": "https://www.padsplit.com/img/psproperty/12011/10dcbf7e-1f88-4242-9727-0822b9d78e94.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/12011",
       "exteriorPhotosDropped": 0
@@ -698,9 +698,12 @@
           "applyIndex": null,
           "name": null,
           "roomNumber": 1,
-          "weeklyRate": 204,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 184,
+          "originalWeeklyRate": 204,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
           "noMoveInFee": false,
           "recommendedPrice": 183,
           "bathroomType": "shared",
@@ -713,7 +716,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
@@ -804,11 +807,11 @@
       ],
       "carousel": [],
       "roomsAvailable": 1,
-      "fromPrice": 204,
+      "fromPrice": 184,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "image": "https://www.padsplit.com/img/psproperty/13036/img_071a0e54-04d2-467d-a7bf-2ea95bc3bf43.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/13036",
       "exteriorPhotosDropped": 2
@@ -840,7 +843,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
@@ -942,7 +945,7 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "image": "https://www.padsplit.com/img/psproperty/14650/img_1e287c47-5208-416d-a6b3-bede3b21386d.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14650",
       "exteriorPhotosDropped": 0
@@ -956,9 +959,12 @@
           "applyIndex": null,
           "name": null,
           "roomNumber": 5,
-          "weeklyRate": 195,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 176,
+          "originalWeeklyRate": 195,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
           "noMoveInFee": true,
           "recommendedPrice": 191,
           "bathroomType": "shared",
@@ -971,7 +977,7 @@
           "windows": null,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
@@ -1077,11 +1083,11 @@
       ],
       "carousel": [],
       "roomsAvailable": 1,
-      "fromPrice": 195,
+      "fromPrice": 176,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "image": "https://www.padsplit.com/img/psproperty/14657/img_979e2ba0-31d3-45ae-b4ea-8357c963f62c.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/14657",
       "exteriorPhotosDropped": 0
@@ -1095,9 +1101,12 @@
           "applyIndex": null,
           "name": null,
           "roomNumber": 10,
-          "weeklyRate": 203,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 183,
+          "originalWeeklyRate": 203,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
           "noMoveInFee": false,
           "recommendedPrice": 201,
           "bathroomType": "shared",
@@ -1110,7 +1119,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-10",
+          "moveInDate": "2026-10-11",
           "image": "https://www.padsplit.com/img/psproperty/29100/img_d0b4b63d-cfc1-46c7-8492-b5c6f479c2e3.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29100/img_d0b4b63d-cfc1-46c7-8492-b5c6f479c2e3.png",
@@ -1125,9 +1134,12 @@
           "applyIndex": null,
           "name": null,
           "roomNumber": 6,
-          "weeklyRate": 206,
-          "originalWeeklyRate": null,
-          "promo": null,
+          "weeklyRate": 186,
+          "originalWeeklyRate": 206,
+          "promo": {
+            "percentOff": 10,
+            "durationWeeks": 6
+          },
           "noMoveInFee": false,
           "recommendedPrice": 198,
           "bathroomType": "shared",
@@ -1140,7 +1152,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-10",
+          "moveInDate": "2026-10-11",
           "image": "https://www.padsplit.com/img/psproperty/29100/img_26c2b0be-54b6-4e33-a319-652471fca426.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29100/img_26c2b0be-54b6-4e33-a319-652471fca426.png",
@@ -1266,11 +1278,11 @@
       ],
       "carousel": [],
       "roomsAvailable": 2,
-      "fromPrice": 203,
+      "fromPrice": 183,
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29100",
       "exteriorPhotosDropped": 0
     },
@@ -1301,7 +1313,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-10",
+          "moveInDate": "2026-10-11",
           "image": "https://www.padsplit.com/img/psproperty/29710/img_efae0a86-c3ae-43a5-aa5b-bca35f1bb9ec.png",
           "photos": [
             "https://www.padsplit.com/img/psproperty/29710/img_efae0a86-c3ae-43a5-aa5b-bca35f1bb9ec.png",
@@ -1411,16 +1423,50 @@
       "priceUnit": "week",
       "available": true,
       "rating": null,
-      "checkedAt": "2026-10-08T17:50:28.077Z",
+      "checkedAt": "2026-10-09T02:48:08.254Z",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/29710",
       "exteriorPhotosDropped": 4
     },
     "35011": {
       "rooms": [
         {
-          "id": 110832,
+          "id": 110835,
           "padIndex": 1,
           "pagePosition": 1,
+          "applyIndex": null,
+          "name": "Rm 5 - Emerald - Large room with desk, close to the bathroom!",
+          "roomNumber": 5,
+          "weeklyRate": 159,
+          "originalWeeklyRate": 167,
+          "promo": {
+            "percentOff": 5,
+            "durationWeeks": 6
+          },
+          "noMoveInFee": true,
+          "recommendedPrice": 175,
+          "bathroomType": "shared",
+          "bedSize": "full",
+          "roomSize": "standard",
+          "workspace": true,
+          "miniFridge": false,
+          "privateAccess": false,
+          "climateControl": "central-ac",
+          "windows": 1,
+          "status": 1,
+          "detailedStatus": "listed",
+          "moveInDate": "2026-10-10",
+          "image": "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
+          "photos": [
+            "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
+            "https://www.padsplit.com/img/psproperty/35011/img_8d140d71-6d2c-4610-bd15-fc4004f78c56.jpg"
+          ],
+          "available": true
+        },
+        {
+          "id": 110832,
+          "padIndex": 2,
+          "pagePosition": 2,
           "applyIndex": null,
           "name": "Room 2 - Brook - Affordable room, close to the kitchen & back door!",
           "roomNumber": 2,
@@ -1442,7 +1488,7 @@
           "windows": 1,
           "status": 1,
           "detailedStatus": "listed",
-          "moveInDate": "2026-10-09",
+          "moveInDate": "2026-10-10",
           "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
           "photos": [
             "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
@@ -1556,21 +1602,21 @@
           "height": 1000
         },
         {
-          "url": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+          "url": "https://www.padsplit.com/img/psproperty/35011/img_733b3aec-7952-4498-b40e-91794ffaf4b3.jpg",
           "category": "bedroom",
           "label": "Bedroom",
           "width": 1500,
           "height": 1000
         }
       ],
-      "roomsAvailable": 1,
-      "fromPrice": 171,
+      "roomsAvailable": 2,
+      "fromPrice": 159,
       "priceUnit": "week",
       "available": true,
       "rating": 5,
-      "checkedAt": "2026-10-08T17:48:10.867Z",
+      "checkedAt": "2026-10-09T02:44:47.491Z",
       "neighborhood": "McAfee",
-      "image": "https://www.padsplit.com/img/psproperty/35011/img_55a73653-74cb-4788-bb04-a81c333247a8.jpg",
+      "image": "https://www.padsplit.com/img/psproperty/35011/img_133b32eb-9586-4d4f-86c5-b47ae35df879.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/35011",
       "utilitiesIncluded": true
     },
@@ -1638,6 +1684,20 @@
           "height": 1000
         },
         {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_0ad7c864-bc5f-4edc-8e2b-b1640c29f782.jpg",
+          "category": "bedroom",
+          "label": "Bedroom",
+          "width": 1500,
+          "height": 1000
+        },
+        {
+          "url": "https://www.padsplit.com/img/psproperty/39708/img_4850275e-e475-40df-8e91-0105a1d3bad1.jpg",
+          "category": "bedroom",
+          "label": "Bathroom",
+          "width": 1500,
+          "height": 1000
+        },
+        {
           "url": "https://www.padsplit.com/img/psproperty/39708/img_52fcad53-08a6-457d-8a9c-8803eee614fe.png",
           "category": "bedroom",
           "label": "Bedroom",
@@ -1650,20 +1710,6 @@
           "label": "Bedroom",
           "width": 1264,
           "height": 843
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/39708/img_acb2f549-3a07-4651-81ef-c0a8f63aa7cd.png",
-          "category": "bedroom",
-          "label": "Bathroom",
-          "width": 1264,
-          "height": 843
-        },
-        {
-          "url": "https://www.padsplit.com/img/psproperty/39708/img_85bd5502-33f0-40bb-8ada-f17a73bfbd95.jpg",
-          "category": "bedroom",
-          "label": "Bathroom",
-          "width": 1500,
-          "height": 1000
         }
       ],
       "roomsAvailable": 0,
@@ -1671,7 +1717,7 @@
       "priceUnit": "week",
       "available": false,
       "rating": 4.8,
-      "checkedAt": "2026-10-08T17:48:10.867Z",
+      "checkedAt": "2026-10-09T02:44:47.491Z",
       "neighborhood": "Baker Hills",
       "image": "https://www.padsplit.com/img/psproperty/39708/f1403e5d-d3f5-483c-89c5-93f34b2d31db.jpg",
       "url": "https://www.padsplit.com/rooms-for-rent/listing/39708",
